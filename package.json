@@ -1,0 +1,36 @@
+{
+  "name": "agentic-code",
+  "version": "1.0.0",
+  "description": "Task-oriented context engineering framework for LLM coding agents - AGENTS.md standard compliant",
+  "scripts": {
+    "setup:lang": "node scripts/setup-language.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "coding-agent",
+    "agents-md",
+    "context-engineering",
+    "agentic-coding",
+    "claude-code",
+    "cursor",
+    "github-copilot",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Shinsuke Kagawa",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinpr/agentic-code.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shinpr/agentic-code/issues"
+  },
+  "homepage": "https://github.com/shinpr/agentic-code#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
