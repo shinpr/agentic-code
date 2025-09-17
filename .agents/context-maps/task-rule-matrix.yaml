@@ -1,167 +1,186 @@
-# Metadata for each rule file
-# Manages overview, tags, typical usage scenarios, and size for each rule
+# Task-Rule Mapping Matrix
+# Maps tasks to relevant rules based on metadata and tags
+# Used by task-analysis.md to recommend appropriate rules for each task type
 
 rules:
-  typescript:
-    file: "typescript.md"
-    tags: [implementation, type-safety, async, refactoring, coding-style, functional-programming, dependency-injection, branded-types]
-    typical-use: "TypeScript code creation, modification, refactoring, modern type features utilization"
-    size: medium
-    key-references:
-      - "YAGNI Principle - Kent Beck"
-      - "Clean Code - Robert C. Martin"
-      - "DRY Principle - The Pragmatic Programmer"
-      - "Refactoring - Martin Fowler"
-      - "TypeScript 4.9 satisfies Operator - Microsoft"
-      - "Branded Types - TypeScript Community"
-      - "Effect-TS / fp-ts - Functional Programming"
-      - "Dependency Injection - Martin Fowler"
-    sections:
-      - "Basic Principles"
-      - "Comment Writing Rules"
-      - "Type Safety"
-      - "Coding Conventions"
-      - "Error Handling"
-      - "Refactoring Techniques"
-      - "Performance Optimization"
-
-  typescript-testing:
-    file: "typescript-testing.md"
-    tags: [quality, testing, tdd, coverage, vitest, implementation, debugging, refactoring]
-    typical-use: "Test creation, quality checks, development steps for code/bug fixes, refactoring, and new feature implementation"
-    size: medium
-    key-references:
-      - "Test-Driven Development - Kent Beck"
-      - "Rule of Three - Martin Fowler"
-      - "Red-Green-Refactor - Kent Beck"
-      - "AAA Pattern - Arrange-Act-Assert"
-    sections:
-      - "Test Framework"
-      - "Basic Testing Policy"
-      - "Red-Green-Refactor Process (Test-First Development)"
-      - "Test Design Principles"
-      - "Test Helper Utilization Rules"
-      - "Test Implementation Conventions"
-      - "Test Granularity Principles"
-      - "Mock Type Safety Enforcement"
-      - "Basic Vitest Example"
-
-  ai-development-guide:
-    file: "ai-development-guide.md"
-    tags: [anti-patterns, technical-judgment, debugging, quality-commands, rule-of-three, implementation, type-safety, refactoring, code-reading, best-practices]
-    typical-use: "Technical decision criteria, anti-pattern detection, debugging techniques, quality check commands, implementation best practices"
-    size: medium
-    key-references:
-      - "Rule of Three - Martin Fowler"
-      - "5 Whys - Toyota Production System"
-      - "DRY Principle - The Pragmatic Programmer"
-      - "Single Responsibility Principle (SRP) - Clean Code"
-      - "YAGNI Principle - Extreme Programming"
-    sections:
-      - "Technical Anti-patterns (Red Flag Patterns)"
-      - "Rule of Three - Criteria for Code Duplication"
-      - "Common Failure Patterns and Avoidance Methods"
-      - "Debugging Techniques"
-      - "Quality Check Command Reference"
-      - "Situations Requiring Technical Decisions"
-      - "Continuous Improvement Mindset"
-
-  technical-spec:
-    file: "technical-spec.md"
-    tags: [architecture, design, documentation, environment, data-flow, implementation]
-    typical-use: "Technical design, environment configuration, documentation creation process, implementation policy decisions"
-    size: medium
-    key-references:
-      - "ADR Format - Michael Nygard"
-      - "Single Data Source Principle - Single Source of Truth"
-    sections:
-      - "Basic Technology Stack Policy"
-      - "Environment Variable Management and Security"
-      - "Architecture Design"
-      - "Unified Data Flow Principles"
-      - "Build and Testing"
-
-  project-context:
-    file: "project-context.md"
-    tags: [context, project-specific, implementation]
-    typical-use: "Project-specific information, understanding implementation principles"
+  # Core Rules
+  core/metacognition:
+    path: ".agents/rules/core/metacognition.md"
+    tags: [self-assessment, reflection, decision-checkpoint, quality-control]
+    when_to_load:
+      - "Task type changes (e.g., from design to implementation)"
+      - "Unexpected errors occur repeatedly"
+      - "Completing a meaningful unit of work"
+      - "Before starting new implementation"
+    typical_tasks: [all]
     size: small
-    key-references:
-      - "Project-specific (empirical)"
-    sections:
-      - "Basic Configuration"
-      - "Implementation Principles"
-      - "Customization Guide"
+    priority: always
+    description: "Self-assessment and reflection protocols for maintaining quality"
 
-  documentation-criteria:
-    file: "documentation-criteria.md"
-    tags: [documentation, adr, prd, design-doc, work-plan, decision-matrix]
-    typical-use: "Implementation start scale assessment, document creation decisions, ADR/PRD/Design Doc/work plan creation criteria"
+  core/ai-development-guide:
+    path: ".agents/rules/core/ai-development-guide.md"
+    tags: [anti-patterns, debugging, best-practices, rule-of-three, technical-debt]
+    when_to_load:
+      - "Starting new implementation"
+      - "Code review and refactoring"
+      - "Debugging complex issues"
+      - "Technical decision making"
+    typical_tasks: [implementation, debugging, refactoring]
     size: medium
-    key-references:
-      - "ADR Methodology - Michael Nygard"
-      - "Design Doc Culture - Google Engineering Practices"
-      - "Single Source of Truth"
-    sections:
-      - "Creation Decision Matrix"
-      - "ADR Creation Conditions (Required if Any Apply)"
-      - "Detailed Document Definitions"
-      - "Creation Process"
-      - "Storage Locations"
-      - "ADR Status"
-      - "AI Automation Rules"
-      - "Diagram Requirements"
-      - "Common ADR Relationships"
+    priority: high
+    description: "Anti-patterns, debugging techniques, and development best practices"
 
-  vertical-slice-architecture:
-    file: "architecture/vertical-slice/rules.md"
-    tags: [architecture, vertical-slice, llm-optimized, single-file, implementation]
-    typical-use: "When adopting Vertical Slice Architecture, feature implementation"
+  core/documentation-criteria:
+    path: ".agents/rules/core/documentation-criteria.md"
+    tags: [documentation, adr, design-doc, decision-matrix, scale-assessment]
+    when_to_load:
+      - "Task scale assessment (Small/Medium/Large)"
+      - "Architecture decisions needed"
+      - "Creating technical documentation"
+      - "New feature planning"
+    typical_tasks: [design, documentation, planning]
     size: medium
-    key-references:
-      - "Vertical Slice Architecture - Jimmy Bogard"
-      - "Anthropic LLM Research"
-    sections:
-      - "Core Implementation Rules"
-      - "Implementation Guidelines"
-      - "Consolidation Decision Criteria"
-      - "LLM Implementation Checklist"
-      - "Anti-patterns"
-      - "Best Practices"
-      - "LLM Implementation Guidelines"
-      - "Summary"
+    priority: medium
+    description: "Criteria for when and how to create documentation"
 
-  hybrid-progressive-architecture:
-    file: "architecture/hybrid-progressive/rules.md"
-    tags: [architecture, scalable, progressive, layered, implementation]
-    typical-use: "Progressively growing projects, implementation rule application"
-    size: medium
-    key-references:
-      - "Evolutionary Architecture - Neal Ford"
-      - "Building Microservices - Sam Newman"
-    sections:
-      - "Basic Principles"
-      - "Stage-specific Implementation Rules"
-      - "Migration Rules"
-      - "Decision Flowchart"
-      - "Coding Conventions"
-      - "Quality Management"
-      - "LLM Implementation Guidelines"
-      - "Summary"
+  # Language Rules (currently TypeScript, but concepts are universal)
+  language/rules:
+    path: ".agents/rules/language/rules.md"
+    tags: [implementation, coding-style, type-safety, error-handling, refactoring, clean-code, solid-principles]
+    when_to_load:
+      - "Writing or modifying code"
+      - "Code review"
+      - "Refactoring existing code"
+      - "Implementing new features"
+    typical_tasks: [implementation, refactoring]
+    size: large
+    priority: high
+    description: "Language-specific coding standards and best practices"
+    universal_concepts:
+      - "YAGNI principle"
+      - "DRY principle"
+      - "Error handling patterns"
+      - "Dependency injection"
+      - "Clean code principles"
+      - "Type/static safety (for typed languages)"
+      - "Async/concurrent programming patterns"
+      - "Function composition over classes"
 
-  implementation-approach:
-    file: "architecture/implementation-approach.md"
-    tags: [architecture, implementation, task-decomposition, strategy-patterns, strangler-pattern, facade-pattern, design, planning, confirmation-levels]
-    typical-use: "Implementation strategy selection, task decomposition, design decisions, large-scale change planning"
+  language/testing:
+    path: ".agents/rules/language/testing.md"
+    tags: [testing, tdd, quality-assurance, coverage, unit-tests, integration-tests, verify-phase]
+    when_to_load:
+      - "Writing tests"
+      - "Bug fixing (test-first)"
+      - "Quality checks"
+      - "Refactoring (ensuring safety)"
+      - "VERIFY phase execution (mandatory)"
+    typical_tasks: [implementation, debugging, quality-check]
     size: medium
-    key-references:
-      - "Strangler Fig Pattern - Martin Fowler"
-      - "Feature Slicing - Martin Fowler"
-      - "Walking Skeleton - Alistair Cockburn"
-      - "Facade Pattern - Gang of Four"
-    sections:
-      - "Meta-cognitive Strategy Selection Process"
-      - "Verification Level Definitions"
-      - "Integration Point Definitions"
-      - "Anti-patterns"
-      - "Guidelines for Meta-cognitive Execution"
+    priority: always
+    description: "Testing standards, TDD practices, and mandatory quality checks"
+    universal_concepts:
+      - "Red-Green-Refactor cycle"
+      - "Test independence"
+      - "AAA pattern (Arrange-Act-Assert)"
+      - "Coverage requirements (70%+)"
+      - "Mock/stub patterns"
+      - "Unit vs Integration testing"
+      - "Test-first development"
+
+  contextual/architecture/implementation-approach:
+    path: ".agents/rules/contextual/architecture/implementation-approach.md"
+    tags: [strategy-selection, task-decomposition, verification-levels, integration-points]
+    when_to_load:
+      - "Medium/Large scale tasks (3+ files)"
+      - "Implementation strategy selection"
+      - "Task breakdown and planning"
+      - "Choosing between vertical/horizontal slicing"
+    typical_tasks: [planning, design, implementation]
+    size: medium
+    priority: conditional
+    description: "Strategy selection for implementation approaches (vertical/horizontal slicing)"
+
+
+# Task Type to Rule Mapping
+task_mappings:
+  prd_creation:
+    required:
+      - "core/documentation-criteria"
+    recommended:
+      - "core/metacognition"
+
+  implementation:
+    required:
+      - "language/rules"
+      - "language/testing"  # TDD is mandatory
+      - "core/ai-development-guide"
+    recommended:
+      - "core/metacognition"
+    conditional:
+      - "contextual/architecture/implementation-approach"  # For Medium/Large scale
+
+  debugging:
+    required:
+      - "core/ai-development-guide"
+      - "language/testing"
+    recommended:
+      - "language/rules"
+      - "core/metacognition"
+
+  design:
+    required:
+      - "core/documentation-criteria"
+    conditional:
+      - "contextual/architecture/implementation-approach"  # Required for Medium/Large scale (3+ files)
+
+  documentation:
+    required:
+      - "core/documentation-criteria"
+
+  refactoring:
+    required:
+      - "language/rules"
+      - "language/testing"
+      - "core/ai-development-guide"
+    recommended:
+      - "core/metacognition"
+
+  research:
+    recommended:
+      - "core/metacognition"
+
+# Scale-based Rule Loading
+scale_mappings:
+  small:  # 1-2 files
+    load_immediately:
+      - "language/rules"
+    load_on_demand: []
+
+  medium:  # 3-5 files
+    load_immediately:
+      - "language/rules"
+      - "language/testing"  # TDD is mandatory
+      - "core/documentation-criteria"
+      - "contextual/architecture/implementation-approach"  # Required for approach selection
+    load_on_demand:
+      - "core/ai-development-guide"
+
+  large:  # 6+ files
+    load_immediately:
+      - "core/documentation-criteria"
+      - "contextual/architecture/implementation-approach"
+    load_on_demand:
+      - "language/rules"
+      - "language/testing"
+      - "core/ai-development-guide"
+
+# Metadata for rule selection algorithm
+selection_rules:
+  - "Always load core/metacognition at session start"
+  - "Load language/rules when any code modification is involved"
+  - "Load language/testing for ALL implementation tasks (TDD mandatory)"
+  - "Load implementation-approach for Medium/Large scale (3+ files)"
+  - "Execute ALL quality check commands in VERIFY phase with 0 errors"
+  - "Progressive loading: start with minimum, add as needed"
+  - "Unload task-specific rules after task completion"

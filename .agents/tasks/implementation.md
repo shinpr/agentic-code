@@ -1,8 +1,55 @@
 # Implementation
 
+## Required Rules [MANDATORY - MUST BE ACTIVE]
+
+**RULE AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md`
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
+3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+4. [LOAD IF NOT ACTIVE] `.agents/tasks/quality-assurance.md`
+
+**LOADING PROTOCOL:**
+- STEP 1: VERIFY metacognition.md is active from initial session setup
+- STEP 2: CHECK if language/rules.md is active in working memory
+- STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
+- STEP 4: CHECK if testing.md is active in working memory
+- STEP 5: If testing.md NOT active → Execute BLOCKING READ
+- STEP 6: CHECK if quality-assurance.md is active in working memory
+- STEP 7: If quality-assurance.md NOT active → Execute BLOCKING READ
+- STEP 8: CONFIRM all rules active before writing ANY code
+
+**EVIDENCE REQUIRED:**
+```
+Rule Status Verification:
+✓ metacognition.md - ACTIVE (from session setup)
+✓ language/rules.md - ACTIVE (loaded/verified)
+✓ language/testing.md - ACTIVE (loaded/verified)
+✓ quality-assurance.md - ACTIVE (loaded/verified)
+```
+
+## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
+
+**CHECKPOINT: System CANNOT write ANY CODE until ALL boxes checked:**
+☐ [VERIFIED] THIS FILE (`implementation.md`) has been READ and is active
+☐ [VERIFIED] All required rules listed above are LOADED and active
+☐ [VERIFIED] Work plan EXISTS with task definitions
+☐ [VERIFIED] Current task identified from work plan
+☐ [VERIFIED] TDD process understood (Red-Green-Refactor-Verify)
+☐ [VERIFIED] SESSION_BASELINE_DATE established and active
+
+**METACOGNITION GATE [MANDATORY]:**
+BEFORE writing first line of code:
+- Understand what needs to be built
+- Verify approach follows existing patterns
+- Confirm TDD cycle will be followed
+
+**GATE ENFORCEMENT:**
+IF any box unchecked → HALT → Return to uncompleted step
+IF attempting to write code without gates → CRITICAL ERROR
+
 ## Purpose
 
-Guide code implementation with focus on quality, maintainability, and correctness.
+Implement code using TDD process.
 
 ## When to Use
 
@@ -12,99 +59,76 @@ Guide code implementation with focus on quality, maintainability, and correctnes
 - Fixing bugs
 - Refactoring
 
-## Completion Conditions
+## Task Exit: Confirm all complete
 
-□ Code implements required functionality
-□ Build succeeds
-□ Linting passes (0 errors)
-□ Tests pass (if test-driven)
-□ Type/compilation check passes
-□ Code follows project conventions
-□ Edge cases handled
-□ Error handling implemented
+- Tests written and passing?
+- Code implements requirements?
+- Quality checks executed with 0 errors?
+- Changes committed to git?
+- Work plan task checkbox marked [x]?
 
-## Execution Guidelines
+## TDD Implementation Process
 
-### 1. Before Starting
+### Every code change follows:
 
-Check:
-- Design decisions (if from design phase)
-- Existing patterns in codebase
-- Language-specific rules loaded
-- Test requirements understood
+**1. RED Phase - Write failing test first**
+   - Define expected behavior in test
+   - Run test to confirm it fails
+   - No implementation code yet
 
-### 2. Implementation Principles
+**2. GREEN Phase - Make test pass**
+   - Write minimal code to pass test
+   - Focus only on making test green
+   - Run test to confirm it passes
 
-**Code Quality**
-- Functions: 30 lines maximum
-- Cyclomatic complexity: 10 maximum
-- Single responsibility per function/class
-- Clear naming (self-documenting)
+**3. REFACTOR Phase - Improve code**
+   - Clean up implementation
+   - Apply coding standards from language/rules.md
+   - Ensure test still passes
 
-**Error Handling**
-- Validate inputs
-- Handle edge cases explicitly
-- Fail fast with clear messages
-- Log errors appropriately
+**4. VERIFY Phase - Quality checks**
+   - Execute ALL commands from language/testing.md Quality Check Commands section
+   - Confirm ALL checks pass with 0 errors
+   - Ready for commit
 
-**Maintainability**
-- Follow existing patterns
-- Keep it simple (KISS)
-- Avoid premature optimization
-- Document non-obvious decisions
+**5. COMMIT Phase - Version control [MANDATORY]**
+   - Stage changes for current implementation
+   - Create commit with descriptive message
+   - Commit message format: "feat: [what was implemented]" or follow work plan task name if available
+   - ENFORCEMENT: Implementation task NOT complete until committed
+   - NOTE: Skip if user explicitly says "don't commit"
 
-### 3. Implementation Process
+## Internal Progress Tracking
 
-1. **Understand the task**
-   - Read requirements/design
-   - Identify affected components
-   - Plan approach
+Track these phases internally:
+```
+Current Task: [task name]
+□ RED Phase: Test written
+□ GREEN Phase: Test passing
+□ REFACTOR Phase: Code cleaned
+□ VERIFY Phase: Quality checks passed (0 errors)
+□ COMMIT Phase: Changes committed
+```
 
-2. **Write tests first (if TDD)**
-   - Define expected behavior
-   - Write failing tests
-   - Implement to pass tests
-
-3. **Implement incrementally**
-   - Start with core functionality
-   - Add edge cases
-   - Refactor for clarity
-   - Add error handling
-
-4. **Verify continuously**
-   - Run builds after changes
-   - Execute tests frequently
-   - Check linting/formatting
-
-### 4. Common Patterns
+## Common Patterns with TDD
 
 **New Feature**
-```
-1. Create interfaces/contracts
-2. Implement core logic
-3. Add validation
-4. Handle errors
-5. Write tests
-6. Document usage
-```
+1. Write test for new behavior (RED)
+2. Implement minimal solution (GREEN)
+3. Refactor and add edge cases (REFACTOR)
+4. Verify quality (VERIFY)
 
 **Bug Fix**
-```
-1. Write test to reproduce bug
-2. Implement minimal fix
-3. Verify fix doesn't break other tests
-4. Consider edge cases
-5. Document why fix works
-```
+1. Write test that reproduces bug (RED)
+2. Fix the bug (GREEN)
+3. Ensure no regression (REFACTOR)
+4. Verify quality (VERIFY)
 
 **Refactoring**
-```
-1. Ensure tests exist
-2. Make incremental changes
+1. Ensure tests exist and pass
+2. Make small changes
 3. Run tests after each change
-4. Keep functionality identical
-5. Improve structure/readability
-```
+4. Maintain behavior
 
 ### 5. Language-Agnostic Standards
 
@@ -117,12 +141,11 @@ Regardless of language:
 
 ### 6. Testing Approach
 
-When implementing:
-- Unit test individual functions
-- Integration test workflows
-- Test happy path first
-- Add edge case tests
-- Test error conditions
+**REFERENCE `.agents/rules/language/testing.md` for complete testing strategy including:**
+- Test types and granularity
+- Test-first development process
+- Coverage requirements
+- Mock and stub usage patterns
 
 ### 7. Security Considerations
 
@@ -143,23 +166,18 @@ Always:
 6. **Copy-paste coding**: Extract common code
 7. **Unclear naming**: Be explicit, not clever
 
-## Quality Checklist
+## Final Quality Gate
 
-Before considering implementation complete:
+**REFERENCE `.agents/tasks/quality-assurance.md` for complete quality checklist**
 
-□ Code is readable and self-documenting
-□ No commented-out code remains
-□ No debug statements left
-□ All TODOs addressed or documented
-□ Consistent style throughout
-□ No obvious performance issues
-□ Security considerations addressed
-□ Tests cover main scenarios
+Essential completion requirements:
+□ ALL quality standards from quality-assurance.md satisfied
+□ ALL language requirements from language/rules.md met
+□ ALL testing requirements from testing.md completed
+□ Work plan task checkbox updated to [✓]
+□ Metacognition "After Completion" executed
 
-## Notes
-
-- Follow language-specific rules in `.agents/rules/language/`
-- Refer to existing code for patterns
-- Ask for clarification when requirements unclear
-- Document decisions for future reference
-- Commit logical units of work
+**FINAL METACOGNITION GATE [BLOCKING]:**
+- Cannot mark task complete without metacognition assessment
+- Must document what worked/failed for future reference
+- Must evaluate if additional rules needed for next task

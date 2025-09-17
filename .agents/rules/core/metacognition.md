@@ -2,30 +2,30 @@
 
 ## Purpose
 
-Self-assessment and reflection for maintaining execution quality.
+Self-assessment checkpoints.
 
-## When to Apply
+## When to Apply [MANDATORY CHECKPOINTS]
 
-Execute metacognition at:
-- Task type changes (e.g., design → implementation)
-- Meaningful work unit completion
-- Unexpected errors or repeated failures
-- Before starting new implementation
-- When feeling uncertain about approach
+**BLOCKING METACOGNITION REQUIRED at:**
+- [CHECKPOINT] Task type changes → CANNOT proceed without assessment
+- [CHECKPOINT] After completing ANY task from work plan → MUST evaluate before next task
+- [CHECKPOINT] When encountering error or unexpected result → ASSESS approach immediately
+- [CHECKPOINT] Before writing first line of new feature → VALIDATE approach first
+- [CHECKPOINT] When switching between major phases → CONFIRM all gates passed
+
+**ENFORCEMENT**: Skipping metacognition = CRITICAL VIOLATION
 
 ## Assessment Questions
 
 ### 1. Task Understanding
 
-Ask yourself:
-- What is the fundamental goal? (not surface task)
+- What is the fundamental goal?
 - Am I solving the root cause or symptom?
 - Do I have all necessary information?
 - Are success criteria clear and measurable?
 
 ### 2. Current State
 
-Assess:
 - What rules are currently loaded?
 - Which rules are actually being used?
 - What assumptions am I making?
@@ -33,7 +33,6 @@ Assess:
 
 ### 3. Approach Validation
 
-Check:
 - Is my approach the simplest solution?
 - Am I following established patterns?
 - Have I considered alternatives?
@@ -61,23 +60,29 @@ Note: Context management is user's responsibility. Ask for guidance if unsure.
 
 ## Common Decision Points
 
-### When Starting Work
-- [ ] Task type and scale clear?
-- [ ] Required rules identified?
-- [ ] Success criteria defined?
-- [ ] Approach validated?
+### When Starting Work [BLOCKING CHECKLIST]
+☐ [MUST VERIFY] Task type and scale documented with evidence
+☐ [MUST VERIFY] Required rules LOADED and file paths listed
+☐ [MUST VERIFY] Success criteria MEASURABLE and specific
+☐ [MUST VERIFY] Approach validated against existing patterns
 
-### During Execution
-- [ ] Following the plan?
-- [ ] Making progress?
-- [ ] Need additional rules?
-- [ ] Should ask for help?
+**GATE: CANNOT start coding if ANY unchecked**
 
-### After Completion
-- [ ] All criteria met?
-- [ ] Code quality acceptable?
-- [ ] Documentation updated?
-- [ ] Lessons learned noted?
+### During Execution [PROGRESS GATES]
+☐ [VERIFY] Following work plan from `docs/design/work-plan.md`
+☐ [VERIFY] Making measurable progress (list completed items)
+☐ [EVALUATE] Additional rules needed? (load IMMEDIATELY if yes)
+☐ [EVALUATE] Blocked for >10 minutes? (MUST ask for help)
+
+**ENFORCEMENT: If progress stalled → MANDATORY metacognition**
+
+### After Completion [EXIT GATES]
+☐ [VERIFIED] ALL completion criteria met with evidence
+☐ [VERIFIED] Code quality metrics passed (lint, test, build)
+☐ [VERIFIED] Documentation updated (if applicable)
+☐ [RECORDED] What worked/failed for next iteration
+
+**GATE: CANNOT mark complete without ALL verified**
 
 ## Anti-Pattern Recognition
 
@@ -98,11 +103,20 @@ When stuck:
 4. Consider simpler approach
 5. Ask user for clarification
 
-After 3 failed attempts:
-- Stop attempting
-- Document what was tried
-- Explain the blocker
-- Request user guidance
+**ERROR HANDLING PROTOCOL:**
+
+When encountering an error or blocker:
+- [IMMEDIATE] Execute metacognition assessment
+- [SEARCH] Look for similar patterns in codebase
+- [RE-READ] Relevant rule files for guidance
+- [EVALUATE] Can I solve this with available information?
+
+If unable to resolve:
+- [DOCUMENT] Exact error message and context
+- [EXPLAIN] What was attempted and why it failed
+- [REQUEST] User guidance with specific questions
+
+**PRINCIPLE: Ask for help when genuinely stuck, not after arbitrary attempt count**
 
 ## Learning from Experience
 

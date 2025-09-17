@@ -1,109 +1,90 @@
 # AGENTS.md
 
+## ABSOLUTE PRINCIPLES
+
+1. **EXECUTE all rules and requirements in task/rule files - no exceptions**
+2. **COMPLETE all entry and exit conditions for every task**
+3. **STOP at gates - proceed only when conditions are met**
+
+## Initial Setup [FIRST TIME ONLY]
+
+**Complete before any other operation:**
+1. Execute `date` command → Store as SESSION_BASELINE_DATE
+2. Apply `.agents/rules/core/metacognition.md` → Keep active entire session
+3. Use SESSION_BASELINE_DATE for all date references (WebSearch, docs, etc.)
+4. Verify project structure with `ls -la`
+
 ## Core Execution Principle
 
-This framework guides task-based development without sub-agents. All work is executed by the main agent using progressive context loading.
+**Universal Entry Point**: Every request starts with task-analysis.md to determine the appropriate path.
 
-## Task Execution Protocol
+## Task Analysis - Required First Step
 
-### Step 1: Task Analysis (ALWAYS FIRST)
+**ALWAYS start here for any user request:**
+1. Apply `.agents/tasks/task-analysis.md`
+2. Determine task type and scale with evidence
+3. Use `.agents/context-maps/task-rule-matrix.yaml` to identify required rules
+4. Based on analysis results, choose appropriate path:
 
-Load `.agents/tasks/task-analysis.md` and determine:
-- Task type (implementation/research/design/documentation/debugging)
-- Task scale: Small (1-2 files), Medium (3-5 files), Large (6+ files)
-- Required rules and resources
+### Path Selection Based on Task Analysis
 
-### Step 2: Development Approach Decision
+**Small Scale (1-2 files) / Single Task:**
+- Load specific task definition (e.g., implementation.md, technical-design.md)
+- Execute that task definition directly
+- No workflow needed
 
-#### For Implementation Tasks:
+**Medium/Large Scale (3+ files) / Complex Task:**
+- Follow task-analysis.md recommendation for workflow selection
 
-**Small Scale (1-2 files):**
-```
-→ Direct implementation
-→ Load: .agents/rules/language/rules.md
-→ Reference: implementation.md for guidelines
-```
+## Core Principles
 
-**Medium/Large Scale (3+ files):**
-```
-→ Ask: "Recommend Agentic Coding (design-driven development). Proceed? [Y/n]"
+### Task Definition Loading
+**Task definitions define WHAT to build - never skip them:**
+- Verify entry gates before proceeding
+- Follow Required Rules section in each task definition
 
-If YES:
-→ Load: .agents/workflows/agentic-coding.md
-→ Follow structured workflow:
-  1. Create design document
-  2. Create work plan with checklist
-  3. Implement step by step
-  4. Check off completed items (internally)
+### Rule Application
+**Apply rules based on task type from task-analysis:**
+- Rules are loaded progressively as needed
+- Each task definition specifies its required rules
+- Unload task-specific rules after completion
 
-If NO:
-→ Direct implementation with basic planning
-```
+### Quality Standards
+**Before marking any task complete:**
+- All tests pass (when applicable)
+- All quality checks return 0 errors
+- Task exit conditions are satisfied
+- Work documented as needed
 
-### Step 3: Rule Loading Strategy
+## Approval Points
 
-#### Always Loaded:
-- `.agents/rules/core/metacognition.md` (at session start)
-- `.agents/rules/language/rules.md` (when developing)
+**Principle**: Get user approval at significant milestones.
 
-#### Conditionally Loaded:
-| Situation | Load File | From |
-|-----------|-----------|------|
-| Development work | ai-development-guide.md | `.agents/rules/core/` |
-| Writing tests | testing.md | `.agents/rules/language/` |
-| Design needed | documentation-criteria.md | `.agents/rules/core/` |
-| Creating design doc | technical-design.md | `.agents/tasks/` |
-| Quality check | quality-assurance.md | `.agents/tasks/` |
-
-### Step 4: Execution Guidelines
-
-For each major task:
-1. Load relevant task definition
-2. Understand completion conditions (not outputs)
-3. Execute following the guidelines
-4. Verify completion conditions are met
-5. Unload task-specific rules
-
-## Task Definitions Structure
-
-Each task file contains:
-- **Purpose**: What to clarify/achieve
-- **Completion Conditions**: Checklist of what makes this task complete
-- **Guidelines**: Key considerations during execution
-- **Deliverables** (if any): Files or documents to create
-
-Example:
-```
-## Completion Conditions
-□ User requirements are clear
-□ Task scale determined (small/medium/large)
-□ Required resources identified
-```
+Common approval points:
+- When recommending a workflow for Medium/Large tasks
+- After creating design or decision documents
+- When technical approach changes significantly
+- At task definition specified stop points
 
 ## Quality Standards
 
-Before marking any implementation complete:
-1. Build succeeds
-2. Linting passes (0 errors)
-3. Tests pass (if applicable)
-4. Format check passes
-5. Type/compilation check passes
+**Universal quality requirements:**
+- Follow TDD process for all code changes
+- All quality checks must pass with 0 errors
+- Follow standards defined in language-specific rules
+- Each task definition specifies its quality gates
 
-Commands are language-specific - check `.agents/rules/language/testing.md`
 
 ## Metacognition Checkpoints
 
-Perform self-assessment at these points:
-- Task type changes (e.g., from design to implementation)
+Perform self-assessment at these mandatory points:
+- Task type changes
 - Unexpected errors occur
 - Completing a meaningful unit of work
 - Before starting new implementation
-
-Reference `.agents/rules/core/metacognition.md` for assessment protocol.
+- After completing each task from work plan
 
 ## Context Management
-
-**User Responsibility**: Monitor and manage context usage. No automatic cleanup.
 
 **Guidelines**:
 - Load rules progressively, not all at once
@@ -113,51 +94,52 @@ Reference `.agents/rules/core/metacognition.md` for assessment protocol.
 
 ## Error Recovery
 
-When stuck or failing repeatedly:
+When stuck or encountering errors:
 1. Re-read current task definition
 2. Check if required rules are loaded
 3. Look for anti-patterns in ai-development-guide.md
-4. Ask user for clarification
-
-After 3 failed attempts: Stop and request user guidance.
+4. If unable to resolve, ask user for clarification
 
 ## File Organization
 
-```
-.agents/
-├── tasks/                    # Task definitions
-│   ├── task-analysis.md      # Analyze and classify work
-│   ├── work-planning.md      # Create work plans
-│   ├── technical-design.md   # Design documentation
-│   ├── implementation.md     # Implementation guidelines
-│   └── quality-assurance.md  # Quality standards
-│
-├── workflows/
-│   └── agentic-coding.md     # Design-driven workflow
-│
-└── rules/
-    ├── core/
-    │   ├── metacognition.md           # Self-assessment
-    │   ├── ai-development-guide.md    # Anti-patterns, best practices
-    │   └── documentation-criteria.md  # When to create docs
-    │
-    └── language/                      # Language-specific rules
-        ├── rules.md
-        └── testing.md
-```
+**Tasks** (.agents/tasks/):
+- task-analysis.md: **Entry point**
+- work-planning.md: Create work plans
+- technical-design.md: Design documentation
+- implementation.md: Implementation guidelines
+- quality-assurance.md: Quality standards
+
+**Workflows** (.agents/workflows/):
+- agentic-coding.md: Medium/Large scale workflow
+
+**Context Maps** (.agents/context-maps/):
+- task-rule-matrix.yaml: Task-to-rule mappings
+
+**Core Rules** (.agents/rules/core/):
+- metacognition.md: Self-assessment
+- ai-development-guide.md: Anti-patterns
+- documentation-criteria.md: Documentation criteria
+
+**Language Rules** (.agents/rules/language/):
+- rules.md: Development rules
+- testing.md: Testing standards
+
+**Contextual Rules** (.agents/rules/contextual/):
+- architecture/: Implementation approaches
 
 ## Anti-Patterns to Avoid
 
-1. **Loading all rules upfront** → Load progressively
-2. **Skipping task analysis** → Always analyze first
-3. **Ignoring completion conditions** → Check against task definitions
-4. **Working without guidelines** → Load relevant task definitions
-5. **Assuming context tracking** → User manages context
+1. **Skipping task-analysis.md** → ALWAYS start with task analysis
+2. **Loading all rules upfront** → Load progressively based on task needs
+3. **Ignoring task entry/exit conditions** → Verify gates at each step
+4. **Working without task definitions** → Task definitions define WHAT to build
+6. **Assuming workflow is always needed** → Small tasks can use direct task definitions
+7. **Premature workflow selection** → Let task-analysis determine the approach
 
 ## Success Metrics
 
 Track internally:
 - Task completion rate
 - Rules actually used vs loaded
-- Number of error recoveries needed
-- Agentic Coding acceptance rate
+- Quality checks passing rate (should be 100%)
+- Appropriate path selection (direct vs workflow)

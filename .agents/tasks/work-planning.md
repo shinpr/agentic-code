@@ -1,24 +1,72 @@
 # Work Planning
 
+## Required Rules [MANDATORY - MUST BE ACTIVE]
+
+**RULE AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md` - Development standards
+3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - TDD process for implementation tasks
+4. [LOAD IF NOT ACTIVE] `.agents/tasks/quality-assurance.md` - Quality verification
+
+**LOADING PROTOCOL:**
+- STEP 1: VERIFY metacognition.md is active from initial session setup
+- STEP 2: CHECK if language/rules.md is active in working memory
+- STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
+- STEP 4: CHECK if testing.md is active in working memory
+- STEP 5: If testing.md NOT active → Execute BLOCKING READ
+- STEP 6: CHECK if quality-assurance.md is active in working memory
+- STEP 7: If quality-assurance.md NOT active → Execute BLOCKING READ
+- STEP 8: CONFIRM all rules active before proceeding with work planning
+
+**EVIDENCE REQUIRED:**
+```
+Rule Status Verification:
+✓ metacognition.md - ACTIVE (from session setup)
+✓ language/rules.md - ACTIVE (loaded/verified)
+✓ language/testing.md - ACTIVE (loaded/verified)
+✓ quality-assurance.md - ACTIVE (loaded/verified)
+```
+
+## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
+
+**CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
+☐ [VERIFIED] THIS FILE (`work-planning.md`) has been READ and is active
+☐ [VERIFIED] All required rules listed above are LOADED and active
+☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
+☐ [VERIFIED] User has APPROVED the design
+☐ [VERIFIED] SESSION_BASELINE_DATE established and active
+
+**METACOGNITION GATE [MANDATORY]:**
+BEFORE creating work plan, execute metacognition assessment:
+- Understand the design intent and goals
+- Verify task decomposition strategy aligns with 1-commit principle
+- Confirm dependencies are logical and achievable
+
+**GATE ENFORCEMENT:**
+IF any box unchecked → HALT → Return to uncompleted step
+IF attempting to skip → CRITICAL ERROR
+
 ## Purpose
 
-Create structured work plans with decomposed tasks for systematic implementation.
+Create work plans with decomposed tasks.
 
 ## When to Use
 
 - Medium/Large scale tasks (3+ files)
-- Complex features requiring phased approach
 - When user chooses Agentic Coding workflow
 - Refactoring with multiple components
 
-## Completion Conditions
+## Completion Conditions [BLOCKING GATES]
 
-□ Work plan document created
-□ Tasks decomposed to appropriate granularity
-□ Dependencies identified and ordered
-□ Each task has clear completion criteria
-□ Verification methods defined
-□ Risk factors documented
+☐ [MANDATORY] Work plan document created at `docs/plans/YYYYMMDD-{type}-{description}.md`
+☐ [VERIFIED] Tasks follow 1-COMMIT PRINCIPLE (each task = 1 logical commit)
+☐ [VERIFIED] Dependencies mapped with explicit order
+☐ [VERIFIED] Each task has MEASURABLE completion criteria
+☐ [VERIFIED] Each task has CHECKBOX for progress tracking
+☐ [VERIFIED] Verification command/method specified for EACH task
+☐ [VERIFIED] Risk factors with specific mitigations
+
+**GATE CHECK**: Cannot proceed to implementation until ALL boxes checked
 
 ## Execution Guidelines
 
@@ -31,46 +79,58 @@ Create work plan with:
 - **Dependencies**: What must complete before what
 - **Risks**: Potential issues and mitigations
 
-### 2. Task Decomposition Principles
+### 2. Task Decomposition Principles [1-COMMIT RULE]
 
-**Granularity**: 1 task = 1 logical unit (ideally 1 commit)
-- Small: 1-2 files (recommended)
-- Medium: 3-5 files (acceptable)
-- Large: 6+ files (must split)
+**MANDATORY GRANULARITY - 1 TASK = 1 COMMIT**:
+- Each task MUST represent ONE atomic change
+- Each task MUST be committable independently
+- Each task MUST NOT break the build when completed
 
-**Independence**: Each task should be:
-- Independently verifiable
+**File Count Guidelines**:
+- IDEAL: 1-2 files per task (one focused change)
+- MAXIMUM: 3 files per task (if tightly coupled)
+- PROHIBITED: 4+ files (MUST split into smaller tasks)
+
+**Independence Requirements**:
+- Independently verifiable (has own test/verification)
 - Rollback-safe (can revert without breaking)
-- Clear in scope
+- Self-contained (doesn't leave system in partial state)
 
-### 3. Task Format
+**Checkbox Update Protocol [MANDATORY]**:
+- BEFORE starting task: Verify checkbox exists `- [ ]`
+- AFTER completing task: Update checkbox to `- [x]` (standard Markdown)
+- ENFORCEMENT: Unchecked completed tasks = Protocol violation
+
+### 3. Task Format [MANDATORY TEMPLATE]
 
 ```markdown
 ## Task N: [Task Name]
 
-### Scope
-- Files affected:
-- Components involved:
+### Entry Conditions
+- [ ] Previous dependencies complete
+- [ ] Understand what to build
+- [ ] Ready to follow TDD
 
-### Implementation Steps
-1. Specific step 1
-2. Specific step 2
-3. ...
+### Scope [Max 2 files or split]
+- Files affected: [EXACT file paths]
+- Components: [SPECIFIC names]
 
-### Verification
-- How to verify it works
-- What tests to run
-- Expected behavior
+### Implementation Steps (TDD + Commit)
+1. RED: Write failing test
+2. GREEN: Write code to pass test
+3. REFACTOR: Improve the code
+4. VERIFY: Run quality checks (0 errors required)
+5. COMMIT: Git commit (following 1-COMMIT principle: 1 task = 1 commit)
 
-### Completion Criteria
-□ Functionality implemented
-□ Tests pass
-□ No regressions
-□ Documentation updated (if needed)
+### Exit Conditions
+- [ ] Test passes
+- [ ] Quality checks pass with 0 errors (see language/testing.md)
+- [ ] Changes committed to git
+- [ ] Task checkbox marked [x] in work plan
 
 ### Dependencies
-- Depends on: Task X
-- Blocks: Task Y
+- Depends on: Task [X]
+- Blocks: Task [Y]
 ```
 
 ### 4. Ordering Strategy
@@ -118,20 +178,31 @@ Phase 3: Cleanup
 
 ## Deliverables
 
-Work plan document containing:
-- Task breakdown with clear scope
-- Execution order
-- Verification methods
+Work plan document at `docs/plans/YYYYMMDD-{type}-{description}.md` containing:
+- Task breakdown following 1-commit principle
+- Execution order with dependencies
+- Checkboxes for progress tracking (- [ ] format)
+- Verification methods for each task
 - Risk mitigation strategies
+
+**CRITICAL**: Work plan location MUST be in `docs/plans/` directory
 
 ## Quality Criteria
 
-Good tasks are:
-- **Atomic**: Single logical change
+Tasks MUST be:
+- **Atomic**: ONE commit worth of changes
+- **Trackable**: Has checkbox for progress
 - **Measurable**: Clear completion criteria
 - **Testable**: Verification method defined
-- **Ordered**: Dependencies respected
-- **Sized**: 1-2 files preferred
+- **Ordered**: Dependencies explicitly stated
+- **Right-sized**: 1-2 files (3 max)
+
+**ENFORCEMENT CHECKLIST**:
+☐ Each task can be one commit
+☐ Each task has - [ ] checkbox
+☐ Each task has verification command
+☐ No task exceeds 3 files
+☐ Dependencies clearly marked
 
 ## Anti-Patterns
 
@@ -141,11 +212,3 @@ Avoid:
 - Circular dependencies
 - Missing verification methods
 - Unclear completion criteria
-
-## Notes
-
-- This planning enables systematic execution
-- Each task should be completable in one session
-- Document assumptions and decisions
-- Update plan if requirements change
-- Consider rollback scenarios

@@ -1,13 +1,51 @@
 # Quality Assurance
 
+## Required Rules [MANDATORY - MUST BE ACTIVE]
+
+**RULE AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md` - Language-specific quality standards
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - Testing requirements and coverage standards
+
+**LOADING PROTOCOL:**
+- STEP 1: CHECK if language/rules.md is active in working memory
+- STEP 2: If language/rules.md NOT active → Execute BLOCKING READ
+- STEP 3: CHECK if testing.md is active in working memory
+- STEP 4: If testing.md NOT active → Execute BLOCKING READ
+- STEP 5: CONFIRM all rules active before executing quality gates
+
+**CRITICAL**: Cannot execute quality checks until ALL required rules confirmed active
+
+**EVIDENCE REQUIRED:**
+```
+Rule Status Verification:
+✓ language/rules.md - ACTIVE (loaded/verified)
+✓ testing.md - ACTIVE (loaded/verified)
+```
+
+## Task Completion Gate [STRICT ENFORCEMENT - NO EXCEPTIONS]
+
+**CANNOT mark task as complete until ALL quality checks pass:**
+□ Build process succeeds
+□ Tests pass (or no tests if not applicable)
+□ Linting: 0 errors
+□ Type checking passes
+□ Manual testing performed (if applicable)
+□ Changes committed to git (for implementation tasks)
+□ Task tracking updated (work plan checkbox if using workflow)
+
+**If any check fails:**
+→ Fix issues before proceeding
+→ Do NOT skip or mark task complete
+→ Do NOT commit with failing checks
+
 ## Purpose
 
 Ensure code quality through systematic verification and testing.
 
-## When to Use
+## When to Use [MANDATORY TIMING]
 
-- After implementation complete
-- Before marking task done
+- **After every implementation** (required)
+- **Before marking any task done** (mandatory)
 - When quality issues suspected
 - During code review
 - Before deployment
@@ -46,7 +84,7 @@ Run project build:
 - Security tests: Vulnerability checks
 
 **Test Coverage**
-- Minimum: 70% code coverage
+- Minimum: 80% code coverage
 - Critical paths: 100% coverage
 - Edge cases: Documented and tested
 
@@ -159,12 +197,3 @@ Avoid:
 - Testing only happy path
 - Ignoring performance
 - Assuming security is fine
-
-## Notes
-
-- Quality is not negotiable
-- Automate everything possible
-- Fix issues immediately
-- Test early and often
-- Document quality decisions
-- Learn from quality failures

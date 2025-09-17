@@ -48,8 +48,8 @@
 - User stories and use cases
 - MoSCoW prioritization (Must/Should/Could/Won't)
 - MVP and Future phase separation
-- User journey diagram (required)
-- Scope boundary diagram (required)
+- User journey diagram
+- Scope boundary diagram
 
 **Excludes**:
 - Technical implementation details (→Design Doc)
@@ -59,14 +59,14 @@
 
 ### ADR (Architecture Decision Record)
 
-**Purpose**: Record technical decision rationale and background
+**Purpose**: Record technical decisions
 
 **Includes**:
 - Decision (what was selected)
 - Rationale (why that selection was made)
 - Option comparison (minimum 3 options) and trade-offs
 - Architecture impact
-- Principled implementation guidelines (e.g., "Use dependency injection")
+- Principled implementation guidelines
 
 **Excludes**:
 - Implementation schedule, duration (→Work Plan)
@@ -76,7 +76,7 @@
 
 ### Design Document
 
-**Purpose**: Define technical implementation methods in detail
+**Purpose**: Define technical implementation
 
 **Includes**:
 - **Existing codebase analysis** (required)
@@ -156,7 +156,7 @@ Interface Change Matrix:
 | Design Doc | `docs/design/` | `[feature-name]-design.md` | `template-en.md` |
 | Work Plan | `docs/plans/` | `YYYYMMDD-{type}-{description}.md` | `template-en.md` |
 
-*Note: Work plans are excluded by `.gitignore`
+*Note: Work plans are stored in `docs/plans/` and excluded by `.gitignore`
 
 ## ADR Status
 `Proposed` → `Accepted` → `Deprecated`/`Superseded`/`Rejected`

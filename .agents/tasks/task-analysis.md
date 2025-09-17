@@ -1,8 +1,27 @@
 # Task Analysis
 
+## Required Rules [MANDATORY - MUST BE ACTIVE]
+
+**RULE AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-rule-matrix.yaml` - Rule selection matrix
+
+**LOADING PROTOCOL:**
+- STEP 1: VERIFY metacognition.md is active from initial session setup
+- STEP 2: CHECK if task-rule-matrix.yaml is active in working memory
+- STEP 3: If task-rule-matrix.yaml NOT active → Execute BLOCKING READ
+- STEP 4: CONFIRM all rules active before proceeding with task analysis
+
+**EVIDENCE REQUIRED:**
+```
+Rule Status Verification:
+✓ metacognition.md - ACTIVE (from session setup)
+✓ task-rule-matrix.yaml - ACTIVE (loaded/verified)
+```
+
 ## Purpose
 
-Analyze user requests to determine task type, scale, and required resources for accurate execution.
+Determine task type, scale, and required resources.
 
 ## When to Use
 
@@ -24,16 +43,23 @@ Analyze user requests to determine task type, scale, and required resources for 
 □ Success criteria defined (measurable)
 □ Constraints and assumptions documented
 
-## Execution Guidelines
+## Mandatory Execution Order [STRICT COMPLIANCE REQUIRED]
 
-### 1. Understand Request Essence
+### Step 0: Initial Setup [BLOCKING - CANNOT SKIP]
+If SESSION_BASELINE_DATE not established:
+1. [IMMEDIATE] Execute `date` command
+2. [STORE] Result as SESSION_BASELINE_DATE for ENTIRE session
+3. [ENFORCE] ALL "current/latest/recent" references MUST use SESSION_BASELINE_DATE year
 
-Ask yourself:
-- What is the user truly trying to achieve?
+VIOLATION EXAMPLE: Using "2024" in web research when SESSION_BASELINE_DATE shows "2025" = CRITICAL ERROR
+
+### Step 1: Understand Request Essence
+
+- What is the user trying to achieve?
 - Is this a symptom or the actual goal?
 - What similar tasks have been done before?
 
-### 2. Classify Task Type
+### Step 2: Classify Task Type [REQUIRED]
 
 **Implementation**: Creating or modifying code
 - New features
@@ -61,7 +87,7 @@ Ask yourself:
 - Performance analysis
 - Behavior diagnosis
 
-### 3. Estimate Scale
+### Step 3: Estimate Scale [REQUIRED]
 
 Count affected components:
 - Number of files to create/modify
@@ -69,7 +95,24 @@ Count affected components:
 - Integration complexity
 - Testing requirements
 
-### 4. Identify Resources
+### Step 4: Execute Rule Selection [BLOCKING CHECKPOINT]
+
+**EXECUTION GATES - System HALTS if any step skipped:**
+1. [BLOCKING READ] `task-rule-matrix.yaml` from `.agents/context-maps/`
+2. [MANDATORY MATCHING] Task type + scale against matrix
+3. [CLASSIFICATION OUTPUT]:
+   - Required rules: IMMEDIATE BLOCKING READ
+   - Recommended rules: EVALUATE context, then BLOCKING READ if applicable
+   - Conditional rules: CHECK conditions, then BLOCKING READ if met
+4. [VERIFICATION GATE] CANNOT PROCEED until ALL required rules loaded
+5. [PROOF OF COMPLIANCE] Output must list:
+   ```
+   Rules Successfully Loaded:
+   ✓ [filepath] - [reason for loading]
+   ✓ [filepath] - [applied to which aspect]
+   ```
+
+### Step 5: Identify Additional Resources
 
 Determine what's needed:
 - Which rule files apply
@@ -77,17 +120,26 @@ Determine what's needed:
 - Reference implementations
 - Documentation sources
 
-### 5. Define Success Criteria
+### Step 6: Define Success Criteria
 
-Make it measurable:
 - Specific functionality works
 - Tests pass
 - Performance metrics met
 - Documentation complete
 
+### Step 7: Workflow Recommendation
+
+Based on scale and complexity:
+- **Small Scale (1-2 files)**: Direct task execution, no workflow needed
+- **Medium/Large Scale (3+ files)**: RECOMMEND agentic-coding.md workflow
+  - Ask: "This task would benefit from a structured workflow with design document and work plan. Proceed? [Y/n]"
+  - If YES: Load and follow agentic-coding.md
+  - If NO: Execute individual task definitions directly
+
 ## Deliverables
 
-None directly - this task clarifies what needs to be done.
+- Task classification output
+- Path recommendation
 
 ## Common Patterns
 
@@ -111,23 +163,82 @@ None directly - this task clarifies what needs to be done.
 
 ## Decision Tree
 
+**Code-related?**
+- YES → Creating new code?
+  - YES: Implementation task
+  - NO → Fixing issues?
+    - YES: Debugging task
+    - NO: Refactoring task
+- NO → Information gathering?
+  - YES: Research task
+  - NO → Planning?
+    - YES: Design task
+    - NO: Documentation task
+
+## Rule Selection Output Format [SYSTEM VERIFICATION REQUIRED]
+
+### BLOCKING OUTPUT - Cannot proceed without this exact format:
 ```
-Is it code-related?
-├─ YES: Is it creating new code?
-│   ├─ YES: Implementation task
-│   └─ NO: Is it fixing issues?
-│       ├─ YES: Debugging task
-│       └─ NO: Refactoring task
-└─ NO: Is it information gathering?
-    ├─ YES: Research task
-    └─ NO: Is it planning?
-        ├─ YES: Design task
-        └─ NO: Documentation task
+[RULE SELECTION CHECKPOINT]
+Task Type: [type]
+Task Scale: [scale]
+SESSION_BASELINE_DATE: [stored date from initial setup]
+
+Path Recommendation:
+- [Direct execution of task definitions] OR
+- [Workflow recommended: agentic-coding.md]
+
+Required Rules [BLOCKING READS - MUST BE LOADED]:
+✓ [path/to/rule1.md] - LOADED - [applying to: specific aspect]
+✓ [path/to/rule2.md] - LOADED - [applying to: specific aspect]
+
+Conditional Rules [LOAD IF CONDITION MET]:
+✓ [path/to/rule3.md] - LOADED - [trigger: "test" keyword found in task]
+✗ [path/to/rule4.md] - NOT LOADED - [trigger not met: no performance requirements]
+
+VERIFICATION: All required rules active in working memory
 ```
 
-## Notes
+### Rule Loading Strategy [WITH CLEAR TRIGGERS]
 
-- This analysis guides all subsequent work
-- Be thorough but efficient
-- Ask user for clarification when ambiguous
-- Document assumptions made
+**By Task Type [IMMEDIATE LOAD]:**
+- Implementation → ALWAYS: language/rules + ai-development-guide
+- Debugging → ALWAYS: ai-development-guide + language/testing
+- Design → ALWAYS: documentation-criteria
+- Documentation → ALWAYS: documentation-criteria
+- Refactoring → ALWAYS: language/rules + ai-development-guide
+- Research → ALREADY LOADED: metacognition (from initial setup)
+
+**Conditional Loading [LOAD WHEN]:**
+- language/testing → WHEN: "test", "TDD", "coverage" in requirements OR implementation task
+- implementation-approach → WHEN: Medium/Large scale (3+ files) OR architecture decision needed
+- contextual/technical-spec → WHEN: external API/service integration
+
+**By Scale [AUTOMATIC TRIGGERS]:**
+- Small (1-2 files) → Load only task type essentials
+- Medium (3-5 files) → AUTO-ADD: documentation-criteria
+- Large (6+ files) → AUTO-ADD: implementation-approach + work-planning
+
+### Context Optimization [EXPLICIT LOADING CONDITIONS]
+
+**Initial Load [ALWAYS]:**
+- Essential rules for identified task type
+- Scale-based automatic additions
+- NOTE: metacognition.md already active from initial setup
+
+**Trigger-Based Loading [LOAD IMMEDIATELY WHEN]:**
+- Error occurs 2+ times → Load debugging patterns
+- "Performance" mentioned → Load optimization rules
+- "Security" mentioned → Load security guidelines
+- External service mentioned → Load integration patterns
+- 3+ state variables → Load state management patterns
+
+**Unloading [AFTER TASK COMPLETE]:**
+- Task-specific architecture patterns
+- One-time reference documents
+- Completed phase rules
+
+**NEVER UNLOAD:**
+- metacognition.md (loaded in initial setup, stays entire session)
+- Current task type's essential rules
+- ai-development-guide.md (during implementation/debugging)

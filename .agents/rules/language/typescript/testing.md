@@ -8,44 +8,52 @@
 ## Basic Testing Policy
 
 ### Quality Requirements
-- **Coverage**: Unit test coverage must be 70% or higher
-- **Independence**: Each test can run independently without depending on other tests
-- **Reproducibility**: Tests are environment-independent and always return the same results
-- **Readability**: Test code maintains the same quality as production code
+- **Coverage**: Unit test coverage must be 80% or higher
+- **Independence**: Each test can run independently
+- **Reproducibility**: Tests are environment-independent
 
 ### Coverage Requirements
-**Mandatory**: Unit test coverage must be 70% or higher
+**Mandatory**: Unit test coverage must be 80% or higher
 **Metrics**: Statements, Branches, Functions, Lines
 
 ### Test Types and Scope
 1. **Unit Tests**
    - Verify behavior of individual functions or classes
    - Mock all external dependencies
-   - Most numerous, implemented with fine granularity
 
 2. **Integration Tests**
    - Verify coordination between multiple components
    - Use actual dependencies (DB, API, etc.)
-   - Verify major functional flows
 
-## Red-Green-Refactor Process (Test-First Development)
+## TDD Process [MANDATORY for all code changes]
 
-**Recommended Principle**: Always start code changes with tests
+**Execute this process for every code change:**
 
-**Background**: 
-- Ensure behavior before changes, prevent regression
-- Clarify expected behavior before implementation
-- Ensure safety during refactoring
+### RED Phase
+1. Write test that defines expected behavior
+2. Run test
+3. Confirm test FAILS (if it passes, the test is wrong)
 
-**Development Steps**:
-1. **Red**: Write test for expected behavior (it fails)
-2. **Green**: Pass test with minimal implementation
-3. **Refactor**: Improve code while maintaining passing tests
+### GREEN Phase
+1. Write MINIMAL code to make test pass
+2. Run test
+3. Confirm test PASSES
 
-**NG Cases (Test-first not required)**:
-- Pure configuration file changes (.env, config, etc.)
-- Documentation-only updates (README, comments, etc.)
-- Emergency production incident response (post-incident tests mandatory)
+### REFACTOR Phase
+1. Improve code quality
+2. Run test
+3. Confirm test STILL PASSES
+
+### VERIFY Phase [MANDATORY - 0 ERRORS REQUIRED]
+1. Execute ALL quality check commands below
+2. Fix any errors until ALL commands pass with 0 errors
+3. Confirm no regressions
+4. ENFORCEMENT: Cannot proceed with ANY errors or warnings
+
+**Exceptions (no TDD required):**
+- Pure configuration files
+- Documentation only
+- Emergency fixes (but add tests immediately after)
 
 ## Test Design Principles
 
@@ -107,15 +115,10 @@ function assertValidUser(user: unknown): asserts user is User {
 ## Test Implementation Conventions
 
 ### Directory Structure
-```
-src/
-└── application/
-    └── services/
-        ├── __tests__/
-        │   ├── service.test.ts      # Unit tests
-        │   └── service.int.test.ts  # Integration tests
-        └── service.ts
-```
+**File structure:**
+- src/application/services/service.ts: Main service file
+- src/application/services/__tests__/service.test.ts: Unit tests
+- src/application/services/__tests__/service.int.test.ts: Integration tests
 
 ### Naming Conventions
 - Test files: `{target-file-name}.test.ts`
@@ -177,12 +180,46 @@ describe('ComponentName', () => {
   it('should follow AAA pattern', () => {
     // Arrange
     const input = 'test'
-    
+
     // Act
     const result = someFunction(input)
-    
+
     // Assert
     expect(result).toBe('expected')
   })
 })
 ```
+
+## Quality Check Commands [MANDATORY for VERIFY phase]
+
+**ALL commands MUST pass with 0 errors before task completion:**
+
+**TypeScript/JavaScript:**
+```bash
+npm test              # MUST pass all tests
+npm run build        # MUST build successfully
+npm run lint         # MUST have 0 lint errors
+npm run type-check   # MUST have 0 type errors
+```
+
+**Python:**
+```bash
+pytest               # MUST pass all tests
+mypy .              # MUST have 0 type errors
+ruff check .        # MUST have 0 lint errors
+black --check .     # MUST be formatted correctly
+```
+
+**Go:**
+```bash
+go test ./...       # MUST pass all tests
+go build ./...      # MUST build successfully
+golangci-lint run   # MUST have 0 lint errors
+go fmt ./...        # MUST be formatted
+```
+
+**ENFORCEMENT:**
+- Run ALL applicable commands for your language
+- Fix ANY errors or warnings before marking task complete
+- If command doesn't exist in package.json/equivalent, skip it
+- Document which commands were run in task completion

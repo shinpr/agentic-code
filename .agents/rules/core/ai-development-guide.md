@@ -1,30 +1,26 @@
-# AI Developer Guide - Technical Decision Criteria and Anti-pattern Collection
-
-This document compiles technical decision criteria, anti-patterns, debugging techniques, and quality check commands that LLMs (you) should reference during implementation. This document focuses purely on technical guidance.
+# AI Developer Guide
 
 ## Technical Anti-patterns (Red Flag Patterns)
 
 Immediately stop and reconsider design when detecting the following patterns:
 
 ### Code Quality Anti-patterns
-1. **Writing similar code 3 or more times** - Violates Rule of Three
-2. **Multiple responsibilities mixed in a single file** - Violates Single Responsibility Principle (SRP)
-3. **Defining same content in multiple files** - Violates DRY principle
-4. **Making changes without checking dependencies** - Potential for unexpected impacts
-5. **Disabling code with comments** - Should use version control
-6. **Error suppression** - Hiding problems creates technical debt
-7. **Excessive use of type assertions (as)** - Abandoning type safety
+1. **Writing similar code 3 or more times**
+2. **Multiple responsibilities mixed in a single file**
+3. **Defining same content in multiple files**
+4. **Making changes without checking dependencies**
+5. **Disabling code with comments**
+6. **Error suppression**
+7. **Excessive use of type assertions (as)**
 
 ### Design Anti-patterns
-- **"Make it work for now" thinking** - Accumulation of technical debt
-- **Patchwork implementation** - Unplanned additions to existing code
-- **Optimistic implementation of uncertain technology** - Designing unknown elements assuming "it'll probably work"
-- **Symptomatic fixes** - Surface-level fixes that don't solve root causes
-- **Unplanned large-scale changes** - Lack of incremental approach
+- **"Make it work for now" thinking**
+- **Patchwork implementation**
+- **Optimistic implementation of uncertain technology**
+- **Symptomatic fixes**
+- **Unplanned large-scale changes**
 
 ## Rule of Three - Criteria for Code Duplication
-
-How to handle duplicate code based on Martin Fowler's "Refactoring":
 
 | Duplication Count | Action | Reason |
 |-------------------|--------|--------|

@@ -42,7 +42,7 @@ Historical Context Understanding:
 #### Strategy Discovery Process
 ```yaml
 Research and Exploration:
-  - Implementation examples and patterns from similar tech stacks (use WebSearch)
+  - Implementation examples and patterns from similar tech stacks (research online)
   - Approach collection from projects handling similar challenges
   - Open source implementation references
   - Technical literature and blog research
@@ -196,7 +196,7 @@ Define integration points according to selected strategy:
 ## Guidelines for Meta-cognitive Execution
 
 1. **Leverage Known Patterns**: Use as starting point, explore creative combinations
-2. **Active WebSearch Use**: Research implementation examples from similar tech stacks
+2. **Active Web Research**: Research implementation examples from similar tech stacks
 3. **Apply 5 Whys**: Pursue root causes to grasp essence
 4. **Multi-perspective Evaluation**: Comprehensively evaluate from each Phase 1-4 perspective
 5. **Creative Thinking**: Consider sequential application of multiple strategies and designs leveraging project-specific constraints

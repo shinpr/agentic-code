@@ -2,8 +2,8 @@
 
 ## Basic Principles
 
-✅ **Aggressive Refactoring** - Prevent technical debt and maintain health
-❌ **Unused "Just in Case" Code** - Violates YAGNI principle (Kent Beck)
+✅ **Aggressive Refactoring**
+❌ **Unused "Just in Case" Code** - YAGNI principle
 
 ## Comment Writing Rules
 - **Function Description Focus**: Describe what the code "does"
@@ -13,12 +13,12 @@
 
 ## Type Safety
 
-**Absolute Rule**: any type is completely prohibited. It disables type checking and becomes a source of runtime errors.
+**Absolute Rule**: any type is completely prohibited.
 
 **any Type Alternatives (Priority Order)**
-1. **unknown Type + Type Guards**: Use for validating external input
-2. **Generics**: When type flexibility is needed
-3. **Union Types・Intersection Types**: Combinations of multiple types
+1. **unknown Type + Type Guards**
+2. **Generics**
+3. **Union Types・Intersection Types**
 4. **Type Assertions (Last Resort)**: Only when type is certain
 
 **Type Guard Implementation Pattern**
