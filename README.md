@@ -3,8 +3,6 @@
 > Task-oriented context engineering framework for LLM coding agents - [AGENTS.md standard](https://agents.md) compliant
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/Node.js-20+-blue.svg)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
 
 Transform chaotic AI coding sessions into systematic, reliable workflows with structured task definitions, progressive rule loading, and built-in quality gates (mandatory checkpoints).
@@ -15,11 +13,12 @@ Transform chaotic AI coding sessions into systematic, reliable workflows with st
 
 ## 🚀 Quick Start
 
-**Get started in 3 simple steps** *(**TypeScript projects only**)*:
+**Get started in 3 simple steps**:
 
 ```bash
 # 1. Create project
-npx github:shinpr/agentic-code my-project
+npx github:shinpr/agentic-code my-project                    # General (works with any language)
+npx github:shinpr/agentic-code my-project --lang=typescript  # TypeScript-specific rules
 
 # 2. Enter directory
 cd my-project
@@ -64,9 +63,9 @@ codex  # OpenAI Codex CLI (recommended)
 
 **Especially valuable if you:**
 - Use AI coding tools regularly (Codex, Cursor, GitHub Copilot, etc.)
-- Work on TypeScript/Node.js projects
 - Want predictable, high-quality AI coding sessions
 - Need systematic task management for complex features
+- Appreciate structured development methodologies like TDD
 
 ### Unique Advantages
 
@@ -171,8 +170,7 @@ Path: Workflow → .agents/workflows/agentic-coding.md
 
 ### Core Commands
 ```bash
-npm run setup         # Initialize new project
-npm run setup:lang   # Configure language-specific rules
+npm run setup         # Initialize existing project (use CLI for new projects)
 ```
 
 ### Quality Checks
@@ -200,10 +198,10 @@ npm run setup:lang   # Configure language-specific rules
 **A**: The task analysis framework is designed to handle edge cases. Start with task-analysis.md - it will guide you to the appropriate approach.
 
 ### Q: How do I customize rules for my specific tech stack?
-**A**: Use `npm run setup:lang` to configure language-specific rules, and add contextual rules in `.agents/rules/contextual/` as needed.
+**A**: Choose your language during project creation (`--lang=general` or `--lang=typescript`), and add contextual rules in `.agents/rules/contextual/` as needed.
 
-### Q: Is this only for TypeScript projects?
-**A**: Currently, yes. The framework is designed for TypeScript projects. Support for other languages may be added in future versions.
+### Q: What languages are supported?
+**A**: The framework supports any language through general development principles (default), plus enhanced TypeScript-specific rules when you use `--lang=typescript`.
 
 ### Q: What is the AGENTS.md standard?
 **A**: AGENTS.md is an open standard for guiding AI coding agents, developed by OpenAI, Google, Cursor, and other industry leaders. It's like a README for agents - a standardized way to provide context and instructions. Learn more at [agents.md](https://agents.md).

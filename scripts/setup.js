@@ -4,8 +4,10 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// TypeScript only for now
-const selectedLang = 'typescript';
+// Parse command line arguments for language option
+const args = process.argv.slice(2);
+const langOption = args.find(arg => arg.startsWith('--lang='));
+const selectedLang = langOption ? langOption.split('=')[1] : 'general';
 
 console.log('🚀 Setting up Agentic Code framework...\n');
 
@@ -30,13 +32,27 @@ if (!isGitRepo()) {
   }
 }
 
-// Set up TypeScript language configuration
-console.log('⚙️  Setting up TypeScript language configuration...');
+// Set up language configuration
+const languageNames = {
+  general: 'General (language-agnostic)',
+  typescript: 'TypeScript'
+};
+
+const languageName = languageNames[selectedLang] || selectedLang;
+console.log(`⚙️  Setting up ${languageName} configuration...`);
+
 try {
   const langPath = path.join(__dirname, '..', '.agents', 'rules', 'language');
-  const sourcePath = path.join(langPath, 'typescript');
+  const sourcePath = path.join(langPath, selectedLang);
   const targetRulesPath = path.join(langPath, 'rules.md');
   const targetTestingPath = path.join(langPath, 'testing.md');
+
+  // Check if source directory exists
+  if (!fs.existsSync(sourcePath)) {
+    console.error(`❌ Language '${selectedLang}' is not supported.`);
+    console.log('Available languages: general, typescript');
+    process.exit(1);
+  }
 
   // Remove existing symlinks if they exist
   if (fs.existsSync(targetRulesPath)) {
@@ -50,9 +66,9 @@ try {
   fs.symlinkSync(path.join(sourcePath, 'rules.md'), targetRulesPath);
   fs.symlinkSync(path.join(sourcePath, 'testing.md'), targetTestingPath);
 
-  console.log('✓ TypeScript has been set as the active language.');
-  console.log('  - .agents/rules/language/rules.md → typescript/rules.md');
-  console.log('  - .agents/rules/language/testing.md → typescript/testing.md\n');
+  console.log(`✓ ${languageName} has been set as the active language.`);
+  console.log(`  - .agents/rules/language/rules.md → ${selectedLang}/rules.md`);
+  console.log(`  - .agents/rules/language/testing.md → ${selectedLang}/testing.md\n`);
 } catch (error) {
   console.error('❌ Failed to setup language configuration:', error.message);
 }

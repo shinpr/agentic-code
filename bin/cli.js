@@ -8,7 +8,7 @@ const { execSync } = require('child_process');
 const args = process.argv.slice(2);
 const projectName = args[0];
 const langOption = args.find(arg => arg.startsWith('--lang='));
-const selectedLang = langOption ? langOption.split('=')[1] : 'typescript';
+const selectedLang = langOption ? langOption.split('=')[1] : 'general';
 
 // Show help if no project name provided
 if (!projectName) {
@@ -16,13 +16,16 @@ if (!projectName) {
 🤖 Agentic Code - Task-oriented context engineering framework
 
 Usage:
-  npx github:shinpr/agentic-code <project-name> [--lang=typescript]
+  npx github:shinpr/agentic-code <project-name> [--lang=general|typescript]
 
 Examples:
-  npx github:shinpr/agentic-code my-project
-  npx github:shinpr/agentic-code my-project --lang=typescript
+  npx github:shinpr/agentic-code my-project                    # General (language-agnostic)
+  npx github:shinpr/agentic-code my-project --lang=general     # General (explicit)
+  npx github:shinpr/agentic-code my-project --lang=typescript  # TypeScript-specific
 
-Currently supports TypeScript projects only.
+Language options:
+  general (default): Universal development principles for any language
+  typescript: Enhanced rules and TypeScript-specific tooling
 `);
   process.exit(1);
 }
@@ -62,7 +65,7 @@ try {
 
   // Set up project configuration
   console.log('⚙️  Setting up project configuration...');
-  execSync('node scripts/setup.js', { stdio: 'inherit' });
+  execSync(`node scripts/setup.js --lang=${selectedLang}`, { stdio: 'inherit' });
 
   // Create initial commit
   console.log('💾 Creating initial commit...');
