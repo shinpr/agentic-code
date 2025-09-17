@@ -192,9 +192,8 @@ describe('ComponentName', () => {
 
 ## Quality Check Commands [MANDATORY for VERIFY phase]
 
-**ALL commands MUST pass with 0 errors before task completion:**
+**ALL TypeScript/JavaScript commands MUST pass with 0 errors before task completion:**
 
-**TypeScript/JavaScript:**
 ```bash
 npm test              # MUST pass all tests
 npm run build        # MUST build successfully
@@ -202,24 +201,8 @@ npm run lint         # MUST have 0 lint errors
 npm run type-check   # MUST have 0 type errors
 ```
 
-**Python:**
-```bash
-pytest               # MUST pass all tests
-mypy .              # MUST have 0 type errors
-ruff check .        # MUST have 0 lint errors
-black --check .     # MUST be formatted correctly
-```
-
-**Go:**
-```bash
-go test ./...       # MUST pass all tests
-go build ./...      # MUST build successfully
-golangci-lint run   # MUST have 0 lint errors
-go fmt ./...        # MUST be formatted
-```
-
 **ENFORCEMENT:**
-- Run ALL applicable commands for your language
+- Run ALL applicable commands listed above
 - Fix ANY errors or warnings before marking task complete
-- If command doesn't exist in package.json/equivalent, skip it
+- If command doesn't exist in package.json, skip that specific command
 - Document which commands were run in task completion
