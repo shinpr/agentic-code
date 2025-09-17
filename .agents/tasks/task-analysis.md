@@ -136,6 +136,38 @@ Based on scale and complexity:
   - If YES: Load and follow agentic-coding.md
   - If NO: Execute individual task definitions directly
 
+### Step 8: Mandatory Plan Injection [BLOCKING - AUTOMATIC EXECUTION]
+
+**FOR DESIGN OR IMPLEMENTATION TASKS (INCLUDING WORKFLOW):**
+
+When Task Type = design OR implementation OR workflow selected:
+1. **[AUTOMATIC INJECTION]** Add to work plan WITHOUT USER PROMPT:
+   ```
+   Plan Injection Required:
+   □ Step 1: BLOCKING READ .agents/tasks/technical-design.md
+   □ Step 2: Verify "Acceptance Criteria" section will be created
+   □ Step 3: Create Rule Status Verification block before design
+   ```
+
+2. **[EVIDENCE REQUIRED]** Show plan injection confirmation:
+   ```
+   [PLAN INJECTION COMPLETED]
+   Injected to plan:
+   ✓ BLOCKING READ: technical-design.md - for acceptance criteria
+   ✓ Design doc requirement: Must contain "Acceptance Criteria" section
+   ✓ Verification gate: Rule status block before proceeding
+   ```
+
+3. **[ENFORCEMENT]** CANNOT proceed to design/implementation without:
+   - Plan injection evidence shown above
+   - Explicit task items in work plan for these reads
+   - Confirmation that AC section is mandatory
+
+**VIOLATION HANDLING:**
+- Attempting design without injection = IMMEDIATE HALT
+- Skipping technical-design.md read = BLOCKING ERROR
+- Missing Acceptance Criteria = DESIGN REJECTION
+
 ## Deliverables
 
 - Task classification output

@@ -38,6 +38,14 @@
 
 ## Core Principles
 
+### Plan Injection [MANDATORY ENFORCEMENT]
+**All design and implementation tasks require Plan Injection:**
+- Task-analysis.md Step 8 automatically injects required reads into work plan
+- Work plans MUST contain "BLOCKING READ" items for critical files
+- Design documents MUST have "Acceptance Criteria" section
+- Gates verify Plan Injection evidence before proceeding
+- Missing Plan Injection = IMMEDIATE HALT
+
 ### Task Definition Loading
 **Task definitions define WHAT to build - never skip them:**
 - Verify entry gates before proceeding
@@ -62,9 +70,14 @@
 
 Common approval points:
 - When recommending a workflow for Medium/Large tasks
-- After creating design or decision documents
+- After creating design or decision documents (MUST have Acceptance Criteria)
 - When technical approach changes significantly
 - At task definition specified stop points
+
+**VIOLATIONS TO PREVENT:**
+- Design without Acceptance Criteria section = BLOCKING ERROR
+- Work plan without Plan Injection items = RETURN TO TASK ANALYSIS
+- Skipping BLOCKING READ requirements = IMMEDIATE HALT
 
 ## Quality Standards
 

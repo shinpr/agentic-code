@@ -64,12 +64,18 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ## Phase 2: Technical Design
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
-2. **[VERIFY]** technical-design.md is ACTIVE in working memory
-3. **[VERIFY]** All rules required by technical-design.md are LOADED
-4. **[CONFIRM]** Entry gates in technical-design.md are satisfied
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains:
+   - "BLOCKING READ .agents/tasks/technical-design.md" task item
+   - "Create Acceptance Criteria section" requirement
+   - If missing: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
+3. **[VERIFY]** technical-design.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by technical-design.md are LOADED
+5. **[CONFIRM]** Entry gates in technical-design.md are satisfied
 
-**ENFORCEMENT**: NO design work until technical-design.md confirmed active
+**ENFORCEMENT**:
+- NO design work until technical-design.md confirmed active
+- NO proceeding without Plan Injection verification
 
 ### Pre-Design Requirements:
 ```
@@ -104,11 +110,17 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ### 🛑 STOP POINT: Design Review [BLOCKING GATE]
 **SYSTEM HALT - CANNOT PROCEED WITHOUT:**
 1. Design document EXISTS at `docs/design/[feature]-design.md`
-2. User EXPLICITLY states approval ("yes", "approved", "大丈夫", etc.)
-3. ADR created if new technology introduced
+2. **[VERIFY AC]** Design doc CONTAINS "Acceptance Criteria" section with:
+   - At least 1 functional requirement (measurable)
+   - At least 1 non-functional requirement (if applicable)
+   - Checkbox format for testability
+   - If missing: REJECT design - Return to Phase 2
+3. User EXPLICITLY states approval ("yes", "approved", "大丈夫", etc.)
+4. ADR created if new technology introduced
 
 **ENFORCEMENT:**
 - NO implementation code until approval received
+- NO design without Acceptance Criteria section
 - NO skipping even for "simple" changes
 - VIOLATION = Return to design phase
 
@@ -147,17 +159,24 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ### 🛑 STOP POINT: Work Plan Approval [BLOCKING GATE]
 **SYSTEM HALT - CANNOT WRITE CODE WITHOUT:**
 1. Work plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
-2. Each task has MEASURABLE completion criteria
-3. User EXPLICITLY approves plan
+2. **[VERIFY INJECTION]** Plan MUST contain these mandatory items:
+   - "BLOCKING READ .agents/tasks/technical-design.md" (if design phase)
+   - "BLOCKING READ .agents/tasks/implementation.md" (before coding)
+   - Each injected item marked with source: "[From Plan Injection]"
+3. Each task has MEASURABLE completion criteria
+4. User EXPLICITLY approves plan
 
 **GATE VERIFICATION:**
 ```
 Plan Location: docs/plans/[filename].md
 Task Count: [N] tasks defined
+Plan Injection Items: [VERIFIED/MISSING]
 User Approval: [AWAITING/RECEIVED]
 ```
 
-**ENFORCEMENT:** First line of code PROHIBITED until approval
+**ENFORCEMENT:**
+- First line of code PROHIBITED until approval
+- Missing Plan Injection items = Return to task-analysis Step 8
 
 ## Phase 4: Implementation
 

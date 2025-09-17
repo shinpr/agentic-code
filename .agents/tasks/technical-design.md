@@ -26,6 +26,9 @@ Rule Status Verification:
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
+☐ [VERIFIED] Plan Injection completed (from task-analysis.md Step 8)
+☐ [VERIFIED] Work plan contains "BLOCKING READ technical-design.md" item
+☐ [VERIFIED] Work plan contains "Create Acceptance Criteria section" requirement
 ☐ [VERIFIED] Project structure confirmed
 ☐ [VERIFIED] PRD reviewed (if exists) with requirements understood
 ☐ [VERIFIED] Related design documents investigation COMPLETED with evidence
@@ -34,6 +37,17 @@ Rule Status Verification:
 ☐ [VERIFIED] Similar functionality search EXECUTED with results documented
 ☐ [VERIFIED] Required rules LOADED with file paths listed above
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active
+
+**PLAN INJECTION VERIFICATION [MANDATORY]:**
+Show evidence of Plan Injection:
+```
+[PLAN INJECTION EVIDENCE]
+✓ Source: task-analysis.md Step 8
+✓ Plan contains: BLOCKING READ technical-design.md
+✓ Plan contains: Acceptance Criteria requirement
+✓ Status: VERIFIED
+```
+If missing → HALT → Return to task-analysis.md Step 8
 
 **METACOGNITION GATE [MANDATORY]:**
 BEFORE starting design, execute metacognition assessment:
@@ -79,7 +93,11 @@ Create ADR and Design Documents.
 □ Integration points identified
 □ Error handling strategy defined
 □ Testing strategy outlined
-□ Acceptance criteria defined and verifiable
+□ **[MANDATORY]** Acceptance Criteria section EXISTS with:
+  - Minimum 1 functional requirement (testable)
+  - Minimum 1 non-functional requirement (if applicable)
+  - Checkbox format (□) for each criterion
+  - Measurable/verifiable conditions
 □ References cited
 
 ## Mandatory Process Before Document Creation [STRICT COMPLIANCE]
@@ -259,14 +277,18 @@ Brief description of what's being designed
 - Non-functional requirements
 - Constraints
 
-## Acceptance Criteria
+## Acceptance Criteria [MANDATORY SECTION]
 ### Functional Requirements
 - [ ] [Specific, testable condition]
 - [ ] [User can perform X and see Y]
+- [ ] [Given-When-Then format acceptable]
 
 ### Non-functional Requirements
 - [ ] [Performance metric achieved]
 - [ ] [Security requirement met]
+- [ ] [Scalability targets defined]
+
+**ENFORCEMENT**: Design REJECTED if this section missing or empty
 
 ## Architecture
 
