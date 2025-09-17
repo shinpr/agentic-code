@@ -12,6 +12,22 @@
 - STEP 3: If documentation-criteria.md NOT active → Execute BLOCKING READ
 - STEP 4: CONFIRM all rules active before proceeding
 
+## Plan Injection Requirement [MANDATORY]
+
+**Upon reading this file, IMMEDIATELY inject to work plan:**
+1. All BLOCKING READs identified in Loading Protocol above:
+   - `.agents/rules/core/documentation-criteria.md` (if not active)
+2. Mark each with "[From prd-creation.md]" source tag
+3. Show evidence of injection:
+   ```
+   [PLAN INJECTION FROM prd-creation.md]
+   Injected to work plan:
+   ✓ BLOCKING READ: documentation-criteria.md - PRD creation criteria
+   Status: VERIFIED
+   ```
+
+**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
@@ -22,6 +38,9 @@ Rule Status Verification:
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
+☐ [VERIFIED] THIS FILE (`prd-creation.md`) has been READ and is active
+☐ [VERIFIED] Plan Injection completed (from prd-creation.md Plan Injection Requirement)
+☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Project structure confirmed
 ☐ [VERIFIED] Existing PRDs investigation COMPLETED with evidence
 ☐ [VERIFIED] Related documentation search EXECUTED with results documented

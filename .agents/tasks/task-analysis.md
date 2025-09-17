@@ -111,6 +111,13 @@ Count affected components:
    ✓ [filepath] - [reason for loading]
    ✓ [filepath] - [applied to which aspect]
    ```
+6. [PLAN INJECTION] IMMEDIATELY inject all identified BLOCKING READs to work plan:
+   ```
+   [PLAN INJECTION FROM task-analysis - Rule Selection]
+   Injected BLOCKING READs from rule selection:
+   ✓ [filepath] - required rule
+   ✓ [filepath] - conditional rule (condition met)
+   ```
 
 ### Step 5: Identify Additional Resources
 
@@ -138,35 +145,43 @@ Based on scale and complexity:
 
 ### Step 8: Mandatory Plan Injection [BLOCKING - AUTOMATIC EXECUTION]
 
-**FOR DESIGN OR IMPLEMENTATION TASKS (INCLUDING WORKFLOW):**
+**FOR ALL TASKS WITH BLOCKING READ REQUIREMENTS:**
 
-When Task Type = design OR implementation OR workflow selected:
-1. **[AUTOMATIC INJECTION]** Add to work plan WITHOUT USER PROMPT:
+1. **[SCAN FOR BLOCKING READS]** Identify ALL files requiring BLOCKING READ:
+   - From selected workflow (if Medium/Large scale)
+   - From task definitions to be executed
+   - From rules that will be loaded
+
+2. **[AUTOMATIC INJECTION]** Add ALL identified BLOCKING READs to work plan:
    ```
    Plan Injection Required:
-   □ Step 1: BLOCKING READ .agents/tasks/technical-design.md
-   □ Step 2: Verify "Acceptance Criteria" section will be created
-   □ Step 3: Create Rule Status Verification block before design
+   □ BLOCKING READ: [file path] - [reason/phase]
+   □ BLOCKING READ: [file path] - [reason/phase]
+   □ Rule Status Verification after each BLOCKING READ
    ```
 
-2. **[EVIDENCE REQUIRED]** Show plan injection confirmation:
+3. **[EVIDENCE REQUIRED]** Show plan injection confirmation:
    ```
    [PLAN INJECTION COMPLETED]
+   Identified BLOCKING READs from:
+   ✓ Workflow phases: [list files]
+   ✓ Task definitions: [list files]
+   ✓ Required rules: [list files]
+
    Injected to plan:
-   ✓ BLOCKING READ: technical-design.md - for acceptance criteria
-   ✓ Design doc requirement: Must contain "Acceptance Criteria" section
-   ✓ Verification gate: Rule status block before proceeding
+   ✓ Total BLOCKING READs: [count]
+   ✓ Verification gates: [count]
    ```
 
-3. **[ENFORCEMENT]** CANNOT proceed to design/implementation without:
+4. **[ENFORCEMENT]** CANNOT proceed without:
+   - ALL BLOCKING READs identified and injected
    - Plan injection evidence shown above
-   - Explicit task items in work plan for these reads
-   - Confirmation that AC section is mandatory
+   - Each BLOCKING READ as explicit task in work plan
 
 **VIOLATION HANDLING:**
-- Attempting design without injection = IMMEDIATE HALT
-- Skipping technical-design.md read = BLOCKING ERROR
-- Missing Acceptance Criteria = DESIGN REJECTION
+- Missing any BLOCKING READ from plan = IMMEDIATE HALT
+- Skipping any BLOCKING READ during execution = CRITICAL ERROR
+- Proceeding without verification = RETURN TO TASK ANALYSIS
 
 ## Deliverables
 

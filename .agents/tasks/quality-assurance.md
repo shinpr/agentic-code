@@ -15,6 +15,24 @@
 
 **CRITICAL**: Cannot execute quality checks until ALL required rules confirmed active
 
+## Plan Injection Requirement [MANDATORY]
+
+**Upon reading this file, IMMEDIATELY inject to work plan:**
+1. All BLOCKING READs identified in Loading Protocol above:
+   - `.agents/rules/language/rules.md` (if not active)
+   - `.agents/rules/language/testing.md` (if not active)
+2. Mark each with "[From quality-assurance.md]" source tag
+3. Show evidence of injection:
+   ```
+   [PLAN INJECTION FROM quality-assurance.md]
+   Injected to work plan:
+   ✓ BLOCKING READ: language/rules.md - quality standards
+   ✓ BLOCKING READ: language/testing.md - testing requirements
+   Status: VERIFIED
+   ```
+
+**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
@@ -25,6 +43,8 @@ Rule Status Verification:
 ## Task Completion Gate [STRICT ENFORCEMENT - NO EXCEPTIONS]
 
 **CANNOT mark task as complete until ALL quality checks pass:**
+□ Plan Injection completed (from quality-assurance.md Plan Injection Requirement)
+□ Work plan contains ALL BLOCKING READs from this file
 □ Build process succeeds
 □ Tests pass (or no tests if not applicable)
 □ Linting: 0 errors
