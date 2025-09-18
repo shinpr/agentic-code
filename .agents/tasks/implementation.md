@@ -6,7 +6,6 @@
 1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md`
 2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
 3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
-4. [LOAD IF NOT ACTIVE] `.agents/tasks/quality-assurance.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup
@@ -14,9 +13,7 @@
 - STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
 - STEP 4: CHECK if testing.md is active in working memory
 - STEP 5: If testing.md NOT active → Execute BLOCKING READ
-- STEP 6: CHECK if quality-assurance.md is active in working memory
-- STEP 7: If quality-assurance.md NOT active → Execute BLOCKING READ
-- STEP 8: CONFIRM all rules active before writing ANY code
+- STEP 6: CONFIRM all rules active before writing ANY code
 
 ## Plan Injection Requirement [MANDATORY]
 
@@ -24,7 +21,6 @@
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/rules/language/rules.md` (if not active)
    - `.agents/rules/language/testing.md` (if not active)
-   - `.agents/tasks/quality-assurance.md` (if not active)
 2. Mark each with "[From implementation.md]" source tag
 3. Show evidence of injection:
    ```
@@ -32,7 +28,6 @@
    Injected to work plan:
    ✓ BLOCKING READ: language/rules.md - development standards
    ✓ BLOCKING READ: language/testing.md - TDD process
-   ✓ BLOCKING READ: quality-assurance.md - quality verification
    Status: VERIFIED
    ```
 
@@ -44,7 +39,6 @@ Rule Status Verification:
 ✓ metacognition.md - ACTIVE (from session setup)
 ✓ language/rules.md - ACTIVE (loaded/verified)
 ✓ language/testing.md - ACTIVE (loaded/verified)
-✓ quality-assurance.md - ACTIVE (loaded/verified)
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]

@@ -230,9 +230,9 @@ Create Product Requirements Documents for new features or significant changes.
 | [Risk 1] | High/Med/Low | High/Med/Low | [Strategy] |
 
 ## Timeline & Milestones
-- Phase 1 (MVP): [Timeline]
+- Stage 1 (MVP): [Timeline]
   - Milestone 1: [Date] - [Deliverable]
-- Phase 2: [Timeline]
+- Stage 2: [Timeline]
   - Milestone 2: [Date] - [Deliverable]
 
 ## Dependencies

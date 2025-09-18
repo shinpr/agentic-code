@@ -68,14 +68,15 @@ rules:
 
   language/testing:
     path: ".agents/rules/language/testing.md"
-    tags: [testing, tdd, quality-assurance, coverage, unit-tests, integration-tests, verify-phase]
+    tags: [testing, tdd, quality-assurance, coverage, unit-tests, integration-tests, verify-phase, test-skeleton]
     when_to_load:
       - "Writing tests"
       - "Bug fixing (test-first)"
       - "Quality checks"
       - "Refactoring (ensuring safety)"
       - "VERIFY phase execution (mandatory)"
-    typical_tasks: [implementation, debugging, quality-check]
+      - "Test skeleton generation from acceptance criteria"
+    typical_tasks: [implementation, debugging, quality-check, test_generation]
     size: medium
     priority: always
     description: "Testing standards, TDD practices, and mandatory quality checks"
@@ -147,6 +148,13 @@ task_mappings:
       - "core/metacognition"
 
   research:
+    recommended:
+      - "core/metacognition"
+
+  test_generation:
+    required:
+      - "language/testing"  # Test framework patterns and conventions
+      - "core/documentation-criteria"  # Design document analysis
     recommended:
       - "core/metacognition"
 

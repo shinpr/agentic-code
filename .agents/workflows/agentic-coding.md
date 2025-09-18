@@ -124,7 +124,64 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 - NO skipping even for "simple" changes
 - VIOLATION = Return to design phase
 
-## Phase 3: Work Planning
+## Phase 3: Acceptance Test Generation
+
+**PHASE ORDERING RATIONALE**: Test skeletons MUST be generated BEFORE work planning. Test structures define verification boundaries that determine task decomposition granularity. Work plans depend on these test specifications to map implementation units to concrete verification points.
+
+### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/acceptance-test-generation.md`
+3. **[VERIFY]** acceptance-test-generation.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by acceptance-test-generation.md are LOADED (per its Required Rules section)
+5. **[VERIFY]** Plan Injection from acceptance-test-generation.md completed
+6. **[CONFIRM]** Entry gates in acceptance-test-generation.md are satisfied
+7. **[VERIFY]** Design document EXISTS and contains Acceptance Criteria section
+
+**ENFORCEMENT**: NO test generation until acceptance-test-generation.md confirmed active and Plan Injection verified
+
+### Internal Checklist:
+```
+□ Design document Acceptance Criteria analyzed
+□ Multi-dimensional requirements mapped
+□ Integration test skeletons generated
+□ E2E test skeletons generated
+□ Test priorities assigned using risk analysis
+□ Verification points documented
+□ Traceability matrix created
+□ Edge cases systematically identified
+```
+
+### Deliverable:
+- Integration test skeletons with pending/placeholder markers
+- E2E test skeletons with pending/placeholder markers
+- Traceability matrix linking tests to ACs
+
+### Completion Conditions:
+- All ACs mapped to test cases
+- Test framework conventions followed
+- Test priorities align with business risk
+- Verification points clearly documented
+
+### 🛑 STOP POINT: Test Skeleton Review [BLOCKING GATE]
+**SYSTEM HALT - CANNOT PROCEED WITHOUT:**
+1. Test skeletons EXIST in appropriate test directories
+2. **[VERIFY COMPLIANCE]** Test generation meets ALL requirements from acceptance-test-generation.md:
+   - All Completion Conditions from acceptance-test-generation.md satisfied
+   - Test framework conventions followed
+   - Traceability matrix complete
+   - If non-compliant: REJECT - Return to Phase 3
+3. User EXPLICITLY states approval on test coverage approach
+4. Generated tests follow existing project patterns
+
+**ENFORCEMENT:**
+- NO work planning until test skeletons approved
+- NO proceeding without test generation compliance
+- VIOLATION = Return to test generation phase
+
+## Phase 4: Work Planning
+
+**PHASE DEPENDENCY**: This phase REQUIRES completed test skeletons from Phase 3. Task decomposition uses test verification points as boundaries for work units. Each implementation task maps to specific test cases for validation.
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
 1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
@@ -135,6 +192,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 5. **[VERIFY]** Plan Injection from work-planning.md completed
 6. **[CONFIRM]** Entry gates in work-planning.md are satisfied
 7. **[VERIFY]** Design document APPROVED by user
+8. **[VERIFY]** Test skeletons from Phase 3 EXIST in test directories
 
 **ENFORCEMENT**: NO work plan creation until work-planning.md confirmed active and Plan Injection verified
 
@@ -183,7 +241,7 @@ User Approval: [AWAITING/RECEIVED]
 - First line of code PROHIBITED until approval
 - Missing ANY BLOCKING READ = Return to task-analysis Step 8
 
-## Phase 4: Implementation
+## Phase 5: Implementation
 
 ### Pre-Implementation Gates [BLOCKING - CANNOT START WITHOUT]:
 ```
@@ -201,7 +259,7 @@ User Approval: [AWAITING/RECEIVED]
 **CRITICAL ENFORCEMENT**:
 - ZERO lines of code until implementation.md confirmed active
 - First code attempt without gates = IMMEDIATE DELETION
-- Violation logged and requires restart from Phase 4 gates
+- Violation logged and requires restart from Phase 5 gates
 
 ### Execution Pattern [ENFORCED SEQUENCE]:
 ```
@@ -237,7 +295,7 @@ Task 4: [ ] Pending
 - Document significant decisions
 - Ask user when blocked
 
-## Phase 5: Quality Assurance
+## Phase 6: Quality Assurance
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
 1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
@@ -265,7 +323,7 @@ Task 4: [ ] Pending
 - No known bugs remain
 - Code is production-ready
 
-## Phase 6: Review and Handoff
+## Phase 7: Review and Handoff
 
 ### Internal Checklist:
 ```
@@ -321,7 +379,7 @@ Periodically update user with:
 
 Example:
 ```
-"Phase 4: Implementation
+"Phase 5: Implementation
 Progress: 3/7 tasks complete
 Currently: Implementing authentication middleware
 No blockers"

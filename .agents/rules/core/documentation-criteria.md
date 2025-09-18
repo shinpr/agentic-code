@@ -122,18 +122,18 @@ Interface Change Matrix:
 - Task breakdown and dependencies (maximum 2 levels)
 - Schedule and duration estimates
 - **Copy E2E verification procedures from Design Doc** (cannot delete, can add)
-- **Phase 4 Quality Assurance Phase (required)**
+- **Stage 4 Quality Assurance Stage (required)**
 - Progress records (checkbox format)
 
 **Excludes**:
 - Technical rationale (→ADR)
 - Design details (→Design Doc)
 
-**Phase Division Criteria**:
-1. **Phase 1: Foundation Implementation** - Type definitions, interfaces, test preparation
-2. **Phase 2: Core Feature Implementation** - Business logic, unit tests
-3. **Phase 3: Integration Implementation** - External connections, presentation layer
-4. **Phase 4: Quality Assurance (Required)** - Acceptance criteria achievement, all tests passing, quality checks
+**Stage Division Criteria**:
+1. **Stage 1: Foundation Implementation** - Type definitions, interfaces, test preparation
+2. **Stage 2: Core Feature Implementation** - Business logic, unit tests
+3. **Stage 3: Integration Implementation** - External connections, presentation layer
+4. **Stage 4: Quality Assurance (Required)** - Acceptance criteria achievement, all tests passing, quality checks
 
 **Three Elements of Task Completion Definition**:
 1. **Implementation Complete**: Code is functional

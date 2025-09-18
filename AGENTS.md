@@ -119,6 +119,7 @@ When stuck or encountering errors:
 - task-analysis.md: **Entry point**
 - work-planning.md: Create work plans
 - technical-design.md: Design documentation
+- acceptance-test-generation.md: Test skeleton generation
 - implementation.md: Implementation guidelines
 - quality-assurance.md: Quality standards
 
