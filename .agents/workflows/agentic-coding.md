@@ -38,7 +38,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 - User requirements clear
 - Success criteria measurable
 
-### 🛑 STOP POINT: PRD Review [BLOCKING GATE]
+### STOP POINT: PRD Review [BLOCKING GATE]
 **SYSTEM HALT - CANNOT PROCEED WITHOUT:**
 1. PRD document EXISTS at `docs/prd/[feature]-prd.md`
 2. User EXPLICITLY states approval
@@ -108,7 +108,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 - Implementation path is defined
 - Latest best practices researched
 
-### 🛑 STOP POINT: Design Review [BLOCKING GATE]
+### STOP POINT: Design Review [BLOCKING GATE]
 **SYSTEM HALT - CANNOT PROCEED WITHOUT:**
 1. Design document EXISTS at `docs/design/[feature]-design.md`
 2. **[VERIFY COMPLIANCE]** Design doc meets ALL requirements from technical-design.md:
@@ -163,7 +163,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 - Test priorities align with business risk
 - Verification points clearly documented
 
-### 🛑 STOP POINT: Test Skeleton Review [BLOCKING GATE]
+### STOP POINT: Test Skeleton Review [BLOCKING GATE]
 **SYSTEM HALT - CANNOT PROCEED WITHOUT:**
 1. Test skeletons EXIST in appropriate test directories
 2. **[VERIFY COMPLIANCE]** Test generation meets ALL requirements from acceptance-test-generation.md:
@@ -217,7 +217,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
    - Status: [ ] Pending
 ```
 
-### 🛑 STOP POINT: Work Plan Approval [BLOCKING GATE]
+### STOP POINT: Work Plan Approval [BLOCKING GATE]
 **SYSTEM HALT - CANNOT WRITE CODE WITHOUT:**
 1. Work plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
 2. **[VERIFY INJECTION]** Plan MUST contain ALL BLOCKING READs identified in task-analysis Step 8:
@@ -281,14 +281,6 @@ For each task in work plan:
 - No code without implementation.md loaded
 - No task transition without metacognition
 
-### Internal Progress Tracking:
-```
-Task 1: [✓] Complete
-Task 2: [→] In Progress
-Task 3: [ ] Pending
-Task 4: [ ] Pending
-```
-
 ### Guidelines:
 - Complete one task fully before starting next
 - Test each component as implemented
@@ -339,55 +331,3 @@ Task 4: [ ] Pending
 - Updated documentation
 - Test suite
 - Setup/deployment instructions
-
-## Decision Points
-
-### When to Skip Phases:
-
-**Skip Design Phase if:**
-- Implementation approach is obvious
-- Similar pattern exists in codebase
-- User provides specific implementation details
-
-**Skip Work Planning if:**
-- Task has < 5 implementation units
-- Dependencies are straightforward
-- Sequential implementation is clear
-
-## Error Handling
-
-### When Blocked:
-1. Document blocking issue
-2. Identify alternatives
-3. Present options to user
-4. Wait for decision
-
-### When Design Needs Change:
-1. Stop implementation
-2. Document needed changes
-3. Update design document
-4. Revise work plan
-5. Resume implementation
-
-## Progress Reporting
-
-Periodically update user with:
-- Current phase
-- Tasks completed / total
-- Any blockers
-- Estimated remaining work
-
-Example:
-```
-"Phase 5: Implementation
-Progress: 3/7 tasks complete
-Currently: Implementing authentication middleware
-No blockers"
-```
-
-## Important Notes
-
-1. **Internal tracking only** - Never update this file with progress
-2. **Sequential execution** - Cannot parallelize without sub-agents
-3. **User context management** - Ask user if context seems full
-4. **Explicit handoffs** - Clear completion criteria for each phase
