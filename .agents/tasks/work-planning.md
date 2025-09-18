@@ -3,10 +3,10 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md` - Development standards
-3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - TDD process for implementation tasks
-4. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md` - Documentation standards
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
+3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+4. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup

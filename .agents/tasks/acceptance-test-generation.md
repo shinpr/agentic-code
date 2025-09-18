@@ -3,8 +3,8 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - Testing standards and framework patterns
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md` - Document analysis criteria
+1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: CHECK if language/testing.md is active in working memory

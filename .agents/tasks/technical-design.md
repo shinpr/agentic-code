@@ -3,9 +3,9 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md` - ADR/Design Doc creation criteria
-3. [CONDITIONAL LOAD] `.agents/rules/contextual/architecture/implementation-approach.md` - Strategy selection (if Medium scale 3+ files OR Large scale)
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
+3. [CONDITIONAL LOAD] `.agents/rules/contextual/architecture/implementation-approach.md` (if Medium scale 3+ files OR Large scale)
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup

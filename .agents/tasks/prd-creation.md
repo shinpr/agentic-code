@@ -3,8 +3,8 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md` - PRD/ADR/Design Doc creation criteria
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup
