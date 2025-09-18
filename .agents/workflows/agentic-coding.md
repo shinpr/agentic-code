@@ -11,12 +11,15 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ## Phase 0: PRD Creation (Large scale only)
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[BLOCKING READ]** Execute Read on `.agents/tasks/prd-creation.md`
-2. **[VERIFY]** prd-creation.md is ACTIVE in working memory
-3. **[VERIFY]** All rules required by prd-creation.md are LOADED
-4. **[CONFIRM]** Entry gates in prd-creation.md are satisfied
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/prd-creation.md`
+3. **[VERIFY]** prd-creation.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by prd-creation.md are LOADED (per its Required Rules section)
+5. **[VERIFY]** Plan Injection from prd-creation.md completed
+6. **[CONFIRM]** Entry gates in prd-creation.md are satisfied
 
-**ENFORCEMENT**: NO requirements work until prd-creation.md confirmed active
+**ENFORCEMENT**: NO requirements work until prd-creation.md confirmed active and Plan Injection verified
 
 ### Internal Checklist:
 ```
@@ -64,12 +67,16 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ## Phase 2: Technical Design
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
-2. **[VERIFY]** technical-design.md is ACTIVE in working memory
-3. **[VERIFY]** All rules required by technical-design.md are LOADED
-4. **[CONFIRM]** Entry gates in technical-design.md are satisfied
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
+3. **[VERIFY]** technical-design.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by technical-design.md are LOADED (per its Required Rules section)
+5. **[CONFIRM]** Entry gates in technical-design.md are satisfied
 
-**ENFORCEMENT**: NO design work until technical-design.md confirmed active
+**ENFORCEMENT**:
+- NO design work until technical-design.md confirmed active
+- NO proceeding without Plan Injection verification for ALL BLOCKING READs
 
 ### Pre-Design Requirements:
 ```
@@ -104,24 +111,32 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ### 🛑 STOP POINT: Design Review [BLOCKING GATE]
 **SYSTEM HALT - CANNOT PROCEED WITHOUT:**
 1. Design document EXISTS at `docs/design/[feature]-design.md`
-2. User EXPLICITLY states approval ("yes", "approved", "大丈夫", etc.)
-3. ADR created if new technology introduced
+2. **[VERIFY COMPLIANCE]** Design doc meets ALL requirements from technical-design.md:
+   - All Completion Conditions from technical-design.md satisfied
+   - All sections required by technical-design.md present
+   - If non-compliant: REJECT - Return to Phase 2
+3. User EXPLICITLY states approval ("yes", "approved", "大丈夫", etc.)
+4. ADR created if new technology introduced
 
 **ENFORCEMENT:**
 - NO implementation code until approval received
+- NO proceeding without full task definition compliance
 - NO skipping even for "simple" changes
 - VIOLATION = Return to design phase
 
 ## Phase 3: Work Planning
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[BLOCKING READ]** Execute Read on `.agents/tasks/work-planning.md`
-2. **[VERIFY]** work-planning.md is ACTIVE in working memory
-3. **[VERIFY]** All rules required by work-planning.md are LOADED
-4. **[CONFIRM]** Entry gates in work-planning.md are satisfied
-5. **[VERIFY]** Design document APPROVED by user
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/work-planning.md`
+3. **[VERIFY]** work-planning.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by work-planning.md are LOADED (per its Required Rules section)
+5. **[VERIFY]** Plan Injection from work-planning.md completed
+6. **[CONFIRM]** Entry gates in work-planning.md are satisfied
+7. **[VERIFY]** Design document APPROVED by user
 
-**ENFORCEMENT**: NO work plan creation until work-planning.md confirmed active
+**ENFORCEMENT**: NO work plan creation until work-planning.md confirmed active and Plan Injection verified
 
 ### Internal Checklist:
 ```
@@ -147,28 +162,40 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ### 🛑 STOP POINT: Work Plan Approval [BLOCKING GATE]
 **SYSTEM HALT - CANNOT WRITE CODE WITHOUT:**
 1. Work plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
-2. Each task has MEASURABLE completion criteria
-3. User EXPLICITLY approves plan
+2. **[VERIFY INJECTION]** Plan MUST contain ALL BLOCKING READs identified in task-analysis Step 8:
+   - Every BLOCKING READ from workflow phases
+   - Every BLOCKING READ from task definitions
+   - Every BLOCKING READ from required rules
+   - Each marked with source: "[From Plan Injection]"
+3. Each task has MEASURABLE completion criteria
+4. User EXPLICITLY approves plan
 
 **GATE VERIFICATION:**
 ```
 Plan Location: docs/plans/[filename].md
 Task Count: [N] tasks defined
+BLOCKING READs in plan: [count] items
+Plan Injection Status: [COMPLETE/INCOMPLETE]
 User Approval: [AWAITING/RECEIVED]
 ```
 
-**ENFORCEMENT:** First line of code PROHIBITED until approval
+**ENFORCEMENT:**
+- First line of code PROHIBITED until approval
+- Missing ANY BLOCKING READ = Return to task-analysis Step 8
 
 ## Phase 4: Implementation
 
 ### Pre-Implementation Gates [BLOCKING - CANNOT START WITHOUT]:
 ```
-1. [BLOCKING READ] Execute Read on `.agents/tasks/implementation.md`
-2. [VERIFY] implementation.md is ACTIVE in working memory
-3. [VERIFY] All rules required by implementation.md are LOADED (will be loaded by implementation.md itself)
-4. [CONFIRM] Entry gates in implementation.md are satisfied
-5. [VERIFY] Work plan document EXISTS and has been APPROVED
-6. [CONFIRM] Current task identified from work plan
+1. [VERIFY PLAN INJECTION] Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. [BLOCKING READ] Execute Read on `.agents/tasks/implementation.md`
+3. [VERIFY] implementation.md is ACTIVE in working memory
+4. [VERIFY] All rules required by implementation.md are LOADED (per its Required Rules section)
+5. [VERIFY] Plan Injection from implementation.md completed
+6. [CONFIRM] Entry gates in implementation.md are satisfied
+7. [VERIFY] Work plan document EXISTS and has been APPROVED
+8. [CONFIRM] Current task identified from work plan
 ```
 
 **CRITICAL ENFORCEMENT**:
@@ -213,12 +240,15 @@ Task 4: [ ] Pending
 ## Phase 5: Quality Assurance
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[BLOCKING READ]** Execute Read on `.agents/tasks/quality-assurance.md`
-2. **[VERIFY]** quality-assurance.md is ACTIVE in working memory
-3. **[VERIFY]** All rules required by quality-assurance.md are LOADED
-4. **[CONFIRM]** All implementation tasks marked complete in work plan
+1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+   - If missing any: HALT - Return to task-analysis.md Step 8
+2. **[BLOCKING READ]** Execute Read on `.agents/tasks/quality-assurance.md`
+3. **[VERIFY]** quality-assurance.md is ACTIVE in working memory
+4. **[VERIFY]** All rules required by quality-assurance.md are LOADED (per its Required Rules section)
+5. **[VERIFY]** Plan Injection from quality-assurance.md completed
+6. **[CONFIRM]** All implementation tasks marked complete in work plan
 
-**ENFORCEMENT**: NO quality checks until quality-assurance.md confirmed active
+**ENFORCEMENT**: NO quality checks until quality-assurance.md confirmed active and Plan Injection verified
 
 ### Internal Checklist:
 ```

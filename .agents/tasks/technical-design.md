@@ -15,6 +15,24 @@
 - STEP 5: If conditions met AND implementation-approach.md NOT active → Execute BLOCKING READ
 - STEP 6: CONFIRM all required rules active before proceeding
 
+## Plan Injection Requirement [MANDATORY]
+
+**Upon reading this file, IMMEDIATELY inject to work plan:**
+1. All BLOCKING READs identified in Loading Protocol above:
+   - `.agents/rules/core/documentation-criteria.md` (if not active)
+   - `.agents/rules/contextual/architecture/implementation-approach.md` (if conditions met)
+2. Mark each with "[From technical-design.md]" source tag
+3. Show evidence of injection:
+   ```
+   [PLAN INJECTION FROM technical-design.md]
+   Injected to work plan:
+   ✓ BLOCKING READ: documentation-criteria.md - ADR/Design Doc criteria
+   ✓ BLOCKING READ: implementation-approach.md - strategy selection (if applicable)
+   Status: VERIFIED
+   ```
+
+**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
@@ -26,6 +44,8 @@ Rule Status Verification:
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
+☐ [VERIFIED] Plan Injection completed (from task-analysis.md Step 8)
+☐ [VERIFIED] Work plan contains "BLOCKING READ technical-design.md" item
 ☐ [VERIFIED] Project structure confirmed
 ☐ [VERIFIED] PRD reviewed (if exists) with requirements understood
 ☐ [VERIFIED] Related design documents investigation COMPLETED with evidence

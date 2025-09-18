@@ -111,6 +111,13 @@ Count affected components:
    ✓ [filepath] - [reason for loading]
    ✓ [filepath] - [applied to which aspect]
    ```
+6. [PLAN INJECTION] IMMEDIATELY inject all identified BLOCKING READs to work plan:
+   ```
+   [PLAN INJECTION FROM task-analysis - Rule Selection]
+   Injected BLOCKING READs from rule selection:
+   ✓ [filepath] - required rule
+   ✓ [filepath] - conditional rule (condition met)
+   ```
 
 ### Step 5: Identify Additional Resources
 
@@ -135,6 +142,46 @@ Based on scale and complexity:
   - Ask: "This task would benefit from a structured workflow with design document and work plan. Proceed? [Y/n]"
   - If YES: Load and follow agentic-coding.md
   - If NO: Execute individual task definitions directly
+
+### Step 8: Mandatory Plan Injection [BLOCKING - AUTOMATIC EXECUTION]
+
+**FOR ALL TASKS WITH BLOCKING READ REQUIREMENTS:**
+
+1. **[SCAN FOR BLOCKING READS]** Identify ALL files requiring BLOCKING READ:
+   - From selected workflow (if Medium/Large scale)
+   - From task definitions to be executed
+   - From rules that will be loaded
+
+2. **[AUTOMATIC INJECTION]** Add ALL identified BLOCKING READs to work plan:
+   ```
+   Plan Injection Required:
+   □ BLOCKING READ: [file path] - [reason/phase]
+   □ BLOCKING READ: [file path] - [reason/phase]
+   □ Rule Status Verification after each BLOCKING READ
+   ```
+
+3. **[EVIDENCE REQUIRED]** Show plan injection confirmation:
+   ```
+   [PLAN INJECTION COMPLETED]
+   Identified BLOCKING READs from:
+   ✓ Workflow phases: [list files]
+   ✓ Task definitions: [list files]
+   ✓ Required rules: [list files]
+
+   Injected to plan:
+   ✓ Total BLOCKING READs: [count]
+   ✓ Verification gates: [count]
+   ```
+
+4. **[ENFORCEMENT]** CANNOT proceed without:
+   - ALL BLOCKING READs identified and injected
+   - Plan injection evidence shown above
+   - Each BLOCKING READ as explicit task in work plan
+
+**VIOLATION HANDLING:**
+- Missing any BLOCKING READ from plan = IMMEDIATE HALT
+- Skipping any BLOCKING READ during execution = CRITICAL ERROR
+- Proceeding without verification = RETURN TO TASK ANALYSIS
 
 ## Deliverables
 

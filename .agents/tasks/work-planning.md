@@ -18,6 +18,26 @@
 - STEP 7: If quality-assurance.md NOT active → Execute BLOCKING READ
 - STEP 8: CONFIRM all rules active before proceeding with work planning
 
+## Plan Injection Requirement [MANDATORY]
+
+**Upon reading this file, IMMEDIATELY inject to work plan:**
+1. All BLOCKING READs identified in Loading Protocol above:
+   - `.agents/rules/language/rules.md` (if not active)
+   - `.agents/rules/language/testing.md` (if not active)
+   - `.agents/tasks/quality-assurance.md` (if not active)
+2. Mark each with "[From work-planning.md]" source tag
+3. Show evidence of injection:
+   ```
+   [PLAN INJECTION FROM work-planning.md]
+   Injected to work plan:
+   ✓ BLOCKING READ: language/rules.md - development standards
+   ✓ BLOCKING READ: language/testing.md - TDD process
+   ✓ BLOCKING READ: quality-assurance.md - quality verification
+   Status: VERIFIED
+   ```
+
+**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
@@ -31,7 +51,9 @@ Rule Status Verification:
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
 ☐ [VERIFIED] THIS FILE (`work-planning.md`) has been READ and is active
+☐ [VERIFIED] Plan Injection completed (from work-planning.md Plan Injection Requirement)
 ☐ [VERIFIED] All required rules listed above are LOADED and active
+☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
 ☐ [VERIFIED] User has APPROVED the design
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active

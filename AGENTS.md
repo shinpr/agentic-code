@@ -38,6 +38,14 @@
 
 ## Core Principles
 
+### Plan Injection [MANDATORY ENFORCEMENT]
+**All tasks require Plan Injection for BLOCKING READs:**
+- Task-analysis.md Step 8 scans and identifies ALL BLOCKING READ requirements
+- Work plans MUST contain every BLOCKING READ from workflow/tasks/rules
+- Each phase verifies its BLOCKING READs are in the plan
+- Gates verify Plan Injection evidence before proceeding
+- Missing ANY BLOCKING READ = IMMEDIATE HALT
+
 ### Task Definition Loading
 **Task definitions define WHAT to build - never skip them:**
 - Verify entry gates before proceeding
@@ -65,6 +73,11 @@ Common approval points:
 - After creating design or decision documents
 - When technical approach changes significantly
 - At task definition specified stop points
+
+**VIOLATIONS TO PREVENT:**
+- Work plan without ALL BLOCKING READs = RETURN TO TASK ANALYSIS
+- Skipping ANY BLOCKING READ = IMMEDIATE HALT
+- Proceeding without task definition compliance = BLOCKING ERROR
 
 ## Quality Standards
 

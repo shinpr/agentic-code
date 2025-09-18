@@ -212,8 +212,6 @@ We welcome contributions from the community! Here's how you can help:
 
 **🐛 Found a Bug?** [Open an issue](https://github.com/shinpr/agentic-code/issues) with details about the problem
 
-**💡 Have an Idea?** [Start a discussion](https://github.com/shinpr/agentic-code/discussions) to share your thoughts
-
 **🔧 Want to Code?** [Submit a pull request](https://github.com/shinpr/agentic-code/pulls) - all skill levels welcome
 
 **🌍 Need Language Support?** Help us expand beyond TypeScript by contributing language-specific rules
