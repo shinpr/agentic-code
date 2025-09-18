@@ -3,8 +3,8 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md` - Language-specific quality standards
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - Testing requirements and coverage standards
+1. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: CHECK if language/rules.md is active in working memory

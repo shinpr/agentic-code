@@ -3,10 +3,10 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` - Self-assessment protocols (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md` - Development standards
-3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md` - TDD process for implementation tasks
-4. [LOAD IF NOT ACTIVE] `.agents/tasks/quality-assurance.md` - Quality verification
+1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
+3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+4. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup
@@ -14,8 +14,8 @@
 - STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
 - STEP 4: CHECK if testing.md is active in working memory
 - STEP 5: If testing.md NOT active → Execute BLOCKING READ
-- STEP 6: CHECK if quality-assurance.md is active in working memory
-- STEP 7: If quality-assurance.md NOT active → Execute BLOCKING READ
+- STEP 6: CHECK if documentation-criteria.md is active in working memory
+- STEP 7: If documentation-criteria.md NOT active → Execute BLOCKING READ
 - STEP 8: CONFIRM all rules active before proceeding with work planning
 
 ## Plan Injection Requirement [MANDATORY]
@@ -24,7 +24,7 @@
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/rules/language/rules.md` (if not active)
    - `.agents/rules/language/testing.md` (if not active)
-   - `.agents/tasks/quality-assurance.md` (if not active)
+   - `.agents/rules/core/documentation-criteria.md` (if not active)
 2. Mark each with "[From work-planning.md]" source tag
 3. Show evidence of injection:
    ```
@@ -32,7 +32,7 @@
    Injected to work plan:
    ✓ BLOCKING READ: language/rules.md - development standards
    ✓ BLOCKING READ: language/testing.md - TDD process
-   ✓ BLOCKING READ: quality-assurance.md - quality verification
+   ✓ BLOCKING READ: documentation-criteria.md - documentation standards
    Status: VERIFIED
    ```
 
@@ -44,7 +44,7 @@ Rule Status Verification:
 ✓ metacognition.md - ACTIVE (from session setup)
 ✓ language/rules.md - ACTIVE (loaded/verified)
 ✓ language/testing.md - ACTIVE (loaded/verified)
-✓ quality-assurance.md - ACTIVE (loaded/verified)
+✓ documentation-criteria.md - ACTIVE (loaded/verified)
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
@@ -56,6 +56,7 @@ Rule Status Verification:
 ☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
 ☐ [VERIFIED] User has APPROVED the design
+☐ [VERIFIED] Test skeletons exist (if applicable for test-driven approach)
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active
 
 **METACOGNITION GATE [MANDATORY]:**
@@ -100,6 +101,7 @@ Create work plan with:
 - **Tasks**: Individual implementation units
 - **Dependencies**: What must complete before what
 - **Risks**: Potential issues and mitigations
+- **Test References**: Link to generated test skeletons (if available)
 
 ### 2. Task Decomposition Principles [1-COMMIT RULE]
 
@@ -122,6 +124,7 @@ Create work plan with:
 - BEFORE starting task: Verify checkbox exists `- [ ]`
 - AFTER completing task: Update checkbox to `- [x]` (standard Markdown)
 - ENFORCEMENT: Unchecked completed tasks = Protocol violation
+- REFERENCE: Link to relevant test skeletons when implementing testable features
 
 ### 3. Task Format [MANDATORY TEMPLATE]
 
@@ -146,7 +149,7 @@ Create work plan with:
 
 ### Exit Conditions
 - [ ] Test passes
-- [ ] Quality checks pass with 0 errors (see language/testing.md)
+- [ ] Quality checks pass with 0 errors (per language/testing.md standards)
 - [ ] Changes committed to git
 - [ ] Task checkbox marked [x] in work plan
 
@@ -166,34 +169,34 @@ Create work plan with:
 
 **Feature Implementation**
 ```
-Phase 1: Data layer
+Stage 1: Data layer
 - Task 1: Define data models
 - Task 2: Create repositories
 
-Phase 2: Business logic
+Stage 2: Business logic
 - Task 3: Implement services
 - Task 4: Add validation
 
-Phase 3: Interface
+Stage 3: Interface
 - Task 5: Create API endpoints
 - Task 6: Add error handling
 
-Phase 4: Testing
+Stage 4: Testing
 - Task 7: Unit tests
 - Task 8: Integration tests
 ```
 
 **Refactoring**
 ```
-Phase 1: Preparation
+Stage 1: Preparation
 - Task 1: Add tests for current behavior
 - Task 2: Create abstraction interfaces
 
-Phase 2: Migration
+Stage 2: Migration
 - Task 3: Implement new structure
 - Task 4: Migrate component by component
 
-Phase 3: Cleanup
+Stage 3: Cleanup
 - Task 5: Remove old code
 - Task 6: Update documentation
 ```

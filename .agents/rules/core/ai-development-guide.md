@@ -133,7 +133,7 @@ console.log('DEBUG:', {
 
 ## Quality Check Command Reference
 
-### Phase 1-3: Basic Checks
+### Step 1-3: Basic Checks
 ```bash
 # Biome comprehensive check (lint + format)
 npm run check
@@ -145,7 +145,7 @@ npm run check:unused
 npm run build
 ```
 
-### Phase 4-6: Tests and Final Confirmation
+### Step 4-6: Tests and Final Confirmation
 ```bash
 # Test execution
 npm test

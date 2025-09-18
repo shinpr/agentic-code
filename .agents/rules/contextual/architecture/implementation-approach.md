@@ -4,7 +4,7 @@ An implementation strategy selection framework based on meta-cognitive thinking.
 
 ## Meta-cognitive Strategy Selection Process
 
-### Phase 1: Comprehensive Current State Analysis
+### Step 1: Comprehensive Current State Analysis
 
 **Core Question**: "What does the existing implementation look like?"
 
@@ -35,7 +35,7 @@ Historical Context Understanding:
 - What dependencies or implicit preconditions are unclear from the code?
 - What benefits and constraints does the current design bring?
 
-### Phase 2: Strategy Exploration and Creation
+### Step 2: Strategy Exploration and Creation
 
 **Core Question**: "When determining before → after, what implementation patterns or strategies should be referenced?"
 
@@ -73,7 +73,7 @@ Creative Thinking:
 
 **Important**: The optimal solution is discovered through creative thinking according to each project's context.
 
-### Phase 3: Risk Assessment and Control
+### Step 3: Risk Assessment and Control
 
 **Core Question**: "What risks arise when applying this to existing implementation, and what's the best way to control them?"
 
@@ -113,7 +113,7 @@ Incident Response:
   - Document partial service continuation procedures
 ```
 
-### Phase 4: Constraint Compatibility Verification
+### Step 4: Constraint Compatibility Verification
 
 **Core Question**: "What are this project's constraints?"
 
@@ -144,7 +144,7 @@ Business Constraints:
   - Regulatory/industry standard compliance
 ```
 
-### Phase 5: Implementation Approach Decision
+### Step 5: Implementation Approach Decision
 
 Select optimal solution from basic implementation approaches (creative combinations encouraged):
 
@@ -163,7 +163,7 @@ Select optimal solution from basic implementation approaches (creative combinati
 **Application Conditions**: Unclear requirements, need to change approach per phase, transition from prototyping to full implementation
 **Verification Method**: Verify at appropriate L1/L2/L3 levels according to each phase's goals
 
-### Phase 6: Decision Rationale Documentation
+### Step 6: Decision Rationale Documentation
 
 **Design Doc Documentation**: Clearly specify implementation strategy selection reasons and rationale.
 
@@ -188,16 +188,16 @@ Define integration points according to selected strategy:
 ## Anti-patterns
 
 - **Pattern Fixation**: Selecting only from listed strategies without considering unique combinations
-- **Insufficient Analysis**: Skipping Phase 1 analysis framework before strategy selection
-- **Risk Neglect**: Starting implementation without Phase 3 risk analysis matrix
-- **Constraint Ignorance**: Deciding strategy without checking Phase 4 constraint checklist
-- **Rationale Omission**: Selecting strategy without using Phase 6 documentation template
+- **Insufficient Analysis**: Skipping Step 1 analysis framework before strategy selection
+- **Risk Neglect**: Starting implementation without Step 3 risk analysis matrix
+- **Constraint Ignorance**: Deciding strategy without checking Step 4 constraint checklist
+- **Rationale Omission**: Selecting strategy without using Step 6 documentation template
 
 ## Guidelines for Meta-cognitive Execution
 
 1. **Leverage Known Patterns**: Use as starting point, explore creative combinations
 2. **Active Web Research**: Research implementation examples from similar tech stacks
 3. **Apply 5 Whys**: Pursue root causes to grasp essence
-4. **Multi-perspective Evaluation**: Comprehensively evaluate from each Phase 1-4 perspective
+4. **Multi-perspective Evaluation**: Comprehensively evaluate from each Step 1-4 perspective
 5. **Creative Thinking**: Consider sequential application of multiple strategies and designs leveraging project-specific constraints
 6. **Clarify Decision Rationale**: Make strategy selection rationale explicit in design documents

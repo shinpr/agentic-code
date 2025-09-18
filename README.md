@@ -136,8 +136,10 @@ Path: Workflow → .agents/workflows/agentic-coding.md
 .agents/
 ├── tasks/                    # Task definitions (WHAT to build)
 │   ├── task-analysis.md     # 🚀 Universal entry point
-│   ├── implementation.md    # Code implementation guidelines
 │   ├── technical-design.md  # Design documentation
+│   ├── acceptance-test-generation.md # Test skeleton generation
+│   ├── work-planning.md     # Work plan creation
+│   ├── implementation.md    # Code implementation guidelines
 │   └── quality-assurance.md # Quality standards
 ├── workflows/               # Multi-step processes
 │   └── agentic-coding.md    # Medium/Large scale workflow
