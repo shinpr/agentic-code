@@ -7,6 +7,7 @@ Your AI (LLM), guided by built-in workflows. Just tell it what you want.
 [![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
+
 *AI builds a Slack bot with tests & docs — in 30s*
 
 ## What You Get
@@ -48,7 +49,7 @@ Every AI coding tool has the same problems:
 Pre-built workflows. No setup needed.
 
 ### 🌐 **Universal Compatibility**
-Any language. Any AI tool that reads AGENTS.md.
+Any programming language. Any AI tool that reads AGENTS.md.
 
 ### ✅ **Test-First by Default** (NEW in v0.2)
 Generates test skeletons before code.
