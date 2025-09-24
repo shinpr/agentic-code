@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Just tell it what you want.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.2.1-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -23,6 +23,10 @@ AI:  ✓ Reads AGENTS.md
 ```
 
 **No configuration. No learning curve. Just results.**
+
+> **Claude Code users building TypeScript?**
+> Prefer a Claude-first stack with advanced sub-agents and rules:
+> **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)**.
 
 ## Quick Start (30 seconds)
 
