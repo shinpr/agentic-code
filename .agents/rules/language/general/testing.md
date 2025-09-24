@@ -52,6 +52,68 @@
    - Use actual dependencies when appropriate
    - Test real system interactions
 
+3. **E2E Tests (End-to-End Tests)**
+   - Verify complete user workflows across entire system
+   - Test real-world scenarios with all components integrated
+   - Validate system behavior from user perspective
+   - Ensure business requirements are met end-to-end
+
+4. **Cross-functional Verification in E2E Tests** [MANDATORY for feature modifications]
+
+   **Purpose**: Prevent regression and ensure existing features remain stable when introducing new features or modifications.
+
+   **When Required**:
+   - Adding new features that interact with existing components
+   - Modifying core business logic or workflows
+   - Changing shared resources or data structures
+   - Updating APIs or integration points
+
+   **Integration Point Analysis**:
+   - **High Impact**: Changes to core process flows, breaking changes, or workflow modifications
+     - Mandatory comprehensive E2E test coverage
+     - Full regression test suite required
+     - Performance benchmarking before/after
+
+   - **Medium Impact**: Data usage modifications, shared state changes, or new dependencies
+     - Integration tests minimum requirement
+     - Targeted E2E tests for affected workflows
+     - Edge case coverage mandatory
+
+   - **Low Impact**: Read-only operations, logging additions, or monitoring hooks
+     - Unit test coverage sufficient
+     - Smoke tests for integration points
+
+   **Verification Pattern**:
+   1. **Establish Baseline**
+      - Test and document existing feature behavior
+      - Capture performance metrics
+      - Record expected outputs
+
+   2. **Apply Changes**
+      - Deploy or enable new feature
+      - Maintain feature flags for rollback capability
+
+   3. **Verify Continuity**
+      - Confirm existing features still function correctly
+      - Compare against baseline metrics
+      - Validate no unexpected side effects
+
+   4. **Measure Performance**
+      - Response times within acceptable limits (project-specific)
+      - Resource usage remains stable
+      - No memory leaks or degradation
+
+   **Success Criteria**:
+   - Zero breaking changes in existing workflows
+   - Performance degradation within project-defined acceptable limits
+   - No new errors in previously stable features
+   - All integration points maintain expected contracts
+   - Backward compatibility preserved where required
+
+   **Documentation Requirements**:
+   - Map all integration points in Design Doc
+   - Document test coverage for each impact level
+
 ## Test Design Principles
 
 ### Test Case Structure

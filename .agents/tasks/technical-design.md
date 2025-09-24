@@ -169,21 +169,11 @@ Must be performed at the beginning of Design Doc creation:
 ### 4. Latest Information Research [BLOCKING REQUIREMENT]
 
 **Web research MUST use SESSION_BASELINE_DATE year - NEVER hardcoded years:**
-- [SEARCH FORMAT] "[technology] best practices [YEAR from SESSION_BASELINE_DATE]"
-- Latest library versions and breaking changes AS OF SESSION_BASELINE_DATE
-- Security updates current to SESSION_BASELINE_DATE
-- Performance patterns validated for SESSION_BASELINE_DATE year
-- Official documentation (append year from SESSION_BASELINE_DATE)
+- Format: "[technology] best practices [YEAR from SESSION_BASELINE_DATE]"
+- Required for: New technology/library introduction, security implementations
+- Verify: Latest versions, breaking changes, security updates as of SESSION_BASELINE_DATE
 
-**VERIFICATION**: Every search query must show SESSION_BASELINE_DATE year usage
-
-**Required Research Timing**:
-- New technology/library introduction
-- Security-related implementation
-
-**Search Pattern Examples**:
-- `[technology] best practices [YEAR]`
-- `[framework] official documentation`
+**Search Examples**: `[tech] best practices [YEAR]`, `[framework] official docs`
 
 ## ADR Creation Guidelines
 
@@ -219,34 +209,29 @@ Supersedes: ADR-YYYY (if applicable)
 ## Options
 
 ### Option A: [Approach Name]
-- Overview: [One sentence explanation]
+- Overview: [One sentence]
 - Benefits: [2-3 items]
 - Drawbacks: [2-3 items]
 - Effort: X days
 - Risk: Low/Medium/High
 
-### Option B/C: [Similarly structured, minimum 3 options]
+### Option B/C: [Similarly structured, minimum 3 options total]
 
 ## Comparison Matrix
 | Evaluation Axis | Option A | Option B | Option C |
 |----------------|----------|----------|----------|
-| Implementation Effort | 3 days | 5 days | 2 days |
-| Maintainability | High | Medium | Low |
-| Performance Impact | None | Positive | Negative |
-| Learning Curve | Low | High | Medium |
+| Implementation Effort | X days | Y days | Z days |
+| Maintainability | High/Med/Low | ... | ... |
+| Performance Impact | +/-/None | ... | ... |
 
 ## Decision
-Option [X] selected.
-
-Rationale: [2-3 sentences including trade-offs]
+Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 
 ## Implementation Guidelines
-[Principle-based guidelines only, no specific procedures]
+[Principle-based guidelines]
 
 ## References
-- [Official Documentation](URL) - Description
-- [Best Practices Article](URL) - Key insights
-- [Comparison Study](URL) - Decision support
+- [Documentation](URL) - Description
 ```
 
 ## Design Doc Creation Guidelines
@@ -258,10 +243,10 @@ Rationale: [2-3 sentences including trade-offs]
 
 ## PRD Reference
 - PRD: `docs/prd/[feature-name]-prd.md` (if applicable)
-- Requirements addressed: [List key requirements from PRD]
+- Requirements addressed: [key requirements]
 
 ## Overview
-Brief description of what's being designed
+[Brief description]
 
 ## Agreement Checklist
 - [ ] Scope: [what to implement]
@@ -270,59 +255,48 @@ Brief description of what's being designed
 - [ ] Performance: [requirements]
 
 ## Existing Codebase Analysis
-- Investigation results
-- Similar functionality search results
-- Decision and rationale
+[Investigation results, similar functionality, decision]
 
 ## Requirements
-- Functional requirements
-- Non-functional requirements
-- Constraints
+[Functional, Non-functional, Constraints]
 
 ## Acceptance Criteria
 ### Functional Requirements
-- [ ] [Specific, testable condition]
-- [ ] [User can perform X and see Y]
+- [ ] [Specific testable conditions]
 
 ### Non-functional Requirements
-- [ ] [Performance metric achieved]
-- [ ] [Security requirement met]
+- [ ] [Performance/Security metrics]
 
 ## Architecture
 
 ### Approach
-Selected pattern and why
+[Selected pattern and rationale]
 
 ### Components
-- Component A: Purpose and responsibility
-- Component B: Purpose and responsibility
+[Component list with responsibilities]
 
 ### Data Flow
-How data moves through the system
+[System data movement]
 
 ### Integration Points
-- External systems
-- APIs
-- Databases
+[External systems, APIs, Databases]
+
+### Integration Point Analysis [MANDATORY for feature modifications]
+[Use format from section above]
 
 ## Implementation Details
 
 ### Technology Stack
-- Languages and frameworks
-- Libraries
-- Tools
+[Languages, frameworks, libraries, tools]
 
 ### Change Impact Map
-Change Target: [Component.method()]
-Direct Impact: [file path] (change type)
-Indirect Impact: [affected system]
+[Target, Direct impact, Indirect impact]
 
 ## Testing Strategy
-- Unit test approach
-- Integration test approach
+[Unit and integration test approaches]
 
 ## Risks and Mitigations
-- Technical risks
+[Technical risks]
 
 ## References
 - [Source](URL) - Description
@@ -330,24 +304,13 @@ Indirect Impact: [affected system]
 
 ## Acceptance Criteria Creation Guidelines
 
-**Principle**: Set specific, verifiable conditions
-
-### Format:
-- **Good**: "After authentication with correct credentials, navigates to dashboard screen"
-- **Bad**: "Login works"
-
-### Testability:
-Each criterion should directly translate to one or more test cases
+**Principle**: Specific, verifiable conditions that translate to test cases
+**Good**: "After auth with correct credentials, navigates to dashboard"
+**Bad**: "Login works"
 
 ## Design Validation
 
-Check design for:
-- Completeness: All requirements addressed
-- Consistency: No contradictions
-- Feasibility: Can be implemented
-- Testability: Can be verified
-- Maintainability: Easy to change
-- Scalability: Can grow
+Verify: Completeness, Consistency, Feasibility, Testability, Maintainability, Scalability
 
 ## Deliverables
 

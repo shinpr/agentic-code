@@ -25,6 +25,41 @@
    - Verify coordination between multiple components
    - Use actual dependencies (DB, API, etc.)
 
+3. **E2E Cross-functional Tests** [MANDATORY for new features]
+   - Test existing features remain stable after new feature integration
+   - Coverage based on Design Doc's Integration Point Map impact levels
+   - Verify performance degradation stays within project-defined limits
+
+### TypeScript/Vitest Pattern Reference
+
+```typescript
+describe('Cross-functional E2E Tests', () => {
+  // Pattern 1: Baseline → Change → Verify
+  it('should maintain existing behavior after new feature', async () => {
+    // 1. Capture baseline
+    const baseline = await testExistingFeature()
+
+    // 2. Enable new feature
+    await enableNewFeature()
+
+    // 3. Verify continuity
+    const result = await testExistingFeature()
+    expect(result).toEqual(baseline)
+    expect(result.responseTime).toBeLessThan(
+      baseline.responseTime * 1.2 // Project-specific threshold
+    )
+  })
+
+  // Pattern 2: Data integrity across features
+  it('should preserve data integrity', async () => {
+    const data = await createTestData()
+    await newFeatureOperation(data.id)
+
+    const retrieved = await existingFeatureGet(data.id)
+    expect(retrieved).toEqual(data) // No unexpected mutations
+  })
+})
+
 ## TDD Process [MANDATORY for all code changes]
 
 **Execute this process for every code change:**
