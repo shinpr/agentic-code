@@ -60,6 +60,8 @@ describe('Cross-functional E2E Tests', () => {
   })
 })
 
+**Note**: LLM outputs naturally vary - test behavior, not exact matches
+
 ## TDD Process [MANDATORY for all code changes]
 
 **Execute this process for every code change:**
