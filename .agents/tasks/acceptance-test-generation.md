@@ -270,6 +270,9 @@ E2E-001: Registration flow | AC-FUNC-001,AC-UX-003,AC-FUNC-005 | P0 | Critical
 □ Framework conventions followed
 □ Traceability matrix complete
 
+## LLM Test Design Notice
+**Exclude**: Output reproducibility (LLM outputs vary), long-term operations (infrastructure scope)
+
 ## Anti-Patterns to Avoid
 
 **Document Analysis Anti-Patterns:**

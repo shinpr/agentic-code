@@ -93,12 +93,12 @@
       - Deploy or enable new feature
       - Maintain feature flags for rollback capability
 
-   3. **Verify Continuity**
+   3. **Verify Existing Features**
       - Confirm existing features still function correctly
       - Compare against baseline metrics
       - Validate no unexpected side effects
 
-   4. **Measure Performance**
+   4. **Measure Performance** (NOT long-term stability tests)
       - Response times within acceptable limits (project-specific)
       - Resource usage remains stable
       - No memory leaks or degradation
