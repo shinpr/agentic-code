@@ -24,9 +24,8 @@ AI:  ✓ Reads AGENTS.md
 
 **No configuration. No learning curve. Just results.**
 
-> **Claude Code users building TypeScript?**
-> Prefer a Claude-first stack with advanced sub-agents and rules:
-> **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)**.
+> **Using Claude Code with TypeScript?**
+> Check out **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)** - a specialized alternative optimized for that specific stack.
 
 ## Quick Start (30 seconds)
 
@@ -35,7 +34,7 @@ npx github:shinpr/agentic-code my-project && cd my-project
 # 🚀 Ready. Just tell it what to build.
 ```
 
-That's it. Works with **any AI tool** - Codex, Cursor, Aider, GitHub Copilot, or anything [AGENTS.md](https://agents.md) compatible.
+That's it. Works with **any AI tool** - Codex, Cursor, Aider, or anything [AGENTS.md](https://agents.md) compatible.
 
 ## Why This Exists
 
@@ -71,7 +70,7 @@ Generates test skeletons before code.
 
 ```
 .agents/
-├── tasks/                    # What to build
+├── tasks/                   # What to build
 │   ├── task-analysis.md     # Entry point - AI starts here
 │   └── ...                  # Design, test, implement, QA tasks
 ├── workflows/               # How to build it
@@ -97,10 +96,10 @@ You: "Build user authentication system"
 
 ### For New Projects
 ```bash
-# General purpose (any language)
+# Create project
 npx github:shinpr/agentic-code my-project
 
-# With TypeScript optimizations
+# Optional: Add language-specific rules
 npx github:shinpr/agentic-code my-project --lang=typescript
 ```
 
@@ -117,6 +116,12 @@ ln -s general/testing.md testing.md
 ```
 
 ## Common Questions
+
+**Q: Can I use this with other AI coding tools besides Codex?**
+Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Aider, and other LLM-assisted development environments.
+
+**Q: What programming languages are supported?**
+The framework is language-agnostic and works with any programming language through general development principles. For TypeScript projects, you can optionally use `--lang=typescript` to enable enhanced TypeScript-specific rules.
 
 **Q: Do I need to learn a new syntax?**
 Nope. Just describe what you want in plain language. The framework handles the rest.
