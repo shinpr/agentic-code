@@ -24,8 +24,7 @@ AI:  ✓ Reads AGENTS.md
 
 **No configuration. No learning curve. Just results.**
 
-> **Using Claude Code with TypeScript?**
->
+> **Using Claude Code with TypeScript?**  
 > Check out **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)** - a specialized alternative optimized for that specific stack.
 
 ## Quick Start (30 seconds)
@@ -118,22 +117,22 @@ ln -s general/testing.md testing.md
 
 ## Common Questions
 
-**Q: Can I use this with other AI coding tools besides Codex?**
+**Q: Can I use this with other AI coding tools besides Codex?**  
 Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Aider, and other LLM-assisted development environments.
 
-**Q: What programming languages are supported?**
+**Q: What programming languages are supported?**  
 The framework is language-agnostic and works with any programming language through general development principles. For TypeScript projects, you can optionally use `--lang=typescript` to enable enhanced TypeScript-specific rules.
 
-**Q: Do I need to learn a new syntax?**
+**Q: Do I need to learn a new syntax?**  
 Nope. Just describe what you want in plain language. The framework handles the rest.
 
-**Q: What if my AI doesn't support AGENTS.md?**
+**Q: What if my AI doesn't support AGENTS.md?**  
 Check if your tool is [AGENTS.md compatible](https://agents.md). If yes, just tell it to read the AGENTS.md file first.
 
-**Q: Can I customize the workflows?**
+**Q: Can I customize the workflows?**  
 Absolutely! Everything in `.agents/` is customizable. But honestly, the defaults work great.
 
-**Q: What about my existing codebase?**
+**Q: What about my existing codebase?**  
 Works perfectly. Your AI analyzes the code and follows your existing patterns.
 
 ## The Technical Stuff
