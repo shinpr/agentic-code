@@ -25,6 +25,7 @@ AI:  ✓ Reads AGENTS.md
 **No configuration. No learning curve. Just results.**
 
 > **Using Claude Code with TypeScript?**
+>
 > Check out **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)** - a specialized alternative optimized for that specific stack.
 
 ## Quick Start (30 seconds)
