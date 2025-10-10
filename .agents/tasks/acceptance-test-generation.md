@@ -270,8 +270,31 @@ E2E-001: Registration flow | AC-FUNC-001,AC-UX-003,AC-FUNC-005 | P0 | Critical
 □ Framework conventions followed
 □ Traceability matrix complete
 
-## LLM Test Design Notice
-**Exclude**: Output reproducibility (LLM outputs vary), long-term operations (infrastructure scope)
+## Out of Scope
+
+**PRINCIPLE**: Generate only tests verifiable in isolated CI/CD environment with high automation ROI.
+
+**External Dependencies** (Test contracts/interfaces instead):
+- Real API calls to third-party services
+- External authentication providers
+- Payment/email/SMS delivery verification
+- Real database connections → Use test DB or mocks
+
+**Non-Deterministic in CI Environment**:
+- Performance metrics, response time measurements
+- Load/stress testing
+- LLM output reproducibility (outputs vary by nature)
+- Long-term operations (infrastructure/deployment scope)
+
+**Implementation Details** (Not user-observable behavior):
+- Internal function calls, class structure, private methods
+- Specific rendering/styling details → Test information presence, not layout
+- Code organization or architectural patterns
+
+**ACTION when AC contains out-of-scope items**:
+1. Transform to verifiable behavior (e.g., external API → mock/contract test)
+2. If transformation impossible → Generate test.skip() with manual test reference
+3. Document rationale in test comment
 
 ## Anti-Patterns to Avoid
 
