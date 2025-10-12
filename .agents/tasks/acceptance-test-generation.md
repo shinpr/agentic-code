@@ -287,7 +287,7 @@ E2E-001: Registration flow | AC-FUNC-001,AC-UX-003,AC-FUNC-005 | P0 | Critical
 - Long-term operations (infrastructure/deployment scope)
 
 **Implementation Details** (Not user-observable behavior):
-- Internal function calls, class structure, private methods
+- Internal function calls, code structure, internal operations
 - Specific rendering/styling details → Test information presence, not layout
 - Code organization or architectural patterns
 

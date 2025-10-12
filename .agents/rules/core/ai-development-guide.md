@@ -50,10 +50,10 @@ Prioritize primary code reliability over fallback implementations. In distribute
 ### Error Masking Detection
 
 **Review Triggers** (require design review):
-- Writing 3rd catch statement in the same feature
-- Multiple try-catch blocks in single function
-- Nested try-catch structures
-- Catch blocks that return default values
+- Writing 3rd error handling block in the same feature
+- Multiple error handling structures in single function
+- Nested error handling structures
+- Error handlers that return default values without propagating
 
 **Before Implementing Any Fallback**:
 1. Verify Design Doc explicitly defines this fallback
@@ -63,31 +63,27 @@ Prioritize primary code reliability over fallback implementations. In distribute
 
 ### Implementation Patterns
 
+Note: Use your language's standard error handling mechanism (exceptions, Result types, error values, etc.)
+
 ```
 ❌ AVOID: Silent fallback that hides errors
-    try:
-        return fetchUserData(userId)
-    catch:
+    [handle error]:
         return DEFAULT_USER  // Error is hidden, debugging becomes difficult
 
 ✅ PREFERRED: Explicit failure with context
-    try:
-        return fetchUserData(userId)
-    catch (error):
-        log_error('Failed to fetch user data', userId, error)
-        throw ServiceError('User data unavailable', error)
+    [handle error]:
+        logError('Failed to fetch user data', userId, error)
+        propagate ServiceError('User data unavailable', error)
 
 ✅ ACCEPTABLE: Documented fallback with monitoring (when justified in Design Doc)
-    try:
-        return fetchPrimaryData()
-    catch (error):
+    [handle error]:
         // Fallback defined in Design Doc section 3.2.1
-        log_warning('Primary data source failed, using cache', error)
-        increment_metric('data.fallback.cache_used')
+        logWarning('Primary data source failed, using cache', error)
+        incrementMetric('data.fallback.cache_used')
 
         cachedData = fetchFromCache()
         if not cachedData:
-            throw ServiceError('Both primary and cache failed', error)
+            propagate ServiceError('Both primary and cache failed', error)
         return cachedData
 ```
 
@@ -114,17 +110,17 @@ Prioritize primary code reliability over fallback implementations. In distribute
 - Simple helpers in test code
 
 ### Implementation Example
-```typescript
-// ❌ Bad example: Immediate commonalization on 1st duplication
-function validateUserEmail(email: string) { /* ... */ }
-function validateContactEmail(email: string) { /* ... */ }
+```
+// ❌ Bad: Immediate commonalization on 1st duplication
+function validateUserEmail(email) { /* ... */ }
+function validateContactEmail(email) { /* ... */ }
 // → Premature abstraction
 
-// ✅ Good example: Commonalize on 3rd occurrence
+// ✅ Good: Commonalize on 3rd occurrence
 // 1st time: inline implementation
 // 2nd time: Copy but consider future
 // 3rd time: Extract to common validator
-function validateEmail(email: string, context: 'user' | 'contact' | 'admin') { /* ... */ }
+function validateEmail(email, context) { /* ... */ }
 ```
 
 ## Common Failure Patterns and Avoidance Methods
@@ -187,13 +183,13 @@ To isolate problems, attempt reproduction with minimal code:
 - Create minimal configuration that reproduces problem
 
 ### 4. Debug Log Output
-```typescript
+```
 // Track problems with structured logs
-console.log('DEBUG:', {
+log('DEBUG:', {
   context: 'user-creation',
   input: { email, name },
   state: currentState,
-  timestamp: new Date().toISOString()
+  timestamp: currentTimestamp()
 })
 ```
 

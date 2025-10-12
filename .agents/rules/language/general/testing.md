@@ -43,7 +43,7 @@
 
 ### Test Types and Scope
 1. **Unit Tests**
-   - Verify behavior of individual functions or classes
+   - Verify behavior of individual units (functions, modules, or components)
    - Mock all external dependencies
    - Fast execution (milliseconds)
 
@@ -117,7 +117,7 @@
 ## Test Design Principles
 
 ### Test Case Structure
-- Tests consist of three stages: **"Arrange," "Act," "Assert"** (AAA Pattern)
+- Tests consist of three stages: **Setup, Execute, Verify** (also known as Arrange-Act-Assert or Given-When-Then)
 - Clear naming that shows purpose of each test
 - One test case verifies only one behavior
 - Test names should describe expected behavior, not implementation
@@ -157,15 +157,15 @@
 
 ### Core Principle: Observable Behavior Only
 **MUST Test**:
-- Public APIs and interfaces
+- Public APIs and contracts
 - Return values and outputs
 - Exceptions and error conditions
 - External calls and side effects
 - Persisted state changes
 
 **MUST NOT Test**:
-- Private methods and internal implementation
-- Internal state that's not observable
+- Internal implementation details not exposed publicly
+- Internal state that's not observable from outside
 - Algorithm implementation details
 - Framework/library internals
 

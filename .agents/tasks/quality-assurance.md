@@ -48,7 +48,7 @@ Rule Status Verification:
 □ Build process succeeds
 □ Tests pass (or no tests if not applicable)
 □ Linting: 0 errors
-□ Type checking passes
+□ Static analysis passes (if applicable)
 □ Manual testing performed (if applicable)
 □ Changes committed to git (for implementation tasks)
 □ Task tracking updated (work plan checkbox if using workflow)
@@ -76,7 +76,7 @@ Ensure code quality through systematic verification and testing.
 □ All tests pass
 □ Linting reports 0 errors
 □ Code formatting verified
-□ Type checking passes (if applicable)
+□ Static analysis passes (if applicable)
 □ Test coverage meets requirements
 □ Performance acceptable
 □ Security checks pass
@@ -113,7 +113,7 @@ Run project build:
 **Static Analysis**
 - Linting: 0 errors required
 - Code formatting: Consistent style
-- Type checking: No type errors
+- Language checks: No errors (static typing, style, etc.)
 - Complexity: Within limits
 
 **Code Review Criteria**
@@ -184,7 +184,7 @@ Ensure:
 | Build fails | Missing dependency | Install dependencies |
 | Tests fail | Logic error | Debug and fix |
 | Lint errors | Style violations | Apply formatting |
-| Type errors | Wrong types | Fix type definitions |
+| Static analysis errors | Language violations | Fix definitions/signatures |
 | Slow tests | No mocking | Add test doubles |
 | Security warning | Old dependency | Update packages |
 

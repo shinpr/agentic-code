@@ -13,11 +13,11 @@
 ## ADR Creation Conditions (Required if Any Apply)
 
 ### 1. Type System Changes
-- **Adding nested types with 3+ levels**: `type A = { b: { c: { d: T } } }`
+- **Adding nested types/structures with 3+ levels**: e.g., `A { B { C { D } } }`
   - Rationale: Deep nesting has high complexity and wide impact scope
 - **Changing/deleting types used in 3+ locations**
   - Rationale: Multiple location impacts require careful consideration
-- **Type responsibility changes** (e.g., DTO→Entity)
+- **Data representation responsibility changes** (e.g., transfer object→domain model)
   - Rationale: Conceptual model changes affect design philosophy
 
 ### 2. Data Flow Changes
@@ -102,11 +102,11 @@ Change Impact Map:
   Indirect Impact: [Data format/Processing time]
   No Ripple Effect: [Unaffected features]
 
-Interface Change Matrix:
-  Existing: [Method name]
-  New: [Method name]
+API Contract Change Matrix:
+  Existing: [Function/operation signature]
+  New: [Function/operation signature]
   Conversion Required: [Yes/No]
-  Compatibility Method: [Approach]
+  Compatibility Strategy: [Approach]
 ```
 
 **Excludes**:

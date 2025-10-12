@@ -190,7 +190,7 @@ Stage 4: Testing
 ```
 Stage 1: Preparation
 - Task 1: Add tests for current behavior
-- Task 2: Create abstraction interfaces
+- Task 2: Create abstraction layer
 
 Stage 2: Migration
 - Task 3: Implement new structure
