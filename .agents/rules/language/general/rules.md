@@ -23,16 +23,18 @@
 ## Function Design
 
 **Parameter Management**
-- **0-2 parameters maximum**: Use object/struct for 3+ parameters
+- **0-2 parameters maximum**: Use structured data (object/struct/dict) for 3+ parameters
   ```
   ✅ Good: createUser({name, email, role})
   ❌ Avoid: createUser(name, email, role, department, startDate)
   ```
+  *Note: Use your language's idiomatic approach for grouping parameters*
 
 **Dependency Injection**
-- **Inject external dependencies as parameters**: Ensure testability and modularity
-- Avoid direct imports of external services within functions
-- Pass dependencies explicitly to maintain loose coupling
+- **Inject external dependencies explicitly**: Ensure testability and modularity
+- Pass dependencies as parameters (functions, constructors, or other language-appropriate mechanisms)
+- Avoid global state, direct instantiation, or implicit dependencies
+- Prefer interfaces/contracts over concrete implementations where applicable
 
 ## Error Handling
 
