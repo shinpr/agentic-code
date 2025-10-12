@@ -132,12 +132,12 @@ Must be performed after documentation review:
 
 1. **Implementation File Path Verification**
    - First grasp overall project structure
-   - Then identify target files by searching for relevant class/service names
+   - Then identify target files by searching for relevant component/module names
    - Record and distinguish between existing implementation locations and planned new locations
 
-2. **Existing Interface Investigation** (Only when changing existing features)
-   - List major public methods of target service
-   - Identify call sites by searching for service usage patterns
+2. **Existing API Investigation** (Only when changing existing features)
+   - List major public operations of target component
+   - Identify call sites by searching for component usage patterns
 
 3. **Similar Functionality Search** (Pattern 5 prevention from ai-development-guide.md)
    - Search existing code for keywords related to planned functionality
