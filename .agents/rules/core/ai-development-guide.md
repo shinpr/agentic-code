@@ -11,7 +11,6 @@ Immediately stop and reconsider design when detecting the following patterns:
 4. **Making changes without checking dependencies**
 5. **Disabling code with comments**
 6. **Error suppression**
-7. **Excessive use of type assertions (as)**
 
 ### Design Anti-patterns
 - **"Make it work for now" thinking**
@@ -135,12 +134,7 @@ function validateEmail(email: string, context: 'user' | 'contact' | 'admin') { /
 **Cause**: Surface-level fixes without understanding root cause
 **Avoidance**: Identify root cause with 5 Whys before fixing
 
-### Pattern 2: Abandoning Type Safety
-**Symptom**: Excessive use of any type or as
-**Cause**: Impulse to avoid type errors
-**Avoidance**: Handle safely with unknown type and type guards
-
-### Pattern 3: Implementation Without Sufficient Testing
+### Pattern 2: Implementation Without Sufficient Testing
 **Symptom**: Many bugs after implementation
 **Cause**: Ignoring Red-Green-Refactor process
 **Avoidance**: Always start with failing tests
@@ -179,11 +173,11 @@ function validateEmail(email: string, context: 'user' | 'contact' | 'admin') { /
 
 ### 2. 5 Whys - Root Cause Analysis
 ```
-Symptom: TypeScript build error
-Why1: Type definitions don't match → Why2: Interface was updated
-Why3: Dependency change → Why4: Package update impact
-Why5: Major version upgrade with breaking changes
-Root cause: Inappropriate version specification in package.json
+Symptom: Application crash on startup
+Why1: Configuration loading failed → Why2: Config file format changed
+Why3: Dependency update → Why4: Library breaking change
+Why5: Unconstrained dependency version specification
+Root cause: Inappropriate version management strategy
 ```
 
 ### 3. Minimal Reproduction Code
@@ -203,53 +197,6 @@ console.log('DEBUG:', {
 })
 ```
 
-## Quality Check Command Reference
-
-### Step 1-3: Basic Checks
-```bash
-# Biome comprehensive check (lint + format)
-npm run check
-
-# Detect unused exports
-npm run check:unused
-
-# TypeScript build
-npm run build
-```
-
-### Step 4-6: Tests and Final Confirmation
-```bash
-# Test execution
-npm test
-
-# Coverage measurement (clear cache)
-npm run test:coverage:fresh
-
-# Overall integrated check
-npm run check:all
-```
-
-### Auxiliary Commands
-```bash
-# Check coverage report
-open coverage/index.html
-
-# Vitest process cleanup (mandatory after tests)
-npm run cleanup:processes
-
-# Safe test execution (with auto cleanup)
-npm run test:safe
-
-# Auto fixes
-npm run format        # Format fixes
-npm run lint:fix      # Lint fixes
-```
-
-### Troubleshooting
-- **Port in use error**: `npm run cleanup:processes`
-- **Cache issues**: `npm run test:coverage:fresh`
-- **Dependency errors**: Reinstall with `npm ci`
-
 ## Situations Requiring Technical Decisions
 
 ### Timing of Abstraction
@@ -261,11 +208,6 @@ npm run lint:fix      # Lint fixes
 - Prioritize readability unless clear bottleneck exists
 - Measure before optimizing (don't guess, measure)
 - Document reason with comments when optimizing
-
-### Granularity of Type Definitions
-- Overly detailed types reduce maintainability
-- Design types that appropriately express domain
-- Use utility types to reduce duplication
 
 ## Continuous Improvement Mindset
 
