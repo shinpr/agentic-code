@@ -210,3 +210,64 @@ log('DEBUG:', {
 - **Humility**: Perfect code doesn't exist, welcome feedback
 - **Courage**: Execute necessary refactoring boldly
 - **Transparency**: Clearly document technical decision reasoning
+
+## Implementation Completeness Assurance
+
+### Impact Analysis: Mandatory 3-Stage Process
+
+Complete these stages sequentially before any implementation:
+
+**1. Discovery** - Identify all affected code:
+- Implementation references (imports, calls, instantiations)
+- Interface dependencies (contracts, types, data structures)
+- Test coverage
+- Configuration (build configs, env settings, feature flags)
+- Documentation (comments, docs, diagrams)
+
+**2. Understanding** - Analyze each discovered location:
+- Role and purpose in the system
+- Dependency direction (consumer or provider)
+- Data flow (origin → transformations → destination)
+- Coupling strength
+
+**3. Identification** - Produce structured report:
+```
+## Impact Analysis
+### Direct Impact
+- [Unit]: [Reason and modification needed]
+
+### Indirect Impact
+- [System]: [Integration path → reason]
+
+### Data Flow
+[Source] → [Transformation] → [Consumer]
+
+### Risk Assessment
+- High: [Complex dependencies, fragile areas]
+- Medium: [Moderate coupling, test gaps]
+- Low: [Isolated, well-tested areas]
+
+### Implementation Order
+1. [Start with lowest risk or deepest dependency]
+2. [...]
+```
+
+**Critical**: Do not implement until all 3 stages are documented
+
+**Relationship to Pattern 5**: This process provides the structured methodology to avoid "Insufficient Existing Code Investigation" (see .agents/rules/core/ai-development-guide.md:150-158)
+
+### Unused Code Deletion
+
+When unused code is detected:
+- Will it be used in this work? Yes → Implement now | No → Delete now (Git preserves)
+- Applies to: Code, tests, docs, configs, assets
+
+### Existing Code Modification
+
+```
+In use? No → Delete
+       Yes → Working? No → Delete + Reimplement
+                     Yes → Fix/Extend
+```
+
+**Principle**: Prefer clean implementation over patching broken code
