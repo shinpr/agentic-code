@@ -19,16 +19,17 @@ rules:
 
   core/ai-development-guide:
     path: ".agents/rules/core/ai-development-guide.md"
-    tags: [anti-patterns, debugging, best-practices, rule-of-three, technical-debt]
+    tags: [anti-patterns, debugging, best-practices, rule-of-three, technical-debt, impact-analysis, unused-code, code-deletion, implementation-completeness]
     when_to_load:
       - "Starting new implementation"
       - "Code review and refactoring"
       - "Debugging complex issues"
       - "Technical decision making"
+      - "Impact analysis before changes"
     typical_tasks: [implementation, debugging, refactoring]
     size: medium
     priority: high
-    description: "Anti-patterns, debugging techniques, and development best practices"
+    description: "Anti-patterns, debugging techniques, development best practices, and implementation completeness assurance"
 
   core/documentation-criteria:
     path: ".agents/rules/core/documentation-criteria.md"
