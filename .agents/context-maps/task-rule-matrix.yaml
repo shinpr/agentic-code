@@ -44,6 +44,19 @@ rules:
     priority: medium
     description: "Criteria for when and how to create documentation"
 
+  core/testing-strategy:
+    path: ".agents/rules/core/testing-strategy.md"
+    tags: [testing, roi-calculation, test-selection, budget-enforcement, behavior-first]
+    when_to_load:
+      - "Generating acceptance tests from design documents"
+      - "Test prioritization and selection"
+      - "ROI-based test strategy decisions"
+      - "Preventing test over-generation"
+    typical_tasks: [test_generation]
+    size: large
+    priority: high
+    description: "ROI-based test selection framework with behavior-first filtering and budget enforcement"
+
   # Language Rules (currently TypeScript, but concepts are universal)
   language/rules:
     path: ".agents/rules/language/rules.md"
@@ -156,6 +169,7 @@ task_mappings:
     required:
       - "language/testing"  # Test framework patterns and conventions
       - "core/documentation-criteria"  # Design document analysis
+      - "core/testing-strategy"  # ROI-based test selection
     recommended:
       - "core/metacognition"
 

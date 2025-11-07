@@ -5,13 +5,16 @@
 **RULE AVAILABILITY VERIFICATION:**
 1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
 2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
+3. [LOAD IF NOT ACTIVE] `.agents/rules/core/testing-strategy.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: CHECK if language/testing.md is active in working memory
 - STEP 2: If language/testing.md NOT active → Execute BLOCKING READ
 - STEP 3: CHECK if documentation-criteria.md is active in working memory
 - STEP 4: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all required rules active before proceeding
+- STEP 5: CHECK if testing-strategy.md is active in working memory
+- STEP 6: If testing-strategy.md NOT active → Execute BLOCKING READ
+- STEP 7: CONFIRM all required rules active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
@@ -19,6 +22,7 @@
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/rules/language/testing.md` (if not active)
    - `.agents/rules/core/documentation-criteria.md` (if not active)
+   - `.agents/rules/core/testing-strategy.md` (if not active)
 2. Mark each with "[From acceptance-test-generation.md]" source tag
 3. Show evidence of injection:
    ```
@@ -26,6 +30,7 @@
    Injected to work plan:
    ✓ BLOCKING READ: language/testing.md - testing standards
    ✓ BLOCKING READ: documentation-criteria.md - document analysis
+   ✓ BLOCKING READ: testing-strategy.md - ROI-based test selection
    Status: VERIFIED
    ```
 
@@ -36,6 +41,7 @@
 Rule Status Verification:
 ✓ language/testing.md - ACTIVE
 ✓ documentation-criteria.md - ACTIVE
+✓ testing-strategy.md - ACTIVE
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
@@ -120,6 +126,36 @@ Transform Design Document Acceptance Criteria (ACs) into structured integration 
    - Flag ACs requiring clarification
    - Document assumption points
 
+**1.4 Behavior-First Filtering [CRITICAL - PREVENTS LOW-ROI TEST GENERATION]**
+
+Apply 3-check process to each AC before proceeding to test generation:
+
+**Check 1: User-Observable**
+- Question: "Can a user (or system operator) observe this behavior?"
+- If NO → Skip AC with reason: `[IMPLEMENTATION_DETAIL]`
+- If YES → Continue to Check 2
+
+**Check 2: System Context**
+- Question: "Requires full system integration to verify?"
+- If NO → Skip AC with reason: `[UNIT_LEVEL]`
+- If YES → Continue to Check 3
+
+**Check 3: CI Verifiable**
+- Question: "Is this verifiable deterministically in CI environment?"
+- If NO → Skip AC with reason: `[NON_DETERMINISTIC]` or `[EXTERNAL_SERVICE]`
+- If YES → Valid AC for test generation
+
+**Skip Reason Tracking**:
+```
+AC-001: "Password hashed with bcrypt" → SKIP [IMPLEMENTATION_DETAIL]
+AC-002: "Tax calculation returns correct value" → SKIP [UNIT_LEVEL]
+AC-003: "API response time < 200ms" → SKIP [NON_DETERMINISTIC]
+AC-004: "Email delivered to inbox" → SKIP [EXTERNAL_SERVICE]
+AC-005: "User can view order history" → PASS (all checks)
+```
+
+**Expected Impact**: 40% of ACs filtered at this stage, preventing low-ROI test generation
+
 ### Stage 2: Strategic Interpretation [REQUIRED]
 
 **2.1 Context-Dependent Analysis**
@@ -180,6 +216,89 @@ order: minimize-setup/teardown
 data: shared|isolated
 parallel: safe|sequential
 env: dev|staging|prod
+```
+
+### Stage 4: ROI-Based Selection and Budget Enforcement [REQUIRED]
+
+**Purpose**: Select highest-value tests within budget constraints to prevent over-generation
+
+**4.1 ROI Calculation**
+
+For each test candidate from Stage 3, calculate ROI score:
+
+```
+ROI Score = (Business Value × User Frequency + Legal Requirement × 10 + Defect Detection)
+            / Test Level Cost
+
+Where:
+- Business Value: 0-10 (revenue impact)
+- User Frequency: 0-10 (% of users affected)
+- Legal Requirement: 0 or 1 (boolean)
+- Defect Detection: 0-10 (likelihood of catching bugs)
+- Test Level Cost: Unit=3, Integration=11, E2E=38
+```
+
+**See**: `.agents/rules/core/testing-strategy.md` for detailed ROI framework
+
+**4.2 Deduplication Check**
+
+Before adding to selection pool:
+1. Search existing test suite for similar scenarios
+2. Check for overlapping coverage at different test levels
+3. Decision:
+   - Full coverage exists → Skip candidate
+   - Partial coverage → Consider extending existing test
+   - No coverage → Add to selection pool
+
+**4.3 Push-Down Analysis**
+
+For each integration/E2E candidate:
+```
+Can this be verified with unit test?
+  YES → Remove from integration/E2E pool, recommend unit test
+  NO → Continue
+
+Already covered by integration test?
+  YES → Don't create E2E version
+  NO → Keep as E2E candidate
+```
+
+**4.4 Budget Enforcement**
+
+**Hard Limits per Feature**:
+- Integration Tests: MAX 3 tests
+- E2E Tests: MAX 1-2 tests (only if ROI > 1.5)
+
+**Selection Algorithm**:
+1. Sort candidates by ROI score (descending)
+2. Select top N within budget limits
+3. Document selection rationale
+
+**Critical User Journey Exception**:
+Budget limits may be relaxed for:
+- Revenue-impacting flows (payment, checkout)
+- Legally required flows (GDPR, data protection)
+- High-frequency core functionality (>80% users)
+
+**Exception requires**: Explicit justification in generation report
+
+**4.5 Selection Documentation**
+
+For each selected test, document:
+```
+Test ID: INT-001
+AC Mapping: AC-FUNC-001, AC-FUNC-003
+ROI Score: 8.9
+Selection Reason: Revenue-critical payment flow
+Budget Slot: 1/3 (integration)
+```
+
+For each skipped candidate, document:
+```
+Candidate: "User profile image upload E2E"
+ROI Score: 0.7
+Skip Reason: Below E2E threshold (1.5), covered by integration test
+Alternative: Existing integration test INT-005
 ```
 
 ## Test Generation Guidelines
