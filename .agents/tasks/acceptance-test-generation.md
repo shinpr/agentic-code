@@ -5,13 +5,16 @@
 **RULE AVAILABILITY VERIFICATION:**
 1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
 2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
+3. [LOAD IF NOT ACTIVE] `.agents/rules/core/testing-strategy.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: CHECK if language/testing.md is active in working memory
 - STEP 2: If language/testing.md NOT active → Execute BLOCKING READ
 - STEP 3: CHECK if documentation-criteria.md is active in working memory
 - STEP 4: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all required rules active before proceeding
+- STEP 5: CHECK if testing-strategy.md is active in working memory
+- STEP 6: If testing-strategy.md NOT active → Execute BLOCKING READ
+- STEP 7: CONFIRM all required rules active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
@@ -19,6 +22,7 @@
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/rules/language/testing.md` (if not active)
    - `.agents/rules/core/documentation-criteria.md` (if not active)
+   - `.agents/rules/core/testing-strategy.md` (if not active)
 2. Mark each with "[From acceptance-test-generation.md]" source tag
 3. Show evidence of injection:
    ```
@@ -26,6 +30,7 @@
    Injected to work plan:
    ✓ BLOCKING READ: language/testing.md - testing standards
    ✓ BLOCKING READ: documentation-criteria.md - document analysis
+   ✓ BLOCKING READ: testing-strategy.md - ROI-based test selection
    Status: VERIFIED
    ```
 
@@ -36,6 +41,7 @@
 Rule Status Verification:
 ✓ language/testing.md - ACTIVE
 ✓ documentation-criteria.md - ACTIVE
+✓ testing-strategy.md - ACTIVE
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
@@ -232,7 +238,7 @@ Where:
 - Test Level Cost: Unit=3, Integration=11, E2E=38
 ```
 
-**See**: `.agents/rules/language/testing-strategy.md` for detailed ROI framework
+**See**: `.agents/rules/core/testing-strategy.md` for detailed ROI framework
 
 **4.2 Deduplication Check**
 
