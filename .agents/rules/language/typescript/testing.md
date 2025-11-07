@@ -87,10 +87,41 @@ describe('Cross-functional E2E Tests', () => {
 3. Confirm no regressions
 4. ENFORCEMENT: Cannot proceed with ANY errors or warnings
 
-**Exceptions (no TDD required):**
-- Pure configuration files
-- Documentation only
-- Emergency fixes (but add tests immediately after)
+**Exceptions (TDD not required):**
+
+The following cases do NOT require test-first approach:
+
+1. **Pure Configuration Files**
+   - package.json, tsconfig.json, build configs
+   - Environment variable files (.env templates)
+   - Linter/formatter configurations
+   - Rationale: No business logic to verify
+
+2. **Documentation Only Changes**
+   - README updates
+   - Code comments additions
+   - Markdown documentation
+   - Rationale: No executable behavior to test
+
+3. **Emergency Hotfixes**
+   - Production incidents requiring immediate fix
+   - Security vulnerabilities requiring urgent patch
+   - **REQUIREMENT**: Add tests immediately after deploying fix
+   - Rationale: Speed prioritized in crisis, but tests must follow
+
+4. **Exploratory Spikes**
+   - Time-boxed research (max 2-4 hours)
+   - Proof-of-concept for uncertain technology
+   - **REQUIREMENT**: Discard spike code or rewrite with tests before merging
+   - Rationale: Learning phase, not production code
+
+5. **Build/Deployment Scripts**
+   - CI/CD pipeline definitions
+   - Deployment automation scripts
+   - **NOTE**: Complex scripts with business logic DO require tests
+   - Rationale: Verified through actual deployment, not unit tests
+
+**When in Doubt**: Default to TDD. Exceptions are narrow, not broad.
 
 ## Test Design Principles
 

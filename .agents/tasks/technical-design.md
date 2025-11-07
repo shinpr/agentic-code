@@ -308,6 +308,53 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 **Good**: "After auth with correct credentials, navigates to dashboard"
 **Bad**: "Login works"
 
+### Behavior-First Principle [CRITICAL]
+
+**Core Principle**: AC = User-observable behavior verifiable in isolated CI environment
+
+**BEFORE writing any AC, apply 3 mandatory checks:**
+
+#### 1. User-Observable Check
+**Question**: "Can a user (or system operator) observe this behavior?"
+- **If NO** → This is an **implementation detail**, exclude from AC
+- **If YES** → Continue to check 2
+
+**Examples**:
+- ❌ Bad (Implementation Detail): "Password must be hashed using bcrypt with 10 salt rounds"
+- ✅ Good (User-Observable): "After failed login attempts, user is locked out for 15 minutes"
+
+#### 2. Verification Context Check
+**Question**: "Can this be verified without full system integration?"
+- **If YES** → This is **unit/component level**, exclude from integration/E2E AC
+- **If NO** → This is a valid AC for integration/E2E tests, continue to check 3
+
+**Examples**:
+- ❌ Bad (Unit-level): "calculateTax function returns correct value for given input"
+- ✅ Good (Integration-level): "After checkout, order total includes correct tax amount"
+
+#### 3. CI Environment Check
+**Question**: "Is this verifiable deterministically in CI?"
+- **If NO** → Exclude (e.g., performance metrics, real external services)
+- **If YES** → Valid AC
+
+**Examples**:
+- ❌ Bad (Non-deterministic): "API response time must be < 200ms"
+- ✅ Good (Deterministic): "System processes checkout requests without blocking user interaction"
+
+**Enhanced Include/Exclude Criteria**:
+
+**Include (High Automation ROI)**:
+- Business logic correctness (calculations, state transitions)
+- Data integrity and persistence behavior
+- User-visible functionality completeness
+- Error handling behavior (what user sees/experiences)
+
+**Exclude (Low Automation ROI)**:
+- External service real connections → Use contract/interface verification instead
+- Performance metrics → Non-deterministic in CI, use dedicated performance testing
+- Implementation details (hashing algorithms, internal function calls) → Focus on observable behavior
+- UI layout specifics → Focus on information availability, not pixel-perfect rendering
+
 ## Design Validation
 
 Verify: Completeness, Consistency, Feasibility, Testability, Maintainability, Scalability
