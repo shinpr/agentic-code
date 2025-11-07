@@ -52,7 +52,7 @@ rules:
       - "Test prioritization and selection"
       - "ROI-based test strategy decisions"
       - "Preventing test over-generation"
-    typical_tasks: [test_generation, design]
+    typical_tasks: [test_generation]
     size: large
     priority: high
     description: "ROI-based test selection framework with behavior-first filtering and budget enforcement"
