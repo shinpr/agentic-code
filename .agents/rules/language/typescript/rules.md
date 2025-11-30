@@ -13,7 +13,7 @@
 
 ## Type Safety
 
-**Absolute Rule**: any type is completely prohibited.
+**Principle**: Use `unknown` + type guards instead of `any` for full type safety.
 
 **any Type Alternatives (Priority Order)**
 1. **unknown Type + Type Guards**
