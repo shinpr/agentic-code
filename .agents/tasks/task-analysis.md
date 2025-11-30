@@ -285,7 +285,7 @@ VERIFICATION: All required rules active in working memory
 - One-time reference documents
 - Completed phase rules
 
-**NEVER UNLOAD:**
-- metacognition.md (loaded in initial setup, stays entire session)
-- Current task type's essential rules
-- ai-development-guide.md (during implementation/debugging)
+**Keep Active (session-wide essentials):**
+- metacognition.md - continuous self-assessment
+- Current task type's essential rules - context consistency
+- ai-development-guide.md - anti-pattern prevention (during implementation/debugging)

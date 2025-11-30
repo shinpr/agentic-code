@@ -27,8 +27,7 @@ Prioritize primary code reliability over fallback implementations. In distribute
 ### Implementation Guidelines
 
 #### Default Approach
-- **Prohibit unconditional fallbacks**: Do not automatically return default values on errors
-- **Make failures explicit**: Errors should be visible and traceable
+- **Explicit failure over silent defaults**: Errors must be visible and traceable, not masked by automatic default values
 - **Preserve error context**: Include original error information when re-throwing
 
 #### When Fallbacks Are Acceptable
