@@ -201,6 +201,14 @@
 - Reason: Creates test gaps and incomplete quality checks
 - Solution: Either fix the test or completely delete if truly unnecessary
 
+## Test Quality Criteria [MANDATORY]
+
+1. **Boundary coverage**: Include empty/zero/max/error cases with happy paths
+2. **Literal expectations**: Use literal values in assertions, not computed expressions
+3. **Result verification**: Assert return values and state, not call order
+4. **Meaningful assertions**: Every test must have at least one assertion
+5. **Mock external I/O only**: Mock DB/API/filesystem, use real internal utilities
+
 ### Test Helper Guidelines
 
 **Basic Principles**

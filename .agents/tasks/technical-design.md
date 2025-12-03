@@ -308,6 +308,17 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 **Good**: "After auth with correct credentials, navigates to dashboard"
 **Bad**: "Login works"
 
+### EARS Format [RECOMMENDED]
+
+Use EARS keywords to standardize AC structure:
+
+| Keyword | Test Type | Example |
+|---------|-----------|---------|
+| **When** | Event trigger | "**When** user clicks submit, the system shall save the form" |
+| **While** | State-based | "**While** logged in, the system shall display username" |
+| **If-then** | Conditional | "**If** cart is empty, **then** show empty message" |
+| (none) | Always-true | "The system shall encrypt all passwords" |
+
 ### Behavior-First Principle [CRITICAL]
 
 **Core Principle**: AC = User-observable behavior verifiable in isolated CI environment

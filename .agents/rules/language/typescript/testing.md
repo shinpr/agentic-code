@@ -205,6 +205,14 @@ function assertValidUser(user: unknown): asserts user is User {
 - Reason: Creates test gaps and incomplete quality checks
 - Solution: Completely delete unnecessary tests
 
+## Test Quality Criteria [MANDATORY]
+
+1. **Boundary coverage**: Include empty/zero/max/error cases with happy paths
+2. **Literal expectations**: `expect(calc(100)).toBe(10)` — use literals, not `100 * RATE`
+3. **Result verification**: Assert return values and state, not call order
+4. **Meaningful assertions**: Every test must have at least one `expect()`
+5. **Mock external I/O only**: Mock DB/API/filesystem, use real internal utils
+
 ## Test Granularity Principles
 
 ### Core Principle: Observable Behavior Only
