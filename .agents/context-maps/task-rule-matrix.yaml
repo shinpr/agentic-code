@@ -57,6 +57,18 @@ rules:
     priority: high
     description: "ROI-based test selection framework with behavior-first filtering and budget enforcement"
 
+  core/integration-e2e-testing:
+    path: ".agents/rules/core/integration-e2e-testing.md"
+    tags: [testing, integration-test, e2e-test, behavior-first, mock-boundary, test-review]
+    when_to_load:
+      - "Generating integration/E2E test skeletons"
+      - "Implementing integration/E2E tests"
+      - "Reviewing test implementation quality"
+    typical_tasks: [test_generation, test_review]
+    size: small
+    priority: high
+    description: "Integration and E2E test design, implementation rules, and review criteria"
+
   # Language Rules (currently TypeScript, but concepts are universal)
   language/rules:
     path: ".agents/rules/language/rules.md"
@@ -170,6 +182,14 @@ task_mappings:
       - "language/testing"  # Test framework patterns and conventions
       - "core/documentation-criteria"  # Design document analysis
       - "core/testing-strategy"  # ROI-based test selection
+      - "core/integration-e2e-testing"  # Integration/E2E test design rules
+    recommended:
+      - "core/metacognition"
+
+  test_review:
+    required:
+      - "language/testing"
+      - "core/integration-e2e-testing"
     recommended:
       - "core/metacognition"
 
