@@ -308,6 +308,7 @@ For each task in work plan:
 □ Linting clean
 □ Documentation updated
 □ Edge cases handled
+□ Integration/E2E test review passed (via integration-test-review.md)
 ```
 
 ### Completion Conditions:

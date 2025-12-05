@@ -6,6 +6,7 @@
 1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
 2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
 3. [LOAD IF NOT ACTIVE] `.agents/rules/core/testing-strategy.md`
+4. [LOAD IF NOT ACTIVE] `.agents/rules/core/integration-e2e-testing.md`
 
 **LOADING PROTOCOL:**
 - STEP 1: CHECK if language/testing.md is active in working memory
@@ -14,7 +15,9 @@
 - STEP 4: If documentation-criteria.md NOT active → Execute BLOCKING READ
 - STEP 5: CHECK if testing-strategy.md is active in working memory
 - STEP 6: If testing-strategy.md NOT active → Execute BLOCKING READ
-- STEP 7: CONFIRM all required rules active before proceeding
+- STEP 7: CHECK if integration-e2e-testing.md is active in working memory
+- STEP 8: If integration-e2e-testing.md NOT active → Execute BLOCKING READ
+- STEP 9: CONFIRM all required rules active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
@@ -23,6 +26,7 @@
    - `.agents/rules/language/testing.md` (if not active)
    - `.agents/rules/core/documentation-criteria.md` (if not active)
    - `.agents/rules/core/testing-strategy.md` (if not active)
+   - `.agents/rules/core/integration-e2e-testing.md` (if not active)
 2. Mark each with "[From acceptance-test-generation.md]" source tag
 3. Show evidence of injection:
    ```
@@ -31,6 +35,7 @@
    ✓ BLOCKING READ: language/testing.md - testing standards
    ✓ BLOCKING READ: documentation-criteria.md - document analysis
    ✓ BLOCKING READ: testing-strategy.md - ROI-based test selection
+   ✓ BLOCKING READ: integration-e2e-testing.md - integration/E2E test design
    Status: VERIFIED
    ```
 
@@ -42,6 +47,7 @@ Rule Status Verification:
 ✓ language/testing.md - ACTIVE
 ✓ documentation-criteria.md - ACTIVE
 ✓ testing-strategy.md - ACTIVE
+✓ integration-e2e-testing.md - ACTIVE
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
