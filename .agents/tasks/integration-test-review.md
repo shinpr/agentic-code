@@ -42,12 +42,12 @@ Verify implementation quality of integration and E2E tests. Evaluate consistency
 ### Stage 1: Skeleton Comment Extraction
 
 Extract the following from the test file:
-- `// AC:` - Acceptance criteria reference
-- `// ROI:` - ROI score and values
-- `// Behavior:` - Trigger → Process → Observable Result
-- `// @category:` - Test category
-- `// @dependency:` - Component dependencies
-- `// @complexity:` - Complexity level
+- `AC:` - Acceptance criteria reference
+- `ROI:` - ROI score and values
+- `Behavior:` - Trigger → Process → Observable Result
+- `@category:` - Test category
+- `@dependency:` - Component dependencies
+- `@complexity:` - Complexity level
 
 ### Stage 2: Skeleton and Implementation Consistency Check
 
@@ -55,7 +55,7 @@ For each test case, verify:
 
 | Check Item | Verification Content | Failure Condition |
 |------------|---------------------|-------------------|
-| AC Correspondence | Test implemented for `// AC:` comment | it.todo remains |
+| AC Correspondence | Test implemented for AC comment | Pending/todo marker remains |
 | Behavior Verification | Assertion exists for "observable result" | No assertion |
 | Verification Item Coverage | All listed items included in assertions | Item missing |
 
@@ -65,7 +65,7 @@ For each test case, verify:
 |------------|---------------------|-------------------|
 | AAA Structure | Arrange/Act/Assert separation clear | Separation unclear |
 | Independence | No state sharing between tests | Shared state modified |
-| Reproducibility | No direct use of Date.now(), Math.random() | Non-deterministic elements |
+| Reproducibility | No direct use of current time or random values | Non-deterministic elements |
 | Readability | Test name matches verification content | Name and content diverge |
 
 ### Stage 4: Mock Boundary Check (Integration Tests Only)
@@ -80,12 +80,12 @@ For each test case, verify:
 ### Status Determination
 
 **approved**:
-- All ACs have implemented tests (no it.todo)
+- All ACs have implemented tests (no pending/todo markers)
 - All observable results have assertions
 - No quality issues or only low priority ones
 
 **needs_revision**:
-- it.todo remains
+- Pending/todo markers remain
 - Behavior verification missing
 - Medium to high priority quality issues exist
 
@@ -125,7 +125,7 @@ prioritizedActions:
 
 ## Anti-Patterns to Avoid
 
-- Approving tests with remaining it.todo
+- Approving tests with remaining pending/todo markers
 - Ignoring missing assertions for observable results
 - Overlooking shared mutable state between tests
 - Accepting excessive mocking of internal components
