@@ -186,12 +186,31 @@ task_mappings:
     recommended:
       - "core/metacognition"
 
-  test_review:
+  integration_test_review:
     required:
       - "language/testing"
       - "core/integration-e2e-testing"
     recommended:
       - "core/metacognition"
+    description: "Review integration and E2E test implementations"
+
+  code_review:
+    required:
+      - "language/rules"
+      - "core/ai-development-guide"
+    recommended:
+      - "core/metacognition"
+    description: "Review implementation against Design Doc compliance"
+
+  technical_document_review:
+    required:
+      - "core/documentation-criteria"
+    conditional:
+      - "core/testing-strategy"
+      - "language/rules"
+    recommended:
+      - "core/metacognition"
+    description: "Review technical documents (Design Docs, ADRs)"
 
 # Scale-based Rule Loading
 scale_mappings:

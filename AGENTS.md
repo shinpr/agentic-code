@@ -22,9 +22,7 @@
 
 **ALWAYS start here for any user request:**
 1. Apply `.agents/tasks/task-analysis.md`
-2. Determine task type and scale with evidence
-3. Use `.agents/context-maps/task-rule-matrix.yaml` to identify required rules
-4. Based on analysis results, choose appropriate path:
+2. Follow its output to select the appropriate path:
 
 ### Path Selection Based on Task Analysis
 
@@ -86,7 +84,6 @@ Common approval points:
 - All quality checks must pass with 0 errors
 - Follow standards defined in language-specific rules
 - Each task definition specifies its quality gates
-
 
 ## Metacognition Checkpoints
 

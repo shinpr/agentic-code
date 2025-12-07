@@ -23,6 +23,7 @@ Self-assessment checkpoints.
 - Am I solving the root cause or symptom?
 - Do I have all necessary information?
 - Are success criteria clear and measurable?
+- What are the known unknowns at this point?
 
 ### 2. Current State
 
@@ -37,6 +38,7 @@ Self-assessment checkpoints.
 - Am I following established patterns?
 - Have I considered alternatives?
 - Is this maintainable long-term?
+- What would make me reverse this decision? (Kill criteria)
 
 ## Rule Selection Guide
 
@@ -73,6 +75,12 @@ Note: Context management is user's responsibility. Ask for guidance if unsure.
 ☐ [VERIFY] Making measurable progress (list completed items)
 ☐ [EVALUATE] Additional rules needed? (load IMMEDIATELY if yes)
 ☐ [EVALUATE] Blocked for >10 minutes? (MUST ask for help)
+
+**Dynamic Rule Loading Triggers:**
+- Same error occurs 2+ times → Load `ai-development-guide.md` for debugging patterns
+- "Performance" mentioned in requirements → Load optimization rules if available
+- "Security" mentioned in requirements → Load security guidelines if available
+- External API/service integration needed → Load integration patterns if available
 
 **ENFORCEMENT: If progress stalled → MANDATORY metacognition**
 
