@@ -23,6 +23,7 @@ Self-assessment checkpoints.
 - Am I solving the root cause or symptom?
 - Do I have all necessary information?
 - Are success criteria clear and measurable?
+- What are the known unknowns at this point?
 
 ### 2. Current State
 
@@ -37,6 +38,7 @@ Self-assessment checkpoints.
 - Am I following established patterns?
 - Have I considered alternatives?
 - Is this maintainable long-term?
+- What would make me reverse this decision? (Kill criteria)
 
 ## Rule Selection Guide
 

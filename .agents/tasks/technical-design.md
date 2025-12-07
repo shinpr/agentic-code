@@ -227,6 +227,16 @@ Supersedes: ADR-YYYY (if applicable)
 ## Decision
 Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 
+### Decision Details
+
+| Item | Content |
+|------|---------|
+| **Decision** | [The decision in one sentence] |
+| **Why now** | [Why this needs to happen now (timing rationale)] |
+| **Why this** | [Why this option over alternatives (1-3 lines)] |
+| **Known unknowns** | [At least one uncertainty at this point] |
+| **Kill criteria** | [One signal that should trigger reversal of this decision] |
+
 ## Implementation Guidelines
 [Principle-based guidelines]
 
@@ -238,7 +248,7 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 
 ### Design Doc Structure
 
-```markdown
+````markdown
 # Technical Design: [Feature Name]
 
 ## PRD Reference
@@ -247,6 +257,22 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 
 ## Overview
 [Brief description]
+
+## Design Summary (Meta)
+
+```yaml
+design_type: "new_feature|extension|refactoring"
+risk_level: "low|medium|high"
+main_constraints:
+  - "[constraint 1]"
+  - "[constraint 2]"
+biggest_risks:
+  - "[risk 1]"
+  - "[risk 2]"
+unknowns:
+  - "[uncertainty 1]"
+  - "[uncertainty 2]"
+```
 
 ## Agreement Checklist
 - [ ] Scope: [what to implement]
@@ -300,7 +326,7 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 
 ## References
 - [Source](URL) - Description
-```
+````
 
 ## Acceptance Criteria Creation Guidelines
 

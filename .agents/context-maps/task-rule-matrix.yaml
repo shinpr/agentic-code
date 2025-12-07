@@ -193,6 +193,23 @@ task_mappings:
     recommended:
       - "core/metacognition"
 
+  code_review:
+    required:
+      - "language/rules"
+      - "core/ai-development-guide"
+    recommended:
+      - "core/metacognition"
+    description: "Review implementation against Design Doc compliance"
+
+  document_review:
+    required:
+      - "core/documentation-criteria"
+    conditional:
+      - "core/testing-strategy"  # When reviewing Design Doc with test strategy
+    recommended:
+      - "core/metacognition"
+    description: "Review technical documents (Design Docs, ADRs, PRDs)"
+
 # Scale-based Rule Loading
 scale_mappings:
   small:  # 1-2 files

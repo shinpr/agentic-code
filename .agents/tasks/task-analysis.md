@@ -31,7 +31,7 @@ Determine task type, scale, and required resources.
 
 ## Completion Conditions
 
-□ Task type identified (implementation/research/design/documentation/debugging/other)
+□ Task type identified (implementation/research/design/documentation/debugging/review/other)
 □ Task scale determined:
   - Small: 1-2 files affected
   - Medium: 3-5 files affected
@@ -86,6 +86,11 @@ VIOLATION EXAMPLE: Using "2024" in web research when SESSION_BASELINE_DATE shows
 - Error investigation
 - Performance analysis
 - Behavior diagnosis
+
+**Review**: Evaluation and verification
+- Document review (design docs, ADRs, PRDs)
+- Code review
+- Test review (integration/E2E tests)
 
 ### Step 3: Estimate Scale [REQUIRED]
 
@@ -208,6 +213,12 @@ Based on scale and complexity:
 3. Estimate change scope
 4. Plan incremental approach
 
+### Review
+1. Identify review target (document/code/tests)
+2. Load appropriate review task definition
+3. Apply review criteria from task definition
+4. Document findings and recommendations
+
 ## Decision Tree
 
 **Code-related?**
@@ -216,11 +227,16 @@ Based on scale and complexity:
   - NO → Fixing issues?
     - YES: Debugging task
     - NO: Refactoring task
-- NO → Information gathering?
-  - YES: Research task
-  - NO → Planning?
-    - YES: Design task
-    - NO: Documentation task
+- NO → Evaluating existing work?
+  - YES: Review task → Determine target:
+    - Document (design/ADR/PRD) → document-review
+    - Code → code-review
+    - Tests → integration-test-review
+  - NO → Information gathering?
+    - YES: Research task
+    - NO → Planning?
+      - YES: Design task
+      - NO: Documentation task
 
 ## Rule Selection Output Format [SYSTEM VERIFICATION REQUIRED]
 
@@ -255,6 +271,10 @@ VERIFICATION: All required rules active in working memory
 - Documentation → ALWAYS: documentation-criteria
 - Refactoring → ALWAYS: language/rules + ai-development-guide
 - Research → ALREADY LOADED: metacognition (from initial setup)
+- Review → ALWAYS: target-specific review task definition
+  - Document → tasks/document-review.md
+  - Code → tasks/code-review.md
+  - Tests → tasks/integration-test-review.md
 
 **Conditional Loading [LOAD WHEN]:**
 - language/testing → WHEN: "test", "TDD", "coverage" in requirements OR implementation task
