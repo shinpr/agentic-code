@@ -87,7 +87,6 @@ Common approval points:
 - Follow standards defined in language-specific rules
 - Each task definition specifies its quality gates
 
-
 ## Metacognition Checkpoints
 
 Perform self-assessment at these mandatory points:

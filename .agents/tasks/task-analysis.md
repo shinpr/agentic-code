@@ -229,7 +229,7 @@ Based on scale and complexity:
     - NO: Refactoring task
 - NO → Evaluating existing work?
   - YES: Review task → Determine target:
-    - Document (design/ADR/PRD) → document-review
+    - Document (design/ADR/PRD) → technical-document-review
     - Code → code-review
     - Tests → integration-test-review
   - NO → Information gathering?
@@ -272,7 +272,7 @@ VERIFICATION: All required rules active in working memory
 - Refactoring → ALWAYS: language/rules + ai-development-guide
 - Research → ALREADY LOADED: metacognition (from initial setup)
 - Review → ALWAYS: target-specific review task definition
-  - Document → tasks/document-review.md
+  - Document → tasks/technical-document-review.md
   - Code → tasks/code-review.md
   - Tests → tasks/integration-test-review.md
 

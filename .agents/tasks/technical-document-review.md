@@ -30,6 +30,7 @@ Review technical documents (Design Docs, ADRs, PRDs) for completeness, consisten
   - `design-doc`: Technical Design Document
   - `adr`: Architecture Decision Record
   - `prd`: Product Requirements Document
+- **templatePath**: Path to template for validation baseline (optional - uses default if not provided)
 - **reviewMode**:
   - `full`: Complete validation (default)
   - `structure`: Structure compliance only
@@ -49,10 +50,13 @@ Review technical documents (Design Docs, ADRs, PRDs) for completeness, consisten
 
 ### Stage 1: Document Type Identification
 
-Confirm document type and load corresponding template requirements:
-- Design Doc → `technical-design.md` structure
-- ADR → ADR structure from `technical-design.md`
-- PRD → PRD requirements from `documentation-criteria.md`
+Confirm document type and determine validation baseline:
+- If template path provided → Use specified template as baseline
+- If no template provided → Request template path from user
+- Default templates by type:
+  - Design Doc → `.agents/tasks/technical-design.md`
+  - ADR → ADR section in `.agents/tasks/technical-design.md`
+  - PRD → PRD section in `.agents/rules/core/documentation-criteria.md`
 
 ### Stage 2: Structure Compliance Check
 

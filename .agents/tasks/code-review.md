@@ -7,10 +7,10 @@
 2. [LOAD IF NOT ACTIVE] `.agents/rules/core/ai-development-guide.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if language/rules.md is active in working memory
-- STEP 2: If language/rules.md NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if ai-development-guide.md is active in working memory
-- STEP 4: If ai-development-guide.md NOT active → Execute BLOCKING READ
+- STEP 1: CHECK if `.agents/rules/language/rules.md` is active in working memory
+- STEP 2: If NOT active → Execute BLOCKING READ
+- STEP 3: CHECK if `.agents/rules/core/ai-development-guide.md` is active in working memory
+- STEP 4: If NOT active → Execute BLOCKING READ
 - STEP 5: CONFIRM all required rules active before proceeding
 
 ## Purpose
@@ -25,26 +25,26 @@ Validate Design Doc compliance and evaluate implementation completeness from a t
 
 ## Required Information
 
-- **designDocPath**: Path to Design Document for validation baseline (required)
 - **implementationFiles**: List of files to review (required)
+- **designDocPath**: Path to Design Document for validation baseline (optional - if provided, enables compliance validation)
 - **workPlanPath**: Path to work plan for completed task verification (optional)
 - **reviewMode**:
   - `full`: Complete validation (default)
-  - `acceptance`: Acceptance criteria only
-  - `architecture`: Architecture compliance only
+  - `acceptance`: Acceptance criteria only (requires designDocPath)
+  - `architecture`: Architecture compliance only (requires designDocPath)
+  - `quality`: Code quality check only (no designDocPath needed)
 
 ## Completion Conditions
 
-□ Design Doc loaded and acceptance criteria extracted
 □ All implementation files reviewed
-□ Compliance rate calculated
 □ Quality issues documented with severity
+□ Compliance rate calculated (if designDocPath provided)
 □ Verdict determined with rationale
 □ Prioritized actions provided
 
 ## Review Process
 
-### Stage 1: Load Baseline Documents
+### Stage 1: Load Baseline Documents (if designDocPath provided)
 
 Extract from Design Doc:
 - Functional requirements and acceptance criteria
@@ -52,7 +52,9 @@ Extract from Design Doc:
 - Data flow
 - Error handling policy
 
-### Stage 2: Implementation Validation
+If designDocPath not provided, skip to Stage 3 (Code Quality Check).
+
+### Stage 2: Implementation Validation (if designDocPath provided)
 
 For each implementation file, verify:
 
@@ -63,7 +65,7 @@ For each implementation file, verify:
 | Error Handling | Error scenarios properly handled |
 | Test Existence | Test cases exist for functionality |
 
-### Stage 3: Code Quality Check
+### Stage 3: Code Quality Check (always executed)
 
 | Metric | Ideal | Maximum | Failure Condition |
 |--------|-------|---------|-------------------|
@@ -72,7 +74,7 @@ For each implementation file, verify:
 | Single responsibility | 1 function = 1 purpose | - | Multiple responsibilities |
 | Error handling | All error paths covered | - | Missing error handling |
 
-### Stage 4: Architecture Compliance
+### Stage 4: Architecture Compliance (if designDocPath provided)
 
 | Check Item | Verification Content |
 |------------|---------------------|
@@ -84,24 +86,20 @@ For each implementation file, verify:
 
 ## Validation Checklist
 
-### Functional Requirements
+### Functional Requirements (if designDocPath provided)
 - [ ] All acceptance criteria have corresponding implementations
 - [ ] Happy path scenarios implemented
 - [ ] Error scenarios handled
 - [ ] Edge cases considered
-
-### Architecture Validation
 - [ ] Implementation matches Design Doc architecture
 - [ ] Data flow follows design
-- [ ] Component dependencies correct
-- [ ] Responsibilities properly separated
-- [ ] No unnecessary duplicate implementations
 
-### Quality Validation
+### Quality Validation (always executed)
 - [ ] Comprehensive error handling
 - [ ] Appropriate logging
-- [ ] Tests cover acceptance criteria
-- [ ] Interface contracts match Design Doc
+- [ ] Tests exist for functionality
+- [ ] No unnecessary duplicate implementations
+- [ ] Responsibilities properly separated
 
 ## Output Format
 

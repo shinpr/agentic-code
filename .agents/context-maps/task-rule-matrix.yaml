@@ -186,12 +186,13 @@ task_mappings:
     recommended:
       - "core/metacognition"
 
-  test_review:
+  integration_test_review:
     required:
       - "language/testing"
       - "core/integration-e2e-testing"
     recommended:
       - "core/metacognition"
+    description: "Review integration and E2E test implementations"
 
   code_review:
     required:
@@ -201,7 +202,7 @@ task_mappings:
       - "core/metacognition"
     description: "Review implementation against Design Doc compliance"
 
-  document_review:
+  technical_document_review:
     required:
       - "core/documentation-criteria"
     conditional:
