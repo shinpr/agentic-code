@@ -207,9 +207,10 @@ task_mappings:
       - "core/documentation-criteria"
     conditional:
       - "core/testing-strategy"
+      - "language/rules"
     recommended:
       - "core/metacognition"
-    description: "Review technical documents (Design Docs, ADRs, PRDs)"
+    description: "Review technical documents (Design Docs, ADRs)"
 
 # Scale-based Rule Loading
 scale_mappings:
