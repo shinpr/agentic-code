@@ -1,10 +1,10 @@
 # Agentic Code
 
-Your AI (LLM), guided by built-in workflows. Just tell it what you want.
+Your AI (LLM), guided by built-in workflows. Describe what you want, and it follows a professional development process.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.5.0-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -17,12 +17,12 @@ You: "Build a Slack bot with Gemini API"
 AI:  ✓ Reads AGENTS.md
      ✓ Analyzes requirements
      ✓ Plans architecture
-     ✓ Writes tests first (NEW in v0.2)
+     ✓ Writes tests first
      ✓ Implements with best practices
      ✓ Verifies everything works
 ```
 
-**No configuration. No learning curve. Just results.**
+**Works out of the box—no configuration or learning curve required.**
 
 > **Using Claude Code with TypeScript?**  
 > Check out **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)** - a specialized alternative optimized for that specific stack.
@@ -31,7 +31,7 @@ AI:  ✓ Reads AGENTS.md
 
 ```bash
 npx github:shinpr/agentic-code my-project && cd my-project
-# 🚀 Ready. Just tell it what to build.
+# Ready to go
 ```
 
 That's it. Works with **any AI tool** - Codex, Cursor, Aider, or anything [AGENTS.md](https://agents.md) compatible.
@@ -49,13 +49,13 @@ Every AI coding tool has the same problems:
 ## What Makes It Different
 
 ### 🎯 **Zero Configuration**
-Pre-built workflows. No setup needed.
+Pre-built workflows that work without setup.
 
 ### 🌐 **Universal Compatibility**
-Any programming language. Any AI tool that reads AGENTS.md.
+Works with any programming language and any AI tool that reads AGENTS.md.
 
-### ✅ **Test-First by Default** (NEW in v0.2)
-Generates test skeletons before code.
+### ✅ **Test-First by Default**
+Generates test skeletons before writing implementation code.
 
 ### 📈 **Smart Scaling**
 - Simple task → Direct execution
@@ -124,16 +124,16 @@ Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Aider,
 The framework is language-agnostic and works with any programming language through general development principles. For TypeScript projects, you can optionally use `--lang=typescript` to enable enhanced TypeScript-specific rules.
 
 **Q: Do I need to learn a new syntax?**  
-Nope. Just describe what you want in plain language. The framework handles the rest.
+No. Describe what you want in plain language; the framework handles the rest.
 
 **Q: What if my AI doesn't support AGENTS.md?**  
-Check if your tool is [AGENTS.md compatible](https://agents.md). If yes, just tell it to read the AGENTS.md file first.
+Check if your tool is [AGENTS.md compatible](https://agents.md). If so, point it to the AGENTS.md file first.
 
 **Q: Can I customize the workflows?**  
-Absolutely! Everything in `.agents/` is customizable. But honestly, the defaults work great.
+Yes, everything in `.agents/` is customizable. The defaults are production-ready, but you can adapt them to your team's process.
 
 **Q: What about my existing codebase?**  
-Works perfectly. Your AI analyzes the code and follows your existing patterns.
+It works with existing projects. Your AI analyzes the code and follows your established patterns.
 
 ## The Technical Stuff
 
@@ -208,6 +208,35 @@ You: "Review the integration tests in tests/integration/auth.test.ts"
 
 **Pro tip:** Make reviews part of your workflow. After any significant generation, switch sessions and review before merging.
 
+### For Cursor Users: Isolated Context Reviews via MCP
+
+Cursor users can run reviews in isolated contexts without switching sessions using [`sub-agents-mcp`](https://github.com/shinpr/sub-agents-mcp). When review runs as a sub-agent, it executes in a completely separate context—achieving the same "fresh perspective" benefit as switching sessions, but without leaving your workflow.
+
+**Quick Setup:**
+
+Add to your MCP config (`~/.cursor/mcp.json` or `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "sub-agents": {
+      "command": "npx",
+      "args": ["-y", "sub-agents-mcp"],
+      "env": {
+        "AGENTS_DIR": "/absolute/path/to/your/project/.agents/tasks",
+        "AGENT_TYPE": "cursor"
+      }
+    }
+  }
+}
+```
+
+After restarting Cursor, task definitions become available as sub-agents:
+
+```bash
+You: "Use the code-review agent to review src/auth/ against docs/design/auth-design.md"
+```
+
 ## Start Building
 
 ```bash
@@ -216,7 +245,7 @@ cd my-awesome-project
 # Tell your AI what to build
 ```
 
-**No more chaotic AI coding sessions. Just reliable, professional development.**
+**Consistent, professional AI-assisted development.**
 
 ---
 
