@@ -166,6 +166,48 @@ Automatic checkpoints ensure:
 
 </details>
 
+## Reviewing Generated Outputs
+
+**Important: Always review AI-generated outputs in a separate session.**
+
+LLMs cannot reliably review their own outputs within the same context. When the AI generates code or documents, it carries the same assumptions and blind spots into any "self-review." This leads to missed issues that a fresh perspective would catch.
+
+### Why Separate Sessions Matter
+
+| Same Session | New Session |
+|--------------|-------------|
+| Shares context and assumptions | Fresh perspective, no prior bias |
+| May overlook own mistakes | Catches issues objectively |
+| "Confirmation bias" in review | Applies standards independently |
+
+### How to Use Review Tasks
+
+After completing implementation or documentation, start a **new session** and request a review:
+
+```bash
+# For code review
+You: "Review the implementation in src/auth/ against docs/design/auth-design.md"
+# AI loads code-review task → Validates against Design Doc → Reports findings
+
+# For document review
+You: "Review docs/design/payment-design.md as a Design Doc"
+# AI loads technical-document-review task → Checks structure and content → Reports gaps
+
+# For test review
+You: "Review the integration tests in tests/integration/auth.test.ts"
+# AI loads integration-test-review task → Validates test quality → Reports issues
+```
+
+### Available Review Tasks
+
+| Task | Target | What It Checks |
+|------|--------|----------------|
+| `code-review` | Implementation files | Design Doc compliance, code quality, architecture |
+| `technical-document-review` | Design Docs, ADRs, PRDs | Structure, content quality, failure scenarios |
+| `integration-test-review` | Integration/E2E tests | Skeleton compliance, AAA structure, mock boundaries |
+
+**Pro tip:** Make reviews part of your workflow. After any significant generation, switch sessions and review before merging.
+
 ## Start Building
 
 ```bash
