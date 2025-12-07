@@ -206,7 +206,7 @@ task_mappings:
     required:
       - "core/documentation-criteria"
     conditional:
-      - "core/testing-strategy"  # When reviewing Design Doc with test strategy
+      - "core/testing-strategy"
     recommended:
       - "core/metacognition"
     description: "Review technical documents (Design Docs, ADRs, PRDs)"

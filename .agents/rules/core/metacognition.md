@@ -76,6 +76,12 @@ Note: Context management is user's responsibility. Ask for guidance if unsure.
 ☐ [EVALUATE] Additional rules needed? (load IMMEDIATELY if yes)
 ☐ [EVALUATE] Blocked for >10 minutes? (MUST ask for help)
 
+**Dynamic Rule Loading Triggers:**
+- Same error occurs 2+ times → Load `ai-development-guide.md` for debugging patterns
+- "Performance" mentioned in requirements → Load optimization rules if available
+- "Security" mentioned in requirements → Load security guidelines if available
+- External API/service integration needed → Load integration patterns if available
+
 **ENFORCEMENT: If progress stalled → MANDATORY metacognition**
 
 ### After Completion [EXIT GATES]

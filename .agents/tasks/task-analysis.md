@@ -88,7 +88,7 @@ VIOLATION EXAMPLE: Using "2024" in web research when SESSION_BASELINE_DATE shows
 - Behavior diagnosis
 
 **Review**: Evaluation and verification
-- Document review (design docs, ADRs, PRDs)
+- Technical document review (design docs, ADRs)
 - Code review
 - Test review (integration/E2E tests)
 
@@ -229,7 +229,7 @@ Based on scale and complexity:
     - NO: Refactoring task
 - NO → Evaluating existing work?
   - YES: Review task → Determine target:
-    - Document (design/ADR/PRD) → technical-document-review
+    - Document (design/ADR) → technical-document-review
     - Code → code-review
     - Tests → integration-test-review
   - NO → Information gathering?
@@ -261,51 +261,3 @@ Conditional Rules [LOAD IF CONDITION MET]:
 
 VERIFICATION: All required rules active in working memory
 ```
-
-### Rule Loading Strategy [WITH CLEAR TRIGGERS]
-
-**By Task Type [IMMEDIATE LOAD]:**
-- Implementation → ALWAYS: language/rules + ai-development-guide
-- Debugging → ALWAYS: ai-development-guide + language/testing
-- Design → ALWAYS: documentation-criteria
-- Documentation → ALWAYS: documentation-criteria
-- Refactoring → ALWAYS: language/rules + ai-development-guide
-- Research → ALREADY LOADED: metacognition (from initial setup)
-- Review → ALWAYS: target-specific review task definition
-  - Document → tasks/technical-document-review.md
-  - Code → tasks/code-review.md
-  - Tests → tasks/integration-test-review.md
-
-**Conditional Loading [LOAD WHEN]:**
-- language/testing → WHEN: "test", "TDD", "coverage" in requirements OR implementation task
-- implementation-approach → WHEN: Medium/Large scale (3+ files) OR architecture decision needed
-- contextual/technical-spec → WHEN: external API/service integration
-
-**By Scale [AUTOMATIC TRIGGERS]:**
-- Small (1-2 files) → Load only task type essentials
-- Medium (3-5 files) → AUTO-ADD: documentation-criteria
-- Large (6+ files) → AUTO-ADD: implementation-approach + work-planning
-
-### Context Optimization [EXPLICIT LOADING CONDITIONS]
-
-**Initial Load [ALWAYS]:**
-- Essential rules for identified task type
-- Scale-based automatic additions
-- NOTE: metacognition.md already active from initial setup
-
-**Trigger-Based Loading [LOAD IMMEDIATELY WHEN]:**
-- Error occurs 2+ times → Load debugging patterns
-- "Performance" mentioned → Load optimization rules
-- "Security" mentioned → Load security guidelines
-- External service mentioned → Load integration patterns
-- 3+ state variables → Load state management patterns
-
-**Unloading [AFTER TASK COMPLETE]:**
-- Task-specific architecture patterns
-- One-time reference documents
-- Completed phase rules
-
-**Keep Active (session-wide essentials):**
-- metacognition.md - continuous self-assessment
-- Current task type's essential rules - context consistency
-- ai-development-guide.md - anti-pattern prevention (during implementation/debugging)
