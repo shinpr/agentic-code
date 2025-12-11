@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.5.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.5.1-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -30,7 +30,7 @@ AI:  ✓ Reads AGENTS.md
 ## Quick Start (30 seconds)
 
 ```bash
-npx github:shinpr/agentic-code my-project && cd my-project
+npx agentic-code my-project && cd my-project
 # Ready to go
 ```
 
@@ -97,10 +97,10 @@ You: "Build user authentication system"
 ### For New Projects
 ```bash
 # Create project
-npx github:shinpr/agentic-code my-project
+npx agentic-code my-project
 
 # Optional: Add language-specific rules
-npx github:shinpr/agentic-code my-project --lang=typescript
+npx agentic-code my-project --lang=typescript
 ```
 
 ### For Existing Projects
@@ -240,7 +240,7 @@ You: "Use the code-review agent to review src/auth/ against docs/design/auth-des
 ## Start Building
 
 ```bash
-npx github:shinpr/agentic-code my-awesome-project
+npx agentic-code my-awesome-project
 cd my-awesome-project
 # Tell your AI what to build
 ```
@@ -265,4 +265,4 @@ MIT - Use it however you want.
 
 Built on the [AGENTS.md standard](https://agents.md) — an open community specification for AI coding agents.
 
-**Ready to code properly with AI?** `npx github:shinpr/agentic-code my-project`
+**Ready to code properly with AI?** `npx agentic-code my-project`
