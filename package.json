@@ -16,17 +16,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "llm",
-    "ai",
-    "coding-agent",
     "agents-md",
     "context-engineering",
     "agentic-coding",
-    "claude-code",
+    "coding-agent",
+    "llm",
+    "codex",
     "cursor",
-    "github-copilot",
-    "template",
-    "boilerplate"
+    "windsurf",
+    "cline"
   ],
   "author": "Shinsuke Kagawa",
   "license": "MIT",
