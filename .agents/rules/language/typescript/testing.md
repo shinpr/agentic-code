@@ -223,8 +223,9 @@ function assertValidUser(user: unknown): asserts user is User {
 // ✅ Test observable behavior
 expect(calculatePrice(100, 0.1)).toBe(110)
 
-// ❌ Test implementation details
+// ❌ Test implementation details (as any access)
 expect((calculator as any).taxRate).toBe(0.1)
+expect((service as any).validate(input)).toBe(true)
 ```
 
 ## Mock Type Safety Enforcement
