@@ -3,20 +3,20 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-rule-matrix.yaml`
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-skills-matrix.yaml`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if task-rule-matrix.yaml is active in working memory
-- STEP 3: If task-rule-matrix.yaml NOT active → Execute BLOCKING READ
+- STEP 2: CHECK if task-skills-matrix.yaml is active in working memory
+- STEP 3: If task-skills-matrix.yaml NOT active → Execute BLOCKING READ
 - STEP 4: CONFIRM all rules active before proceeding with task analysis
 
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
 ✓ metacognition.md - ACTIVE (from session setup)
-✓ task-rule-matrix.yaml - ACTIVE (loaded/verified)
+✓ task-skills-matrix.yaml - ACTIVE (loaded/verified)
 ```
 
 ## Purpose
@@ -103,7 +103,7 @@ Count affected components:
 ### Step 4: Execute Rule Selection [BLOCKING CHECKPOINT]
 
 **EXECUTION GATES - System HALTS if any step skipped:**
-1. [BLOCKING READ] `task-rule-matrix.yaml` from `.agents/context-maps/`
+1. [BLOCKING READ] `task-skills-matrix.yaml` from `.agents/context-maps/`
 2. [MANDATORY MATCHING] Task type + scale against matrix
 3. [CLASSIFICATION OUTPUT]:
    - Required rules: IMMEDIATE BLOCKING READ
@@ -116,10 +116,10 @@ Count affected components:
    ✓ [filepath] - [reason for loading]
    ✓ [filepath] - [applied to which aspect]
    ```
-6. [PLAN INJECTION] IMMEDIATELY inject all identified BLOCKING READs to work plan:
+6. [TASK TRACKING] IMMEDIATELY add all identified BLOCKING READs to your internal task management (Task List):
    ```
-   [PLAN INJECTION FROM task-analysis - Rule Selection]
-   Injected BLOCKING READs from rule selection:
+   [BLOCKING READs FROM task-analysis - Rule Selection]
+   Added to Task List:
    ✓ [filepath] - required rule
    ✓ [filepath] - conditional rule (condition met)
    ```
@@ -144,11 +144,11 @@ Determine what's needed:
 Based on scale and complexity:
 - **Small Scale (1-2 files)**: Direct task execution, no workflow needed
 - **Medium/Large Scale (3+ files)**: RECOMMEND agentic-coding.md workflow
-  - Ask: "This task would benefit from a structured workflow with design document and work plan. Proceed? [Y/n]"
+  - Ask: "This task would benefit from a structured workflow with design document and Work Plan. Proceed? [Y/n]"
   - If YES: Load and follow agentic-coding.md
   - If NO: Execute individual task definitions directly
 
-### Step 8: Mandatory Plan Injection [BLOCKING - AUTOMATIC EXECUTION]
+### Step 8: Mandatory Task Tracking [BLOCKING - AUTOMATIC EXECUTION]
 
 **FOR ALL TASKS WITH BLOCKING READ REQUIREMENTS:**
 
@@ -157,34 +157,34 @@ Based on scale and complexity:
    - From task definitions to be executed
    - From rules that will be loaded
 
-2. **[AUTOMATIC INJECTION]** Add ALL identified BLOCKING READs to work plan:
+2. **[ADD TO TASK LIST]** Add ALL identified BLOCKING READs to your internal task management (Task List):
    ```
-   Plan Injection Required:
+   Task List - BLOCKING READs:
    □ BLOCKING READ: [file path] - [reason/phase]
    □ BLOCKING READ: [file path] - [reason/phase]
    □ Rule Status Verification after each BLOCKING READ
    ```
 
-3. **[EVIDENCE REQUIRED]** Show plan injection confirmation:
+3. **[EVIDENCE REQUIRED]** Show task tracking confirmation:
    ```
-   [PLAN INJECTION COMPLETED]
+   [TASK TRACKING COMPLETED]
    Identified BLOCKING READs from:
    ✓ Workflow phases: [list files]
    ✓ Task definitions: [list files]
    ✓ Required rules: [list files]
 
-   Injected to plan:
+   Added to Task List:
    ✓ Total BLOCKING READs: [count]
    ✓ Verification gates: [count]
    ```
 
 4. **[ENFORCEMENT]** CANNOT proceed without:
-   - ALL BLOCKING READs identified and injected
-   - Plan injection evidence shown above
-   - Each BLOCKING READ as explicit task in work plan
+   - ALL BLOCKING READs identified and added to Task List
+   - Task tracking evidence shown above
+   - Each BLOCKING READ as explicit item in Task List
 
 **VIOLATION HANDLING:**
-- Missing any BLOCKING READ from plan = IMMEDIATE HALT
+- Missing any BLOCKING READ from Task List = IMMEDIATE HALT
 - Skipping any BLOCKING READ during execution = CRITICAL ERROR
 - Proceeding without verification = RETURN TO TASK ANALYSIS
 

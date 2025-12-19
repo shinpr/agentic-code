@@ -74,7 +74,7 @@ Generates test skeletons before writing implementation code.
 │   ├── task-analysis.md     # Entry point - AI starts here
 │   └── ...                  # Design, test, implement, QA tasks
 ├── workflows/               # How to build it
-└── rules/                   # Quality standards
+└── skills/                  # Quality standards (Codex-compatible)
 ```
 
 ## Real Examples
@@ -96,11 +96,7 @@ You: "Build user authentication system"
 
 ### For New Projects
 ```bash
-# Create project
 npx agentic-code my-project
-
-# Optional: Add language-specific rules
-npx agentic-code my-project --lang=typescript
 ```
 
 ### For Existing Projects
@@ -108,11 +104,17 @@ npx agentic-code my-project --lang=typescript
 # Copy the framework files
 cp -r path/to/agentic-code/AGENTS.md .
 cp -r path/to/agentic-code/.agents .
+```
 
-# Set up language rules (choose one)
-cd .agents/rules/language
-ln -s general/rules.md rules.md
-ln -s general/testing.md testing.md
+### Skills
+
+`.agents/skills/` contains reusable skill files in the [Codex Skills format](https://github.com/openai/codex/blob/main/docs/skills.md). Each skill has a `SKILL.md` with instructions that AI agents can discover and apply.
+
+**Codex**: You can install skills globally so Codex picks them up across all projects:
+
+```bash
+npx agentic-code-install-skills --codex
+# Installs to ~/.codex/skills/agentic-code/
 ```
 
 ## Common Questions
@@ -120,8 +122,8 @@ ln -s general/testing.md testing.md
 **Q: Can I use this with other AI coding tools besides Codex?**  
 Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Aider, and other LLM-assisted development environments.
 
-**Q: What programming languages are supported?**  
-The framework is language-agnostic and works with any programming language through general development principles. For TypeScript projects, you can optionally use `--lang=typescript` to enable enhanced TypeScript-specific rules.
+**Q: What programming languages are supported?**
+The framework is language-agnostic and works with any programming language through general development principles. TypeScript-specific rules are available in `skills/*/references/typescript.md`.
 
 **Q: Do I need to learn a new syntax?**  
 No. Describe what you want in plain language; the framework handles the rest.
@@ -141,16 +143,16 @@ The framework has three pillars:
 
 1. **Tasks** - Define WHAT to build
 2. **Workflows** - Define HOW to build it
-3. **Rules** - Define quality STANDARDS
+3. **Skills** - Define quality STANDARDS
 
 <details>
 <summary>Advanced features for the curious...</summary>
 
-### Progressive Rule Loading
-Rules load based on task analysis:
-- Small (1-2 files) → Direct execution with minimal rules
+### Progressive Skill Loading
+Skills load based on task analysis:
+- Small (1-2 files) → Direct execution with minimal skills
 - Medium/Large (3+ files) → Structured workflow with design docs
-- Each task definition specifies its required rules
+- Each task definition specifies its required skills
 
 ### Quality Gates
 Automatic checkpoints ensure:

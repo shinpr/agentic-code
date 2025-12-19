@@ -32,9 +32,6 @@ yarn-error.log*
 # Claude Code specific (excluded from version control)
 .claude/
 
-# Language symlinks (created by setup script)
-.agents/rules/language/rules.md
-.agents/rules/language/testing.md
 
 # Temporary files
 tmp/

@@ -7,8 +7,6 @@ const { execSync } = require('child_process');
 // Parse command line arguments
 const args = process.argv.slice(2);
 const projectName = args[0];
-const langOption = args.find(arg => arg.startsWith('--lang='));
-const selectedLang = langOption ? langOption.split('=')[1] : 'general';
 
 // Show help if no project name provided
 if (!projectName) {
@@ -16,16 +14,12 @@ if (!projectName) {
 🤖 Agentic Code - Task-oriented context engineering framework
 
 Usage:
-  npx github:shinpr/agentic-code <project-name> [--lang=general|typescript]
+  npx github:shinpr/agentic-code <project-name>
 
 Examples:
-  npx github:shinpr/agentic-code my-project                    # General (language-agnostic)
-  npx github:shinpr/agentic-code my-project --lang=general     # General (explicit)
-  npx github:shinpr/agentic-code my-project --lang=typescript  # TypeScript-specific
+  npx github:shinpr/agentic-code my-project
 
-Language options:
-  general (default): Universal development principles for any language
-  typescript: Enhanced rules and TypeScript-specific tooling
+Skills include language-specific references (e.g., .agents/skills/coding-rules/references/typescript.md)
 `);
   process.exit(1);
 }
@@ -42,8 +36,7 @@ if (fs.existsSync(projectName)) {
   process.exit(1);
 }
 
-console.log(`🚀 Creating Agentic Code project: ${projectName}`);
-console.log(`📝 Language: ${selectedLang}\n`);
+console.log(`🚀 Creating Agentic Code project: ${projectName}\n`);
 
 try {
   // Create project directory
@@ -63,10 +56,6 @@ try {
   console.log('📦 Initializing Git repository...');
   execSync('git init', { stdio: 'inherit' });
 
-  // Set up project configuration
-  console.log('⚙️  Setting up project configuration...');
-  execSync(`node scripts/setup.js --lang=${selectedLang}`, { stdio: 'inherit' });
-
   // Create initial commit
   console.log('💾 Creating initial commit...');
   execSync('git add .', { stdio: 'inherit' });
@@ -77,7 +66,7 @@ try {
   console.log(`   cd ${projectName}`);
   console.log('   1. Read AGENTS.md to understand the framework');
   console.log('   2. Start with: open .agents/tasks/task-analysis.md');
-  console.log('   3. Follow the task-rule-matrix for complex workflows');
+  console.log('   3. Skills are in .agents/skills/');
   console.log('\n💡 Need help? Check the documentation or open an issue on GitHub.');
 
 } catch (error) {

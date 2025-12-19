@@ -1,3 +1,10 @@
+---
+name: ai-development-guide
+description: |
+  Technical anti-pattern detection, fail-fast design principles, debugging techniques, and implementation completeness guidelines.
+  Use when: implementing features, reviewing code quality, debugging errors, refactoring code, or detecting code smells.
+---
+
 # AI Developer Guide
 
 ## Technical Anti-patterns (Red Flag Patterns)
@@ -253,7 +260,7 @@ Complete these stages sequentially before any implementation:
 
 **Critical**: Do not implement until all 3 stages are documented
 
-**Relationship to Pattern 5**: This process provides the structured methodology to avoid "Insufficient Existing Code Investigation" (see .agents/rules/core/ai-development-guide.md:150-158)
+**Relationship to Pattern 5**: This process provides the structured methodology to avoid "Insufficient Existing Code Investigation"
 
 ### Unused Code Deletion
 

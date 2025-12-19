@@ -2,56 +2,56 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
+2. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if language/rules.md is active in working memory
-- STEP 2: If language/rules.md NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if testing.md is active in working memory
-- STEP 4: If testing.md NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all rules active before executing quality gates
+- STEP 1: CHECK if coding-rules/SKILL.md is active in working memory
+- STEP 2: If coding-rules/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 3: CHECK if testing/SKILL.md is active in working memory
+- STEP 4: If testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 5: CONFIRM all skills active before executing quality gates
 
 **CRITICAL**: Cannot execute quality checks until ALL required rules confirmed active
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/language/rules.md` (if not active)
-   - `.agents/rules/language/testing.md` (if not active)
+   - `.agents/skills/coding-rules/SKILL.md` (if not active)
+   - `.agents/skills/testing/SKILL.md` (if not active)
 2. Mark each with "[From quality-assurance.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM quality-assurance.md]
-   Injected to work plan:
-   ✓ BLOCKING READ: language/rules.md - quality standards
-   ✓ BLOCKING READ: language/testing.md - testing requirements
+   [TASK TRACKING FROM quality-assurance.md]
+   Added to Task List:
+   ✓ BLOCKING READ: coding-rules/SKILL.md - quality standards
+   ✓ BLOCKING READ: testing/SKILL.md - testing requirements
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ language/rules.md - ACTIVE (loaded/verified)
-✓ testing.md - ACTIVE (loaded/verified)
+Skill Status Verification:
+✓ coding-rules/SKILL.md - ACTIVE (loaded/verified)
+✓ testing/SKILL.md - ACTIVE (loaded/verified)
 ```
 
 ## Task Completion Gate [STRICT ENFORCEMENT - NO EXCEPTIONS]
 
 **CANNOT mark task as complete until ALL quality checks pass:**
-□ Plan Injection completed (from quality-assurance.md Plan Injection Requirement)
-□ Work plan contains ALL BLOCKING READs from this file
+□ Task Tracking completed (from quality-assurance.md Task Tracking Requirement)
+□ Task List contains ALL BLOCKING READs from this file
 □ Build process succeeds
 □ Tests pass (or no tests if not applicable)
 □ Linting: 0 errors
 □ Static analysis passes (if applicable)
 □ Manual testing performed (if applicable)
 □ Changes committed to git (for implementation tasks)
-□ Task tracking updated (work plan checkbox if using workflow)
+□ Task tracking updated (Work Plan checkbox if using workflow)
 
 **If any check fails:**
 → Fix issues before proceeding
@@ -92,7 +92,7 @@ Run project build:
 - Verify output artifacts
 - Confirm dependencies resolved
 
-*Note: Build commands are language-specific. Check language/testing.md*
+*Note: Build commands are language-specific. Check testing/SKILL.md*
 
 ### 2. Test Execution
 
@@ -190,7 +190,7 @@ Ensure:
 
 ## Tools by Language
 
-Reference `.agents/rules/language/testing.md` for:
+Reference `.agents/skills/testing/SKILL.md` for:
 - Language-specific test commands
 - Coverage tools
 - Linting configuration

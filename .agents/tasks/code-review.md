@@ -2,16 +2,16 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/ai-development-guide.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
+2. [LOAD IF NOT ACTIVE] `.agents/skills/ai-development-guide/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if `.agents/rules/language/rules.md` is active in working memory
+- STEP 1: CHECK if `.agents/skills/coding-rules/SKILL.md` is active in working memory
 - STEP 2: If NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if `.agents/rules/core/ai-development-guide.md` is active in working memory
+- STEP 3: CHECK if `.agents/skills/ai-development-guide/SKILL.md` is active in working memory
 - STEP 4: If NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all required rules active before proceeding
+- STEP 5: CONFIRM all required skills active before proceeding
 
 ## Purpose
 

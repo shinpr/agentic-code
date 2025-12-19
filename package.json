@@ -1,18 +1,17 @@
 {
   "name": "agentic-code",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Task-oriented context engineering framework for LLM coding agents - AGENTS.md standard compliant",
   "files": [
     "bin/",
     ".agents/",
-    "AGENTS.md",
-    "scripts/"
+    "AGENTS.md"
   ],
   "bin": {
-    "agentic-code": "./bin/cli.js"
+    "agentic-code": "./bin/cli.js",
+    "agentic-code-install-skills": "./bin/install-codex-skills.js"
   },
   "scripts": {
-    "setup": "node scripts/setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

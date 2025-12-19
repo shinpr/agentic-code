@@ -11,15 +11,15 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ## Phase 0: PRD Creation (Large scale only)
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. **[BLOCKING READ]** Execute Read on `.agents/tasks/prd-creation.md`
 3. **[VERIFY]** prd-creation.md is ACTIVE in working memory
 4. **[VERIFY]** All rules required by prd-creation.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Plan Injection from prd-creation.md completed
+5. **[VERIFY]** Task Tracking from prd-creation.md completed
 6. **[CONFIRM]** Entry gates in prd-creation.md are satisfied
 
-**ENFORCEMENT**: NO requirements work until prd-creation.md confirmed active and Plan Injection verified
+**ENFORCEMENT**: NO requirements work until prd-creation.md confirmed active and Task Tracking verified
 
 ### Internal Checklist:
 ```
@@ -67,7 +67,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 ## Phase 2: Technical Design
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
 3. **[VERIFY]** technical-design.md is ACTIVE in working memory
@@ -76,7 +76,7 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 
 **ENFORCEMENT**:
 - NO design work until technical-design.md confirmed active
-- NO proceeding without Plan Injection verification for ALL BLOCKING READs
+- NO proceeding without Task Tracking verification for ALL BLOCKING READs
 
 ### Pre-Design Requirements:
 ```
@@ -126,19 +126,19 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 
 ## Phase 3: Acceptance Test Generation
 
-**PHASE ORDERING RATIONALE**: Test skeletons MUST be generated BEFORE work planning. Test structures define verification boundaries that determine task decomposition granularity. Work plans depend on these test specifications to map implementation units to concrete verification points.
+**PHASE ORDERING RATIONALE**: Test skeletons MUST be generated BEFORE work planning. Test structures define verification boundaries that determine task decomposition granularity. Work Plan documents depend on these test specifications to map implementation units to concrete verification points.
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. **[BLOCKING READ]** Execute Read on `.agents/tasks/acceptance-test-generation.md`
 3. **[VERIFY]** acceptance-test-generation.md is ACTIVE in working memory
 4. **[VERIFY]** All rules required by acceptance-test-generation.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Plan Injection from acceptance-test-generation.md completed
+5. **[VERIFY]** Task Tracking from acceptance-test-generation.md completed
 6. **[CONFIRM]** Entry gates in acceptance-test-generation.md are satisfied
 7. **[VERIFY]** Design document EXISTS and contains Acceptance Criteria section
 
-**ENFORCEMENT**: NO test generation until acceptance-test-generation.md confirmed active and Plan Injection verified
+**ENFORCEMENT**: NO test generation until acceptance-test-generation.md confirmed active and Task Tracking verified
 
 ### Internal Checklist:
 ```
@@ -184,17 +184,17 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 **PHASE DEPENDENCY**: This phase REQUIRES completed test skeletons from Phase 3. Task decomposition uses test verification points as boundaries for work units. Each implementation task maps to specific test cases for validation.
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. **[BLOCKING READ]** Execute Read on `.agents/tasks/work-planning.md`
 3. **[VERIFY]** work-planning.md is ACTIVE in working memory
 4. **[VERIFY]** All rules required by work-planning.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Plan Injection from work-planning.md completed
+5. **[VERIFY]** Task Tracking from work-planning.md completed
 6. **[CONFIRM]** Entry gates in work-planning.md are satisfied
 7. **[VERIFY]** Design document APPROVED by user
 8. **[VERIFY]** Test skeletons from Phase 3 EXIST in test directories
 
-**ENFORCEMENT**: NO work plan creation until work-planning.md confirmed active and Plan Injection verified
+**ENFORCEMENT**: NO Work Plan document creation until work-planning.md confirmed active and Task Tracking verified
 
 ### Internal Checklist:
 ```
@@ -219,21 +219,21 @@ Execute phases sequentially. For Large scale (6+ files), include PRD phase.
 
 ### STOP POINT: Work Plan Approval [BLOCKING GATE]
 **SYSTEM HALT - CANNOT WRITE CODE WITHOUT:**
-1. Work plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
-2. **[VERIFY INJECTION]** Plan MUST contain ALL BLOCKING READs identified in task-analysis Step 8:
+1. Work Plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
+2. **[VERIFY TASK LIST]** Task List MUST contain ALL BLOCKING READs identified in task-analysis Step 8:
    - Every BLOCKING READ from workflow phases
    - Every BLOCKING READ from task definitions
    - Every BLOCKING READ from required rules
-   - Each marked with source: "[From Plan Injection]"
+   - Each marked with source: "[From Task Tracking]"
 3. Each task has MEASURABLE completion criteria
 4. User EXPLICITLY approves plan
 
 **GATE VERIFICATION:**
 ```
-Plan Location: docs/plans/[filename].md
+Work Plan Location: docs/plans/[filename].md
 Task Count: [N] tasks defined
-BLOCKING READs in plan: [count] items
-Plan Injection Status: [COMPLETE/INCOMPLETE]
+BLOCKING READs in Task List: [count] items
+Task Tracking Status: [COMPLETE/INCOMPLETE]
 User Approval: [AWAITING/RECEIVED]
 ```
 
@@ -245,15 +245,15 @@ User Approval: [AWAITING/RECEIVED]
 
 ### Pre-Implementation Gates [BLOCKING - CANNOT START WITHOUT]:
 ```
-1. [VERIFY PLAN INJECTION] Confirm work plan contains ALL required BLOCKING READs for this phase
+1. [VERIFY TASK TRACKING] Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. [BLOCKING READ] Execute Read on `.agents/tasks/implementation.md`
 3. [VERIFY] implementation.md is ACTIVE in working memory
 4. [VERIFY] All rules required by implementation.md are LOADED (per its Required Rules section)
-5. [VERIFY] Plan Injection from implementation.md completed
+5. [VERIFY] Task Tracking from implementation.md completed
 6. [CONFIRM] Entry gates in implementation.md are satisfied
-7. [VERIFY] Work plan document EXISTS and has been APPROVED
-8. [CONFIRM] Current task identified from work plan
+7. [VERIFY] Work Plan document EXISTS and has been APPROVED
+8. [CONFIRM] Current task identified from Work Plan document
 ```
 
 **CRITICAL ENFORCEMENT**:
@@ -263,16 +263,16 @@ User Approval: [AWAITING/RECEIVED]
 
 ### Execution Pattern [ENFORCED SEQUENCE]:
 ```
-For each task in work plan:
+For each task in Work Plan document:
   1. [METACOGNITION PRE] Execute "When Starting Work" checklist from metacognition protocol
-  2. [TRACKING] Mark task as in_progress in task tracking
+  2. [TRACKING] Mark task as in_progress in your internal task management (Task List)
   3. [IMPLEMENT] Write code following ALL loaded rules (TDD: RED-GREEN-REFACTOR)
   4. [VERIFY] Run ALL quality check commands - MUST have 0 errors
   5. [COMMIT] Git commit with descriptive message for this task
-  6. [UPDATE] Mark task checkbox complete [x] in work plan document
+  6. [UPDATE] Mark task checkbox complete [x] in Work Plan document
   7. [GATE CHECK] ALL completion criteria must pass
   8. [METACOGNITION POST] Execute "After Completion" checklist
-  9. [TRACKING] Mark task complete in task tracking
+  9. [TRACKING] Mark task complete in Task List
   10. [CHECKPOINT] Cannot start next task until all steps complete
 ```
 
@@ -290,15 +290,15 @@ For each task in work plan:
 ## Phase 6: Quality Assurance
 
 ### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY PLAN INJECTION]** Confirm work plan contains ALL required BLOCKING READs for this phase
+1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
    - If missing any: HALT - Return to task-analysis.md Step 8
 2. **[BLOCKING READ]** Execute Read on `.agents/tasks/quality-assurance.md`
 3. **[VERIFY]** quality-assurance.md is ACTIVE in working memory
 4. **[VERIFY]** All rules required by quality-assurance.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Plan Injection from quality-assurance.md completed
-6. **[CONFIRM]** All implementation tasks marked complete in work plan
+5. **[VERIFY]** Task Tracking from quality-assurance.md completed
+6. **[CONFIRM]** All implementation tasks marked complete in Work Plan document
 
-**ENFORCEMENT**: NO quality checks until quality-assurance.md confirmed active and Plan Injection verified
+**ENFORCEMENT**: NO quality checks until quality-assurance.md confirmed active and Task Tracking verified
 
 ### Internal Checklist:
 ```

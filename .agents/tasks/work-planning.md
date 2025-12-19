@@ -2,65 +2,65 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
-3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
-4. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
+3. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
+4. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if language/rules.md is active in working memory
-- STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
-- STEP 4: CHECK if testing.md is active in working memory
-- STEP 5: If testing.md NOT active → Execute BLOCKING READ
-- STEP 6: CHECK if documentation-criteria.md is active in working memory
-- STEP 7: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 8: CONFIRM all rules active before proceeding with work planning
+- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
+- STEP 2: CHECK if coding-rules/SKILL.md is active in working memory
+- STEP 3: If coding-rules/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 4: CHECK if testing/SKILL.md is active in working memory
+- STEP 5: If testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 6: CHECK if documentation-criteria/SKILL.md is active in working memory
+- STEP 7: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 8: CONFIRM all skills active before proceeding with work planning
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/language/rules.md` (if not active)
-   - `.agents/rules/language/testing.md` (if not active)
-   - `.agents/rules/core/documentation-criteria.md` (if not active)
+   - `.agents/skills/coding-rules/SKILL.md` (if not active)
+   - `.agents/skills/testing/SKILL.md` (if not active)
+   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
 2. Mark each with "[From work-planning.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM work-planning.md]
-   Injected to work plan:
-   ✓ BLOCKING READ: language/rules.md - development standards
-   ✓ BLOCKING READ: language/testing.md - TDD process
-   ✓ BLOCKING READ: documentation-criteria.md - documentation standards
+   [TASK TRACKING FROM work-planning.md]
+   Added to Task List:
+   ✓ BLOCKING READ: coding-rules/SKILL.md - development standards
+   ✓ BLOCKING READ: testing/SKILL.md - TDD process
+   ✓ BLOCKING READ: documentation-criteria/SKILL.md - documentation standards
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ metacognition.md - ACTIVE (from session setup)
-✓ language/rules.md - ACTIVE (loaded/verified)
-✓ language/testing.md - ACTIVE (loaded/verified)
-✓ documentation-criteria.md - ACTIVE (loaded/verified)
+Skill Status Verification:
+✓ metacognition/SKILL.md - ACTIVE (from session setup)
+✓ coding-rules/SKILL.md - ACTIVE (loaded/verified)
+✓ testing/SKILL.md - ACTIVE (loaded/verified)
+✓ documentation-criteria/SKILL.md - ACTIVE (loaded/verified)
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
 ☐ [VERIFIED] THIS FILE (`work-planning.md`) has been READ and is active
-☐ [VERIFIED] Plan Injection completed (from work-planning.md Plan Injection Requirement)
+☐ [VERIFIED] Task Tracking completed (from work-planning.md Task Tracking Requirement)
 ☐ [VERIFIED] All required rules listed above are LOADED and active
-☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
+☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
 ☐ [VERIFIED] User has APPROVED the design
 ☐ [VERIFIED] Test skeletons exist (if applicable for test-driven approach)
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active
 
 **METACOGNITION GATE [MANDATORY]:**
-BEFORE creating work plan, execute metacognition assessment:
+BEFORE creating Work Plan document, execute metacognition assessment:
 - Understand the design intent and goals
 - Verify task decomposition strategy aligns with 1-commit principle
 - Confirm dependencies are logical and achievable
@@ -71,7 +71,7 @@ IF attempting to skip → CRITICAL ERROR
 
 ## Purpose
 
-Create work plans with decomposed tasks.
+Create Work Plan documents with decomposed tasks.
 
 ## When to Use
 
@@ -95,7 +95,7 @@ Create work plans with decomposed tasks.
 
 ### 1. Plan Structure
 
-Create work plan with:
+Create Work Plan document with:
 - **Overview**: What's being built/changed
 - **Phases**: Logical groupings of work
 - **Tasks**: Individual implementation units
@@ -149,9 +149,9 @@ Create work plan with:
 
 ### Exit Conditions
 - [ ] Test passes
-- [ ] Quality checks pass with 0 errors (per language/testing.md standards)
+- [ ] Quality checks pass with 0 errors (per testing/SKILL.md standards)
 - [ ] Changes committed to git
-- [ ] Task checkbox marked [x] in work plan
+- [ ] Task checkbox marked [x] in Work Plan document
 
 ### Dependencies
 - Depends on: Task [X]
