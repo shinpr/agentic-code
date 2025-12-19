@@ -2,16 +2,16 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
-2. [CONDITIONAL LOAD] `.agents/rules/core/testing-strategy.md` (if reviewing Design Doc with test strategy)
+**SKILL AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
+2. [CONDITIONAL LOAD] `.agents/skills/testing-strategy/SKILL.md` (if reviewing Design Doc with test strategy)
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if documentation-criteria.md is active in working memory
-- STEP 2: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 3: EVALUATE if testing-strategy.md needed (Design Doc with test strategy section)
+- STEP 1: CHECK if documentation-criteria/SKILL.md is active in working memory
+- STEP 2: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 3: EVALUATE if testing-strategy/SKILL.md needed (Design Doc with test strategy section)
 - STEP 4: If needed AND NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all required rules active before proceeding
+- STEP 5: CONFIRM all required skills active before proceeding
 
 ## Purpose
 
@@ -56,7 +56,7 @@ Confirm document type and determine validation baseline:
 - Default templates by type:
   - Design Doc → `.agents/tasks/technical-design.md`
   - ADR → ADR section in `.agents/tasks/technical-design.md`
-  - PRD → PRD section in `.agents/rules/core/documentation-criteria.md`
+  - PRD → PRD section in `.agents/skills/documentation-criteria/SKILL.md`
 
 ### Stage 2: Structure Compliance Check
 

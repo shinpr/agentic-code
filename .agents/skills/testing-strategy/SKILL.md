@@ -1,3 +1,10 @@
+---
+name: testing-strategy
+description: |
+  ROI-based test selection framework with calculation formula, critical user journey definitions, and test prioritization guidelines.
+  Use when: designing test strategy, selecting which tests to write, calculating test ROI, or prioritizing test coverage.
+---
+
 # Test Strategy: ROI-Based Selection
 
 ## Core Principle: Maximum Coverage, Minimum Tests

@@ -1,4 +1,16 @@
-# General Testing Rules
+---
+name: testing
+description: |
+  Testing principles including TDD process, test quality criteria, coverage standards, and mock usage guidelines.
+  Use when: writing tests, designing test strategies, reviewing test quality, or establishing testing standards.
+---
+
+# Testing Rules
+
+## Language-Specific References
+
+For language-specific rules, also read:
+- **TypeScript/Vitest**: [references/typescript.md](references/typescript.md)
 
 ## TDD Process [MANDATORY for all code changes]
 
@@ -29,6 +41,8 @@
 - Pure configuration files
 - Documentation only
 - Emergency fixes (but add tests immediately after)
+- Exploratory spikes (discard or rewrite with tests before merging)
+- Build/deployment scripts (unless they contain business logic)
 
 ## Basic Testing Policy
 
@@ -83,36 +97,12 @@
      - Unit test coverage sufficient
      - Smoke tests for integration points
 
-   **Verification Pattern**:
-   1. **Establish Baseline**
-      - Test and document existing feature behavior
-      - Capture performance metrics
-      - Record expected outputs
-
-   2. **Apply Changes**
-      - Deploy or enable new feature
-      - Maintain feature flags for rollback capability
-
-   3. **Verify Existing Features**
-      - Confirm existing features still function correctly
-      - Compare against baseline metrics
-      - Validate no unexpected side effects
-
-   4. **Measure Performance** (NOT long-term stability tests)
-      - Response times within acceptable limits (project-specific)
-      - Resource usage remains stable
-      - No memory leaks or degradation
-
    **Success Criteria**:
    - Zero breaking changes in existing workflows
    - Performance degradation within project-defined acceptable limits
    - No new errors in previously stable features
    - All integration points maintain expected contracts
    - Backward compatibility preserved where required
-
-   **Documentation Requirements**:
-   - Map all integration points in Design Doc
-   - Document test coverage for each impact level
 
 ## Test Design Principles
 
@@ -245,12 +235,6 @@ Your project MUST have mechanisms to verify:
 4. **Type Safety** (for typed languages)
    - Type checking passes
    - No type errors or warnings
-
-### Implementation Guidelines
-- **Identify Your Tools**: Use your project's existing quality tools (test runners, linters, formatters, type checkers)
-- **Zero Error Policy**: ALL quality checks must pass with 0 errors before task completion
-- **Document Execution**: Note which quality checks were run and their results
-- **Project-Specific**: Adapt to your specific language, framework, and tooling setup
 
 ### ENFORCEMENT
 - Cannot proceed with task completion if ANY quality check fails

@@ -2,40 +2,40 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
-3. [LOAD IF NOT ACTIVE] `.agents/rules/core/testing-strategy.md`
-4. [LOAD IF NOT ACTIVE] `.agents/rules/core/integration-e2e-testing.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
+2. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
+3. [LOAD IF NOT ACTIVE] `.agents/skills/testing-strategy/SKILL.md`
+4. [LOAD IF NOT ACTIVE] `.agents/skills/integration-e2e-testing/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if language/testing.md is active in working memory
-- STEP 2: If language/testing.md NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if documentation-criteria.md is active in working memory
-- STEP 4: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 5: CHECK if testing-strategy.md is active in working memory
-- STEP 6: If testing-strategy.md NOT active → Execute BLOCKING READ
-- STEP 7: CHECK if integration-e2e-testing.md is active in working memory
-- STEP 8: If integration-e2e-testing.md NOT active → Execute BLOCKING READ
-- STEP 9: CONFIRM all required rules active before proceeding
+- STEP 1: CHECK if testing/SKILL.md is active in working memory
+- STEP 2: If testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 3: CHECK if documentation-criteria/SKILL.md is active in working memory
+- STEP 4: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 5: CHECK if testing-strategy/SKILL.md is active in working memory
+- STEP 6: If testing-strategy/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 7: CHECK if integration-e2e-testing/SKILL.md is active in working memory
+- STEP 8: If integration-e2e-testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 9: CONFIRM all required skills active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
 **Upon reading this file, IMMEDIATELY inject to work plan:**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/language/testing.md` (if not active)
-   - `.agents/rules/core/documentation-criteria.md` (if not active)
-   - `.agents/rules/core/testing-strategy.md` (if not active)
-   - `.agents/rules/core/integration-e2e-testing.md` (if not active)
+   - `.agents/skills/testing/SKILL.md` (if not active)
+   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
+   - `.agents/skills/testing-strategy/SKILL.md` (if not active)
+   - `.agents/skills/integration-e2e-testing/SKILL.md` (if not active)
 2. Mark each with "[From acceptance-test-generation.md]" source tag
 3. Show evidence of injection:
    ```
    [PLAN INJECTION FROM acceptance-test-generation.md]
    Injected to work plan:
-   ✓ BLOCKING READ: language/testing.md - testing standards
-   ✓ BLOCKING READ: documentation-criteria.md - document analysis
-   ✓ BLOCKING READ: testing-strategy.md - ROI-based test selection
-   ✓ BLOCKING READ: integration-e2e-testing.md - integration/E2E test design
+   ✓ BLOCKING READ: testing/SKILL.md - testing standards
+   ✓ BLOCKING READ: documentation-criteria/SKILL.md - document analysis
+   ✓ BLOCKING READ: testing-strategy/SKILL.md - ROI-based test selection
+   ✓ BLOCKING READ: integration-e2e-testing/SKILL.md - integration/E2E test design
    Status: VERIFIED
    ```
 
@@ -43,11 +43,11 @@
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ language/testing.md - ACTIVE
-✓ documentation-criteria.md - ACTIVE
-✓ testing-strategy.md - ACTIVE
-✓ integration-e2e-testing.md - ACTIVE
+Skill Status Verification:
+✓ testing/SKILL.md - ACTIVE
+✓ documentation-criteria/SKILL.md - ACTIVE
+✓ testing-strategy/SKILL.md - ACTIVE
+✓ integration-e2e-testing/SKILL.md - ACTIVE
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
@@ -244,7 +244,7 @@ Where:
 - Test Level Cost: Unit=3, Integration=11, E2E=38
 ```
 
-**See**: `.agents/rules/core/testing-strategy.md` for detailed ROI framework
+**See**: `.agents/skills/testing-strategy/SKILL.md` for detailed ROI framework
 
 **4.2 Deduplication Check**
 

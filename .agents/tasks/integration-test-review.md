@@ -2,16 +2,16 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/integration-e2e-testing.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
+2. [LOAD IF NOT ACTIVE] `.agents/skills/integration-e2e-testing/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: CHECK if language/testing.md is active in working memory
-- STEP 2: If language/testing.md NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if integration-e2e-testing.md is active in working memory
-- STEP 4: If integration-e2e-testing.md NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all required rules active before proceeding
+- STEP 1: CHECK if testing/SKILL.md is active in working memory
+- STEP 2: If testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 3: CHECK if integration-e2e-testing/SKILL.md is active in working memory
+- STEP 4: If integration-e2e-testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 5: CONFIRM all required skills active before proceeding
 
 ## Purpose
 

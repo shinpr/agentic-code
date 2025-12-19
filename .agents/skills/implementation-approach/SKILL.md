@@ -1,3 +1,10 @@
+---
+name: implementation-approach
+description: |
+  Implementation strategy selection framework with meta-cognitive approach, verification levels, and integration point definitions.
+  Use when: planning implementation strategy, selecting development approach (vertical/horizontal/hybrid), or defining verification criteria.
+---
+
 # Implementation Strategy Selection Framework (Meta-cognitive Approach)
 
 An implementation strategy selection framework based on meta-cognitive thinking. Derives optimal implementation approaches through a systematic decision process from understanding existing implementations to constraint compatibility.

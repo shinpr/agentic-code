@@ -1,3 +1,10 @@
+---
+name: metacognition
+description: |
+  Self-assessment checkpoints and protocol for AI agents.
+  Use when: task type changes, after completing tasks, encountering errors, before starting new features, or switching between phases.
+---
+
 # Metacognition Protocol
 
 ## Purpose

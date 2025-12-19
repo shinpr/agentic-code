@@ -2,32 +2,32 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md`
-2. [LOAD IF NOT ACTIVE] `.agents/rules/language/rules.md`
-3. [LOAD IF NOT ACTIVE] `.agents/rules/language/testing.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md`
+2. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
+3. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if language/rules.md is active in working memory
-- STEP 3: If language/rules.md NOT active → Execute BLOCKING READ
-- STEP 4: CHECK if testing.md is active in working memory
-- STEP 5: If testing.md NOT active → Execute BLOCKING READ
-- STEP 6: CONFIRM all rules active before writing ANY code
+- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
+- STEP 2: CHECK if coding-rules/SKILL.md is active in working memory
+- STEP 3: If coding-rules/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 4: CHECK if testing/SKILL.md is active in working memory
+- STEP 5: If testing/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 6: CONFIRM all skills active before writing ANY code
 
 ## Plan Injection Requirement [MANDATORY]
 
 **Upon reading this file, IMMEDIATELY inject to work plan:**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/language/rules.md` (if not active)
-   - `.agents/rules/language/testing.md` (if not active)
+   - `.agents/skills/coding-rules/SKILL.md` (if not active)
+   - `.agents/skills/testing/SKILL.md` (if not active)
 2. Mark each with "[From implementation.md]" source tag
 3. Show evidence of injection:
    ```
    [PLAN INJECTION FROM implementation.md]
    Injected to work plan:
-   ✓ BLOCKING READ: language/rules.md - development standards
-   ✓ BLOCKING READ: language/testing.md - TDD process
+   ✓ BLOCKING READ: coding-rules/SKILL.md - development standards
+   ✓ BLOCKING READ: testing/SKILL.md - TDD process
    Status: VERIFIED
    ```
 
@@ -35,10 +35,10 @@
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ metacognition.md - ACTIVE (from session setup)
-✓ language/rules.md - ACTIVE (loaded/verified)
-✓ language/testing.md - ACTIVE (loaded/verified)
+Skill Status Verification:
+✓ metacognition/SKILL.md - ACTIVE (from session setup)
+✓ coding-rules/SKILL.md - ACTIVE (loaded/verified)
+✓ testing/SKILL.md - ACTIVE (loaded/verified)
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
@@ -99,11 +99,11 @@ Implement code using TDD process.
 
 **3. REFACTOR Phase - Improve code**
    - Clean up implementation
-   - Apply coding standards from language/rules.md
+   - Apply coding standards from coding-rules/SKILL.md
    - Ensure test still passes
 
 **4. VERIFY Phase - Quality checks**
-   - Execute ALL commands from language/testing.md Quality Check Commands section
+   - Execute ALL commands from testing/SKILL.md Quality Check Commands section
    - Confirm ALL checks pass with 0 errors
    - Ready for commit
 
@@ -157,7 +157,7 @@ Regardless of language:
 
 ### 6. Testing Approach
 
-**REFERENCE `.agents/rules/language/testing.md` for complete testing strategy including:**
+**REFERENCE `.agents/skills/testing/SKILL.md` for complete testing strategy including:**
 - Test types and granularity
 - Test-first development process
 - Coverage requirements
@@ -188,8 +188,8 @@ Always:
 
 Essential completion requirements:
 □ ALL quality standards from quality-assurance.md satisfied
-□ ALL language requirements from language/rules.md met
-□ ALL testing requirements from testing.md completed
+□ ALL language requirements from coding-rules/SKILL.md met
+□ ALL testing requirements from testing/SKILL.md completed
 □ Work plan task checkbox updated to [✓]
 □ Metacognition "After Completion" executed
 

@@ -1,4 +1,16 @@
-# General Development Rules
+---
+name: coding-rules
+description: |
+  Coding principles for maintainability, readability, and quality.
+  Use when: implementing features, refactoring code, reviewing code quality, or establishing coding standards.
+---
+
+# Development Rules
+
+## Language-Specific References
+
+For language-specific rules, also read:
+- **TypeScript**: [references/typescript.md](references/typescript.md)
 
 ## Basic Principles
 

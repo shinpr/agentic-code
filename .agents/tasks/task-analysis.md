@@ -3,20 +3,20 @@
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
 **RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-rule-matrix.yaml`
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-skills-matrix.yaml`
 
 **LOADING PROTOCOL:**
 - STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if task-rule-matrix.yaml is active in working memory
-- STEP 3: If task-rule-matrix.yaml NOT active → Execute BLOCKING READ
+- STEP 2: CHECK if task-skills-matrix.yaml is active in working memory
+- STEP 3: If task-skills-matrix.yaml NOT active → Execute BLOCKING READ
 - STEP 4: CONFIRM all rules active before proceeding with task analysis
 
 **EVIDENCE REQUIRED:**
 ```
 Rule Status Verification:
 ✓ metacognition.md - ACTIVE (from session setup)
-✓ task-rule-matrix.yaml - ACTIVE (loaded/verified)
+✓ task-skills-matrix.yaml - ACTIVE (loaded/verified)
 ```
 
 ## Purpose
@@ -103,7 +103,7 @@ Count affected components:
 ### Step 4: Execute Rule Selection [BLOCKING CHECKPOINT]
 
 **EXECUTION GATES - System HALTS if any step skipped:**
-1. [BLOCKING READ] `task-rule-matrix.yaml` from `.agents/context-maps/`
+1. [BLOCKING READ] `task-skills-matrix.yaml` from `.agents/context-maps/`
 2. [MANDATORY MATCHING] Task type + scale against matrix
 3. [CLASSIFICATION OUTPUT]:
    - Required rules: IMMEDIATE BLOCKING READ

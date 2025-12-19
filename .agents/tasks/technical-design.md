@@ -2,32 +2,32 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
-3. [CONDITIONAL LOAD] `.agents/rules/contextual/architecture/implementation-approach.md` (if Medium scale 3+ files OR Large scale)
+**SKILL AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
+3. [CONDITIONAL LOAD] `.agents/skills/implementation-approach/SKILL.md` (if Medium scale 3+ files OR Large scale)
 
 **LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if documentation-criteria.md is active in working memory
-- STEP 3: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 4: EVALUATE conditions for implementation-approach.md (Medium/Large scale: 3+ files)
-- STEP 5: If conditions met AND implementation-approach.md NOT active → Execute BLOCKING READ
-- STEP 6: CONFIRM all required rules active before proceeding
+- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
+- STEP 2: CHECK if documentation-criteria/SKILL.md is active in working memory
+- STEP 3: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 4: EVALUATE conditions for implementation-approach/SKILL.md (Medium/Large scale: 3+ files)
+- STEP 5: If conditions met AND implementation-approach/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 6: CONFIRM all required skills active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
 **Upon reading this file, IMMEDIATELY inject to work plan:**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/core/documentation-criteria.md` (if not active)
-   - `.agents/rules/contextual/architecture/implementation-approach.md` (if conditions met)
+   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
+   - `.agents/skills/implementation-approach/SKILL.md` (if conditions met)
 2. Mark each with "[From technical-design.md]" source tag
 3. Show evidence of injection:
    ```
    [PLAN INJECTION FROM technical-design.md]
    Injected to work plan:
-   ✓ BLOCKING READ: documentation-criteria.md - ADR/Design Doc criteria
-   ✓ BLOCKING READ: implementation-approach.md - strategy selection (if applicable)
+   ✓ BLOCKING READ: documentation-criteria/SKILL.md - ADR/Design Doc criteria
+   ✓ BLOCKING READ: implementation-approach/SKILL.md - strategy selection (if applicable)
    Status: VERIFIED
    ```
 
@@ -35,10 +35,10 @@
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ metacognition.md - ACTIVE
-✓ documentation-criteria.md - ACTIVE
-✓ implementation-approach.md - [ACTIVE/NOT NEEDED]
+Skill Status Verification:
+✓ metacognition/SKILL.md - ACTIVE
+✓ documentation-criteria/SKILL.md - ACTIVE
+✓ implementation-approach/SKILL.md - [ACTIVE/NOT NEEDED]
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]

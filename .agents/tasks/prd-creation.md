@@ -2,27 +2,27 @@
 
 ## Required Rules [MANDATORY - MUST BE ACTIVE]
 
-**RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/rules/core/metacognition.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/rules/core/documentation-criteria.md`
+**SKILL AVAILABILITY VERIFICATION:**
+1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
+2. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
 
 **LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if documentation-criteria.md is active in working memory
-- STEP 3: If documentation-criteria.md NOT active → Execute BLOCKING READ
-- STEP 4: CONFIRM all rules active before proceeding
+- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
+- STEP 2: CHECK if documentation-criteria/SKILL.md is active in working memory
+- STEP 3: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
+- STEP 4: CONFIRM all skills active before proceeding
 
 ## Plan Injection Requirement [MANDATORY]
 
 **Upon reading this file, IMMEDIATELY inject to work plan:**
 1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/rules/core/documentation-criteria.md` (if not active)
+   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
 2. Mark each with "[From prd-creation.md]" source tag
 3. Show evidence of injection:
    ```
    [PLAN INJECTION FROM prd-creation.md]
    Injected to work plan:
-   ✓ BLOCKING READ: documentation-criteria.md - PRD creation criteria
+   ✓ BLOCKING READ: documentation-criteria/SKILL.md - PRD creation criteria
    Status: VERIFIED
    ```
 
@@ -30,9 +30,9 @@
 
 **EVIDENCE REQUIRED:**
 ```
-Rule Status Verification:
-✓ metacognition.md - ACTIVE (from session setup)
-✓ documentation-criteria.md - ACTIVE (loaded/verified)
+Skill Status Verification:
+✓ metacognition/SKILL.md - ACTIVE (from session setup)
+✓ documentation-criteria/SKILL.md - ACTIVE (loaded/verified)
 ```
 
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]

@@ -1,3 +1,10 @@
+---
+name: integration-e2e-testing
+description: |
+  Integration and E2E test design principles, behavior verification rules, mock boundaries, and review criteria.
+  Use when: designing integration tests, E2E tests, writing test skeletons, or reviewing test implementation quality.
+---
+
 # Integration Test & E2E Test Design/Implementation Rules
 
 ## Test Types and Limits

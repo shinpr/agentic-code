@@ -1,0 +1,236 @@
+# Task-Skill Mapping Matrix
+# Maps tasks to relevant skills based on metadata and tags
+# Used by task-analysis.md to recommend appropriate skills for each task type
+
+skills:
+  # Core Skills
+  metacognition:
+    path: ".agents/skills/metacognition/SKILL.md"
+    tags: [self-assessment, reflection, decision-checkpoint, quality-control]
+    when_to_load:
+      - "Task type changes (e.g., from design to implementation)"
+      - "Unexpected errors occur repeatedly"
+      - "Completing a meaningful unit of work"
+      - "Before starting new implementation"
+    typical_tasks: [all]
+    size: small
+    priority: always
+    description: "Self-assessment and reflection protocols for maintaining quality"
+
+  ai-development-guide:
+    path: ".agents/skills/ai-development-guide/SKILL.md"
+    tags: [anti-patterns, debugging, best-practices, rule-of-three, technical-debt, impact-analysis, unused-code, code-deletion, implementation-completeness]
+    when_to_load:
+      - "Starting new implementation"
+      - "Code review and refactoring"
+      - "Debugging complex issues"
+      - "Technical decision making"
+      - "Impact analysis before changes"
+    typical_tasks: [implementation, debugging, refactoring]
+    size: medium
+    priority: high
+    description: "Anti-patterns, debugging techniques, development best practices, and implementation completeness assurance"
+
+  documentation-criteria:
+    path: ".agents/skills/documentation-criteria/SKILL.md"
+    tags: [documentation, adr, design-doc, decision-matrix, scale-assessment]
+    when_to_load:
+      - "Task scale assessment (Small/Medium/Large)"
+      - "Architecture decisions needed"
+      - "Creating technical documentation"
+      - "New feature planning"
+    typical_tasks: [design, documentation, planning]
+    size: medium
+    priority: medium
+    description: "Criteria for when and how to create documentation"
+
+  testing-strategy:
+    path: ".agents/skills/testing-strategy/SKILL.md"
+    tags: [testing, roi-calculation, test-selection, budget-enforcement, behavior-first]
+    when_to_load:
+      - "Generating acceptance tests from design documents"
+      - "Test prioritization and selection"
+      - "ROI-based test strategy decisions"
+      - "Preventing test over-generation"
+    typical_tasks: [test_generation]
+    size: large
+    priority: high
+    description: "ROI-based test selection framework with behavior-first filtering and budget enforcement"
+
+  integration-e2e-testing:
+    path: ".agents/skills/integration-e2e-testing/SKILL.md"
+    tags: [testing, integration-test, e2e-test, behavior-first, mock-boundary, test-review]
+    when_to_load:
+      - "Generating integration/E2E test skeletons"
+      - "Implementing integration/E2E tests"
+      - "Reviewing test implementation quality"
+    typical_tasks: [test_generation, test_review]
+    size: small
+    priority: high
+    description: "Integration and E2E test design, implementation rules, and review criteria"
+
+  # Architecture Skills
+  implementation-approach:
+    path: ".agents/skills/implementation-approach/SKILL.md"
+    tags: [strategy-selection, task-decomposition, verification-levels, integration-points]
+    when_to_load:
+      - "Medium/Large scale tasks (3+ files)"
+      - "Implementation strategy selection"
+      - "Task breakdown and planning"
+      - "Choosing between vertical/horizontal slicing"
+    typical_tasks: [planning, design, implementation]
+    size: medium
+    priority: conditional
+    description: "Strategy selection for implementation approaches (vertical/horizontal slicing)"
+
+  # Development Skills (with language-specific references)
+  coding-rules:
+    path: ".agents/skills/coding-rules/SKILL.md"
+    references:
+      typescript: ".agents/skills/coding-rules/references/typescript.md"
+    tags: [implementation, coding-style, error-handling, refactoring, clean-code, solid-principles]
+    when_to_load:
+      - "Writing or modifying code"
+      - "Code review"
+      - "Refactoring existing code"
+      - "Implementing new features"
+    typical_tasks: [implementation, refactoring]
+    size: medium
+    priority: high
+    description: "Coding standards and best practices (includes language-specific references)"
+
+  testing:
+    path: ".agents/skills/testing/SKILL.md"
+    references:
+      typescript: ".agents/skills/testing/references/typescript.md"
+    tags: [testing, tdd, quality-assurance, coverage, unit-tests, integration-tests, verify-phase]
+    when_to_load:
+      - "Writing tests"
+      - "Bug fixing (test-first)"
+      - "Quality checks"
+      - "Refactoring (ensuring safety)"
+      - "VERIFY phase execution (mandatory)"
+    typical_tasks: [implementation, debugging, quality-check, test_generation]
+    size: medium
+    priority: always
+    description: "Testing standards and TDD practices (includes language-specific references)"
+
+
+# Task Type to Skill Mapping
+task_mappings:
+  prd_creation:
+    required:
+      - "documentation-criteria"
+    recommended:
+      - "metacognition"
+
+  implementation:
+    required:
+      - "coding-rules"
+      - "testing"  # TDD is mandatory
+      - "ai-development-guide"
+    recommended:
+      - "metacognition"
+    conditional:
+      - "implementation-approach"  # For Medium/Large scale
+
+  debugging:
+    required:
+      - "ai-development-guide"
+      - "testing"
+    recommended:
+      - "coding-rules"
+      - "metacognition"
+
+  design:
+    required:
+      - "documentation-criteria"
+    conditional:
+      - "implementation-approach"  # Required for Medium/Large scale (3+ files)
+
+  documentation:
+    required:
+      - "documentation-criteria"
+
+  refactoring:
+    required:
+      - "coding-rules"
+      - "testing"
+      - "ai-development-guide"
+    recommended:
+      - "metacognition"
+
+  research:
+    recommended:
+      - "metacognition"
+
+  test_generation:
+    required:
+      - "testing"
+      - "documentation-criteria"
+      - "testing-strategy"
+      - "integration-e2e-testing"
+    recommended:
+      - "metacognition"
+
+  integration_test_review:
+    required:
+      - "testing"
+      - "integration-e2e-testing"
+    recommended:
+      - "metacognition"
+    description: "Review integration and E2E test implementations"
+
+  code_review:
+    required:
+      - "coding-rules"
+      - "ai-development-guide"
+    recommended:
+      - "metacognition"
+    description: "Review implementation against Design Doc compliance"
+
+  technical_document_review:
+    required:
+      - "documentation-criteria"
+    conditional:
+      - "testing-strategy"
+      - "coding-rules"
+    recommended:
+      - "metacognition"
+    description: "Review technical documents (Design Docs, ADRs)"
+
+# Scale-based Skill Loading
+scale_mappings:
+  small:  # 1-2 files
+    load_immediately:
+      - "coding-rules"
+    load_on_demand: []
+
+  medium:  # 3-5 files
+    load_immediately:
+      - "coding-rules"
+      - "testing"  # TDD is mandatory
+      - "documentation-criteria"
+      - "implementation-approach"  # Required for approach selection
+    load_on_demand:
+      - "ai-development-guide"
+
+  large:  # 6+ files
+    load_immediately:
+      - "documentation-criteria"
+      - "implementation-approach"
+    load_on_demand:
+      - "coding-rules"
+      - "testing"
+      - "ai-development-guide"
+
+# Metadata for skill selection algorithm
+selection_rules:
+  - "Always load metacognition at session start"
+  - "Load coding-rules when any code modification is involved"
+  - "Load testing for ALL implementation tasks (TDD mandatory)"
+  - "Load implementation-approach for Medium/Large scale (3+ files)"
+  - "Execute ALL quality check commands in VERIFY phase with 0 errors"
+  - "Progressive loading: start with minimum, add as needed"
+  - "Unload task-specific skills after task completion"
+  - "For TypeScript projects, also read references/typescript.md in coding-rules and testing skills"
