@@ -19,19 +19,19 @@
 - STEP 8: If integration-e2e-testing/SKILL.md NOT active → Execute BLOCKING READ
 - STEP 9: CONFIRM all required skills active before proceeding
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/testing/SKILL.md` (if not active)
    - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
    - `.agents/skills/testing-strategy/SKILL.md` (if not active)
    - `.agents/skills/integration-e2e-testing/SKILL.md` (if not active)
 2. Mark each with "[From acceptance-test-generation.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM acceptance-test-generation.md]
-   Injected to work plan:
+   [TASK TRACKING FROM acceptance-test-generation.md]
+   Added to Task List:
    ✓ BLOCKING READ: testing/SKILL.md - testing standards
    ✓ BLOCKING READ: documentation-criteria/SKILL.md - document analysis
    ✓ BLOCKING READ: testing-strategy/SKILL.md - ROI-based test selection
@@ -39,7 +39,7 @@
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -53,8 +53,8 @@ Skill Status Verification:
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
-☐ [VERIFIED] Plan Injection completed (from acceptance-test-generation.md)
-☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
+☐ [VERIFIED] Task Tracking completed (from acceptance-test-generation.md)
+☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Design document exists and contains Acceptance Criteria section
 ☐ [VERIFIED] Project testing structure investigated (existing test patterns)
 ☐ [VERIFIED] Test framework configuration confirmed

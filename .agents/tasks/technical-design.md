@@ -15,23 +15,23 @@
 - STEP 5: If conditions met AND implementation-approach/SKILL.md NOT active → Execute BLOCKING READ
 - STEP 6: CONFIRM all required skills active before proceeding
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
    - `.agents/skills/implementation-approach/SKILL.md` (if conditions met)
 2. Mark each with "[From technical-design.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM technical-design.md]
-   Injected to work plan:
+   [TASK TRACKING FROM technical-design.md]
+   Added to Task List:
    ✓ BLOCKING READ: documentation-criteria/SKILL.md - ADR/Design Doc criteria
    ✓ BLOCKING READ: implementation-approach/SKILL.md - strategy selection (if applicable)
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -44,8 +44,8 @@ Skill Status Verification:
 ## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
-☐ [VERIFIED] Plan Injection completed (from task-analysis.md Step 8)
-☐ [VERIFIED] Work plan contains "BLOCKING READ technical-design.md" item
+☐ [VERIFIED] Task Tracking completed (from task-analysis.md Step 8)
+☐ [VERIFIED] Task List contains "BLOCKING READ technical-design.md" item
 ☐ [VERIFIED] Project structure confirmed
 ☐ [VERIFIED] PRD reviewed (if exists) with requirements understood
 ☐ [VERIFIED] Related design documents investigation COMPLETED with evidence

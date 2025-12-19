@@ -15,23 +15,23 @@
 
 **CRITICAL**: Cannot execute quality checks until ALL required rules confirmed active
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/coding-rules/SKILL.md` (if not active)
    - `.agents/skills/testing/SKILL.md` (if not active)
 2. Mark each with "[From quality-assurance.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM quality-assurance.md]
-   Injected to work plan:
+   [TASK TRACKING FROM quality-assurance.md]
+   Added to Task List:
    ✓ BLOCKING READ: coding-rules/SKILL.md - quality standards
    ✓ BLOCKING READ: testing/SKILL.md - testing requirements
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -43,15 +43,15 @@ Skill Status Verification:
 ## Task Completion Gate [STRICT ENFORCEMENT - NO EXCEPTIONS]
 
 **CANNOT mark task as complete until ALL quality checks pass:**
-□ Plan Injection completed (from quality-assurance.md Plan Injection Requirement)
-□ Work plan contains ALL BLOCKING READs from this file
+□ Task Tracking completed (from quality-assurance.md Task Tracking Requirement)
+□ Task List contains ALL BLOCKING READs from this file
 □ Build process succeeds
 □ Tests pass (or no tests if not applicable)
 □ Linting: 0 errors
 □ Static analysis passes (if applicable)
 □ Manual testing performed (if applicable)
 □ Changes committed to git (for implementation tasks)
-□ Task tracking updated (work plan checkbox if using workflow)
+□ Task tracking updated (Work Plan checkbox if using workflow)
 
 **If any check fails:**
 → Fix issues before proceeding

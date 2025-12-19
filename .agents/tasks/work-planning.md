@@ -18,25 +18,25 @@
 - STEP 7: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
 - STEP 8: CONFIRM all skills active before proceeding with work planning
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/coding-rules/SKILL.md` (if not active)
    - `.agents/skills/testing/SKILL.md` (if not active)
    - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
 2. Mark each with "[From work-planning.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM work-planning.md]
-   Injected to work plan:
+   [TASK TRACKING FROM work-planning.md]
+   Added to Task List:
    ✓ BLOCKING READ: coding-rules/SKILL.md - development standards
    ✓ BLOCKING READ: testing/SKILL.md - TDD process
    ✓ BLOCKING READ: documentation-criteria/SKILL.md - documentation standards
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -51,16 +51,16 @@ Skill Status Verification:
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
 ☐ [VERIFIED] THIS FILE (`work-planning.md`) has been READ and is active
-☐ [VERIFIED] Plan Injection completed (from work-planning.md Plan Injection Requirement)
+☐ [VERIFIED] Task Tracking completed (from work-planning.md Task Tracking Requirement)
 ☐ [VERIFIED] All required rules listed above are LOADED and active
-☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
+☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
 ☐ [VERIFIED] User has APPROVED the design
 ☐ [VERIFIED] Test skeletons exist (if applicable for test-driven approach)
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active
 
 **METACOGNITION GATE [MANDATORY]:**
-BEFORE creating work plan, execute metacognition assessment:
+BEFORE creating Work Plan document, execute metacognition assessment:
 - Understand the design intent and goals
 - Verify task decomposition strategy aligns with 1-commit principle
 - Confirm dependencies are logical and achievable
@@ -71,7 +71,7 @@ IF attempting to skip → CRITICAL ERROR
 
 ## Purpose
 
-Create work plans with decomposed tasks.
+Create Work Plan documents with decomposed tasks.
 
 ## When to Use
 
@@ -95,7 +95,7 @@ Create work plans with decomposed tasks.
 
 ### 1. Plan Structure
 
-Create work plan with:
+Create Work Plan document with:
 - **Overview**: What's being built/changed
 - **Phases**: Logical groupings of work
 - **Tasks**: Individual implementation units
@@ -151,7 +151,7 @@ Create work plan with:
 - [ ] Test passes
 - [ ] Quality checks pass with 0 errors (per testing/SKILL.md standards)
 - [ ] Changes committed to git
-- [ ] Task checkbox marked [x] in work plan
+- [ ] Task checkbox marked [x] in Work Plan document
 
 ### Dependencies
 - Depends on: Task [X]

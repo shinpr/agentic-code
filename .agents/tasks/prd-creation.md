@@ -12,21 +12,21 @@
 - STEP 3: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
 - STEP 4: CONFIRM all skills active before proceeding
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
 2. Mark each with "[From prd-creation.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM prd-creation.md]
-   Injected to work plan:
+   [TASK TRACKING FROM prd-creation.md]
+   Added to Task List:
    ✓ BLOCKING READ: documentation-criteria/SKILL.md - PRD creation criteria
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -39,8 +39,8 @@ Skill Status Verification:
 
 **CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
 ☐ [VERIFIED] THIS FILE (`prd-creation.md`) has been READ and is active
-☐ [VERIFIED] Plan Injection completed (from prd-creation.md Plan Injection Requirement)
-☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
+☐ [VERIFIED] Task Tracking completed (from prd-creation.md Task Tracking Requirement)
+☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
 ☐ [VERIFIED] Project structure confirmed
 ☐ [VERIFIED] Existing PRDs investigation COMPLETED with evidence
 ☐ [VERIFIED] Related documentation search EXECUTED with results documented

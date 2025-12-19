@@ -15,7 +15,7 @@ Self-assessment checkpoints.
 
 **BLOCKING METACOGNITION REQUIRED at:**
 - [CHECKPOINT] Task type changes → CANNOT proceed without assessment
-- [CHECKPOINT] After completing ANY task from work plan → MUST evaluate before next task
+- [CHECKPOINT] After completing ANY task from Work Plan document → MUST evaluate before next task
 - [CHECKPOINT] When encountering error or unexpected result → ASSESS approach immediately
 - [CHECKPOINT] Before writing first line of new feature → VALIDATE approach first
 - [CHECKPOINT] When switching between major phases → CONFIRM all gates passed
@@ -78,7 +78,7 @@ Note: Context management is user's responsibility. Ask for guidance if unsure.
 **GATE: CANNOT start coding if ANY unchecked**
 
 ### During Execution [PROGRESS GATES]
-☐ [VERIFY] Following work plan from `docs/design/work-plan.md`
+☐ [VERIFY] Following Work Plan from `docs/plans/`
 ☐ [VERIFY] Making measurable progress (list completed items)
 ☐ [EVALUATE] Additional rules needed? (load IMMEDIATELY if yes)
 ☐ [EVALUATE] Blocked for >10 minutes? (MUST ask for help)

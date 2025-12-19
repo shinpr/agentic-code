@@ -15,23 +15,23 @@
 - STEP 5: If testing/SKILL.md NOT active → Execute BLOCKING READ
 - STEP 6: CONFIRM all skills active before writing ANY code
 
-## Plan Injection Requirement [MANDATORY]
+## Task Tracking Requirement [MANDATORY]
 
-**Upon reading this file, IMMEDIATELY inject to work plan:**
+**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
 1. All BLOCKING READs identified in Loading Protocol above:
    - `.agents/skills/coding-rules/SKILL.md` (if not active)
    - `.agents/skills/testing/SKILL.md` (if not active)
 2. Mark each with "[From implementation.md]" source tag
-3. Show evidence of injection:
+3. Show evidence:
    ```
-   [PLAN INJECTION FROM implementation.md]
-   Injected to work plan:
+   [TASK TRACKING FROM implementation.md]
+   Added to Task List:
    ✓ BLOCKING READ: coding-rules/SKILL.md - development standards
    ✓ BLOCKING READ: testing/SKILL.md - TDD process
    Status: VERIFIED
    ```
 
-**ENFORCEMENT:** Cannot proceed without Plan Injection evidence
+**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
 
 **EVIDENCE REQUIRED:**
 ```
@@ -45,11 +45,11 @@ Skill Status Verification:
 
 **CHECKPOINT: System CANNOT write ANY CODE until ALL boxes checked:**
 ☐ [VERIFIED] THIS FILE (`implementation.md`) has been READ and is active
-☐ [VERIFIED] Plan Injection completed (from implementation.md Plan Injection Requirement)
+☐ [VERIFIED] Task Tracking completed (from implementation.md Task Tracking Requirement)
 ☐ [VERIFIED] All required rules listed above are LOADED and active
-☐ [VERIFIED] Work plan EXISTS with task definitions
-☐ [VERIFIED] Work plan contains ALL BLOCKING READs from this file
-☐ [VERIFIED] Current task identified from work plan
+☐ [VERIFIED] Work Plan document EXISTS with task definitions
+☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
+☐ [VERIFIED] Current task identified from Work Plan document
 ☐ [VERIFIED] TDD process understood (Red-Green-Refactor-Verify)
 ☐ [VERIFIED] SESSION_BASELINE_DATE established and active
 
@@ -110,7 +110,7 @@ Implement code using TDD process.
 **5. COMMIT Phase - Version control [MANDATORY]**
    - Stage changes for current implementation
    - Create commit with descriptive message
-   - Commit message format: "feat: [what was implemented]" or follow work plan task name if available
+   - Commit message format: "feat: [what was implemented]" or follow Work Plan task name if available
    - ENFORCEMENT: Implementation task NOT complete until committed
    - NOTE: Skip if user explicitly says "don't commit"
 
