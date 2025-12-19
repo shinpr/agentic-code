@@ -8,7 +8,8 @@
     "AGENTS.md"
   ],
   "bin": {
-    "agentic-code": "./bin/cli.js"
+    "agentic-code": "./bin/cli.js",
+    "agentic-code-install-skills": "./bin/install-codex-skills.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

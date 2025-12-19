@@ -106,6 +106,17 @@ cp -r path/to/agentic-code/AGENTS.md .
 cp -r path/to/agentic-code/.agents .
 ```
 
+### Skills
+
+`.agents/skills/` contains reusable skill files in the [Codex Skills format](https://github.com/openai/codex/blob/main/docs/skills.md). Each skill has a `SKILL.md` with instructions that AI agents can discover and apply.
+
+**Codex**: You can install skills globally so Codex picks them up across all projects:
+
+```bash
+npx agentic-code-install-skills --codex
+# Installs to ~/.codex/skills/.agentic-code/
+```
+
 ## Common Questions
 
 **Q: Can I use this with other AI coding tools besides Codex?**  
