@@ -114,7 +114,7 @@ cp -r path/to/agentic-code/.agents .
 
 ```bash
 npx agentic-code-install-skills --codex
-# Installs to ~/.codex/skills/.agentic-code/
+# Installs to ~/.codex/skills/agentic-code/
 ```
 
 ## Common Questions

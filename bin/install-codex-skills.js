@@ -11,7 +11,7 @@ const args = process.argv.slice(2);
 const TARGETS = {
   codex: {
     dir: path.join(os.homedir(), '.codex', 'skills'),
-    name: '.agentic-code',
+    name: 'agentic-code',
     description: 'OpenAI Codex CLI',
     postInstall: 'Restart Codex to load the skills.\nNote: Enable skills with --enable skills flag or in config.toml'
   }
