@@ -20,7 +20,12 @@
 
 ## Task Analysis - Required First Step
 
-**ALWAYS start here for any user request:**
+**Early Exit Check (BEFORE loading task-analysis.md):**
+Does this task require reading code files to decide HOW to execute it?
+- **NO** → Execute directly, skip task-analysis.md
+- **YES** → Load and follow task-analysis.md
+
+**If not early exit, start here for any user request:**
 1. Apply `.agents/tasks/task-analysis.md`
 2. Follow its output to select the appropriate path:
 
