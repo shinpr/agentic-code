@@ -1,8 +1,8 @@
 ---
 name: coding-rules
 description: |
-  Coding principles for maintainability, readability, and quality.
-  Use when: implementing features, refactoring code, reviewing code quality, or establishing coding standards.
+  Applies coding standards for clean, maintainable code. Covers functions, error handling, and refactoring techniques.
+  Use when: writing functions, handling errors, refactoring, or reviewing code style.
 ---
 
 # Development Rules

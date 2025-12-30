@@ -1,8 +1,8 @@
 ---
 name: testing
 description: |
-  Testing principles including TDD process, test quality criteria, coverage standards, and mock usage guidelines.
-  Use when: writing tests, designing test strategies, reviewing test quality, or establishing testing standards.
+  Applies TDD process, test quality criteria, and mock usage guidelines. Covers unit, integration, and E2E tests.
+  Use when: writing unit tests, using mocks, reviewing test quality, or ensuring test coverage.
 ---
 
 # Testing Rules
