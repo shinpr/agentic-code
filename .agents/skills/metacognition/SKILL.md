@@ -1,8 +1,8 @@
 ---
 name: metacognition
-description: |
-  Self-assessment checkpoints and protocol for AI agents.
-  Use when: task type changes, after completing tasks, encountering errors, before starting new features, or switching between phases.
+description: >
+  Validates approach and checks assumptions before and after tasks. Provides self-assessment protocol.
+  Use when: starting new work, encountering errors, completing tasks, or switching between phases.
 ---
 
 # Metacognition Protocol

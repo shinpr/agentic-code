@@ -1,8 +1,8 @@
 ---
 name: ai-development-guide
-description: |
-  Technical anti-pattern detection, fail-fast design principles, debugging techniques, and implementation completeness guidelines.
-  Use when: implementing features, reviewing code quality, debugging errors, refactoring code, or detecting code smells.
+description: >
+  Detects code smells, anti-patterns, and debugging issues. Guides fail-fast design and implementation completeness.
+  Use when: fixing bugs, reviewing code quality, refactoring, or detecting code smells.
 ---
 
 # AI Developer Guide

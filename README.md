@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.5.1-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.6.2-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -110,11 +110,20 @@ cp -r path/to/agentic-code/.agents .
 
 `.agents/skills/` contains reusable skill files in the [Codex Skills format](https://github.com/openai/codex/blob/main/docs/skills.md). Each skill has a `SKILL.md` with instructions that AI agents can discover and apply.
 
-**Codex**: You can install skills globally so Codex picks them up across all projects:
+**Codex**: Install skills for Codex CLI:
 
 ```bash
+# User scope (all projects)
 npx agentic-code-install-skills --codex
 # Installs to ~/.codex/skills/agentic-code/
+
+# Project scope (current project only)
+npx agentic-code-install-skills --codex --project
+# Installs to ./.codex/skills/agentic-code/
+
+# Custom path
+npx agentic-code-install-skills --path ./custom/skills
+# Installs to ./custom/skills/agentic-code/
 ```
 
 ## Common Questions
