@@ -1,6 +1,6 @@
 ---
 name: integration-e2e-testing
-description: |
+description: >
   Designs integration and E2E tests with mock boundaries and behavior verification rules.
   Use when: writing E2E tests, integration tests, test skeletons, or reviewing test quality.
 ---

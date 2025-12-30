@@ -1,6 +1,6 @@
 ---
 name: coding-rules
-description: |
+description: >
   Applies coding standards for clean, maintainable code. Covers functions, error handling, and refactoring techniques.
   Use when: writing functions, handling errors, refactoring, or reviewing code style.
 ---

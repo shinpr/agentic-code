@@ -1,6 +1,6 @@
 ---
 name: implementation-approach
-description: |
+description: >
   Selects implementation strategy (vertical slice, horizontal slice, or hybrid) with risk assessment.
   Use when: planning how to build a feature, deciding development approach, or defining verification levels.
 ---

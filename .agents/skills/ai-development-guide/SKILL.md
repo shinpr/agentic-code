@@ -1,6 +1,6 @@
 ---
 name: ai-development-guide
-description: |
+description: >
   Detects code smells, anti-patterns, and debugging issues. Guides fail-fast design and implementation completeness.
   Use when: fixing bugs, reviewing code quality, refactoring, or detecting code smells.
 ---

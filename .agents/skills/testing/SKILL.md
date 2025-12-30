@@ -1,6 +1,6 @@
 ---
 name: testing
-description: |
+description: >
   Applies TDD process, test quality criteria, and mock usage guidelines. Covers unit, integration, and E2E tests.
   Use when: writing unit tests, using mocks, reviewing test quality, or ensuring test coverage.
 ---
