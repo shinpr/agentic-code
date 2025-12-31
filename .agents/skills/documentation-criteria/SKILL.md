@@ -1,8 +1,6 @@
 ---
 name: documentation-criteria
-description: >
-  Guides PRD, ADR, Design Doc, and Work Plan creation with templates and decision matrix.
-  Use when: planning features, writing specs, creating technical documents, or deciding which docs are needed.
+description: "Guides PRD, ADR, Design Doc, and Work Plan creation. Use when: planning features, writing specs, or creating technical documents."
 ---
 
 # Documentation Creation Criteria
