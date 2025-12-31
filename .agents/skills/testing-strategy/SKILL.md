@@ -1,8 +1,6 @@
 ---
 name: testing-strategy
-description: >
-  Prioritizes which tests to write based on ROI calculation and critical user journeys.
-  Use when: deciding test coverage, selecting test types, or budgeting test effort.
+description: "Prioritizes tests based on ROI and critical user journeys. Use when: deciding test coverage, selecting test types, or budgeting effort."
 ---
 
 # Test Strategy: ROI-Based Selection

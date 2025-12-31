@@ -1,8 +1,6 @@
 ---
 name: metacognition
-description: >
-  Validates approach and checks assumptions before and after tasks. Provides self-assessment protocol.
-  Use when: starting new work, encountering errors, completing tasks, or switching between phases.
+description: "Validates approach and checks assumptions before/after tasks. Use when: starting work, encountering errors, or switching phases."
 ---
 
 # Metacognition Protocol
