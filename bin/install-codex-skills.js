@@ -4,13 +4,20 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-
 // Scope types
 const SCOPES = {
   user: 'user',
   project: 'project'
+};
+
+// Target configurations
+const TARGETS = {
+  codex: {
+    name: 'agentic-code',
+    description: 'OpenAI Codex CLI',
+    postInstall: 'Restart Codex to load the skills.\nNote: Enable skills with --enable skills flag or in config.toml'
+  }
+  // Future targets can be added here
 };
 
 // Get target directory based on target and scope
@@ -24,88 +31,6 @@ function getTargetDir(targetKey, scope) {
     return path.join(codexHome, 'skills');
   }
   return null;
-}
-
-// Target configurations
-const TARGETS = {
-  codex: {
-    name: 'agentic-code',
-    description: 'OpenAI Codex CLI',
-    postInstall: 'Restart Codex to load the skills.\nNote: Enable skills with --enable skills flag or in config.toml'
-  }
-  // Future targets can be added here
-};
-
-// Show help
-if (args.includes('--help') || args.includes('-h')) {
-  console.log(`
-Usage: agentic-code-install-skills [options]
-
-Options:
-  --codex         Install skills to Codex CLI (default)
-  --project       Install to project scope instead of user scope
-  --path <path>   Install to custom path
-  --help          Show this help message
-
-Scopes:
-  user (default)  Install to user directory (~/.codex/skills/ or $CODEX_HOME/skills/)
-  project         Install to current project (./.codex/skills/)
-
-Examples:
-  agentic-code-install-skills                    # Install to ~/.codex/skills/ (user scope)
-  agentic-code-install-skills --codex            # Same as above (explicit)
-  agentic-code-install-skills --codex --project  # Install to ./.codex/skills/ (project scope)
-  agentic-code-install-skills --path ./my-skills # Install to ./my-skills/agentic-code
-`);
-  process.exit(0);
-}
-
-// Parse --path option
-function getCustomPath() {
-  const pathIndex = args.indexOf('--path');
-  if (pathIndex === -1) return null;
-
-  const customPath = args[pathIndex + 1];
-  if (!customPath || customPath.startsWith('-')) {
-    console.error('Error: --path requires a path argument');
-    process.exit(1);
-  }
-  return path.resolve(customPath);
-}
-
-const customPath = getCustomPath();
-
-// Determine target (default: codex)
-let targetKey = customPath ? 'custom' : 'codex';
-if (args.includes('--codex')) {
-  targetKey = customPath ? 'custom' : 'codex';
-}
-
-// Determine scope (default: user)
-const scope = args.includes('--project') ? SCOPES.project : SCOPES.user;
-
-// Get skills directory
-let skillsDir;
-let target;
-
-if (customPath) {
-  skillsDir = customPath;
-  target = {
-    name: 'agentic-code',
-    description: 'custom path',
-    postInstall: null
-  };
-} else {
-  target = TARGETS[targetKey];
-  if (!target) {
-    console.error(`Error: Unknown target '${targetKey}'`);
-    process.exit(1);
-  }
-  skillsDir = getTargetDir(targetKey, scope);
-  if (!skillsDir) {
-    console.error(`Error: Cannot determine target directory for '${targetKey}'`);
-    process.exit(1);
-  }
 }
 
 // Get source directory (from installed package or local)
@@ -142,8 +67,82 @@ function copyDirectory(src, dest) {
   }
 }
 
-// Main
-function main() {
+// Parse --path option
+function getCustomPath(args) {
+  const pathIndex = args.indexOf('--path');
+  if (pathIndex === -1) return null;
+
+  const customPath = args[pathIndex + 1];
+  if (!customPath || customPath.startsWith('-')) {
+    console.error('Error: --path requires a path argument');
+    process.exit(1);
+  }
+  return path.resolve(customPath);
+}
+
+// Main run function
+function run(cliArgs) {
+  const args = cliArgs || process.argv.slice(2);
+
+  // Show help
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+Usage: npx agentic-code skills [options]
+
+Options:
+  --codex         Install skills to Codex CLI (default)
+  --project       Install to project scope instead of user scope
+  --path <path>   Install to custom path
+  --help          Show this help message
+
+Scopes:
+  user (default)  Install to user directory (~/.codex/skills/ or $CODEX_HOME/skills/)
+  project         Install to current project (./.codex/skills/)
+
+Examples:
+  npx agentic-code skills                    # Install to ~/.codex/skills/ (user scope)
+  npx agentic-code skills --codex            # Same as above (explicit)
+  npx agentic-code skills --codex --project  # Install to ./.codex/skills/ (project scope)
+  npx agentic-code skills --path ./my-skills # Install to ./my-skills/agentic-code
+`);
+    process.exit(0);
+  }
+
+  const customPath = getCustomPath(args);
+
+  // Determine target (default: codex)
+  let targetKey = customPath ? 'custom' : 'codex';
+  if (args.includes('--codex')) {
+    targetKey = customPath ? 'custom' : 'codex';
+  }
+
+  // Determine scope (default: user)
+  const scope = args.includes('--project') ? SCOPES.project : SCOPES.user;
+
+  // Get skills directory
+  let skillsDir;
+  let target;
+
+  if (customPath) {
+    skillsDir = customPath;
+    target = {
+      name: 'agentic-code',
+      description: 'custom path',
+      postInstall: null
+    };
+  } else {
+    target = TARGETS[targetKey];
+    if (!target) {
+      console.error(`Error: Unknown target '${targetKey}'`);
+      process.exit(1);
+    }
+    skillsDir = getTargetDir(targetKey, scope);
+    if (!skillsDir) {
+      console.error(`Error: Cannot determine target directory for '${targetKey}'`);
+      process.exit(1);
+    }
+  }
+
   const sourceDir = getSourceSkillsDir();
 
   if (!sourceDir) {
@@ -187,4 +186,10 @@ function main() {
   }
 }
 
-main();
+// Export for module usage
+module.exports = { run };
+
+// Run if called directly
+if (require.main === module) {
+  run();
+}

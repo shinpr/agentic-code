@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.6.2-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.6.4-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -114,15 +114,15 @@ cp -r path/to/agentic-code/.agents .
 
 ```bash
 # User scope (all projects)
-npx agentic-code-install-skills --codex
+npx agentic-code skills --codex
 # Installs to ~/.codex/skills/agentic-code/
 
 # Project scope (current project only)
-npx agentic-code-install-skills --codex --project
+npx agentic-code skills --codex --project
 # Installs to ./.codex/skills/agentic-code/
 
 # Custom path
-npx agentic-code-install-skills --path ./custom/skills
+npx agentic-code skills --path ./custom/skills
 # Installs to ./custom/skills/agentic-code/
 ```
 

@@ -6,6 +6,15 @@ const { execSync } = require('child_process');
 
 // Parse command line arguments
 const args = process.argv.slice(2);
+
+// Subcommand routing
+if (args[0] === 'skills') {
+  // Delegate to install-codex-skills
+  const installSkills = require('./install-codex-skills');
+  installSkills.run(args.slice(1));
+  process.exit(0);
+}
+
 const projectName = args[0];
 
 // Show help if no project name provided
@@ -14,12 +23,15 @@ if (!projectName) {
 🤖 Agentic Code - Task-oriented context engineering framework
 
 Usage:
-  npx github:shinpr/agentic-code <project-name>
+  npx agentic-code <project-name>       Create a new project
+  npx agentic-code skills [options]     Install skills to Codex CLI
 
 Examples:
-  npx github:shinpr/agentic-code my-project
+  npx agentic-code my-project
+  npx agentic-code skills --codex
+  npx agentic-code skills --codex --project
 
-Skills include language-specific references (e.g., .agents/skills/coding-rules/references/typescript.md)
+For skills options, run: npx agentic-code skills --help
 `);
   process.exit(1);
 }
