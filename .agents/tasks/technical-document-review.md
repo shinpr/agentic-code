@@ -168,6 +168,7 @@ When sources exist:
 - Content quality issues exist
 - Failure scenarios partially covered
 - Medium severity issues present
+- Complexity level is medium/high but rationale does not justify necessity (Design Docs)
 
 **blocked**:
 - Critical sections missing
