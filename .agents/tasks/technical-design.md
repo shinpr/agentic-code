@@ -101,6 +101,7 @@ Create ADR and Design Documents.
 □ Testing strategy outlined
 □ Acceptance criteria defined and verifiable
 □ References cited
+□ Complexity assessment completed (if medium/high, rationale justifies necessity)
 
 ## Mandatory Process Before Document Creation [STRICT COMPLIANCE]
 
@@ -263,6 +264,8 @@ Option [X] selected. Rationale: [2-3 sentences with trade-offs]
 ```yaml
 design_type: "new_feature|extension|refactoring"
 risk_level: "low|medium|high"
+complexity_level: "low|medium|high"
+complexity_rationale: "[Required if medium/high: which requirements necessitate this complexity]"
 main_constraints:
   - "[constraint 1]"
   - "[constraint 2]"
