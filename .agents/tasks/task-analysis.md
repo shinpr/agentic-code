@@ -100,6 +100,51 @@ Count affected components:
 - Integration complexity
 - Testing requirements
 
+#### File Count Estimation Process [MANDATORY]
+
+Before determining scale, investigate existing code with concrete steps:
+
+1. **Identify entry points**: Find files directly related to the task (e.g., components, API endpoints, handlers)
+2. **Trace dependencies**: Follow imports and callers to discover connected files
+3. **Include test files**: Add related test files to the count
+4. **List explicitly**: Document affected file paths as evidence for scale determination
+
+**Scale determination must cite specific file paths as evidence.**
+
+Example output:
+```
+Affected Files (5 files → Medium scale):
+- src/components/UserProfile.tsx (modify)
+- src/hooks/useUser.ts (modify)
+- src/api/userApi.ts (modify)
+- src/components/__tests__/UserProfile.test.tsx (modify)
+- src/hooks/__tests__/useUser.test.ts (modify)
+```
+
+#### Scale Confidence
+
+Indicate certainty level of scale determination:
+
+- **confirmed**: Scale is certain based on clear requirements and identified files
+- **provisional**: Scale may change depending on user answers to clarifying questions
+
+When provisional, always document **Scope Dependencies** - questions whose answers affect scale.
+
+#### Scope Dependencies
+
+When scale confidence is provisional, explicitly document factors that could change the scale:
+
+```
+Scope Dependencies:
+- Authentication method: Use existing OAuth → Medium (3 files) / New implementation → Large (8 files)
+- Caching requirement: None → Medium / Required → Large (adds Redis integration)
+```
+
+This enables:
+1. User to understand what decisions affect scope
+2. Re-evaluation when requirements are clarified
+3. Transparent reasoning for scale determination
+
 ### Step 4: Execute Rule Selection [BLOCKING CHECKPOINT]
 
 **EXECUTION GATES - System HALTS if any step skipped:**
@@ -245,7 +290,15 @@ Based on scale and complexity:
 [RULE SELECTION CHECKPOINT]
 Task Type: [type]
 Task Scale: [scale]
+Scale Confidence: [confirmed/provisional]
 SESSION_BASELINE_DATE: [stored date from initial setup]
+
+Affected Files:
+- [path/to/file1] (create/modify)
+- [path/to/file2] (create/modify)
+
+Scope Dependencies (if provisional):
+- [Question that affects scale]: If [condition A] → [scale], If [condition B] → [scale]
 
 Path Recommendation:
 - [Direct execution of task definitions] OR
