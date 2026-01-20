@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.6.4-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.6.6-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
