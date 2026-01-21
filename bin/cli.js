@@ -9,8 +9,8 @@ const args = process.argv.slice(2);
 
 // Subcommand routing
 if (args[0] === 'skills') {
-  // Delegate to install-codex-skills
-  const installSkills = require('./install-codex-skills');
+  // Delegate to install-skills
+  const installSkills = require('./install-skills');
   installSkills.run(args.slice(1));
   process.exit(0);
 }
@@ -24,12 +24,13 @@ if (!projectName) {
 
 Usage:
   npx agentic-code <project-name>       Create a new project
-  npx agentic-code skills [options]     Install skills to Codex CLI
+  npx agentic-code skills [options]     Install skills to Codex/Cursor
 
 Examples:
   npx agentic-code my-project
   npx agentic-code skills --codex
-  npx agentic-code skills --codex --project
+  npx agentic-code skills --cursor
+  npx agentic-code skills --cursor --project
 
 For skills options, run: npx agentic-code skills --help
 `);

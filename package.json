@@ -1,6 +1,6 @@
 {
   "name": "agentic-code",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "description": "Task-oriented context engineering framework for LLM coding agents - AGENTS.md standard compliant",
   "files": [
     "bin/",

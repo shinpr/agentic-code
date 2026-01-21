@@ -4,7 +4,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.6.6-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.6.7-blue.svg)](package.json)
 
 ![Demo: Building a Slack bot with Agentic Code](.github/assets/demo.gif)
 
@@ -34,7 +34,7 @@ npx agentic-code my-project && cd my-project
 # Ready to go
 ```
 
-That's it. Works with **any AI tool** - Codex, Cursor, Aider, or anything [AGENTS.md](https://agents.md) compatible.
+That's it. Works with **any AI tool** - Cursor, Codex, Aider, or anything [AGENTS.md](https://agents.md) compatible.
 
 ## Why This Exists
 
@@ -110,6 +110,20 @@ cp -r path/to/agentic-code/.agents .
 
 `.agents/skills/` contains reusable skill files in the [Codex Skills format](https://github.com/openai/codex/blob/main/docs/skills.md). Each skill has a `SKILL.md` with instructions that AI agents can discover and apply.
 
+**Cursor**: Install skills for Cursor Editor:
+
+```bash
+# User scope (all projects)
+npx agentic-code skills --cursor
+# Installs to ~/.cursor/skills/agentic-code/
+
+# Project scope (current project only)
+npx agentic-code skills --cursor --project
+# Installs to ./.cursor/skills/agentic-code/
+```
+
+> Note: Skills feature in Cursor requires Nightly release channel.
+
 **Codex**: Install skills for Codex CLI:
 
 ```bash
@@ -120,16 +134,19 @@ npx agentic-code skills --codex
 # Project scope (current project only)
 npx agentic-code skills --codex --project
 # Installs to ./.codex/skills/agentic-code/
+```
 
-# Custom path
+**Custom path**:
+
+```bash
 npx agentic-code skills --path ./custom/skills
 # Installs to ./custom/skills/agentic-code/
 ```
 
 ## Common Questions
 
-**Q: Can I use this with other AI coding tools besides Codex?**  
-Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Aider, and other LLM-assisted development environments.
+**Q: Can I use this with other AI coding tools?**
+Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Codex, Aider, and other LLM-assisted development environments.
 
 **Q: What programming languages are supported?**
 The framework is language-agnostic and works with any programming language through general development principles. TypeScript-specific rules are available in `skills/*/references/typescript.md`.
