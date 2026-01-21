@@ -16,8 +16,12 @@ const TARGETS = {
     name: 'agentic-code',
     description: 'OpenAI Codex CLI',
     postInstall: 'Restart Codex to load the skills.\nNote: Enable skills with --enable skills flag or in config.toml'
+  },
+  cursor: {
+    name: 'agentic-code',
+    description: 'Cursor Editor',
+    postInstall: 'Restart Cursor to load the skills.\nNote: Skills feature requires Nightly release channel.'
   }
-  // Future targets can be added here
 };
 
 // Get target directory based on target and scope
@@ -29,6 +33,14 @@ function getTargetDir(targetKey, scope) {
     // User scope: respect CODEX_HOME environment variable
     const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), '.codex');
     return path.join(codexHome, 'skills');
+  }
+  if (targetKey === 'cursor') {
+    if (scope === SCOPES.project) {
+      return path.join(process.cwd(), '.cursor', 'skills');
+    }
+    // User scope: respect CURSOR_CONFIG_DIR environment variable
+    const cursorHome = process.env.CURSOR_CONFIG_DIR || path.join(os.homedir(), '.cursor');
+    return path.join(cursorHome, 'skills');
   }
   return null;
 }
@@ -91,18 +103,25 @@ Usage: npx agentic-code skills [options]
 
 Options:
   --codex         Install skills to Codex CLI (default)
+  --cursor        Install skills to Cursor Editor
   --project       Install to project scope instead of user scope
   --path <path>   Install to custom path
   --help          Show this help message
 
 Scopes:
-  user (default)  Install to user directory (~/.codex/skills/ or $CODEX_HOME/skills/)
-  project         Install to current project (./.codex/skills/)
+  user (default)  Install to user directory
+  project         Install to current project
+
+Target directories:
+  Codex:   ~/.codex/skills/ (user) or ./.codex/skills/ (project)
+  Cursor:  ~/.cursor/skills/ (user) or ./.cursor/skills/ (project)
 
 Examples:
   npx agentic-code skills                    # Install to ~/.codex/skills/ (user scope)
   npx agentic-code skills --codex            # Same as above (explicit)
   npx agentic-code skills --codex --project  # Install to ./.codex/skills/ (project scope)
+  npx agentic-code skills --cursor           # Install to ~/.cursor/skills/ (user scope)
+  npx agentic-code skills --cursor --project # Install to ./.cursor/skills/ (project scope)
   npx agentic-code skills --path ./my-skills # Install to ./my-skills/agentic-code
 `);
     process.exit(0);
@@ -112,7 +131,9 @@ Examples:
 
   // Determine target (default: codex)
   let targetKey = customPath ? 'custom' : 'codex';
-  if (args.includes('--codex')) {
+  if (args.includes('--cursor')) {
+    targetKey = customPath ? 'custom' : 'cursor';
+  } else if (args.includes('--codex')) {
     targetKey = customPath ? 'custom' : 'codex';
   }
 
