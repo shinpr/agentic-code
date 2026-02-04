@@ -60,6 +60,9 @@ Confirm document type and determine validation baseline:
 
 ### Stage 2: Structure Compliance Check
 
+#### Gate 0: Structural Existence (must pass before quality review)
+Verify required elements exist per template. Gate 0 failure on any item → `blocked`.
+
 #### For Design Doc
 
 | Required Section | Check Item |
@@ -68,12 +71,18 @@ Confirm document type and determine validation baseline:
 | Design Summary (Meta) | risk_level, constraints, unknowns defined |
 | Agreement Checklist | Scope/Non-scope/Constraints documented |
 | Existing Codebase Analysis | Investigation results included |
+| Applicable Standards | Explicit/implicit classification listed |
+| Code Inspection Evidence | Inspected files and functions recorded |
 | Acceptance Criteria | Specific, testable conditions |
 | Architecture | Approach, components, data flow defined |
 | Integration Points | External dependencies identified |
+| Field Propagation Map | Present when fields cross boundaries |
 | Testing Strategy | Test approach outlined |
 | Risks and Mitigations | Technical risks documented |
 | References | Sources cited |
+
+#### Gate 1: Quality Assessment (only after Gate 0 passes)
+Proceed to Stage 3-5 only after all Gate 0 structural checks pass.
 
 #### For ADR
 
@@ -104,8 +113,10 @@ Confirm document type and determine validation baseline:
 | Specificity | Concrete, not vague | Abstract statements without examples |
 | Testability | Acceptance criteria verifiable | Cannot be tested |
 | Consistency | No internal contradictions | Sections contradict each other |
-| Completeness | All required sections present | Missing sections |
+| Completeness | All required sections present with depth | Missing sections |
 | Clarity | Unambiguous language | Multiple interpretations possible |
+| Rationale Verification | Design decisions reference identified standards | Unverifiable rationale without standard reference |
+| Code Inspection Evidence | Inspected files relevant to design scope | Key related files missing from evidence |
 
 ### Stage 4: Failure Scenario Review (Design Docs Only)
 
@@ -153,17 +164,25 @@ When sources exist:
 - [ ] Terminology used consistently
 - [ ] Scope aligned throughout document
 
+### Design Doc Additional Validation
+- [ ] Gate 0 structural existence checks pass before quality review
+- [ ] Design decision rationales verified against identified standards/patterns
+- [ ] Code inspection evidence covers files relevant to design scope
+- [ ] Field propagation map present when fields cross component boundaries
+
 ## Output Format
 
 ### Status Determination
 
 **approved**:
+- Gate 0: All structural existence checks pass
 - All required sections present and complete
 - Content is specific and testable
 - Failure scenarios covered (Design Docs)
 - No high severity issues
 
 **needs_revision**:
+- Gate 0: All structural existence checks pass
 - Some sections incomplete
 - Content quality issues exist
 - Failure scenarios partially covered
@@ -171,6 +190,7 @@ When sources exist:
 - Complexity level is medium/high but rationale does not justify necessity (Design Docs)
 
 **blocked**:
+- Gate 0: Any structural existence check fails OR
 - Critical sections missing
 - Major contradictions found
 - Document type unclear
@@ -186,6 +206,9 @@ verdict: approved | needs_revision | blocked
 completenessRate: [X]%
 
 [STRUCTURE COMPLIANCE]
+gate0:
+  status: pass | fail
+  missing_elements: []
 requiredSections: [count]
 presentSections: [count]
 missingSections:
