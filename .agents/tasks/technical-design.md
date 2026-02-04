@@ -102,12 +102,31 @@ Create ADR and Design Documents.
 □ Acceptance criteria defined and verifiable
 □ References cited
 □ Complexity assessment completed (if medium/high, rationale justifies necessity)
+□ Standards identification gate completed
+□ Code inspection evidence recorded
+□ Data representation decision documented (when new structures introduced)
+□ Field propagation map included (when fields cross boundaries)
 
 ## Mandatory Process Before Document Creation [STRICT COMPLIANCE]
 
 **These steps MUST be completed to pass the entry gate:**
 
-### 1. Existing Documentation Investigation [REQUIRED - CANNOT SKIP]
+### 1. Standards Identification Gate [REQUIRED - CANNOT SKIP]
+Must be performed before any investigation:
+
+1. **Identify Project Standards**
+   - Scan project configuration, rule files, and existing code patterns
+   - Classify each: **Explicit** (documented) or **Implicit** (observed pattern only)
+
+2. **Record in Design Doc**
+   - List in "Applicable Standards" section with `[explicit]`/`[implicit]` tags
+   - Implicit standards require user confirmation before design proceeds
+
+3. **Alignment Rule**
+   - Design decisions must reference applicable standards
+   - Deviations require documented rationale
+
+### 2. Existing Documentation Investigation [REQUIRED - CANNOT SKIP]
 Must be performed before any design:
 
 1. **PRD Investigation** (if applicable)
@@ -128,7 +147,7 @@ Must be performed before any design:
    - Check for superseded ADRs that might need updating
    - List applicable ADRs in "Prerequisite ADRs" section
 
-### 2. Existing Code Investigation [REQUIRED - CANNOT SKIP]
+### 3. Existing Code Investigation [REQUIRED - CANNOT SKIP]
 Must be performed after documentation review:
 
 1. **Implementation File Path Verification**
@@ -153,7 +172,24 @@ Must be performed after documentation review:
    - Clearly document similar functionality search results
    - Record adopted decision and rationale
 
-### 3. Agreement Checklist【MOST IMPORTANT】
+5. **Code Inspection Evidence**
+   - Record all inspected files and key functions in "Code Inspection Evidence" section of Design Doc
+   - Each entry must state relevance (similar functionality / integration point / pattern reference)
+
+### 4. Data Representation Decision [REQUIRED WHEN APPLICABLE]
+When the design introduces or significantly modifies data structures:
+
+1. **Reuse-vs-New Assessment**
+   - Search for existing structures with overlapping purpose
+   - Evaluate: semantic fit, responsibility fit, lifecycle fit, boundary/interop cost
+
+2. **Decision Rule**
+   - All criteria satisfied → Reuse existing
+   - 1-2 criteria fail → Evaluate extension with adapter
+   - 3+ criteria fail → New structure justified
+   - Record decision and rationale in Design Doc
+
+### 5. Agreement Checklist【MOST IMPORTANT】
 Must be performed at the beginning of Design Doc creation:
 
 1. **List agreements with user in bullet points**
@@ -167,7 +203,7 @@ Must be performed at the beginning of Design Doc creation:
    - [ ] Confirm no design contradicts agreements
    - [ ] If any agreements not reflected, state reason
 
-### 4. Latest Information Research [BLOCKING REQUIREMENT]
+### 6. Latest Information Research [BLOCKING REQUIREMENT]
 
 **Web research MUST use SESSION_BASELINE_DATE year - NEVER hardcoded years:**
 - Format: "[technology] best practices [YEAR from SESSION_BASELINE_DATE]"
@@ -283,8 +319,18 @@ unknowns:
 - [ ] Constraints: [limitations]
 - [ ] Performance: [requirements]
 
+#### Applicable Standards
+- [ ] [Standard/convention] `[explicit]` - Source: [config / rule file / documentation path]
+- [ ] [Observed pattern] `[implicit]` - Evidence: [file paths] - Confirmed: [Yes/No]
+
 ## Existing Codebase Analysis
 [Investigation results, similar functionality, decision]
+
+### Code Inspection Evidence
+
+| File/Function | Relevance |
+|---------------|-----------|
+| [path:function] | [similar functionality / integration point / pattern reference] |
 
 ## Requirements
 [Functional, Non-functional, Constraints]
@@ -313,6 +359,17 @@ unknowns:
 ### Integration Point Analysis [MANDATORY for feature modifications]
 [Use format from section above]
 
+### Data Representation Decision (When Introducing New Structures)
+
+| Criterion | Assessment | Reason |
+|-----------|-----------|--------|
+| Semantic Fit | [Yes/No] | [Does existing structure's meaning align?] |
+| Responsibility Fit | [Yes/No] | [Same bounded context?] |
+| Lifecycle Fit | [Yes/No] | [Same creation/mutation/deletion timing?] |
+| Boundary/Interop Cost | [Low/Medium/High] | [Cost of sharing across boundaries?] |
+
+**Decision**: [reuse / extend / new] — [rationale in 1-2 sentences]
+
 ## Implementation Details
 
 ### Technology Stack
@@ -320,6 +377,12 @@ unknowns:
 
 ### Change Impact Map
 [Target, Direct impact, Indirect impact]
+
+### Field Propagation Map (When Fields Cross Boundaries)
+
+| Field | Boundary | Status | Detail |
+|-------|----------|--------|--------|
+| [field name] | [Component A → B] | preserved / transformed / dropped | [logic or reason] |
 
 ## Testing Strategy
 [Unit and integration test approaches]
