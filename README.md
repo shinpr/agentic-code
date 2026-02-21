@@ -1,6 +1,7 @@
-# Agentic Code
+# Agentic Code — AGENTS.md Workflow Framework for AI Coding Agents
 
-Your AI (LLM), guided by built-in workflows. Describe what you want, and it follows a professional development process.
+Agentic coding workflows for Cursor, Codex, Gemini CLI, and any
+AGENTS.md-compatible tool. Zero config, test-first, language-agnostic.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compliant-blue.svg)](https://agents.md)
@@ -10,7 +11,7 @@ Your AI (LLM), guided by built-in workflows. Describe what you want, and it foll
 
 *AI builds a Slack bot with tests & docs — in 30s*
 
-## What You Get
+## How Agentic Code Works
 
 ```
 You: "Build a Slack bot with Gemini API"
@@ -22,10 +23,7 @@ AI:  ✓ Reads AGENTS.md
      ✓ Verifies everything works
 ```
 
-**Works out of the box—no configuration or learning curve required.**
-
-> **Using Claude Code with TypeScript?**  
-> Check out **[AI Coding Project Boilerplate](https://github.com/shinpr/ai-coding-project-boilerplate)** - a specialized alternative optimized for that specific stack.
+**Works out of the box — no configuration required.**
 
 ## Quick Start (30 seconds)
 
@@ -34,9 +32,18 @@ npx agentic-code my-project && cd my-project
 # Ready to go
 ```
 
-That's it. Works with **any AI tool** - Cursor, Codex, Aider, or anything [AGENTS.md](https://agents.md) compatible.
+That's it. Works with **Cursor, Codex, Gemini CLI**, and [many AGENTS.md-compatible tools](https://agents.md).
 
-## Why This Exists
+## Compatible Tools
+
+| Tool | Support | Notes |
+|------|---------|-------|
+| [Cursor](https://cursor.com) | Primary | Skills installation via `npx agentic-code skills --cursor` |
+| [Codex](https://github.com/openai/codex) | Primary | Skills installation via `npx agentic-code skills --codex` |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Primary | Reads AGENTS.md automatically |
+| Any AGENTS.md tool | Compatible | [See full list at agents.md](https://agents.md) |
+
+## Problems with AI Coding Agents
 
 Every AI coding tool has the same problems:
 - Forgets your project structure after 10 messages
@@ -46,7 +53,7 @@ Every AI coding tool has the same problems:
 
 **We built the solution into the framework.** AGENTS.md guides your AI through professional workflows automatically.
 
-## What Makes It Different
+## Features
 
 ### 🎯 **Zero Configuration**
 Pre-built workflows that work without setup.
@@ -61,7 +68,7 @@ Generates test skeletons before writing implementation code.
 - Simple task → Direct execution
 - Complex feature → Full workflow with approvals
 
-## How It Actually Works
+## Architecture: Tasks, Workflows, and Skills
 
 1. **AGENTS.md tells your AI the process** - Like a README but for AI agents
 2. **Progressive rule loading** - Only loads what's needed, when needed
@@ -92,7 +99,7 @@ You: "Build user authentication system"
 #     Implementation → Quality checks → Done
 ```
 
-## Installation Options
+## Install
 
 ### For New Projects
 ```bash
@@ -143,10 +150,16 @@ npx agentic-code skills --path ./custom/skills
 # Installs to ./custom/skills/agentic-code/
 ```
 
-## Common Questions
+## FAQ
+
+**Q: What is AGENTS.md?**
+AGENTS.md is an [open community standard](https://agents.md) that tells AI coding agents how to work in your project. It defines tasks, workflows, and quality standards so that any compatible tool follows a consistent development process.
+
+**Q: How does agentic coding differ from AI code completion?**
+AI code completion suggests the next line. Agentic coding gives the AI an entire workflow—requirements analysis, architecture planning, test-first development, and quality checks—so it builds features the way a professional developer would.
 
 **Q: Can I use this with other AI coding tools?**
-Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Codex, Aider, and other LLM-assisted development environments.
+Yes! This framework works with any AGENTS.md-compatible tool like Cursor, Codex, Gemini CLI, and other LLM-assisted development environments.
 
 **Q: What programming languages are supported?**
 The framework is language-agnostic and works with any programming language through general development principles. TypeScript-specific rules are available in `skills/*/references/typescript.md`.
@@ -160,10 +173,13 @@ Check if your tool is [AGENTS.md compatible](https://agents.md). If so, point it
 **Q: Can I customize the workflows?**  
 Yes, everything in `.agents/` is customizable. The defaults are production-ready, but you can adapt them to your team's process.
 
-**Q: What about my existing codebase?**  
+**Q: What about my existing codebase?**
 It works with existing projects. Your AI analyzes the code and follows your established patterns.
 
-## The Technical Stuff
+**Q: Does this work with local LLMs?**
+Yes, as long as your AI tool reads AGENTS.md. The framework is model-agnostic—it works with cloud APIs and local models alike.
+
+## Technical Details
 
 The framework has three pillars:
 
@@ -291,6 +307,6 @@ MIT - Use it however you want.
 
 ---
 
-Built on the [AGENTS.md standard](https://agents.md) — an open community specification for AI coding agents.
+Built on the [AGENTS.md specification](https://agents.md) — an open community specification for AI coding agents.
 
 **Ready to code properly with AI?** `npx agentic-code my-project`
