@@ -43,6 +43,12 @@ That's it. Works with **Cursor, Codex, Gemini CLI**, and [many AGENTS.md-compati
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | Primary | Reads AGENTS.md automatically |
 | Any AGENTS.md tool | Compatible | [See full list at agents.md](https://agents.md) |
 
+## Using Codex?
+
+If you mainly use Codex, see [codex-workflows](https://github.com/shinpr/codex-workflows) for a more Codex-specific setup.
+
+It includes subagents-based isolation for review and verification tasks, improving reliability by separating context inside the same working session.
+
 ## Problems with AI Coding Agents
 
 Every AI coding tool has the same problems:
