@@ -8,7 +8,7 @@ It does not generate an application by itself. It gives a coding agent a repeata
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compatible-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.7.1-blue.svg)](package.json)
 
 ## What It Provides
 
