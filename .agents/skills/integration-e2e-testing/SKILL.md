@@ -1,41 +1,9 @@
 ---
 name: integration-e2e-testing
-description: "Designs integration and E2E tests with mock boundaries. Use when: writing E2E tests, integration tests, or reviewing test quality."
+description: "Applies integration and E2E implementation, mock-boundary, and review rules. Use when: writing integration or E2E tests or reviewing their quality."
 ---
 
-# Integration Test & E2E Test Design/Implementation Rules
-
-## Test Types and Limits
-
-| Type | Purpose | Limit |
-|------|---------|-------|
-| Integration Test | Component interaction verification | 3 per feature |
-| E2E Test | Critical user journey verification | 1-2 per feature |
-
-## Behavior-First Principle
-
-### Observability Check (All YES = Include)
-
-| Check | Question | If NO |
-|-------|----------|-------|
-| Observable | Can user observe the result? | Exclude |
-| System Context | Does it require integration of multiple components? | Exclude |
-| Automatable | Can it run stably in CI environment? | Exclude |
-
-### Include/Exclude Criteria
-
-**Include**: Business logic accuracy, data integrity, user-visible features, error handling
-**Exclude**: External live connections, performance metrics, implementation details, UI layout
-
-## Skeleton Specification
-
-### Required Comment Format
-
-Each test skeleton MUST include:
-- **AC**: Original acceptance criteria text
-- **ROI**: Calculated score with Business Value and Frequency
-- **Behavior**: Trigger → Process → Observable Result format
-- **Metadata**: @category, @dependency, @complexity annotations
+# Integration and E2E Test Implementation and Review Rules
 
 ## Implementation Rules
 

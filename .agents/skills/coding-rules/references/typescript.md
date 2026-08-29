@@ -1,142 +1,39 @@
 # TypeScript-Specific Rules
 
+Use these rules after inspecting the repository's TypeScript configuration, formatter, linter, framework conventions, and representative code. Repository contracts take precedence over generic preferences.
+
 ## Type Safety
 
-**Principle**: Use `unknown` + type guards instead of `any` for full type safety.
+- Receive untrusted external input as `unknown` and narrow it at the boundary.
+- Prefer inference, generics, unions, and discriminated unions over broad assertions.
+- Use `satisfies` when it verifies a shape while preserving useful inference.
+- Use assertions only when runtime or repository evidence establishes the type more strongly than TypeScript can express.
+- Model external API shapes as they exist, then convert them into internal domain shapes where responsibilities differ.
 
-**any Type Alternatives (Priority Order)**
-1. **unknown Type + Type Guards**
-2. **Generics**
-3. **Union Types・Intersection Types**
-4. **Type Assertions (Last Resort)**: Only when type is certain
+Add branded types, template-literal types, deep generic helpers, or custom validation only when they protect a current contract or remove demonstrated ambiguity. Type complexity is judged by readability, ownership, and change cost rather than fixed field, optional-property, or nesting counts.
 
-**Type Guard Implementation Pattern**
-```typescript
-// Safely validate external input
-function isUser(value: unknown): value is User {
-  return typeof value === 'object' && value !== null &&
-    'id' in value && 'name' in value
-}
-// Usage: if (isUser(data)) { /* data is typed as User */ }
-```
+## Functions and Data Shapes
 
-**Modern Type Features**
-- **satisfies Operator**: Type check while preserving type inference
-  ```typescript
-  const config = { port: 3000 } satisfies Config  // ✅ Preserves inference
-  const config: Config = { port: 3000 }           // ❌ Loses inference
-  ```
-- **const Assertion**: Ensure immutability with literal types
-  ```typescript
-  const ROUTES = { HOME: '/' } as const satisfies Routes  // ✅ Immutable and type-safe
-  ```
-- **Branded Types**: Distinguish meaning for same primitive types
-  ```typescript
-  type UserId = string & { __brand: 'UserId' }
-  type OrderId = string & { __brand: 'OrderId' }
-  // UserId and OrderId are incompatible - prevents mixing
-  ```
-- **Template Literal Types**: Express string patterns with types
-  ```typescript
-  type Route = `/${string}`
-  type HttpMethod = 'GET' | 'POST'
-  type Endpoint = `${HttpMethod} ${Route}`
-  ```
+- Follow repository conventions for functions, classes, interfaces, and object parameters.
+- Group parameters when they form one coherent concept or when call-site clarity improves.
+- Use classes when a framework requires them or when identity, state, and behavior form one responsibility.
+- Keep dependencies visible at the boundary appropriate to the repository architecture.
 
-**Type Safety in Implementation**
-- API Communication: Always receive responses as `unknown`, validate with type guards
-- Form Input: External input as `unknown`, type determined after validation
-- Legacy Integration: Stepwise assertion like `window as unknown as LegacyWindow`
-- Test Code: Always define types for mocks, utilize `Partial<T>` and `vi.fn<[Args], Return>()`
+## Async and Errors
 
-**Type Safety in Data Flow**
-Input Layer (`unknown`) → Type Guard → Business Layer (Type Guaranteed) → Output Layer (Serialization)
+- Await or explicitly return promises so ownership of async work is clear.
+- Catch an error only where the code can recover, add useful context, or translate the receiving contract.
+- Preserve the original cause when wrapping errors.
+- Use a `Result`-style value only when it fits the repository's established error contract.
+- Central process-level handlers are application concerns, not a requirement for every TypeScript module.
 
-**Type Complexity Management**
-- Field Count: Up to 20 (split by responsibility if exceeded, external API types are exceptions)
-- Optional Ratio: Up to 30% (separate required/optional if exceeded)
-- Nesting Depth: Up to 3 levels (flatten if exceeded)
-- Type Assertions: Review design if used 3+ times
-- **External API Types**: Relax constraints and define according to reality (convert appropriately internally)
+## Imports and Formatting
 
-## Coding Conventions
+Use the repository's `tsconfig`, module system, formatter, and lint rules for paths, semicolons, naming, and import ordering. Do not introduce a new convention inside an unrelated change.
 
-**Class Usage Criteria**
-- **Recommended: Implementation with Functions and Interfaces**
-  - Rationale: Improves testability and flexibility of function composition
-- **Classes Allowed**:
-  - Framework requirements (NestJS Controller/Service, TypeORM Entity, etc.)
-  - Custom error class definitions
-  - When state and business logic are tightly coupled (e.g., ShoppingCart, Session, StateMachine)
-- **Decision Criterion**: If "Does this data have behavior?" is Yes, consider using a class
-  ```typescript
-  // ✅ Functions and interfaces
-  interface UserService { create(data: UserData): User }
-  const userService: UserService = { create: (data) => {...} }
-  // ❌ Unnecessary class
-  class UserService { create(data: UserData) {...} }
-  ```
+## Completion Check
 
-**Function Design**
-```typescript
-// ✅ Object parameter
-function createUser({ name, email, role }: CreateUserParams) {}
-// ❌ Multiple parameters
-function createUser(name: string, email: string, role: string) {}
-```
-
-**Dependency Injection**
-```typescript
-// ✅ Receive dependency as parameter
-function createService(repository: Repository) { return {...} }
-// ❌ Direct import dependency
-import { userRepository } from './infrastructure/repository'
-```
-
-**Asynchronous Processing**
-- Promise Handling: Always use `async/await`
-- Error Handling: Always handle with `try-catch`
-- Type Definition: Explicitly define return value types (e.g., `Promise<Result>`)
-
-**Format Rules**
-- Semicolon omission (follow Biome settings)
-- Types in `PascalCase`, variables/functions in `camelCase`
-- Imports use absolute paths (`src/`)
-
-## Error Handling
-
-**Result Type Pattern**: Express errors with types for explicit handling
-```typescript
-type Result<T, E> = { ok: true; value: T } | { ok: false; error: E }
-
-// Example: Express error possibility with types
-function parseUser(data: unknown): Result<User, ValidationError> {
-  if (!isValid(data)) return { ok: false, error: new ValidationError() }
-  return { ok: true, value: data as User }
-}
-```
-
-**Custom Error Classes**
-```typescript
-export class AppError extends Error {
-  constructor(message: string, public readonly code: string, public readonly statusCode = 500) {
-    super(message)
-    this.name = this.constructor.name
-  }
-}
-// Purpose-specific: ValidationError(400), BusinessRuleError(400), DatabaseError(500), ExternalServiceError(502)
-```
-
-**Asynchronous Error Handling**
-- Global handler setup mandatory: `unhandledRejection`, `uncaughtException`
-- Use try-catch with all async/await
-- Always log and re-throw errors
-
-## Refactoring Priority
-
-Duplicate Code Removal > Large Function Division > Complex Conditional Branch Simplification > **Type Safety Improvement**
-
-## Performance Optimization
-
-- Streaming Processing: Process large datasets with streams
-- Memory Leak Prevention: Explicitly release unnecessary objects
+- External inputs are narrowed before trusted use.
+- Assertions and advanced types protect a current boundary.
+- Async failures remain observable at the correct owner.
+- Repository type-check, build, lint, and formatting commands pass when applicable.

@@ -1,134 +1,37 @@
-# TypeScript/Vitest Testing Rules
+# TypeScript Testing Rules
 
-## Test Framework
-- **Vitest**: This project uses Vitest
-- Test imports: `import { describe, it, expect, beforeEach, vi } from 'vitest'`
-- Mock creation: Use `vi.mock()`
+Use these rules after identifying the repository's test framework, file naming, setup, and scripts. Do not assume Vitest, Jest, a directory layout, or an integration suffix without repository evidence.
 
-## Directory Structure
+## Observable Tests
 
-**File structure:**
-- src/application/services/service.ts: Main service file
-- src/application/services/__tests__/service.test.ts: Unit tests
-- src/application/services/__tests__/service.int.test.ts: Integration tests
+- Assert public outputs, errors, persisted effects, and required interactions.
+- Keep private fields and implementation-only call order outside tests unless they are accepted contracts.
+- Use Arrange-Act-Assert or the repository's equivalent structure when it improves readability.
+- Keep test data minimal and deterministic.
 
-**Naming Conventions:**
-- Test files: `{target-file-name}.test.ts`
-- Integration test files: `{target-file-name}.int.test.ts`
+## Type-Safe Test Doubles
 
-## Cross-functional E2E Test Patterns
+- Model only the collaborator surface used by the test, such as `Pick<T, K>` or a narrow local interface.
+- Use the framework's typed mock utilities when available.
+- Use `unknown` and narrowing for intentionally untrusted values.
+- Use a type assertion for an external SDK double only when a narrower substitute cannot express the required boundary; document the reason near the assertion.
 
-```typescript
-describe('Cross-functional E2E Tests', () => {
-  // Pattern 1: Baseline → Change → Verify
-  it('should maintain existing behavior after new feature', async () => {
-    // 1. Capture baseline
-    const baseline = await testExistingFeature()
+## Integration and E2E
 
-    // 2. Enable new feature
-    await enableNewFeature()
+- Follow repository-native environment setup, cleanup, and fixture patterns.
+- Mock outside the boundary being tested and use real collaborators inside it.
+- Select an E2E test only when the complete journey is the acceptance criterion.
+- Use project-defined performance or timing thresholds; avoid arbitrary multipliers in generic tests.
 
-    // 3. Verify continuity
-    const result = await testExistingFeature()
-    expect(result).toEqual(baseline)
-    expect(result.responseTime).toBeLessThan(
-      baseline.responseTime * 1.2 // Project-specific threshold
-    )
-  })
+## Applicable Commands
 
-  // Pattern 2: Data integrity across features
-  it('should preserve data integrity', async () => {
-    const data = await createTestData()
-    await newFeatureOperation(data.id)
-
-    const retrieved = await existingFeatureGet(data.id)
-    expect(retrieved).toEqual(data) // No unexpected mutations
-  })
-})
-```
-
-**Note**: LLM outputs naturally vary - test behavior, not exact matches
-
-## Test Helper Usage Examples
-
-```typescript
-// ✅ Recommended: Utilize builder pattern
-const testData = new TestDataBuilder()
-  .withDefaults()
-  .withName('Test User')
-  .build()
-
-// ✅ Recommended: Custom assertions
-function assertValidUser(user: unknown): asserts user is User {
-  // Validation logic
-}
-
-// ❌ Avoid: Individual implementation of duplicate complex mocks
-```
-
-## Test Granularity Examples
-
-```typescript
-// ✅ Test observable behavior
-expect(calculatePrice(100, 0.1)).toBe(110)
-
-// ❌ Test implementation details (as any access)
-expect((calculator as any).taxRate).toBe(0.1)
-expect((service as any).validate(input)).toBe(true)
-```
-
-## Mock Type Safety Enforcement
-
-### Minimal Type Definition Requirements
-```typescript
-// ✅ Only required parts
-type TestRepo = Pick<Repository, 'find' | 'save'>
-const mock: TestRepo = { find: vi.fn(), save: vi.fn() }
-
-// Only when absolutely necessary, with clear justification
-const sdkMock = {
-  call: vi.fn()
-} as unknown as ExternalSDK // Complex external SDK type structure
-```
-
-## Basic Vitest Example
-
-```typescript
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-
-// Mock setup example
-vi.mock('./userService', () => ({
-  getUserById: vi.fn(),
-  updateUser: vi.fn()
-}))
-
-describe('ComponentName', () => {
-  it('should follow AAA pattern', () => {
-    // Arrange
-    const input = 'test'
-
-    // Act
-    const result = someFunction(input)
-
-    // Assert
-    expect(result).toBe('expected')
-  })
-})
-```
-
-## Quality Check Commands [MANDATORY for VERIFY phase]
-
-**ALL TypeScript/JavaScript commands MUST pass with 0 errors before task completion:**
+Discover commands from `package.json`, CI configuration, and contributor documentation. Typical script names may include:
 
 ```bash
-npm test              # MUST pass all tests
-npm run build        # MUST build successfully
-npm run lint         # MUST have 0 lint errors
-npm run type-check   # MUST have 0 type errors
+npm test
+npm run build
+npm run lint
+npm run type-check
 ```
 
-**ENFORCEMENT:**
-- Run ALL applicable commands listed above
-- Fix ANY errors or warnings before marking task complete
-- If command doesn't exist in package.json, skip that specific command
-- Document which commands were run in task completion
+Run the focused proof and applicable established checks for the changed surface. Report unavailable commands; add tooling only when the approved outcome or a demonstrated recurring failure requires it.

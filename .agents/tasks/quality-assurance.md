@@ -1,219 +1,71 @@
 # Quality Assurance
 
-## Required Rules [MANDATORY - MUST BE ACTIVE]
-
-**SKILL AVAILABILITY VERIFICATION:**
-1. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
-2. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
-
-**LOADING PROTOCOL:**
-- STEP 1: CHECK if coding-rules/SKILL.md is active in working memory
-- STEP 2: If coding-rules/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 3: CHECK if testing/SKILL.md is active in working memory
-- STEP 4: If testing/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 5: CONFIRM all skills active before executing quality gates
-
-**CRITICAL**: Cannot execute quality checks until ALL required rules confirmed active
-
-## Task Tracking Requirement [MANDATORY]
-
-**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
-1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/skills/coding-rules/SKILL.md` (if not active)
-   - `.agents/skills/testing/SKILL.md` (if not active)
-2. Mark each with "[From quality-assurance.md]" source tag
-3. Show evidence:
-   ```
-   [TASK TRACKING FROM quality-assurance.md]
-   Added to Task List:
-   ✓ BLOCKING READ: coding-rules/SKILL.md - quality standards
-   ✓ BLOCKING READ: testing/SKILL.md - testing requirements
-   Status: VERIFIED
-   ```
-
-**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
-
-**EVIDENCE REQUIRED:**
-```
-Skill Status Verification:
-✓ coding-rules/SKILL.md - ACTIVE (loaded/verified)
-✓ testing/SKILL.md - ACTIVE (loaded/verified)
-```
-
-## Task Completion Gate [STRICT ENFORCEMENT - NO EXCEPTIONS]
-
-**CANNOT mark task as complete until ALL quality checks pass:**
-□ Task Tracking completed (from quality-assurance.md Task Tracking Requirement)
-□ Task List contains ALL BLOCKING READs from this file
-□ Build process succeeds
-□ Tests pass (or no tests if not applicable)
-□ Linting: 0 errors
-□ Static analysis passes (if applicable)
-□ Manual testing performed (if applicable)
-□ Changes committed to git (for implementation tasks)
-□ Task tracking updated (Work Plan checkbox if using workflow)
-
-**If any check fails:**
-→ Fix issues before proceeding
-→ Do NOT skip or mark task complete
-→ Do NOT commit with failing checks
-
 ## Purpose
 
-Ensure code quality through systematic verification and testing.
+Verify the completed change at the narrowest sufficient boundaries and run the repository's applicable established checks.
 
-## When to Use [MANDATORY TIMING]
+## Required Skills
 
-- **After every implementation** (required)
-- **Before marking any task done** (mandatory)
-- When quality issues suspected
-- During code review
-- Before deployment
+- `.agents/skills/coding-rules/SKILL.md`
+- `.agents/skills/testing/SKILL.md`
+- `.agents/skills/metacognition/SKILL.md`
+
+## Required Inputs
+
+- requested outcome and non-goals;
+- changed paths and affected contracts;
+- focused verification selected by implementation or design;
+- repository scripts, CI configuration, and contributor guidance.
+
+## Process
+
+### 1. Discover Applicable Checks
+
+Identify checks the repository already establishes for the changed surface, such as focused tests, broader tests, build, type checking, linting, formatting, generated artifacts, or documented manual verification.
+
+Do not infer universal coverage, complexity, runtime, performance, security, or deployment thresholds when the repository and approved requirements do not define them.
+
+### 2. Run Focused Verification
+
+Execute the proof that directly observes the requested behavior or preserved contract. Confirm that a passing result cannot hide the important failure named by the task.
+
+### 3. Run Applicable Repository Checks
+
+Run the established checks affected by the complete change. Fix failures caused by the current work. Distinguish pre-existing or unrelated failures and report them with evidence.
+
+### 4. Check Scope and Documentation
+
+Confirm:
+
+- delivered behavior matches the approved outcome;
+- non-goals and preserved contracts remain intact;
+- no optional mechanism or unrelated cleanup entered the change;
+- documentation consumed by an affected user or maintainer is current.
+
+### 5. Report Gaps
+
+When a relevant check or environment is unavailable, report what could not be verified and the resulting risk. Add new tooling or operational work only when the approved outcome or a demonstrated recurring failure requires it.
 
 ## Completion Conditions
 
-□ Build process succeeds
-□ All tests pass
-□ Linting reports 0 errors
-□ Code formatting verified
-□ Static analysis passes (if applicable)
-□ Test coverage meets requirements
-□ Performance acceptable
-□ Security checks pass
-□ Documentation updated
+- Focused verification observes the intended result.
+- Applicable established checks pass, or unrelated failures are clearly separated.
+- Scope and contract checks pass.
+- Verification gaps and residual limitations are explicit.
 
-## Execution Guidelines
+## Output
 
-### 1. Build Verification
+```text
+[QUALITY RESULT]
+Focused verification:
+- [command or method]: pass | fail | unavailable
 
-Run project build:
-- Ensure compilation succeeds
-- Check for warnings
-- Verify output artifacts
-- Confirm dependencies resolved
+Applicable repository checks:
+- [command]: pass | fail | not applicable
 
-*Note: Build commands are language-specific. Check testing/SKILL.md*
+Scope and contracts:
+- [boundary]: preserved | changed as approved | issue
 
-### 2. Test Execution
-
-**Test Categories**
-- Unit tests: Individual functions
-- Integration tests: Component interactions
-- End-to-end tests: Full workflows
-- Performance tests: Speed and resources
-- Security tests: Vulnerability checks
-
-**Test Coverage**
-- Minimum: 80% code coverage
-- Critical paths: 100% coverage
-- Edge cases: Documented and tested
-
-### 3. Code Quality Checks
-
-**Static Analysis**
-- Linting: 0 errors required
-- Code formatting: Consistent style
-- Language checks: No errors (static typing, style, etc.)
-- Complexity: Within limits
-
-**Code Review Criteria**
-- Readability: Self-documenting
-- Maintainability: Easy to modify
-- Efficiency: No obvious issues
-- Security: Best practices followed
-
-### 4. Quality Standards
-
-| Aspect | Standard |
-|--------|----------|
-| Functions | ≤ 30 lines |
-| Complexity | ≤ 10 cyclomatic |
-| Duplication | < 5% |
-| Test time | < 30 seconds total |
-| Build time | < 2 minutes |
-| Comments | For non-obvious only |
-
-### 5. Security Validation
-
-Check for:
-- Input validation present
-- SQL injection prevention
-- XSS protection
-- Authentication properly implemented
-- Authorization checks in place
-- Sensitive data encrypted
-- Secrets not hardcoded
-
-### 6. Performance Validation
-
-Verify:
-- Response times acceptable
-- Memory usage reasonable
-- Database queries optimized
-- Caching implemented where needed
-- No unnecessary loops
-- Async operations proper
-
-### 7. Documentation Check
-
-Ensure:
-- README updated if needed
-- API documentation current
-- Complex logic explained
-- Configuration documented
-- Setup instructions clear
-- Breaking changes noted
-
-## Quality Process
-
+Remaining limitations:
+- [evidence-backed gap or none]
 ```
-1. Run build → Must succeed
-2. Run tests → All must pass
-3. Check coverage → Meet minimums
-4. Run linter → 0 errors
-5. Check formatting → Consistent
-6. Review security → No issues
-7. Test performance → Acceptable
-8. Update docs → Current
-```
-
-## Common Issues and Fixes
-
-| Issue | Likely Cause | Fix |
-|-------|-------------|-----|
-| Build fails | Missing dependency | Install dependencies |
-| Tests fail | Logic error | Debug and fix |
-| Lint errors | Style violations | Apply formatting |
-| Static analysis errors | Language violations | Fix definitions/signatures |
-| Slow tests | No mocking | Add test doubles |
-| Security warning | Old dependency | Update packages |
-
-## Tools by Language
-
-Reference `.agents/skills/testing/SKILL.md` for:
-- Language-specific test commands
-- Coverage tools
-- Linting configuration
-- Build processes
-- Security scanners
-
-## Pre-Deployment Checklist
-
-□ All automated tests pass
-□ Manual testing complete
-□ Code reviewed
-□ Documentation updated
-□ Performance verified
-□ Security validated
-□ Rollback plan exists
-□ Monitoring configured
-
-## Anti-Patterns
-
-Avoid:
-- Skipping tests to save time
-- Ignoring warnings
-- Accepting "good enough" quality
-- Testing only happy path
-- Ignoring performance
-- Assuming security is fine

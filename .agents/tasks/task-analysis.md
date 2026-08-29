@@ -1,316 +1,141 @@
 # Task Analysis
 
-## Required Rules [MANDATORY - MUST BE ACTIVE]
-
-**RULE AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/context-maps/task-skills-matrix.yaml`
-
-**LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition.md is active from initial session setup
-- STEP 2: CHECK if task-skills-matrix.yaml is active in working memory
-- STEP 3: If task-skills-matrix.yaml NOT active → Execute BLOCKING READ
-- STEP 4: CONFIRM all rules active before proceeding with task analysis
-
-**EVIDENCE REQUIRED:**
-```
-Rule Status Verification:
-✓ metacognition.md - ACTIVE (from session setup)
-✓ task-skills-matrix.yaml - ACTIVE (loaded/verified)
-```
-
 ## Purpose
 
-Determine task type, scale, and required resources.
+Determine the requested outcome, structural scale, applicable task definition, required skills, and the smallest sufficient execution path.
 
-## When to Use
+## Required Rules
 
-- At the start of any user request
-- When task scope is unclear
-- When switching to a different type of work
+- Keep `.agents/skills/metacognition/SKILL.md` active.
+- Read `.agents/context-maps/task-skills-matrix.yaml` when selecting task-specific skills.
 
 ## Completion Conditions
 
-□ Task type identified (implementation/research/design/documentation/debugging/review/other)
-□ Task scale determined:
-  - Small: 1-2 files affected
-  - Medium: 3-5 files affected
-  - Large: 6+ files affected
-□ Required resources identified:
-  - Rules needed
-  - External dependencies
-  - Existing code to reference
-□ Success criteria defined (measurable)
-□ Constraints and assumptions documented
+- Task type and intended outcome are explicit.
+- Current requirements and non-goals are distinguished from observations and speculation.
+- Structural scale is supported by repository evidence.
+- The selected task definition and required skills are identified.
+- Success criteria and verification boundaries are observable.
+- Unknowns that change the outcome, scale, authority, or execution path are resolved or returned to the user.
 
-## Mandatory Execution Order [STRICT COMPLIANCE REQUIRED]
+## Process
 
-### Step 0: Initial Setup [BLOCKING - CANNOT SKIP]
-If SESSION_BASELINE_DATE not established:
-1. [IMMEDIATE] Execute `date` command
-2. [STORE] Result as SESSION_BASELINE_DATE for ENTIRE session
-3. [ENFORCE] ALL "current/latest/recent" references MUST use SESSION_BASELINE_DATE year
+### 1. Confirm the Outcome
 
-VIOLATION EXAMPLE: Using "2024" in web research when SESSION_BASELINE_DATE shows "2025" = CRITICAL ERROR
+Record:
 
-### Step 1: Understand Request Essence
+- one observable outcome;
+- requirements that must be delivered now;
+- explicit non-goals;
+- supplied constraints and authority boundaries;
+- whether no-change or reuse could satisfy the request.
 
-- What is the user trying to achieve?
-- Is this a symptom or the actual goal?
-- What similar tasks have been done before?
+Treat current-state descriptions and speculative ideas as evidence, not buildable scope, unless the user selected them as requirements.
 
-### Step 2: Classify Task Type [REQUIRED]
+### 2. Classify the Task
 
-**Implementation**: Creating or modifying code
-- New features
-- Bug fixes
-- Refactoring
-- Performance optimization
+| Type | Use when |
+|------|----------|
+| Implementation | Creating or modifying code or configuration |
+| Debugging | Finding the cause of incorrect behavior |
+| Refactoring | Improving structure while preserving behavior |
+| Research | Gathering repository or external evidence |
+| Design | Selecting and documenting a technical approach |
+| Documentation | Creating or updating user-facing or project documentation |
+| Review | Evaluating code, tests, or documents without applying changes |
 
-**Research**: Information gathering
-- Code exploration
-- Architecture analysis
-- Feasibility studies
+When the requested action changes during execution, re-run the classification before crossing into the new task type.
 
-**Design**: Planning and documentation
-- Technical specifications
-- Architecture decisions
-- API design
+### 3. Inspect the Change Surface
 
-**Documentation**: Writing docs
-- README updates
-- API documentation
-- User guides
+Perform the shallowest inspection that can establish:
 
-**Debugging**: Problem solving
-- Error investigation
-- Performance analysis
-- Behavior diagnosis
+- relevant paths, components, and responsibility boundaries;
+- public or shared contracts and callers;
+- integrations, persisted data, and dependency platforms;
+- existing equivalent behavior or representative patterns;
+- existing verification support;
+- unknowns that could change the route.
 
-**Review**: Evaluation and verification
-- Technical document review (design docs, ADRs)
-- Code review
-- Test review (integration/E2E tests)
+Mark evidence as `observed`, `inferred`, or `unknown`. File count may describe the surface but does not determine scale.
 
-### Step 3: Estimate Scale [REQUIRED]
+### 4. Determine Structural Scale
 
-Count affected components:
-- Number of files to create/modify
-- Number of systems/modules involved
-- Integration complexity
-- Testing requirements
+| Scale | Structural condition |
+|-------|----------------------|
+| Small | One coherent outcome follows existing patterns within one responsibility boundary |
+| Medium | One coherent outcome coordinates across a boundary or requires a durable design decision |
+| Large | Multiple independently valuable outcomes require separate design decisions |
 
-#### File Count Estimation Process [MANDATORY]
+A durable design decision materially changes a responsibility, dependency direction, shared contract, persistence model, technology dependency, reversibility, or lifecycle cost that future work must preserve.
 
-Before determining scale, investigate existing code with concrete steps:
+Multiple files or layers serving one coherent outcome remain Medium. Large applies only when separate outcomes require separate design decisions.
 
-1. **Identify entry points**: Find files directly related to the task (e.g., components, API endpoints, handlers)
-2. **Trace dependencies**: Follow imports and callers to discover connected files
-3. **Include test files**: Add related test files to the count
-4. **List explicitly**: Document affected file paths as evidence for scale determination
+Record scale confidence as:
 
-**Scale determination must cite specific file paths as evidence.**
+- `confirmed` when inspected evidence determines the route;
+- `provisional` when a named unknown could change it.
 
-Example output:
-```
-Affected Files (5 files → Medium scale):
-- src/components/UserProfile.tsx (modify)
-- src/hooks/useUser.ts (modify)
-- src/api/userApi.ts (modify)
-- src/components/__tests__/UserProfile.test.tsx (modify)
-- src/hooks/__tests__/useUser.test.ts (modify)
-```
+### 5. Select the Task and Skills
 
-#### Scale Confidence
+1. Read `.agents/context-maps/task-skills-matrix.yaml`.
+2. Match the task type to its required skills.
+3. Add `implementation-approach` for Medium/Large implementation or design work.
+4. Load each selected skill at the point where its rules affect the next decision.
+5. Record why each selected skill changes execution or verification.
 
-Indicate certainty level of scale determination:
+Scale alone does not load coding or testing skills for research, review, or documentation tasks.
 
-- **confirmed**: Scale is certain based on clear requirements and identified files
-- **provisional**: Scale may change depending on user answers to clarifying questions
+### 6. Select the Execution Path
 
-When provisional, always document **Scope Dependencies** - questions whose answers affect scale.
+- **Small**: Load the owning task definition and execute directly.
+- **Medium/Large**: Recommend `.agents/workflows/agentic-coding.md` and obtain user approval before starting it.
 
-#### Scope Dependencies
+Use a task-specific direct path when the user requests only research, review, or documentation and no implementation workflow is needed to produce the requested result.
 
-When scale confidence is provisional, explicitly document factors that could change the scale:
+### 7. Define Completion Evidence
 
-```
-Scope Dependencies:
-- Authentication method: Use existing OAuth → Medium (3 files) / New implementation → Large (8 files)
-- Caching requirement: None → Medium / Required → Large (adds Redis integration)
-```
+Specify:
 
-This enables:
-1. User to understand what decisions affect scope
-2. Re-evaluation when requirements are clarified
-3. Transparent reasoning for scale determination
+- the observable result;
+- the narrowest sufficient verification method;
+- applicable repository checks;
+- user decisions or authority still required;
+- the stopping condition.
 
-### Step 4: Execute Rule Selection [BLOCKING CHECKPOINT]
+Do not create a document, test lane, approval record, or mitigation solely because it is available in a template.
 
-**EXECUTION GATES - System HALTS if any step skipped:**
-1. [BLOCKING READ] `task-skills-matrix.yaml` from `.agents/context-maps/`
-2. [MANDATORY MATCHING] Task type + scale against matrix
-3. [CLASSIFICATION OUTPUT]:
-   - Required rules: IMMEDIATE BLOCKING READ
-   - Recommended rules: EVALUATE context, then BLOCKING READ if applicable
-   - Conditional rules: CHECK conditions, then BLOCKING READ if met
-4. [VERIFICATION GATE] CANNOT PROCEED until ALL required rules loaded
-5. [PROOF OF COMPLIANCE] Output must list:
-   ```
-   Rules Successfully Loaded:
-   ✓ [filepath] - [reason for loading]
-   ✓ [filepath] - [applied to which aspect]
-   ```
-6. [TASK TRACKING] IMMEDIATELY add all identified BLOCKING READs to your internal task management (Task List):
-   ```
-   [BLOCKING READs FROM task-analysis - Rule Selection]
-   Added to Task List:
-   ✓ [filepath] - required rule
-   ✓ [filepath] - conditional rule (condition met)
-   ```
+## Output
 
-### Step 5: Identify Additional Resources
-
-Determine what's needed:
-- Which rule files apply
-- External libraries/tools
-- Reference implementations
-- Documentation sources
-
-### Step 6: Define Success Criteria
-
-- Specific functionality works
-- Tests pass
-- Performance metrics met
-- Documentation complete
-
-### Step 7: Workflow Recommendation
-
-Based on scale and complexity:
-- **Small Scale (1-2 files)**: Direct task execution, no workflow needed
-- **Medium/Large Scale (3+ files)**: RECOMMEND agentic-coding.md workflow
-  - Ask: "This task would benefit from a structured workflow with design document and Work Plan. Proceed? [Y/n]"
-  - If YES: Load and follow agentic-coding.md
-  - If NO: Execute individual task definitions directly
-
-### Step 8: Mandatory Task Tracking [BLOCKING - AUTOMATIC EXECUTION]
-
-**FOR ALL TASKS WITH BLOCKING READ REQUIREMENTS:**
-
-1. **[SCAN FOR BLOCKING READS]** Identify ALL files requiring BLOCKING READ:
-   - From selected workflow (if Medium/Large scale)
-   - From task definitions to be executed
-   - From rules that will be loaded
-
-2. **[ADD TO TASK LIST]** Add ALL identified BLOCKING READs to your internal task management (Task List):
-   ```
-   Task List - BLOCKING READs:
-   □ BLOCKING READ: [file path] - [reason/phase]
-   □ BLOCKING READ: [file path] - [reason/phase]
-   □ Rule Status Verification after each BLOCKING READ
-   ```
-
-3. **[EVIDENCE REQUIRED]** Show task tracking confirmation:
-   ```
-   [TASK TRACKING COMPLETED]
-   Identified BLOCKING READs from:
-   ✓ Workflow phases: [list files]
-   ✓ Task definitions: [list files]
-   ✓ Required rules: [list files]
-
-   Added to Task List:
-   ✓ Total BLOCKING READs: [count]
-   ✓ Verification gates: [count]
-   ```
-
-4. **[ENFORCEMENT]** CANNOT proceed without:
-   - ALL BLOCKING READs identified and added to Task List
-   - Task tracking evidence shown above
-   - Each BLOCKING READ as explicit item in Task List
-
-**VIOLATION HANDLING:**
-- Missing any BLOCKING READ from Task List = IMMEDIATE HALT
-- Skipping any BLOCKING READ during execution = CRITICAL ERROR
-- Proceeding without verification = RETURN TO TASK ANALYSIS
-
-## Deliverables
-
-- Task classification output
-- Path recommendation
-
-## Common Patterns
-
-### Feature Request
-1. Identify core functionality
-2. Estimate component changes
-3. Consider edge cases
-4. Plan testing approach
-
-### Bug Fix
-1. Understand expected vs actual behavior
-2. Identify affected components
-3. Determine root cause approach
-4. Plan verification method
-
-### Refactoring
-1. Identify improvement goals
-2. Assess current structure
-3. Estimate change scope
-4. Plan incremental approach
-
-### Review
-1. Identify review target (document/code/tests)
-2. Load appropriate review task definition
-3. Apply review criteria from task definition
-4. Document findings and recommendations
-
-## Decision Tree
-
-**Code-related?**
-- YES → Creating new code?
-  - YES: Implementation task
-  - NO → Fixing issues?
-    - YES: Debugging task
-    - NO: Refactoring task
-- NO → Evaluating existing work?
-  - YES: Review task → Determine target:
-    - Document (design/ADR) → technical-document-review
-    - Code → code-review
-    - Tests → integration-test-review
-  - NO → Information gathering?
-    - YES: Research task
-    - NO → Planning?
-      - YES: Design task
-      - NO: Documentation task
-
-## Rule Selection Output Format [SYSTEM VERIFICATION REQUIRED]
-
-### BLOCKING OUTPUT - Cannot proceed without this exact format:
-```
-[RULE SELECTION CHECKPOINT]
+```text
+[TASK ANALYSIS]
 Task Type: [type]
-Task Scale: [scale]
-Scale Confidence: [confirmed/provisional]
-SESSION_BASELINE_DATE: [stored date from initial setup]
+Outcome: [observable result]
+Requirements: [current requirements]
+Non-goals: [explicit exclusions]
+Structural Scale: Small | Medium | Large
+Scale Confidence: confirmed | provisional
 
-Affected Files:
-- [path/to/file1] (create/modify)
-- [path/to/file2] (create/modify)
+Change-Surface Evidence:
+- [observed path, boundary, contract, caller, integration, or verification support]
 
-Scope Dependencies (if provisional):
-- [Question that affects scale]: If [condition A] → [scale], If [condition B] → [scale]
+Unknowns:
+- [unknown and the decision it could change]
 
-Path Recommendation:
-- [Direct execution of task definitions] OR
-- [Workflow recommended: agentic-coding.md]
+Execution Path:
+- [direct task definition or agentic-coding workflow]
 
-Required Rules [BLOCKING READS - MUST BE LOADED]:
-✓ [path/to/rule1.md] - LOADED - [applying to: specific aspect]
-✓ [path/to/rule2.md] - LOADED - [applying to: specific aspect]
+Required Skills:
+- [skill path]: [execution or verification effect]
 
-Conditional Rules [LOAD IF CONDITION MET]:
-✓ [path/to/rule3.md] - LOADED - [trigger: "test" keyword found in task]
-✗ [path/to/rule4.md] - NOT LOADED - [trigger not met: no performance requirements]
-
-VERIFICATION: All required rules active in working memory
+Completion Evidence:
+- [observable check and stopping condition]
 ```
+
+## Quality Check
+
+- The route follows structural decisions rather than file count.
+- Every requirement serves the outcome.
+- Every required skill affects a current decision or check.
+- Reuse, no-change, and direct execution remain available when evidence supports them.
+- User questions are reserved for outcome-changing or authority-bound decisions.

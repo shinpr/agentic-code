@@ -35,7 +35,7 @@ skills:
     path: ".agents/skills/documentation-criteria/SKILL.md"
     tags: [documentation, adr, design-doc, decision-matrix, scale-assessment]
     when_to_load:
-      - "Task scale assessment (Small/Medium/Large)"
+      - "Structural scale assessment (Small/Medium/Large)"
       - "Architecture decisions needed"
       - "Creating technical documentation"
       - "New feature planning"
@@ -46,16 +46,16 @@ skills:
 
   testing-strategy:
     path: ".agents/skills/testing-strategy/SKILL.md"
-    tags: [testing, roi-calculation, test-selection, budget-enforcement, behavior-first]
+    tags: [testing, test-selection, behavior-first]
     when_to_load:
       - "Generating acceptance tests from design documents"
       - "Test prioritization and selection"
-      - "ROI-based test strategy decisions"
+      - "Selecting the narrowest sufficient proof boundary"
       - "Preventing test over-generation"
     typical_tasks: [test_generation]
-    size: large
+    size: small
     priority: high
-    description: "ROI-based test selection framework with behavior-first filtering and budget enforcement"
+    description: "Test selection from observable boundaries, repository evidence, and maintenance cost"
 
   integration-e2e-testing:
     path: ".agents/skills/integration-e2e-testing/SKILL.md"
@@ -67,14 +67,14 @@ skills:
     typical_tasks: [test_generation, test_review]
     size: small
     priority: high
-    description: "Integration and E2E test design, implementation rules, and review criteria"
+    description: "Integration and E2E implementation, mock-boundary, and review rules"
 
   # Architecture Skills
   implementation-approach:
     path: ".agents/skills/implementation-approach/SKILL.md"
     tags: [strategy-selection, task-decomposition, verification-levels, integration-points]
     when_to_load:
-      - "Medium/Large scale tasks (3+ files)"
+      - "Medium/Large work by structural scale"
       - "Implementation strategy selection"
       - "Task breakdown and planning"
       - "Choosing between vertical/horizontal slicing"
@@ -127,12 +127,12 @@ task_mappings:
   implementation:
     required:
       - "coding-rules"
-      - "testing"  # TDD is mandatory
+      - "testing"
       - "ai-development-guide"
     recommended:
       - "metacognition"
     conditional:
-      - "implementation-approach"  # For Medium/Large scale
+      - "implementation-approach"  # For Medium/Large structural scale
 
   debugging:
     required:
@@ -146,7 +146,7 @@ task_mappings:
     required:
       - "documentation-criteria"
     conditional:
-      - "implementation-approach"  # Required for Medium/Large scale (3+ files)
+      - "implementation-approach"  # Required for Medium/Large structural scale
 
   documentation:
     required:
@@ -167,7 +167,6 @@ task_mappings:
   test_generation:
     required:
       - "testing"
-      - "documentation-criteria"
       - "testing-strategy"
       - "integration-e2e-testing"
     recommended:
@@ -199,38 +198,13 @@ task_mappings:
       - "metacognition"
     description: "Review technical documents (Design Docs, ADRs)"
 
-# Scale-based Skill Loading
-scale_mappings:
-  small:  # 1-2 files
-    load_immediately:
-      - "coding-rules"
-    load_on_demand: []
-
-  medium:  # 3-5 files
-    load_immediately:
-      - "coding-rules"
-      - "testing"  # TDD is mandatory
-      - "documentation-criteria"
-      - "implementation-approach"  # Required for approach selection
-    load_on_demand:
-      - "ai-development-guide"
-
-  large:  # 6+ files
-    load_immediately:
-      - "documentation-criteria"
-      - "implementation-approach"
-    load_on_demand:
-      - "coding-rules"
-      - "testing"
-      - "ai-development-guide"
-
 # Metadata for skill selection algorithm
 selection_rules:
   - "Always load metacognition at session start"
   - "Load coding-rules when any code modification is involved"
-  - "Load testing for ALL implementation tasks (TDD mandatory)"
-  - "Load implementation-approach for Medium/Large scale (3+ files)"
-  - "Execute ALL quality check commands in VERIFY phase with 0 errors"
+  - "Load testing for implementation verification; apply TDD when the behavior change can be represented by a failing test"
+  - "Load implementation-approach for Medium/Large structural scale"
+  - "Execute applicable established repository checks in VERIFY phase"
   - "Progressive loading: start with minimum, add as needed"
   - "Unload task-specific skills after task completion"
   - "For TypeScript projects, also read references/typescript.md in coding-rules and testing skills"
