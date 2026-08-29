@@ -8,7 +8,7 @@
     "AGENTS.md"
   ],
   "bin": {
-    "agentic-code": "./bin/cli.js"
+    "agentic-code": "bin/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
