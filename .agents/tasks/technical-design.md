@@ -1,498 +1,111 @@
 # Technical Design
 
-## Required Rules [MANDATORY - MUST BE ACTIVE]
-
-**SKILL AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
-3. [CONDITIONAL LOAD] `.agents/skills/implementation-approach/SKILL.md` (if Medium scale 3+ files OR Large scale)
-
-**LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
-- STEP 2: CHECK if documentation-criteria/SKILL.md is active in working memory
-- STEP 3: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 4: EVALUATE conditions for implementation-approach/SKILL.md (Medium/Large scale: 3+ files)
-- STEP 5: If conditions met AND implementation-approach/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 6: CONFIRM all required skills active before proceeding
-
-## Task Tracking Requirement [MANDATORY]
-
-**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
-1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
-   - `.agents/skills/implementation-approach/SKILL.md` (if conditions met)
-2. Mark each with "[From technical-design.md]" source tag
-3. Show evidence:
-   ```
-   [TASK TRACKING FROM technical-design.md]
-   Added to Task List:
-   ✓ BLOCKING READ: documentation-criteria/SKILL.md - ADR/Design Doc criteria
-   ✓ BLOCKING READ: implementation-approach/SKILL.md - strategy selection (if applicable)
-   Status: VERIFIED
-   ```
-
-**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
-
-**EVIDENCE REQUIRED:**
-```
-Skill Status Verification:
-✓ metacognition/SKILL.md - ACTIVE
-✓ documentation-criteria/SKILL.md - ACTIVE
-✓ implementation-approach/SKILL.md - [ACTIVE/NOT NEEDED]
-```
-
-## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
-
-**CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
-☐ [VERIFIED] Task Tracking completed (from task-analysis.md Step 8)
-☐ [VERIFIED] Task List contains "BLOCKING READ technical-design.md" item
-☐ [VERIFIED] Project structure confirmed
-☐ [VERIFIED] PRD reviewed (if exists) with requirements understood
-☐ [VERIFIED] Related design documents investigation COMPLETED with evidence
-☐ [VERIFIED] Existing ADRs reviewed for relevant decisions
-☐ [VERIFIED] Existing codebase investigation COMPLETED with evidence
-☐ [VERIFIED] Similar functionality search EXECUTED with results documented
-☐ [VERIFIED] Required rules LOADED with file paths listed above
-☐ [VERIFIED] SESSION_BASELINE_DATE established and active
-
-**METACOGNITION GATE [MANDATORY]:**
-BEFORE starting design, execute metacognition assessment:
-- Understand fundamental goal (not surface task)
-- Verify all necessary information available
-- Confirm approach aligns with existing patterns
-
-**GATE ENFORCEMENT:**
-IF any box unchecked → HALT → Return to uncompleted step
-IF attempting to skip → CRITICAL ERROR
-
 ## Purpose
 
-Create ADR and Design Documents.
+Create the smallest durable design record needed for repository-grounded implementation and verification.
 
-### ADR Creation Triggers [EVALUATE DURING DESIGN]:
-- Data flow changes → ADR-ARCH-DATA-FLOW
-- Architecture changes → ADR-ARCH-[SPECIFIC]
-- External dependency changes → ADR-DEPS-[NAME]
-- New technology introduction → ADR-TECH-[NAME] [BLOCKING: MUST CREATE]
-- Performance optimization → ADR-PERF-[ASPECT]
-- Security implementation → ADR-SEC-[FEATURE]
+## Required Skills
 
-**EVALUATION**: Check conditions above - if ANY trigger met, ADR creation is MANDATORY
+- `.agents/skills/documentation-criteria/SKILL.md`
+- `.agents/skills/implementation-approach/SKILL.md` for Medium/Large structural scale
+- `.agents/skills/metacognition/SKILL.md`
+
+## Required Inputs
+
+- confirmed outcome, current requirements, and non-goals;
+- related PRD when one governs the scope;
+- relevant repository paths and accepted decisions;
+- unknowns that can change the design.
 
 ## Completion Conditions
 
-### For ADR:
-□ Problem background clearly stated
-□ Minimum 3 options evaluated
-□ Trade-offs explicitly documented
-□ Decision rationale recorded
-□ Latest technology research conducted
-□ References cited with URLs
-□ Consistency with existing architecture verified
+- The document path follows `documentation-criteria`.
+- Every retained decision constrains implementation or verification.
+- Existing patterns, contracts, callers, and integrations relevant to the change are represented.
+- ADRs exist only for current-scope choices that pass both choice and durability filters.
+- Acceptance criteria are observable and have a narrowest sufficient verification boundary.
+- User approval is recorded for the implementation scope and major durable design decisions.
 
-### For Design Doc:
-□ Agreement checklist completed
-□ Existing codebase analysis included
-□ Architecture approach documented
-□ Component structure defined
-□ Data flow mapped
-□ Integration points identified
-□ Error handling strategy defined
-□ Testing strategy outlined
-□ Acceptance criteria defined and verifiable
-□ References cited
-□ Complexity assessment completed (if medium/high, rationale justifies necessity)
-□ Standards identification gate completed
-□ Code inspection evidence recorded
-□ Data representation decision documented (when new structures introduced)
-□ Field propagation map included (when fields cross boundaries)
+## Process
 
-## Mandatory Process Before Document Creation [STRICT COMPLIANCE]
+### 1. Confirm Governing Scope
 
-**These steps MUST be completed to pass the entry gate:**
+Record the outcome, requirements, non-goals, constraints, and unresolved product questions. Use an existing approved PRD when it already carries the current scope.
 
-### 1. Standards Identification Gate [REQUIRED - CANNOT SKIP]
-Must be performed before any investigation:
+### 2. Inspect Existing Evidence
 
-1. **Identify Project Standards**
-   - Scan project configuration, rule files, and existing code patterns
-   - Classify each: **Explicit** (documented) or **Implicit** (observed pattern only)
+Inspect only evidence that can change reuse, design validity, preserved contracts, dependency order, or verification:
 
-2. **Record in Design Doc**
-   - List in "Applicable Standards" section with `[explicit]`/`[implicit]` tags
-   - Implicit standards require user confirmation before design proceeds
+- applicable project rules and accepted ADRs;
+- relevant implementation paths, callers, and integration points;
+- representative patterns and existing equivalent behavior;
+- data or control flow across changed boundaries;
+- current tests and available verification harnesses.
 
-3. **Alignment Rule**
-   - Design decisions must reference applicable standards
-   - Deviations require documented rationale
+Mark evidence as observed, inferred, or unknown. An implicit local pattern may guide a reversible choice; user confirmation is required only when adopting it would change scope or a major durable decision.
 
-### 2. Existing Documentation Investigation [REQUIRED - CANNOT SKIP]
-Must be performed before any design:
+### 3. Select Documents
 
-1. **PRD Investigation** (if applicable)
-   - Check for related PRD in `docs/prd/` directory
-   - Review requirements and success criteria
-   - Note any constraints or scope boundaries defined
-   - Include PRD reference in design doc header
+Apply `.agents/skills/documentation-criteria/SKILL.md`:
 
-2. **Related Design Documents Search**
-   - Search existing designs in `docs/design/` directory
-   - Identify similar or dependent features
-   - Review architectural patterns used
-   - Note integration points and data flows
+- create an ADR only when the choice and durability filters both pass;
+- create one ADR per independently durable decision point;
+- keep evident or cheaply reversible implementation choices in the Design Doc;
+- reuse existing accepted decisions when they still govern the change.
 
-3. **Existing ADRs Review**
-   - Search ADRs in `docs/adr/` directory
-   - Identify relevant technical decisions
-   - Check for superseded ADRs that might need updating
-   - List applicable ADRs in "Prerequisite ADRs" section
+### 4. Select the Implementation Approach
 
-### 3. Existing Code Investigation [REQUIRED - CANNOT SKIP]
-Must be performed after documentation review:
+Use `.agents/skills/implementation-approach/SKILL.md` to choose the direct implementation, verify where it fails current evidence, and add only targeted expansions that resolve those failures.
 
-1. **Implementation File Path Verification**
-   - First grasp overall project structure
-   - Then identify target files by searching for relevant component/module names
-   - Record and distinguish between existing implementation locations and planned new locations
+### 5. Define Observable Proof
 
-2. **Existing API Investigation** (Only when changing existing features)
-   - List major public operations of target component
-   - Identify call sites by searching for component usage patterns
+For each acceptance criterion:
 
-3. **Similar Functionality Search** (Pattern 5 prevention from ai-development-guide.md)
-   - Search existing code for keywords related to planned functionality
-   - Look for implementations with same domain, responsibilities, or configuration patterns
-   - Decision and action:
-     - Similar functionality found → Use that implementation (do not create new)
-     - Similar functionality is technical debt → Create ADR improvement proposal
-     - No similar functionality → Proceed with new implementation
+- name the behavior or contract to observe;
+- select the narrowest sufficient local, integration, or E2E boundary;
+- reuse existing proof where sufficient;
+- identify any evidence unavailable until implementation.
 
-4. **Include in Design Doc**
-   - Always include investigation results in "## Existing Codebase Analysis" section
-   - Clearly document similar functionality search results
-   - Record adopted decision and rationale
-
-5. **Code Inspection Evidence**
-   - Record all inspected files and key functions in "Code Inspection Evidence" section of Design Doc
-   - Each entry must state relevance (similar functionality / integration point / pattern reference)
-
-### 4. Data Representation Decision [REQUIRED WHEN APPLICABLE]
-When the design introduces or significantly modifies data structures:
-
-1. **Reuse-vs-New Assessment**
-   - Search for existing structures with overlapping purpose
-   - Evaluate: semantic fit, responsibility fit, lifecycle fit, boundary/interop cost
-
-2. **Decision Rule**
-   - All criteria satisfied → Reuse existing
-   - 1-2 criteria fail → Evaluate extension with adapter
-   - 3+ criteria fail → New structure justified
-   - Record decision and rationale in Design Doc
-
-### 5. Agreement Checklist【MOST IMPORTANT】
-Must be performed at the beginning of Design Doc creation:
-
-1. **List agreements with user in bullet points**
-   - Scope (what to change)
-   - Non-scope (what not to change)
-   - Constraints (compatibility requirements, etc.)
-   - Performance requirements
-
-2. **Confirm reflection in design**
-   - [ ] Specify where each agreement is reflected
-   - [ ] Confirm no design contradicts agreements
-   - [ ] If any agreements not reflected, state reason
-
-### 6. Latest Information Research [BLOCKING REQUIREMENT]
-
-**Web research MUST use SESSION_BASELINE_DATE year - NEVER hardcoded years:**
-- Format: "[technology] best practices [YEAR from SESSION_BASELINE_DATE]"
-- Required for: New technology/library introduction, security implementations
-- Verify: Latest versions, breaking changes, security updates as of SESSION_BASELINE_DATE
-
-**Search Examples**: `[tech] best practices [YEAR]`, `[framework] official docs`
-
-## ADR Creation Guidelines
-
-### ADR Superseding Process [MANDATORY FOR RELATED ADRS]
-
-When creating an ADR that replaces or modifies a previous decision:
-
-1. **Identify Related ADRs**
-   - Search for ADRs covering the same domain/technology
-   - Check for ADRs that would be contradicted by new decision
-   - List all ADRs that need to be superseded
-
-2. **Update Existing ADR Status**
-   - Change status of old ADR: `Status: Superseded by ADR-XXXX`
-   - Add superseding note with date and new ADR reference
-   - DO NOT delete old ADRs - maintain history
-
-3. **Reference in New ADR**
-   - Add "Supersedes: ADR-YYYY" in header
-   - Explain what changed and why
-   - Maintain traceability of decision evolution
-
-### ADR Structure
+## Design Doc Shape
 
 ```markdown
-# ADR-XXXX: [Title]
-Status: Proposed
-Supersedes: ADR-YYYY (if applicable)
-
-## Background
-[Technical challenges and constraints in 1-2 sentences]
-
-## Options
-
-### Option A: [Approach Name]
-- Overview: [One sentence]
-- Benefits: [2-3 items]
-- Drawbacks: [2-3 items]
-- Effort: X days
-- Risk: Low/Medium/High
-
-### Option B/C: [Similarly structured, minimum 3 options total]
-
-## Comparison Matrix
-| Evaluation Axis | Option A | Option B | Option C |
-|----------------|----------|----------|----------|
-| Implementation Effort | X days | Y days | Z days |
-| Maintainability | High/Med/Low | ... | ... |
-| Performance Impact | +/-/None | ... | ... |
-
-## Decision
-Option [X] selected. Rationale: [2-3 sentences with trade-offs]
-
-### Decision Details
-
-| Item | Content |
-|------|---------|
-| **Decision** | [The decision in one sentence] |
-| **Why now** | [Why this needs to happen now (timing rationale)] |
-| **Why this** | [Why this option over alternatives (1-3 lines)] |
-| **Known unknowns** | [At least one uncertainty at this point] |
-| **Kill criteria** | [One signal that should trigger reversal of this decision] |
-
-## Implementation Guidelines
-[Principle-based guidelines]
-
-## References
-- [Documentation](URL) - Description
-```
-
-## Design Doc Creation Guidelines
-
-### Design Doc Structure
-
-````markdown
-# Technical Design: [Feature Name]
-
-## PRD Reference
-- PRD: `docs/prd/[feature-name]-prd.md` (if applicable)
-- Requirements addressed: [key requirements]
+# Technical Design: [Feature]
 
 ## Overview
-[Brief description]
+- Outcome:
+- Requirements:
+- Non-goals:
+- Constraints:
 
-## Design Summary (Meta)
+## Governing Sources
+- PRD / ADR / repository rules:
 
-```yaml
-design_type: "new_feature|extension|refactoring"
-risk_level: "low|medium|high"
-complexity_level: "low|medium|high"
-complexity_rationale: "[Required if medium/high: which requirements necessitate this complexity]"
-main_constraints:
-  - "[constraint 1]"
-  - "[constraint 2]"
-biggest_risks:
-  - "[risk 1]"
-  - "[risk 2]"
-unknowns:
-  - "[uncertainty 1]"
-  - "[uncertainty 2]"
+## Existing Evidence
+- Observed paths, patterns, contracts, callers, and verification support
+- Inferences and unknowns
+
+## Design
+- Selected approach and why the direct implementation is sufficient
+- Added mechanisms and the failed requirement or constraint each resolves
+- Responsibility boundaries, contracts, and integration points affected
+- Real dependency order
+
+## Acceptance Criteria and Verification
+- [AC]: [observable result] → [narrowest sufficient proof]
+
+## Risks and Open Questions
+- Only material current-scope risks and decisions that can change implementation
 ```
 
-## Agreement Checklist
-- [ ] Scope: [what to implement]
-- [ ] Non-scope: [what not to change]
-- [ ] Constraints: [limitations]
-- [ ] Performance: [requirements]
+Add diagrams, field-propagation maps, API matrices, or migration tables only when the relationship would otherwise be difficult for the next consumer to reconstruct.
 
-#### Applicable Standards
-- [ ] [Standard/convention] `[explicit]` - Source: [config / rule file / documentation path]
-- [ ] [Observed pattern] `[implicit]` - Evidence: [file paths] - Confirmed: [Yes/No]
+## External Research
 
-## Existing Codebase Analysis
-[Investigation results, similar functionality, decision]
+Use current primary sources when a new or changed dependency, security requirement, platform behavior, or version-specific contract cannot be determined from the repository. Record the decision-relevant fact and source rather than generic best-practice research.
 
-### Code Inspection Evidence
+## Quality Check
 
-| File/Function | Relevance |
-|---------------|-----------|
-| [path:function] | [similar functionality / integration point / pattern reference] |
-
-## Requirements
-[Functional, Non-functional, Constraints]
-
-## Acceptance Criteria
-### Functional Requirements
-- [ ] [Specific testable conditions]
-
-### Non-functional Requirements
-- [ ] [Performance/Security metrics]
-
-## Architecture
-
-### Approach
-[Selected pattern and rationale]
-
-### Components
-[Component list with responsibilities]
-
-### Data Flow
-[System data movement]
-
-### Integration Points
-[External systems, APIs, Databases]
-
-### Integration Point Analysis [MANDATORY for feature modifications]
-[Use format from section above]
-
-### Data Representation Decision (When Introducing New Structures)
-
-| Criterion | Assessment | Reason |
-|-----------|-----------|--------|
-| Semantic Fit | [Yes/No] | [Does existing structure's meaning align?] |
-| Responsibility Fit | [Yes/No] | [Same bounded context?] |
-| Lifecycle Fit | [Yes/No] | [Same creation/mutation/deletion timing?] |
-| Boundary/Interop Cost | [Low/Medium/High] | [Cost of sharing across boundaries?] |
-
-**Decision**: [reuse / extend / new] — [rationale in 1-2 sentences]
-
-## Implementation Details
-
-### Technology Stack
-[Languages, frameworks, libraries, tools]
-
-### Change Impact Map
-[Target, Direct impact, Indirect impact]
-
-### Field Propagation Map (When Fields Cross Boundaries)
-
-| Field | Boundary | Status | Detail |
-|-------|----------|--------|--------|
-| [field name] | [Component A → B] | preserved / transformed / dropped | [logic or reason] |
-
-## Testing Strategy
-[Unit and integration test approaches]
-
-## Risks and Mitigations
-[Technical risks]
-
-## References
-- [Source](URL) - Description
-````
-
-## Acceptance Criteria Creation Guidelines
-
-**Principle**: Specific, verifiable conditions that translate to test cases
-**Good**: "After auth with correct credentials, navigates to dashboard"
-**Bad**: "Login works"
-
-### EARS Format [RECOMMENDED]
-
-Use EARS keywords to standardize AC structure:
-
-| Keyword | Test Type | Example |
-|---------|-----------|---------|
-| **When** | Event trigger | "**When** user clicks submit, the system shall save the form" |
-| **While** | State-based | "**While** logged in, the system shall display username" |
-| **If-then** | Conditional | "**If** cart is empty, **then** show empty message" |
-| (none) | Always-true | "The system shall encrypt all passwords" |
-
-### Behavior-First Principle [CRITICAL]
-
-**Core Principle**: AC = User-observable behavior verifiable in isolated CI environment
-
-**BEFORE writing any AC, apply 3 mandatory checks:**
-
-#### 1. User-Observable Check
-**Question**: "Can a user (or system operator) observe this behavior?"
-- **If NO** → This is an **implementation detail**, exclude from AC
-- **If YES** → Continue to check 2
-
-**Examples**:
-- ❌ Bad (Implementation Detail): "Password must be hashed using bcrypt with 10 salt rounds"
-- ✅ Good (User-Observable): "After failed login attempts, user is locked out for 15 minutes"
-
-#### 2. Verification Context Check
-**Question**: "Can this be verified without full system integration?"
-- **If YES** → This is **unit/component level**, exclude from integration/E2E AC
-- **If NO** → This is a valid AC for integration/E2E tests, continue to check 3
-
-**Examples**:
-- ❌ Bad (Unit-level): "calculateTax function returns correct value for given input"
-- ✅ Good (Integration-level): "After checkout, order total includes correct tax amount"
-
-#### 3. CI Environment Check
-**Question**: "Is this verifiable deterministically in CI?"
-- **If NO** → Exclude (e.g., performance metrics, real external services)
-- **If YES** → Valid AC
-
-**Examples**:
-- ❌ Bad (Non-deterministic): "API response time must be < 200ms"
-- ✅ Good (Deterministic): "System processes checkout requests without blocking user interaction"
-
-**Enhanced Include/Exclude Criteria**:
-
-**Include (High Automation ROI)**:
-- Business logic correctness (calculations, state transitions)
-- Data integrity and persistence behavior
-- User-visible functionality completeness
-- Error handling behavior (what user sees/experiences)
-
-**Exclude (Low Automation ROI)**:
-- External service real connections → Use contract/interface verification instead
-- Performance metrics → Non-deterministic in CI, use dedicated performance testing
-- Implementation details (hashing algorithms, internal function calls) → Focus on observable behavior
-- UI layout specifics → Focus on information availability, not pixel-perfect rendering
-
-## Design Validation
-
-Verify: Completeness, Consistency, Feasibility, Testability, Maintainability, Scalability
-
-## Deliverables
-
-### When ADR needed:
-- ADR document in `docs/adr/ADR-[4-digit]-[title].md`
-- Status: "Proposed" → "Accepted" or "Rejected" after decision
-
-### Always:
-- Design document in `docs/design/[feature-name]-design.md`
-- Include all investigation results
-- Include all references
-
-## Post-Design Metacognition Gate [MANDATORY]
-
-**AFTER completing design document:**
-☐ Execute "After Completion" metacognition checklist
-☐ Verify design addresses all requirements
-☐ Confirm technical approach is simplest viable solution
-☐ Document any assumptions or risks identified
-☐ Evaluate if additional research needed
-
-**CANNOT proceed to implementation without:**
-- Metacognition assessment complete
-- Design document created
-- User approval received
-
-## Anti-Patterns to Avoid
-
-**ADR Anti-Patterns**
-Recommended: Evaluate 3+ options with research-backed trade-offs
-Reason: Single option decisions lack validation; options without drawbacks are unrealistic
-
-**Design Anti-Patterns**
-Recommended: Specific, testable acceptance criteria with impact analysis
-Reason: Vague criteria prevent verification; missing impact analysis causes integration issues
+- No fixed option count created artificial ADR alternatives.
+- No section exists only because a template offered it.
+- Local reversible choices remain available to implementation.
+- Every added mechanism and verification lane has a named current-scope effect.

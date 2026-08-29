@@ -1,277 +1,73 @@
 ---
 name: ai-development-guide
-description: "Detects code smells, anti-patterns, and debugging issues. Use when: fixing bugs, reviewing code quality, or refactoring."
+description: "Applies root-cause analysis, impact inspection, and completeness checks without expanding approved scope. Use when fixing bugs, refactoring, reviewing quality, or resolving unexpected implementation evidence."
 ---
 
-# AI Developer Guide
+# AI Development Guide
 
-## Technical Anti-patterns (Red Flag Patterns)
+## Core Rule
 
-Immediately stop and reconsider design when detecting the following patterns:
+Correct the invalid source before adding compensating layers. A workaround, fallback, abstraction, or new artifact is justified only when current evidence shows that removing or fixing the cause cannot satisfy the approved outcome.
 
-### Code Quality Anti-patterns
-1. **Writing similar code 3 or more times**
-2. **Multiple responsibilities mixed in a single file**
-3. **Defining same content in multiple files**
-4. **Making changes without checking dependencies**
-5. **Disabling code with comments**
-6. **Error suppression**
+## Investigation
 
-### Design Anti-patterns
-- **"Make it work for now" thinking**
-- **Patchwork implementation**
-- **Optimistic implementation of uncertain technology**
-- **Symptomatic fixes**
-- **Unplanned large-scale changes**
+Inspect the smallest relevant path that can establish:
 
-## Fail-Fast Fallback Design Principles
+- expected versus actual behavior;
+- the first failing boundary;
+- callers, contracts, and data or control flow affected;
+- existing equivalent behavior and representative repository patterns;
+- tests and checks that can reproduce or observe the issue;
+- unknowns that could change the fix.
 
-### Core Principle
-Prioritize primary code reliability over fallback implementations. In distributed systems, excessive fallback mechanisms can mask errors and make debugging difficult.
+Mark findings as observed, inferred, or unknown. Expand inspection when new evidence points to another affected boundary, not to satisfy a fixed coverage checklist.
 
-### Implementation Guidelines
+## Root-Cause Resolution
 
-#### Default Approach
-- **Explicit failure over silent defaults**: Errors must be visible and traceable, not masked by automatic default values
-- **Preserve error context**: Include original error information when re-throwing
+1. Reproduce or otherwise observe the failure.
+2. Identify the earliest invalid assumption, state, or contract.
+3. Determine whether existing code, configuration, or documentation already provides the correct mechanism.
+4. Fix or remove the invalid source.
+5. Add a focused regression proof when it protects the demonstrated failure from recurrence.
 
-#### When Fallbacks Are Acceptable
-- **Only with explicit Design Doc approval**: Document why fallback is necessary
-- **Business-critical continuity**: When partial functionality is better than none
-- **Graceful degradation paths**: Clearly defined degraded service levels
+Use a minimal reproduction or iterative why-analysis when it changes the cause decision. Do not create either as a ceremonial artifact.
 
-#### Layer Responsibilities
-- **Infrastructure Layer**:
-  - Always throw errors upward
-  - No business logic decisions
-  - Provide detailed error context
+## Existing Mechanism Decision
 
-- **Application Layer**:
-  - Make business-driven error handling decisions
-  - Implement fallbacks only when specified in requirements
-  - Log all fallback activations for monitoring
+When similar functionality exists:
 
-### Error Masking Detection
+- reuse it when its responsibility, lifecycle, and contract fit the current outcome;
+- extend it when the extension preserves its responsibility and remains cheaper than a parallel mechanism;
+- replace or remove it when evidence shows it is broken or unused;
+- create a new mechanism only when the current ones cannot satisfy the approved requirement.
 
-**Review Triggers** (require design review):
-- Writing 3rd error handling block in the same feature
-- Multiple error handling structures in single function
-- Nested error handling structures
-- Error handlers that return default values without propagating
+Technical debt discovered outside the current outcome remains a finding, not an automatic ADR or implementation task.
 
-**Before Implementing Any Fallback**:
-1. Verify Design Doc explicitly defines this fallback
-2. Document the business justification
-3. Ensure error is logged with full context
-4. Add monitoring/alerting for fallback activation
+## Fallbacks
 
-### Implementation Patterns
+Prefer explicit failure with preserved error context. Add fallback behavior only when a current requirement defines the degraded outcome or evidence shows continuity is necessary. Verify that the fallback is observable and does not hide the original failure.
 
-Note: Use your language's standard error handling mechanism (exceptions, Result types, error values, etc.)
+## Impact and Completeness
 
-```
-❌ AVOID: Silent fallback that hides errors
-    [handle error]:
-        return DEFAULT_USER  // Error is hidden, debugging becomes difficult
+Before completion, verify the affected boundary:
 
-✅ PREFERRED: Explicit failure with context
-    [handle error]:
-        logError('Failed to fetch user data', userId, error)
-        propagate ServiceError('User data unavailable', error)
+- direct implementation and callers;
+- shared contracts or persisted shapes touched by the change;
+- focused tests and applicable repository checks;
+- documentation consumed by affected users or maintainers.
 
-✅ ACCEPTABLE: Documented fallback with monitoring (when justified in Design Doc)
-    [handle error]:
-        // Fallback defined in Design Doc section 3.2.1
-        logWarning('Primary data source failed, using cache', error)
-        incrementMetric('data.fallback.cache_used')
+The impact record can remain in the active execution context. Create a separate report only for a named downstream consumer.
 
-        cachedData = fetchFromCache()
-        if not cachedData:
-            propagate ServiceError('Both primary and cache failed', error)
-        return cachedData
-```
+## Refactoring
 
-## Rule of Three - Criteria for Code Duplication
+- Preserve observable behavior and accepted contracts.
+- Remove unused or broken paths when evidence shows they no longer serve a current consumer.
+- Extract shared code when multiple callers have the same responsibility and change pressure, not at a universal duplication count.
+- Measure before performance optimization.
 
-| Duplication Count | Action | Reason |
-|-------------------|--------|--------|
-| 1st time | Inline implementation | Cannot predict future changes |
-| 2nd time | Consider future consolidation | Pattern beginning to emerge |
-| 3rd time | Implement commonalization | Pattern established |
+## Completion Check
 
-### Criteria for Commonalization
-
-**Cases for Commonalization**
-- Business logic duplication
-- Complex processing algorithms
-- Areas likely requiring bulk changes
-- Validation rules
-
-**Cases to Avoid Commonalization**
-- Accidental matches (coincidentally same code)
-- Possibility of evolving in different directions
-- Significant readability decrease from commonalization
-- Simple helpers in test code
-
-### Implementation Example
-```
-// ❌ Bad: Immediate commonalization on 1st duplication
-function validateUserEmail(email) { /* ... */ }
-function validateContactEmail(email) { /* ... */ }
-// → Premature abstraction
-
-// ✅ Good: Commonalize on 3rd occurrence
-// 1st time: inline implementation
-// 2nd time: Copy but consider future
-// 3rd time: Extract to common validator
-function validateEmail(email, context) { /* ... */ }
-```
-
-## Common Failure Patterns and Avoidance Methods
-
-### Pattern 1: Error Fix Chain
-**Symptom**: Fixing one error causes new errors
-**Cause**: Surface-level fixes without understanding root cause
-**Avoidance**: Identify root cause with 5 Whys before fixing
-
-### Pattern 2: Implementation Without Sufficient Testing
-**Symptom**: Many bugs after implementation
-**Cause**: Ignoring Red-Green-Refactor process
-**Avoidance**: Always start with failing tests
-
-### Pattern 4: Ignoring Technical Uncertainty
-**Symptom**: Frequent unexpected errors when introducing new technology
-**Cause**: Assuming "it should work according to official documentation" without prior investigation
-**Avoidance**:
-- Record certainty evaluation at the beginning of task files
-  ```
-  Certainty: low (Reason: no examples of MCP connection found)
-  Exploratory implementation: true
-  Fallback: use conventional API
-  ```
-- For low certainty cases, create minimal verification code first
-
-### Pattern 5: Insufficient Existing Code Investigation
-**Symptom**: Duplicate implementations, architecture inconsistency, integration failures
-**Cause**: Insufficient understanding of existing code before implementation
-**Avoidance Methods**:
-- Before implementation, always search for similar functionality (using domain, responsibility, configuration patterns as keywords)
-- Similar functionality found → Use that implementation (do not create new implementation)
-- Similar functionality is technical debt → Create ADR improvement proposal before implementation
-- No similar functionality exists → Implement new functionality following existing design philosophy
-- Record all decisions and rationale in "Existing Codebase Analysis" section of Design Doc
-
-## Debugging Techniques
-
-### 1. Error Analysis Procedure
-```bash
-# How to read stack traces
-1. Read error message (first line) accurately
-2. Focus on first and last of stack trace
-3. Identify first line where your code appears
-```
-
-### 2. 5 Whys - Root Cause Analysis
-```
-Symptom: Application crash on startup
-Why1: Configuration loading failed → Why2: Config file format changed
-Why3: Dependency update → Why4: Library breaking change
-Why5: Unconstrained dependency version specification
-Root cause: Inappropriate version management strategy
-```
-
-### 3. Minimal Reproduction Code
-To isolate problems, attempt reproduction with minimal code:
-- Remove unrelated parts
-- Replace external dependencies with mocks
-- Create minimal configuration that reproduces problem
-
-### 4. Debug Log Output
-```
-// Track problems with structured logs
-log('DEBUG:', {
-  context: 'user-creation',
-  input: { email, name },
-  state: currentState,
-  timestamp: currentTimestamp()
-})
-```
-
-## Situations Requiring Technical Decisions
-
-### Timing of Abstraction
-- Extract patterns after writing concrete implementation 3 times
-- Be conscious of YAGNI, implement only currently needed features
-- Prioritize current simplicity over future extensibility
-
-### Performance vs Readability
-- Prioritize readability unless clear bottleneck exists
-- Measure before optimizing (don't guess, measure)
-- Document reason with comments when optimizing
-
-## Continuous Improvement Mindset
-
-- **Humility**: Perfect code doesn't exist, welcome feedback
-- **Courage**: Execute necessary refactoring boldly
-- **Transparency**: Clearly document technical decision reasoning
-
-## Implementation Completeness Assurance
-
-### Impact Analysis: Mandatory 3-Stage Process
-
-Complete these stages sequentially before any implementation:
-
-**1. Discovery** - Identify all affected code:
-- Implementation references (imports, calls, instantiations)
-- Interface dependencies (contracts, types, data structures)
-- Test coverage
-- Configuration (build configs, env settings, feature flags)
-- Documentation (comments, docs, diagrams)
-
-**2. Understanding** - Analyze each discovered location:
-- Role and purpose in the system
-- Dependency direction (consumer or provider)
-- Data flow (origin → transformations → destination)
-- Coupling strength
-
-**3. Identification** - Produce structured report:
-```
-## Impact Analysis
-### Direct Impact
-- [Unit]: [Reason and modification needed]
-
-### Indirect Impact
-- [System]: [Integration path → reason]
-
-### Data Flow
-[Source] → [Transformation] → [Consumer]
-
-### Risk Assessment
-- High: [Complex dependencies, fragile areas]
-- Medium: [Moderate coupling, test gaps]
-- Low: [Isolated, well-tested areas]
-
-### Implementation Order
-1. [Start with lowest risk or deepest dependency]
-2. [...]
-```
-
-**Critical**: Do not implement until all 3 stages are documented
-
-**Relationship to Pattern 5**: This process provides the structured methodology to avoid "Insufficient Existing Code Investigation"
-
-### Unused Code Deletion
-
-When unused code is detected:
-- Will it be used in this work? Yes → Implement now | No → Delete now (Git preserves)
-- Applies to: Code, tests, docs, configs, assets
-
-### Existing Code Modification
-
-```
-In use? No → Delete
-       Yes → Working? No → Delete + Reimplement
-                     Yes → Fix/Extend
-```
-
-**Principle**: Prefer clean implementation over patching broken code
+- The change addresses the demonstrated cause or approved refactoring outcome.
+- No fallback or abstraction masks an unfixed source.
+- No side finding became unapproved work.
+- Verification observes the affected boundary.

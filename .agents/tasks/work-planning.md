@@ -1,239 +1,63 @@
 # Work Planning
 
-## Required Rules [MANDATORY - MUST BE ACTIVE]
-
-**SKILL AVAILABILITY VERIFICATION:**
-1. [VERIFY ACTIVE] `.agents/skills/metacognition/SKILL.md` (loaded at session start)
-2. [LOAD IF NOT ACTIVE] `.agents/skills/coding-rules/SKILL.md`
-3. [LOAD IF NOT ACTIVE] `.agents/skills/testing/SKILL.md`
-4. [LOAD IF NOT ACTIVE] `.agents/skills/documentation-criteria/SKILL.md`
-
-**LOADING PROTOCOL:**
-- STEP 1: VERIFY metacognition/SKILL.md is active from initial session setup
-- STEP 2: CHECK if coding-rules/SKILL.md is active in working memory
-- STEP 3: If coding-rules/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 4: CHECK if testing/SKILL.md is active in working memory
-- STEP 5: If testing/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 6: CHECK if documentation-criteria/SKILL.md is active in working memory
-- STEP 7: If documentation-criteria/SKILL.md NOT active → Execute BLOCKING READ
-- STEP 8: CONFIRM all skills active before proceeding with work planning
-
-## Task Tracking Requirement [MANDATORY]
-
-**Upon reading this file, IMMEDIATELY add to your internal task management (Task List):**
-1. All BLOCKING READs identified in Loading Protocol above:
-   - `.agents/skills/coding-rules/SKILL.md` (if not active)
-   - `.agents/skills/testing/SKILL.md` (if not active)
-   - `.agents/skills/documentation-criteria/SKILL.md` (if not active)
-2. Mark each with "[From work-planning.md]" source tag
-3. Show evidence:
-   ```
-   [TASK TRACKING FROM work-planning.md]
-   Added to Task List:
-   ✓ BLOCKING READ: coding-rules/SKILL.md - development standards
-   ✓ BLOCKING READ: testing/SKILL.md - TDD process
-   ✓ BLOCKING READ: documentation-criteria/SKILL.md - documentation standards
-   Status: VERIFIED
-   ```
-
-**ENFORCEMENT:** Cannot proceed without Task Tracking evidence
-
-**EVIDENCE REQUIRED:**
-```
-Skill Status Verification:
-✓ metacognition/SKILL.md - ACTIVE (from session setup)
-✓ coding-rules/SKILL.md - ACTIVE (loaded/verified)
-✓ testing/SKILL.md - ACTIVE (loaded/verified)
-✓ documentation-criteria/SKILL.md - ACTIVE (loaded/verified)
-```
-
-## Phase Entry Gate [BLOCKING - SYSTEM HALT IF VIOLATED]
-
-**CHECKPOINT: System CANNOT proceed until ALL boxes checked:**
-☐ [VERIFIED] THIS FILE (`work-planning.md`) has been READ and is active
-☐ [VERIFIED] Task Tracking completed (from work-planning.md Task Tracking Requirement)
-☐ [VERIFIED] All required rules listed above are LOADED and active
-☐ [VERIFIED] Task List contains ALL BLOCKING READs from this file
-☐ [VERIFIED] Design document EXISTS at `docs/design/[feature]-design.md`
-☐ [VERIFIED] User has APPROVED the design
-☐ [VERIFIED] Test skeletons exist (if applicable for test-driven approach)
-☐ [VERIFIED] SESSION_BASELINE_DATE established and active
-
-**METACOGNITION GATE [MANDATORY]:**
-BEFORE creating Work Plan document, execute metacognition assessment:
-- Understand the design intent and goals
-- Verify task decomposition strategy aligns with 1-commit principle
-- Confirm dependencies are logical and achievable
-
-**GATE ENFORCEMENT:**
-IF any box unchecked → HALT → Return to uncompleted step
-IF attempting to skip → CRITICAL ERROR
-
 ## Purpose
 
-Create Work Plan documents with decomposed tasks.
+Create the fewest executable implementation tasks that preserve the approved scope, real dependency order, and observable proof.
 
-## When to Use
+## Required Skills
 
-- Medium/Large scale tasks (3+ files)
-- When user chooses Agentic Coding workflow
-- Refactoring with multiple components
+- `.agents/skills/documentation-criteria/SKILL.md`
+- `.agents/skills/implementation-approach/SKILL.md`
+- `.agents/skills/testing/SKILL.md`
+- `.agents/skills/metacognition/SKILL.md`
 
-## Completion Conditions [BLOCKING GATES]
+## Required Inputs
 
-☐ [MANDATORY] Work plan document created at `docs/plans/YYYYMMDD-{type}-{description}.md`
-☐ [VERIFIED] Tasks follow 1-COMMIT PRINCIPLE (each task = 1 logical commit)
-☐ [VERIFIED] Dependencies mapped with explicit order
-☐ [VERIFIED] Each task has MEASURABLE completion criteria
-☐ [VERIFIED] Each task has CHECKBOX for progress tracking
-☐ [VERIFIED] Verification command/method specified for EACH task
-☐ [VERIFIED] Risk factors with specific mitigations
+- approved Design Doc or equivalent governing source;
+- selected acceptance proof, including existing tests or an explicit no-new-test result;
+- repository commands and task dependencies established by evidence.
 
-**GATE CHECK**: Cannot proceed to implementation until ALL boxes checked
+## Completion Conditions
 
-## Execution Guidelines
+- Every task traces to an approved outcome, requirement, design section, or required correction.
+- Task boundaries follow coherent results and real dependencies rather than file count.
+- Each task has an executable verification method.
+- Existing selected test skeletons are consumed at the earliest task that can make their boundary executable.
+- The plan contains no optional hardening, speculative infrastructure, or duplicated proof.
 
-### 1. Plan Structure
+## Process
 
-Create Work Plan document with:
-- **Overview**: What's being built/changed
-- **Phases**: Logical groupings of work
-- **Tasks**: Individual implementation units
-- **Dependencies**: What must complete before what
-- **Risks**: Potential issues and mitigations
-- **Test References**: Link to generated test skeletons (if available)
+1. Extract the approved implementation outcomes and dependency constraints.
+2. Choose vertical, foundation-first, or hybrid slicing from `implementation-approach`.
+3. Create the fewest independently executable tasks that keep the repository in a valid state.
+4. Attach the narrowest verification that proves each task result.
+5. Order tasks by verified dependencies. Shared infrastructure precedes an outcome only when that outcome cannot work without it.
+6. Compare the final plan with non-goals and remove unsupported work.
 
-### 2. Task Decomposition Principles [1-COMMIT RULE]
+File count and architecture layers do not define task boundaries.
 
-**MANDATORY GRANULARITY - 1 TASK = 1 COMMIT**:
-- Each task MUST represent ONE atomic change
-- Each task MUST be committable independently
-- Each task MUST NOT break the build when completed
-
-**File Count Guidelines**:
-- IDEAL: 1-2 files per task (one focused change)
-- MAXIMUM: 3 files per task (if tightly coupled)
-- PROHIBITED: 4+ files (MUST split into smaller tasks)
-
-**Independence Requirements**:
-- Independently verifiable (has own test/verification)
-- Rollback-safe (can revert without breaking)
-- Self-contained (doesn't leave system in partial state)
-
-**Checkbox Update Protocol [MANDATORY]**:
-- BEFORE starting task: Verify checkbox exists `- [ ]`
-- AFTER completing task: Update checkbox to `- [x]` (standard Markdown)
-- ENFORCEMENT: Unchecked completed tasks = Protocol violation
-- REFERENCE: Link to relevant test skeletons when implementing testable features
-
-### 3. Task Format [MANDATORY TEMPLATE]
+## Task Shape
 
 ```markdown
-## Task N: [Task Name]
+### [Task ID]: [Coherent result]
 
-### Entry Conditions
-- [ ] Previous dependencies complete
-- [ ] Understand what to build
-- [ ] Ready to follow TDD
-
-### Scope [Max 2 files or split]
-- Files affected: [EXACT file paths]
-- Components: [SPECIFIC names]
-
-### Implementation Steps (TDD + Commit)
-1. RED: Write failing test
-2. GREEN: Write code to pass test
-3. REFACTOR: Improve the code
-4. VERIFY: Run quality checks (0 errors required)
-5. COMMIT: Git commit (following 1-COMMIT principle: 1 task = 1 commit)
-
-### Exit Conditions
-- [ ] Test passes
-- [ ] Quality checks pass with 0 errors (per testing/SKILL.md standards)
-- [ ] Changes committed to git
-- [ ] Task checkbox marked [x] in Work Plan document
-
-### Dependencies
-- Depends on: Task [X]
-- Blocks: Task [Y]
+- **Source**: [Design Doc section, acceptance criterion, or approved correction]
+- **Result**: [Observable implementation outcome]
+- **Scope**: [Responsibilities and expected paths]
+- **Depends on**: [Real prerequisite or none]
+- **Verification**: [Executable focused proof and applicable checks]
+- **Status**: [ ] Pending
 ```
 
-### 4. Ordering Strategy
+Add a verification focus only when a check could pass without proving one important required behavior.
 
-1. **Foundation first**: Core structures before features
-2. **Dependencies respected**: Prerequisites before dependents
-3. **Testability maintained**: Each step verifiable
-4. **Risk front-loaded**: Complex/uncertain parts early
+## Storage
 
-### 5. Common Patterns
+Store Work Plans at `docs/plans/YYYYMMDD-{type}-{description}.md`. They are transient execution state unless the repository explicitly versions them.
 
-**Feature Implementation**
-```
-Stage 1: Data layer
-- Task 1: Define data models
-- Task 2: Create repositories
+## Quality Check
 
-Stage 2: Business logic
-- Task 3: Implement services
-- Task 4: Add validation
-
-Stage 3: Interface
-- Task 5: Create API endpoints
-- Task 6: Add error handling
-
-Stage 4: Testing
-- Task 7: Unit tests
-- Task 8: Integration tests
-```
-
-**Refactoring**
-```
-Stage 1: Preparation
-- Task 1: Add tests for current behavior
-- Task 2: Create abstraction layer
-
-Stage 2: Migration
-- Task 3: Implement new structure
-- Task 4: Migrate component by component
-
-Stage 3: Cleanup
-- Task 5: Remove old code
-- Task 6: Update documentation
-```
-
-## Deliverables
-
-Work plan document at `docs/plans/YYYYMMDD-{type}-{description}.md` containing:
-- Task breakdown following 1-commit principle
-- Execution order with dependencies
-- Checkboxes for progress tracking (- [ ] format)
-- Verification methods for each task
-- Risk mitigation strategies
-
-**CRITICAL**: Work plan location MUST be in `docs/plans/` directory
-
-## Quality Criteria
-
-Tasks MUST be:
-- **Atomic**: ONE commit worth of changes
-- **Trackable**: Has checkbox for progress
-- **Measurable**: Clear completion criteria
-- **Testable**: Verification method defined
-- **Ordered**: Dependencies explicitly stated
-- **Right-sized**: 1-2 files (3 max)
-
-**ENFORCEMENT CHECKLIST**:
-☐ Each task can be one commit
-☐ Each task has - [ ] checkbox
-☐ Each task has verification command
-☐ No task exceeds 3 files
-☐ Dependencies clearly marked
-
-## Anti-Patterns
-
-Avoid:
-- Vague tasks ("Improve performance")
-- Giant tasks (10+ files)
-- Circular dependencies
-- Missing verification methods
-- Unclear completion criteria
+- Every task changes the outcome, protects a boundary, serves a consumer, or supplies necessary proof.
+- No task exists only to satisfy a phase template.
+- Combining or splitting tasks would not improve dependency clarity or verification.
+- The plan stops when all approved outcomes have an executable path to proof.

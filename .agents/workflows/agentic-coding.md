@@ -1,333 +1,136 @@
 # Agentic Coding Workflow
 
-**When to use**: Medium/Large scale tasks (3+ files) after task-analysis.md recommendation. User approval required before starting.
+## Purpose
 
-Track progress internally - do not update this file.
+Carry one coordinated outcome or several independently valuable outcomes from confirmed scope through design, planning, implementation, and observable verification.
 
-## Workflow Overview
+Use this workflow for Medium/Large structural scale after task analysis and user approval. Track progress internally; this file defines phase ownership and transition evidence.
 
-Execute phases sequentially. For Large scale (6+ files), include PRD phase.
+## Operating Rules
 
-## Phase 0: PRD Creation (Large scale only)
+- Preserve the confirmed outcome, current requirements, non-goals, and repository contracts.
+- Load each phase's task definition and required skills when that phase starts.
+- Treat semantically equivalent evidence as satisfying a gate unless a machine consumes an exact schema.
+- Resolve reversible repository-local choices from evidence.
+- Ask the user only for a new product requirement, a scope change, a major approved design change, unavailable authority, or an unauthorized irreversible action.
+- Create only artifacts and verification lanes required by the current outcome or a downstream consumer.
 
-### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. **[BLOCKING READ]** Execute Read on `.agents/tasks/prd-creation.md`
-3. **[VERIFY]** prd-creation.md is ACTIVE in working memory
-4. **[VERIFY]** All rules required by prd-creation.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Task Tracking from prd-creation.md completed
-6. **[CONFIRM]** Entry gates in prd-creation.md are satisfied
+## Phase 0: Product Requirements [Large only]
 
-**ENFORCEMENT**: NO requirements work until prd-creation.md confirmed active and Task Tracking verified
+Load `.agents/tasks/prd-creation.md` when multiple independently valuable outcomes need one approved product boundary.
 
-### Internal Checklist:
-```
-□ Target users identified
-□ User stories documented
-□ Success metrics defined
-□ Scope boundaries clear
-□ MoSCoW prioritization complete
-```
+### Result
 
-### Deliverable:
-- PRD document in `docs/prd/[feature-name]-prd.md`
+- A PRD records the observable outcomes, current requirements, acceptance criteria, and user-decided exclusions.
+- Current-state evidence and speculative ideas remain distinguishable from buildable scope.
 
-### Completion Conditions:
-- Business value articulated
-- User requirements clear
-- Success criteria measurable
+### Transition Gate
 
-### STOP POINT: PRD Review [BLOCKING GATE]
-**SYSTEM HALT - CANNOT PROCEED WITHOUT:**
-1. PRD document EXISTS at `docs/prd/[feature]-prd.md`
-2. User EXPLICITLY states approval
-3. All requirements understood
+Proceed after the user approves the product scope. If an existing approved PRD already carries the current scope, reuse it.
 
-**ENFORCEMENT:**
-- NO technical design until PRD approved
-- VIOLATION = Return to PRD phase
+## Phase 1: Requirements Confirmation
 
-## Phase 1: Requirements Analysis
+Confirm:
 
-### Internal Checklist:
-```
-□ User requirements documented
-□ Functional requirements listed
-□ Non-functional requirements identified
-□ Constraints and assumptions noted
-□ Success criteria defined
-```
+- the observable outcome;
+- requirements to deliver now;
+- explicit non-goals;
+- relevant repository evidence;
+- rough structural cost and unknowns.
 
-### Completion Conditions:
-- All aspects of requirements are clear
-- Ambiguities resolved through user questions
-- Scope boundaries defined
+Ask only about unresolved inputs that could change the outcome, structural scale, authority, or document path.
 
 ## Phase 2: Technical Design
 
-### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. **[BLOCKING READ]** Execute Read on `.agents/tasks/technical-design.md`
-3. **[VERIFY]** technical-design.md is ACTIVE in working memory
-4. **[VERIFY]** All rules required by technical-design.md are LOADED (per its Required Rules section)
-5. **[CONFIRM]** Entry gates in technical-design.md are satisfied
+Load `.agents/tasks/technical-design.md` and the skills it selects.
 
-**ENFORCEMENT**:
-- NO design work until technical-design.md confirmed active
-- NO proceeding without Task Tracking verification for ALL BLOCKING READs
+### Result
 
-### Pre-Design Requirements:
-```
-□ Check for need of technology decision documentation
-□ Perform existing code investigation
-□ Research latest information online
-□ Document user agreements
-```
+- Reuse an existing approved design when it fully governs the current change.
+- Create ADRs only for current-scope choices that require judgment and remain durable.
+- Create a Design Doc containing the repository-grounded implementation approach, affected contracts, real dependencies, and verification strategy.
 
-### Internal Checklist:
-```
-□ Technology decisions documented if needed (refer to technical-design.md)
-□ Architecture approach selected
-□ Component structure designed
-□ Data flow documented
-□ Integration points identified
-□ Technology choices justified
-□ Error handling strategy defined
-□ References cited with URLs
-```
+### Transition Gate
 
-### Deliverable:
-- Technology decision documents in `docs/adr/` (if needed)
-- Design document in `docs/design/`
+Proceed after the user approves the implementation scope and any major durable design decisions. Local reversible choices remain implementation decisions.
 
-### Completion Conditions:
-- Design covers all requirements
-- Technical approach is clear
-- Implementation path is defined
-- Latest best practices researched
+## Phase 3: Acceptance Proof Selection
 
-### STOP POINT: Design Review [BLOCKING GATE]
-**SYSTEM HALT - CANNOT PROCEED WITHOUT:**
-1. Design document EXISTS at `docs/design/[feature]-design.md`
-2. **[VERIFY COMPLIANCE]** Design doc meets ALL requirements from technical-design.md:
-   - All Completion Conditions from technical-design.md satisfied
-   - All sections required by technical-design.md present
-   - If non-compliant: REJECT - Return to Phase 2
-3. User EXPLICITLY states approval ("yes", "approved", "大丈夫", etc.)
-4. ADR created if new technology introduced
+Load `.agents/tasks/acceptance-test-generation.md` when the approved design selects an integration or E2E boundary as the narrowest sufficient proof for an acceptance criterion.
 
-**ENFORCEMENT:**
-- NO implementation code until approval received
-- NO proceeding without full task definition compliance
-- NO skipping even for "simple" changes
-- VIOLATION = Return to design phase
+### Selection Rule
 
-## Phase 3: Acceptance Test Generation
+1. Reuse existing proof when it already observes the required behavior.
+2. Prefer the cheapest test level that observes the boundary.
+3. Generate a skeleton only when the repository's established pattern or the next planning consumer needs one.
+4. Record why selected proof is necessary and why a cheaper boundary is insufficient.
 
-**PHASE ORDERING RATIONALE**: Test skeletons MUST be generated BEFORE work planning. Test structures define verification boundaries that determine task decomposition granularity. Work Plan documents depend on these test specifications to map implementation units to concrete verification points.
-
-### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. **[BLOCKING READ]** Execute Read on `.agents/tasks/acceptance-test-generation.md`
-3. **[VERIFY]** acceptance-test-generation.md is ACTIVE in working memory
-4. **[VERIFY]** All rules required by acceptance-test-generation.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Task Tracking from acceptance-test-generation.md completed
-6. **[CONFIRM]** Entry gates in acceptance-test-generation.md are satisfied
-7. **[VERIFY]** Design document EXISTS and contains Acceptance Criteria section
-
-**ENFORCEMENT**: NO test generation until acceptance-test-generation.md confirmed active and Task Tracking verified
-
-### Internal Checklist:
-```
-□ Design document Acceptance Criteria analyzed
-□ Multi-dimensional requirements mapped
-□ Integration test skeletons generated
-□ E2E test skeletons generated
-□ Test priorities assigned using risk analysis
-□ Verification points documented
-□ Traceability matrix created
-□ Edge cases systematically identified
-```
-
-### Deliverable:
-- Integration test skeletons with pending/placeholder markers
-- E2E test skeletons with pending/placeholder markers
-- Traceability matrix linking tests to ACs
-
-### Completion Conditions:
-- All ACs mapped to test cases
-- Test framework conventions followed
-- Test priorities align with business risk
-- Verification points clearly documented
-
-### STOP POINT: Test Skeleton Review [BLOCKING GATE]
-**SYSTEM HALT - CANNOT PROCEED WITHOUT:**
-1. Test skeletons EXIST in appropriate test directories
-2. **[VERIFY COMPLIANCE]** Test generation meets ALL requirements from acceptance-test-generation.md:
-   - All Completion Conditions from acceptance-test-generation.md satisfied
-   - Test framework conventions followed
-   - Traceability matrix complete
-   - If non-compliant: REJECT - Return to Phase 3
-3. User EXPLICITLY states approval on test coverage approach
-4. Generated tests follow existing project patterns
-
-**ENFORCEMENT:**
-- NO work planning until test skeletons approved
-- NO proceeding without test generation compliance
-- VIOLATION = Return to test generation phase
+Some changes require no new integration or E2E test. That is a valid result when focused unit checks or existing coverage provide sufficient proof.
 
 ## Phase 4: Work Planning
 
-**PHASE DEPENDENCY**: This phase REQUIRES completed test skeletons from Phase 3. Task decomposition uses test verification points as boundaries for work units. Each implementation task maps to specific test cases for validation.
+Load `.agents/tasks/work-planning.md`.
 
-### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. **[BLOCKING READ]** Execute Read on `.agents/tasks/work-planning.md`
-3. **[VERIFY]** work-planning.md is ACTIVE in working memory
-4. **[VERIFY]** All rules required by work-planning.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Task Tracking from work-planning.md completed
-6. **[CONFIRM]** Entry gates in work-planning.md are satisfied
-7. **[VERIFY]** Design document APPROVED by user
-8. **[VERIFY]** Test skeletons from Phase 3 EXIST in test directories
+Create the fewest tasks that preserve real dependencies and observable verification. Each task records:
 
-**ENFORCEMENT**: NO Work Plan document creation until work-planning.md confirmed active and Task Tracking verified
+- governing source;
+- intended result;
+- affected responsibility or paths;
+- dependencies that make ordering necessary;
+- executable verification.
 
-### Internal Checklist:
-```
-□ Tasks decomposed into units
-□ Dependencies identified
-□ Execution order determined
-□ Each task has clear completion criteria
-□ Risk factors noted
-```
+Use an existing selected test skeleton in the earliest task that can make its boundary executable. Shared infrastructure comes first only when that proof cannot run without it.
 
-### Deliverable:
-- Work plan document with task list
+### Transition Gate
 
-### Task Breakdown Format:
-```
-1. [Task Name]
-   - Files affected:
-   - Dependencies:
-   - Completion: When [specific condition]
-   - Status: [ ] Pending
-```
-
-### STOP POINT: Work Plan Approval [BLOCKING GATE]
-**SYSTEM HALT - CANNOT WRITE CODE WITHOUT:**
-1. Work Plan document EXISTS at `docs/plans/YYYYMMDD-{type}-{description}.md`
-2. **[VERIFY TASK LIST]** Task List MUST contain ALL BLOCKING READs identified in task-analysis Step 8:
-   - Every BLOCKING READ from workflow phases
-   - Every BLOCKING READ from task definitions
-   - Every BLOCKING READ from required rules
-   - Each marked with source: "[From Task Tracking]"
-3. Each task has MEASURABLE completion criteria
-4. User EXPLICITLY approves plan
-
-**GATE VERIFICATION:**
-```
-Work Plan Location: docs/plans/[filename].md
-Task Count: [N] tasks defined
-BLOCKING READs in Task List: [count] items
-Task Tracking Status: [COMPLETE/INCOMPLETE]
-User Approval: [AWAITING/RECEIVED]
-```
-
-**ENFORCEMENT:**
-- First line of code PROHIBITED until approval
-- Missing ANY BLOCKING READ = Return to task-analysis Step 8
+Proceed when the Work Plan represents the approved implementation scope, all real dependencies are ordered, and the user approves the plan when it fixes decisions or scope not already approved.
 
 ## Phase 5: Implementation
 
-### Pre-Implementation Gates [BLOCKING - CANNOT START WITHOUT]:
-```
-1. [VERIFY TASK TRACKING] Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. [BLOCKING READ] Execute Read on `.agents/tasks/implementation.md`
-3. [VERIFY] implementation.md is ACTIVE in working memory
-4. [VERIFY] All rules required by implementation.md are LOADED (per its Required Rules section)
-5. [VERIFY] Task Tracking from implementation.md completed
-6. [CONFIRM] Entry gates in implementation.md are satisfied
-7. [VERIFY] Work Plan document EXISTS and has been APPROVED
-8. [CONFIRM] Current task identified from Work Plan document
-```
+Load `.agents/tasks/implementation.md` and execute each planned task.
 
-**CRITICAL ENFORCEMENT**:
-- ZERO lines of code until implementation.md confirmed active
-- First code attempt without gates = IMMEDIATE DELETION
-- Violation logged and requires restart from Phase 5 gates
+For each task:
 
-### Execution Pattern [ENFORCED SEQUENCE]:
-```
-For each task in Work Plan document:
-  1. [METACOGNITION PRE] Execute "When Starting Work" checklist from metacognition protocol
-  2. [TRACKING] Mark task as in_progress in your internal task management (Task List)
-  3. [IMPLEMENT] Write code following ALL loaded rules (TDD: RED-GREEN-REFACTOR)
-  4. [VERIFY] Run ALL quality check commands - MUST have 0 errors
-  5. [COMMIT] Git commit with descriptive message for this task
-  6. [UPDATE] Mark task checkbox complete [x] in Work Plan document
-  7. [GATE CHECK] ALL completion criteria must pass
-  8. [METACOGNITION POST] Execute "After Completion" checklist
-  9. [TRACKING] Mark task complete in Task List
-  10. [CHECKPOINT] Cannot start next task until all steps complete
-```
+1. Confirm its source, result, dependencies, and verification.
+2. Implement the smallest change that produces the result.
+3. Use TDD when the behavior change can be represented by a failing test.
+4. Run focused verification and applicable repository checks.
+5. Update progress after the task satisfies its exit evidence.
 
-**ENFORCEMENT:**
-- Skipping ANY step = RESTART task
-- No code without implementation.md loaded
-- No task transition without metacognition
-
-### Guidelines:
-- Complete one task fully before starting next
-- Test each component as implemented
-- Document significant decisions
-- Ask user when blocked
+When new evidence invalidates the planned result or a major design decision, return to the owning phase. Repository-local corrections that preserve scope remain in implementation.
 
 ## Phase 6: Quality Assurance
 
-### Pre-Phase Gates [BLOCKING - CANNOT PROCEED WITHOUT]:
-1. **[VERIFY TASK TRACKING]** Confirm Task List contains ALL required BLOCKING READs for this phase
-   - If missing any: HALT - Return to task-analysis.md Step 8
-2. **[BLOCKING READ]** Execute Read on `.agents/tasks/quality-assurance.md`
-3. **[VERIFY]** quality-assurance.md is ACTIVE in working memory
-4. **[VERIFY]** All rules required by quality-assurance.md are LOADED (per its Required Rules section)
-5. **[VERIFY]** Task Tracking from quality-assurance.md completed
-6. **[CONFIRM]** All implementation tasks marked complete in Work Plan document
+Load `.agents/tasks/quality-assurance.md`.
 
-**ENFORCEMENT**: NO quality checks until quality-assurance.md confirmed active and Task Tracking verified
+Run the applicable established checks against the complete change. Fix in-scope failures. Report unavailable checks and residual limitations without creating new infrastructure unless the approved outcome requires it.
 
-### Internal Checklist:
-```
-□ All tasks completed
-□ Build succeeds
-□ Tests pass
-□ Linting clean
-□ Documentation updated
-□ Edge cases handled
-```
+### Completion Evidence
 
-### Completion Conditions:
-- All quality standards met
-- No known bugs remain
-- Code is production-ready
+- requested behavior is observable;
+- applicable repository checks pass;
+- approved contracts and non-goals remain preserved;
+- documentation used by an affected consumer is current;
+- remaining limitations are reported.
 
 ## Phase 7: Review and Handoff
 
-### Internal Checklist:
-```
-□ Implementation matches design
-□ All requirements fulfilled
-□ Documentation complete
-□ Known limitations documented
-□ Setup instructions provided
-```
+Review the completed change against the approved scope and observable proof.
 
-### Final Deliverables:
-- Working implementation
-- Updated documentation
-- Test suite
-- Setup/deployment instructions
+Resolve each finding as:
+
+- **apply** when it is required by correctness, confirmed requirements, accepted design, or repository rules;
+- **decline** when it adds optional scope, reverses a non-goal, duplicates proof, or lacks an observable effect worth its cost;
+- **user decision** when it changes the product outcome or a major approved decision.
+
+Repeat review only when an applied correction changes relevant evidence. A repeated preference without new evidence does not block completion.
+
+## Final Handoff
+
+Report:
+
+- delivered outcome;
+- changed files and artifacts;
+- verification executed and results;
+- applied and declined review findings when relevant;
+- remaining limitations or user decisions.

@@ -1,149 +1,92 @@
 # AGENTS.md
 
-## ABSOLUTE PRINCIPLES
+## Goal
 
-1. **EXECUTE all rules and requirements in task/skill files - no exceptions**
-2. **COMPLETE all entry and exit conditions for every task**
-3. **STOP at gates - proceed only when conditions are met**
+Use the repository's task definitions and skills to complete the requested outcome with the minimum sufficient work and observable verification.
 
-## Initial Setup [FIRST TIME ONLY]
+## Operating Boundaries
 
-**Complete before any other operation:**
-1. Execute `date` command → Store as SESSION_BASELINE_DATE
-2. Apply `.agents/skills/metacognition/SKILL.md` → Keep active entire session
-3. Use SESSION_BASELINE_DATE for all date references (WebSearch, docs, etc.)
-4. Verify project structure with `ls -la`
+- Preserve confirmed requirements, explicit non-goals, repository contracts, and user authority.
+- Treat reuse and no-change as valid conclusions when repository evidence shows the outcome is already satisfied.
+- Require user approval when the product outcome, scope, a major durable design decision, or an irreversible external state would change.
+- Consider work complete when the requested behavior is observable through the narrowest sufficient verification boundary.
 
-## Core Execution Principle
+## Session Setup
 
-**Universal Entry Point**: Every request starts with task-analysis.md to determine the appropriate path.
+For repository work:
 
-## Task Analysis - Required First Step
+1. Inspect the project structure.
+2. Load `.agents/skills/metacognition/SKILL.md` and keep it active for the session.
 
-**Early Exit Check (BEFORE loading task-analysis.md):**
-Does this task require reading code files to decide HOW to execute it?
-- **NO** → Execute directly, skip task-analysis.md
-- **YES** → Load and follow task-analysis.md
+## Task Routing
 
-**If not early exit, start here for any user request:**
-1. Apply `.agents/tasks/task-analysis.md`
-2. Follow its output to select the appropriate path:
+Before loading `task-analysis.md`, check whether repository inspection is needed to decide how to execute the request.
 
-### Path Selection Based on Task Analysis
+- If not, execute the request directly.
+- If yes, load `.agents/tasks/task-analysis.md` and use its result to select the path.
 
-**Small Scale (1-2 files) / Single Task:**
-- Load specific task definition (e.g., implementation.md, technical-design.md)
-- Execute that task definition directly
-- No workflow needed
+### Small / Single Task
 
-**Medium/Large Scale (3+ files) / Complex Task:**
-- Follow task-analysis.md recommendation for workflow selection
+- Load the task definition that owns the requested result.
+- Load only the skills required for the current decision or action.
+- Execute directly without the workflow.
 
-## Core Principles
+### Medium / Large Work
 
-### Plan Injection [MANDATORY ENFORCEMENT]
-**All tasks require Plan Injection for BLOCKING READs:**
-- Task-analysis.md Step 8 scans and identifies ALL BLOCKING READ requirements
-- Work plans MUST contain every BLOCKING READ from workflow/tasks/skills
-- Each phase verifies its BLOCKING READs are in the plan
-- Gates verify Plan Injection evidence before proceeding
-- Missing ANY BLOCKING READ = IMMEDIATE HALT
+- Follow `.agents/workflows/agentic-coding.md` after the user approves the recommended path.
+- Medium means one coherent outcome coordinates across a responsibility boundary or requires a durable design decision.
+- Large means multiple independently valuable outcomes require separate design decisions.
+- File count is supporting evidence, not the scale rule.
 
-### Task Definition Loading
-**Task definitions define WHAT to build - never skip them:**
-- Verify entry gates before proceeding
-- Follow Required Skills section in each task definition
+## Task Definitions and Skills
 
-### Skill Application
-**Apply skills based on task type from task-analysis:**
-- Skills are loaded progressively as needed
-- Each task definition specifies its required skills
-- Unload task-specific skills after completion
+- Task definitions describe the result, required inputs, execution criteria, and completion evidence for one kind of work.
+- Skills supply reusable judgment and quality rules.
+- Read a task or skill at the point where its rules affect the next decision; do not preload future phases.
+- When a task names required skills, confirm they are active before executing that task.
 
-### Quality Standards
-**Before marking any task complete:**
-- All tests pass (when applicable)
-- All quality checks return 0 errors
-- Task exit conditions are satisfied
-- Work documented as needed
+## Gates and Escalation
 
-## Approval Points
+A gate is justified when it protects:
 
-**Principle**: Get user approval at significant milestones.
+- user authority;
+- an irreversible action;
+- confirmed requirements or a major durable design decision;
+- a machine-consumed contract;
+- observable completion evidence.
 
-Common approval points:
-- When recommending a workflow for Medium/Large tasks
-- After creating design or decision documents
-- When technical approach changes significantly
-- At task definition specified stop points
+Accept semantically equivalent evidence unless software requires an exact schema. Resolve reversible repository-local ambiguity from available evidence. Ask the user when proceeding requires a new product requirement, a scope change, a major approved design change, authority only the user holds, or an irreversible action the user did not authorize.
 
-**VIOLATIONS TO PREVENT:**
-- Work plan without ALL BLOCKING READs = RETURN TO TASK ANALYSIS
-- Skipping ANY BLOCKING READ = IMMEDIATE HALT
-- Proceeding without task definition compliance = BLOCKING ERROR
+## Implementation and Verification
 
-## Quality Standards
+- Follow repository patterns and existing contracts.
+- Use TDD when a behavior change can be represented by a failing test.
+- Select the narrowest established test or check that observes the required boundary.
+- Run applicable repository checks before completion.
+- Report unavailable verification or residual risk rather than creating unrequested infrastructure.
 
-**Universal quality requirements:**
-- Follow TDD process for all code changes
-- All quality checks must pass with 0 errors
-- Follow standards defined in language-specific skills
-- Each task definition specifies its quality gates
+## Review
 
-## Metacognition Checkpoints
+Treat review findings as candidates:
 
-Perform self-assessment at these mandatory points:
-- Task type changes
-- Unexpected errors occur
-- Completing a meaningful unit of work
-- Before starting new implementation
-- After completing each task from work plan
+- **Apply** findings required by confirmed requirements, repository rules, accepted design, or observable correctness.
+- **Decline** findings that add optional scope, reverse a non-goal, duplicate proof, or cost more than their observable effect justifies.
+- **Return for user decision** findings that change the product outcome or a major approved decision.
 
-## Context Management
+A repeated preference without new evidence does not block progress.
 
-**Guidelines**:
-- Load skills progressively, not all at once
-- Unload task-specific skills after completion
-- Keep only frequently-used skills loaded
-- If context feels constrained, ask user for cleanup guidance
+## Completion
 
-## Error Recovery
+Before marking work complete:
 
-When stuck or encountering errors:
-1. Re-read current task definition
-2. Check if required skills are loaded
-3. Look for anti-patterns in ai-development-guide skill
-4. If unable to resolve, ask user for clarification
+- confirm the requested outcome and task exit conditions;
+- run the applicable repository checks;
+- record verification evidence and remaining limitations;
+- update required documentation when the change affects its consumer.
 
 ## File Organization
 
-**Tasks** (.agents/tasks/):
-- task-analysis.md: **Entry point**
-- work-planning.md: Create work plans
-- technical-design.md: Design documentation
-- acceptance-test-generation.md: Test skeleton generation
-- implementation.md: Implementation guidelines
-- quality-assurance.md: Quality standards
-
-**Workflows** (.agents/workflows/):
-- agentic-coding.md: Medium/Large scale workflow
-
-**Context Maps** (.agents/context-maps/):
-- task-skills-matrix.yaml: Task-to-skill mappings
-
-## Anti-Patterns to Avoid
-
-1. **Skipping task-analysis.md** → ALWAYS start with task analysis
-2. **Loading all skills upfront** → Load progressively based on task needs
-3. **Ignoring task entry/exit conditions** → Verify gates at each step
-4. **Working without task definitions** → Task definitions define WHAT to build
-5. **Assuming workflow is always needed** → Small tasks can use direct task definitions
-6. **Premature workflow selection** → Let task-analysis determine the approach
-
-## Success Metrics
-
-Track internally:
-- Task completion rate
-- Skills actually used vs loaded
-- Quality checks passing rate (should be 100%)
-- Appropriate path selection (direct vs workflow)
+- `.agents/tasks/` — task definitions
+- `.agents/workflows/agentic-coding.md` — coordinated Medium/Large workflow
+- `.agents/skills/` — reusable decision and quality rules
+- `.agents/context-maps/task-skills-matrix.yaml` — task-to-skill mapping

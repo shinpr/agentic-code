@@ -1,194 +1,116 @@
 ---
 name: documentation-criteria
-description: "Guides PRD, ADR, Design Doc, and Work Plan creation. Use when: planning features, writing specs, or creating technical documents."
+description: "Determines which PRD, ADR, Design Doc, and Work Plan a change requires. Use when deciding documentation scope or creating technical documents."
 ---
 
 # Documentation Creation Criteria
 
 ## Creation Decision Matrix
 
-| Condition | Required Documents | Creation Order |
-|-----------|-------------------|----------------|
-| New Feature Addition | PRD → [ADR] → Design Doc → Work Plan | After PRD approval |
-| ADR Conditions Met (see below) | ADR → Design Doc → Work Plan | Start immediately |
-| 6+ Files | ADR → Design Doc → Work Plan (Required) | Start immediately |
-| 3-5 Files | Design Doc → Work Plan (Recommended) | Start immediately |
-| 1-2 Files | None | Direct implementation |
+| Structural Scale | Required Documents | Creation Order |
+|------------------|--------------------|----------------|
+| Small | None | Direct task execution |
+| Medium | Design Doc → Work Plan | Start with Design Doc |
+| Large | PRD → Design Doc → Work Plan | Continue after PRD approval |
 
-## ADR Creation Conditions (Required if Any Apply)
+Insert an ADR immediately before the Design Doc only when a current-scope decision passes both ADR filters below. A qualifying ADR decision sets the scale floor to Medium.
 
-### 1. Type System Changes
-- **Adding nested types/structures with 3+ levels**: e.g., `A { B { C { D } } }`
-  - Rationale: Deep nesting has high complexity and wide impact scope
-- **Changing/deleting types used in 3+ locations**
-  - Rationale: Multiple location impacts require careful consideration
-- **Data representation responsibility changes** (e.g., transfer object→domain model)
-  - Rationale: Conceptual model changes affect design philosophy
+## Structural Scale
 
-### 2. Data Flow Changes
-- **Storage location changes** (DB→File, Memory→Cache)
-- **Processing order changes with 3+ steps**
-  - Example: "Input→Validation→Save" to "Input→Save→Async Validation"
-- **Data passing method changes** (props→Context, direct reference→events)
+Classify the decision burden, not repository layout. File count is supporting evidence only.
 
-### 3. Architecture Changes
-- Layer addition, responsibility changes, component relocation
+| Scale | Structural condition |
+|-------|----------------------|
+| Small | One coherent outcome follows existing patterns within one responsibility boundary |
+| Medium | One coherent outcome coordinates across a boundary or requires a durable design decision |
+| Large | Multiple independently valuable outcomes require separate design decisions |
 
-### 4. External Dependency Changes
-- Library/framework/external API introduction or replacement
+Multiple files or layers that serve one coherent outcome remain Medium. Large applies only when separate outcomes require separate design decisions.
 
-### 5. Complex Implementation Logic (Regardless of Scale)
-- Managing 3+ states
-- Coordinating 5+ asynchronous processes
+## ADR Creation Conditions
 
-## Detailed Document Definitions
+Check accepted ADRs that govern the changed responsibility, then apply both filters to each technical topic in the confirmed scope:
 
-### PRD (Product Requirements Document)
+1. **Choice requires judgment**: Current requirements, accepted decisions, and representative repository patterns support at least two credible, materially distinct options.
+2. **Decision is durable**: The choice materially changes a responsibility, dependency direction, shared contract, persistence model, technology dependency, reversibility, or lifecycle cost that future work must preserve.
 
-**Purpose**: Define business requirements and user value
+Create one ADR for each topic that passes both filters. Keep a topic in the Design Doc when one repository-supported implementation is evident or the choice remains cheaply reversible.
 
-**Includes**:
-- Business requirements and user value
-- Success metrics and KPIs (measurable format)
-- User stories and use cases
-- MoSCoW prioritization (Must/Should/Could/Won't)
-- MVP and Future phase separation
-- User journey diagram
-- Scope boundary diagram
+Qualifying durable choices can include:
 
-**Excludes**:
-- Technical implementation details (→Design Doc)
-- Technical selection rationale (→ADR)
-- **Implementation phases** (→Work Plan)
-- **Task breakdown** (→Work Plan)
+- introducing or replacing a technology, platform, storage model, or external dependency;
+- changing ownership, dependency direction, a trust boundary, or a shared public contract when credible alternatives exist;
+- reversing or superseding an accepted architecture decision;
+- selecting an irreversible or high-cost compatibility or data migration strategy.
 
-### ADR (Architecture Decision Record)
+Counts of files, consumers, nesting levels, states, or processing steps do not independently require an ADR.
 
-**Purpose**: Record technical decisions
+## What Each Document Fixes
 
-**Includes**:
-- Decision (what was selected)
-- Rationale (why that selection was made)
-- Option comparison (minimum 3 options) and trade-offs
-- Architecture impact
-- Principled implementation guidelines
+Create an artifact only when its downstream consumer would otherwise need to infer the named decision.
 
-**Excludes**:
-- Implementation schedule, duration (→Work Plan)
-- Detailed implementation procedures (→Design Doc)
-- Specific code examples (→Design Doc)
-- Resource assignments (→Work Plan)
+| Document | Decision it fixes | Consumer effect when missing |
+|----------|-------------------|------------------------------|
+| PRD | Product outcome, current requirements, acceptance criteria, and exclusions | Design would have to infer product scope |
+| ADR | One qualifying durable technical choice and the alternatives it resolves | Design and future changes could not distinguish an accepted decision from a local choice |
+| Design Doc | Repository-grounded implementation approach, contracts, change surface, and verification strategy | Planning and implementation would make design decisions locally |
+| Work Plan | Implementation order, real dependencies, and executable verification | Execution would choose sequencing and proof boundaries locally |
 
-### Design Document
+## Document Boundaries
 
-**Purpose**: Define technical implementation
+### PRD
 
-**Includes**:
-- **Existing codebase analysis** (required)
-  - Implementation path mapping (both existing and new)
-  - Integration point clarification (connection points with existing code even for new implementations)
-- Technical implementation approach (vertical/horizontal/hybrid)
-- **Technical dependencies and implementation constraints** (required implementation order)
-- Interface and type definitions
-- Data flow and component design
-- **E2E verification procedures at integration points**
-- **Acceptance criteria (measurable format)**
-- Change impact map (clearly specify direct impact/indirect impact/no ripple effect)
-- Complete enumeration of integration points
-- Data contract clarification
-- **Agreement checklist** (agreements with stakeholders)
-- **Code inspection evidence** (inspected files/functions during investigation)
-- **Field propagation map** (when fields cross component boundaries)
-- **Data representation decision** (when introducing new structures)
-- **Applicable standards** (explicit/implicit classification)
-- **Prerequisite ADRs** (including common ADRs)
+Include product outcome, current requirements, success criteria, user-visible scope, exclusions, and unresolved product decisions. Keep technical implementation choices in the Design Doc or ADR.
 
-**Required Structural Elements**:
-```yaml
-Change Impact Map:
-  Change Target: [Component/Feature]
-  Direct Impact: [Files/Functions]
-  Indirect Impact: [Data format/Processing time]
-  No Ripple Effect: [Unaffected features]
+### ADR
 
-API Contract Change Matrix:
-  Existing: [Function/operation signature]
-  New: [Function/operation signature]
-  Conversion Required: [Yes/No]
-  Compatibility Strategy: [Approach]
-```
+Include the durable choice, materially distinct options, trade-offs, decision, consequences, and reversal conditions. Evaluate the number of options established by evidence; do not manufacture alternatives to satisfy a fixed count.
 
-**Excludes**:
-- Why that technology was chosen (→Reference ADR)
-- When to implement, duration (→Work Plan)
-- Who will implement (→Work Plan)
+### Design Doc
+
+Include only information that constrains implementation or verification:
+
+- confirmed outcome and non-goals;
+- relevant existing code and accepted decisions;
+- selected implementation approach and contracts;
+- affected responsibility boundaries and integration points;
+- acceptance criteria and the narrowest sufficient verification strategy;
+- material risks, unknowns, and decisions deferred to implementation.
+
+Add a change-impact map, field-propagation map, API matrix, or diagram when the relationship would otherwise be difficult for the next consumer to reconstruct.
 
 ### Work Plan
 
-**Purpose**: Implementation task management and progress tracking
-
-**Includes**:
-- Task breakdown and dependencies (maximum 2 levels)
-- Schedule and duration estimates
-- **Copy E2E verification procedures from Design Doc** (cannot delete, can add)
-- **Stage 4 Quality Assurance Stage (required)**
-- Progress records (checkbox format)
-
-**Excludes**:
-- Technical rationale (→ADR)
-- Design details (→Design Doc)
-
-**Stage Division Criteria**:
-1. **Stage 1: Foundation Implementation** - Type definitions, interfaces, test preparation
-2. **Stage 2: Core Feature Implementation** - Business logic, unit tests
-3. **Stage 3: Integration Implementation** - External connections, presentation layer
-4. **Stage 4: Quality Assurance (Required)** - Acceptance criteria achievement, all tests passing, quality checks
-
-**Three Elements of Task Completion Definition**:
-1. **Implementation Complete**: Code is functional
-2. **Quality Complete**: Tests, type checks, linting pass
-3. **Integration Complete**: Verified connection with other components
+Include the fewest implementation units needed to preserve real dependencies and observable proof. Each task names its source, intended result, scope, dependencies, and verification.
 
 ## Creation Process
 
-1. **Problem Analysis**: Change scale assessment, ADR condition check
-   - Identify explicit and implicit project standards before investigation
-2. **ADR Option Consideration** (ADR only): Compare 3+ options, specify trade-offs
-3. **Creation**: Use templates, include measurable conditions
-4. **Approval**: "Accepted" after review enables implementation
+1. Confirm the outcome, current requirements, and non-goals.
+2. Determine Structural Scale from repository evidence.
+3. Apply the ADR choice and durability filters.
+4. Create only the documents selected by the decision matrix.
+5. Obtain approval for product requirements and major durable design decisions before they authorize implementation.
 
 ## Storage Locations
 
-| Document | Path | Naming Convention | Template |
-|----------|------|------------------|----------|
-| PRD | `docs/prd/` | `[feature-name]-prd.md` | `template-en.md` |
-| ADR | `docs/adr/` | `ADR-[4-digits]-[title].md` | `template-en.md` |
-| Design Doc | `docs/design/` | `[feature-name]-design.md` | `template-en.md` |
-| Work Plan | `docs/plans/` | `YYYYMMDD-{type}-{description}.md` | `template-en.md` |
+| Document | Path | Naming Convention |
+|----------|------|-------------------|
+| PRD | `docs/prd/` | `[feature-name]-prd.md` |
+| ADR | `docs/adr/` | `ADR-[4-digits]-[title].md` |
+| Design Doc | `docs/design/` | `[feature-name]-design.md` |
+| Work Plan | `docs/plans/` | `YYYYMMDD-{type}-{description}.md` |
 
-*Note: Work plans are stored in `docs/plans/` and excluded by `.gitignore`
+Work Plans are transient execution state and remain excluded by `.gitignore` unless the repository explicitly chooses to version them.
 
 ## ADR Status
-`Proposed` → `Accepted` → `Deprecated`/`Superseded`/`Rejected`
 
-## AI Automation Rules
-- 5+ files: Suggest ADR creation
-- Type/data flow change detected: ADR mandatory
-- Check existing ADRs before implementation
+`Proposed` → `Accepted` → `Deprecated` / `Superseded` / `Rejected`
 
-## Diagram Requirements
+When a new ADR supersedes an accepted ADR, retain the old ADR, mark it `Superseded` with a reference to the new ADR, and add a reference to the old ADR in the new ADR.
 
-Required diagrams for each document (using mermaid notation):
+## Quality Check
 
-| Document | Required Diagrams | Purpose |
-|----------|------------------|---------|
-| PRD | User journey diagram, Scope boundary diagram | Clarify user experience and scope |
-| ADR | Option comparison diagram (when needed) | Visualize trade-offs |
-| Design Doc | Architecture diagram, Data flow diagram | Understand technical structure |
-| Work Plan | Phase structure diagram, Task dependency diagram | Clarify implementation order |
-
-## Common ADR Relationships
-1. **At creation**: Identify common technical areas (logging, error handling, async processing, etc.), reference existing common ADRs
-2. **When missing**: Consider creating necessary common ADRs
-3. **Design Doc**: Specify common ADRs in "Prerequisite ADRs" section
-4. **Compliance check**: Verify design aligns with common ADR decisions
+- Every document serves a named downstream consumer.
+- Every retained section changes a decision, protects a boundary, or supplies necessary proof.
+- Repository observations, inferences, and unknowns are distinguishable.
+- Reuse and no-document outcomes remain valid when evidence supports them.
