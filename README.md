@@ -1,163 +1,66 @@
 # Agentic Code
 
-A repository-resident development workflow for coding agents that read `AGENTS.md`.
-
-Agentic Code adds an `AGENTS.md` entry point and a set of task, workflow, and skill files to a repository. The agent uses them to keep a well-scoped change on a direct path, route coordinated work through design and planning, load guidance only when it becomes relevant, and verify observable behavior before completion.
-
-It does not generate an application by itself. It gives a coding agent a repeatable way to analyze, design, implement, test, and review changes in the repository where the files are installed.
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![AGENTS.md](https://img.shields.io/badge/AGENTS.md-compatible-blue.svg)](https://agents.md)
-[![Version](https://img.shields.io/badge/version-0.7.2-blue.svg)](package.json)
+[![Version](https://img.shields.io/badge/version-0.7.3-blue.svg)](package.json)
 
-## What It Provides
+Agentic Code is a set of instruction files for coding agents that read `AGENTS.md`, such as Cursor, Codex CLI, and Gemini CLI. You add the files to a repository, describe a change in plain words, and the agent works through it with a process sized to that change. A small fix goes straight to implementation. A change that crosses several parts of the system gets a design and a plan first.
 
-```text
-AGENTS.md                      Repository entry point and operating boundaries
-.agents/tasks/                 Definitions for analysis, design, implementation, QA, and review
-.agents/workflows/             Coordinated workflow for structurally Medium/Large work
-.agents/skills/                Reusable implementation, testing, and documentation rules
-.agents/context-maps/          Task-to-skill selection map
-```
+The files shape how the agent works inside your repository. They do not generate an application.
 
-The route is based on decision burden rather than file count:
+## What you get
 
-| Scale | Structural condition | Route |
-|-------|----------------------|-------|
-| Small | One coherent outcome follows existing patterns within one responsibility boundary | Direct task execution |
-| Medium | One coherent outcome coordinates across a boundary or requires a durable design decision | Design and Work Plan before implementation |
-| Large | Multiple independently valuable outcomes require separate design decisions | PRD, separate design decisions, and Work Plan |
+Current coding agents can carry most changes to the end on their own. The trouble is usually the process around them: they build more than you asked for, stop to ask about details you don't care about, or call a task done without showing it works. Agentic Code is tuned against those failures.
 
-File paths and affected layers are still inspected, but they are evidence about the change surface rather than the scale formula.
+Scope stays where you put it. The agent records what you want and what you ruled out, then keeps to both. When existing code already covers most of a request, it tells you before building the rest, and "nothing needs to change" is an acceptable answer.
 
-## Quick Start
+You are asked about what you want, not how it gets built. Questions are reserved for your requirements, permissions only you can give, and actions that can't be undone. Once you let implementation start, the agent carries it through without asking again for each technical detail.
+
+Done means shown to work. Before finishing, the agent runs your repository's own tests and checks. Each changed behavior is proven by one test at the place where you would notice it, so the suite doesn't fill up with duplicates.
+
+Review feedback is weighed before it becomes work. Required fixes are applied, optional extras are declined with a reason, and anything that would change what you asked for comes back to you.
+
+## Quick start
 
 Requires Node.js 22 or later.
-
-Create a new repository containing the workflow:
 
 ```bash
 npx agentic-code my-project
 cd my-project
 ```
 
-The command creates the directory, copies `AGENTS.md` and `.agents/`, initializes Git, and creates an initial commit. Open the repository with an AGENTS.md-compatible coding agent and describe the change you want.
-
-For example:
+This creates `my-project` with `AGENTS.md` and the `.agents/` directory, initializes Git, and makes a first commit. Open the directory with your coding agent and describe the change:
 
 ```text
 Add an API endpoint for user search without changing the existing response contract.
 ```
 
-The agent inspects the repository, confirms the outcome and boundaries, selects a direct task or the coordinated workflow, and runs the applicable repository checks before completion.
+Saying what must stay the same, like the response contract here, helps the agent as much as saying what to build.
 
-## Add It to an Existing Repository
+## Add it to an existing repository
 
-Copy the framework entry point and `.agents` directory into the repository root:
+Copy the two entries into the repository root:
 
 ```bash
 cp /path/to/agentic-code/AGENTS.md .
 cp -R /path/to/agentic-code/.agents .
 ```
 
-Review the generic defaults against the repository's existing commands and conventions. Repository-specific contracts and established checks take precedence over generic examples in the framework.
+Then skim the defaults against how your project builds and tests. Where they differ, your repository's own commands and conventions win.
 
-## How the Workflow Behaves
+## How a request is handled
 
-```mermaid
-flowchart LR
-    A[Request] --> B[Confirm outcome and non-goals]
-    B --> C{Structural scale}
-    C -->|Small| D[Direct task]
-    C -->|Medium| E[Design and Work Plan]
-    C -->|Large| F[PRD and separate design decisions]
-    D --> G[Implement and verify]
-    E --> G
-    F --> G
-    G --> H[QA and review]
-    H --> I[Observable completion]
-```
+The agent reads the relevant code first and judges the size of the change by what it has to decide, not by how many files it touches.
 
-The workflow is strict about requirements, user authority, irreversible actions, and completion evidence. Inside those boundaries, the agent resolves reversible repository-local choices from the available evidence. Technical choices recorded in a design or plan stay revisable while the outcome holds, so a smaller path to the same outcome does not need approval again.
+- **Small**: one change that follows existing patterns. The agent implements and verifies it directly.
+- **Medium**: one change that crosses parts of the system or needs a design decision later work will live with. The agent writes a design doc, checks with you that it matches what you want, then writes a work plan. You give the go-ahead once, and implementation runs to the end.
+- **Large**: several outcomes that are each useful on their own. A product requirements document comes before the design.
 
-Reuse, no-change, no-new-document, and no-new-test are valid conclusions when they satisfy the requested outcome and its proof. Each changed behavioral claim is proven once, by the test at the boundary where it is observable.
+Every route ends with your repository's checks and a review of the change.
 
-## Tasks, Workflows, and Skills
+## Asking for a review
 
-### Tasks
-
-Task definitions own one kind of result. Available tasks include:
-
-| Task | Result |
-|------|--------|
-| `task-analysis` | Outcome, structural scale, selected path, and required skills |
-| `prd-creation` | User-confirmed product outcomes and exclusions for Large work |
-| `technical-design` | Repository-grounded implementation design and verification strategy |
-| `acceptance-test-generation` | Owning integration/E2E test selection and skeletons when required |
-| `work-planning` | Fewest executable tasks with real dependencies and verification |
-| `implementation` | Smallest sufficient implementation with owning-test proof |
-| `quality-assurance` | Applicable repository checks and completion evidence |
-| `code-review` | Evidence-backed implementation findings without scope expansion |
-| `technical-document-review` | Consumer-focused PRD, ADR, and Design Doc review |
-| `integration-test-review` | Integration/E2E boundary and proof quality review |
-
-### Workflow
-
-`.agents/workflows/agentic-coding.md` coordinates Medium/Large work. It preserves the requested outcome across requirements, design, planning, implementation, QA, and review without requiring fixed file counts, test quotas, or template sections that have no current consumer.
-
-### Skills
-
-Skills contain reusable judgment for coding, testing, documentation, implementation strategy, and metacognition. They are loaded when the selected task needs them rather than all at startup.
-
-## Install Skills Separately
-
-The `skills` subcommand installs only `.agents/skills/`; it does not install the full `AGENTS.md` workflow.
-
-### Codex
-
-```bash
-# User scope
-npx agentic-code skills --codex
-
-# Current project
-npx agentic-code skills --codex --project
-```
-
-### Cursor
-
-```bash
-# User scope
-npx agentic-code skills --cursor
-
-# Current project
-npx agentic-code skills --cursor --project
-```
-
-### Custom Path
-
-```bash
-npx agentic-code skills --path ./custom/skills
-```
-
-Run `npx agentic-code skills --help` for the target paths and available options.
-
-## Compatible Tools
-
-The core workflow works with tools that read repository-level `AGENTS.md` instructions. Cursor, Codex CLI, and Gemini CLI are common examples; exact discovery and skill-installation behavior depends on the tool version.
-
-If you primarily use Codex and want a Codex-native setup with custom agents and isolated review contexts, see [codex-workflows](https://github.com/shinpr/codex-workflows).
-
-## Reviews
-
-Review tasks evaluate findings against the requirements, the current design, repository rules, and observable correctness. A receiving agent can:
-
-- apply a finding required by correctness, the requirements, or the current design;
-- decline optional scope, duplicated proof, or unsupported hardening;
-- return a finding to the user when it changes the outcome, requirements, non-goals, explicit constraints, or user-held authority.
-
-For a fresh perspective, run important reviews in a new session or an isolated agent context. The reviewer still needs the governing requirements, relevant document paths, changed files, and verification evidence.
-
-Example requests:
+You can also ask for a review by itself:
 
 ```text
 Review src/auth/ against docs/design/auth-design.md.
@@ -165,13 +68,33 @@ Review docs/design/payment-design.md as a Design Doc.
 Review the integration tests in tests/integration/auth.test.ts.
 ```
 
-## Scope and Trade-offs
+For important changes, run the review in a new session so it isn't colored by the conversation that produced the code. Point it at the requirements or design doc, the changed files, and the test results.
 
-Agentic Code adds process and context. Direct agent execution is usually cheaper for a well-scoped fix, a disposable experiment, or a one-shot script whose safe boundary is already clear.
+## Install only the skills
 
-Use the coordinated workflow when technical choices can change the product outcome, cross a responsibility boundary, or create a durable decision that later work must understand.
+The `skills` command copies the coding, testing, and documentation guidance in `.agents/skills/` into your tool's skill directory, without the `AGENTS.md` workflow.
 
-The framework is language-agnostic at its core. TypeScript-specific references are included; other languages use their repository-native commands and conventions until language-specific guidance is added.
+```bash
+npx agentic-code skills --codex             # Codex, user scope
+npx agentic-code skills --codex --project   # Codex, current project
+npx agentic-code skills --cursor            # Cursor, user scope
+npx agentic-code skills --cursor --project  # Cursor, current project
+npx agentic-code skills --path ./custom/skills
+```
+
+Run `npx agentic-code skills --help` for the target paths and other options.
+
+## Compatible tools
+
+Agentic Code works with tools that read a repository-level `AGENTS.md`. Cursor, Codex CLI, and Gemini CLI are common examples. How each tool discovers instructions and skills depends on its version.
+
+If you primarily use Codex and want a Codex-native setup with custom agents and isolated review contexts, see [codex-workflows](https://github.com/shinpr/codex-workflows).
+
+## When to skip it
+
+The files add process and context to every session. For a well-scoped fix, a throwaway experiment, or a one-off script, a plain agent session is usually cheaper. Agentic Code pays off when a change crosses parts of the system or leaves a decision that later work has to understand.
+
+The guidance is language-agnostic, with extra references for TypeScript. Other languages rely on the commands and conventions already in your repository.
 
 ## Contributing
 
