@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create the fewest executable implementation tasks that preserve the approved scope, real dependency order, and observable proof.
+Create the fewest executable implementation tasks that preserve the design's scope, real dependency order, and observable proof.
 
 ## Required Skills
 
@@ -13,13 +13,13 @@ Create the fewest executable implementation tasks that preserve the approved sco
 
 ## Required Inputs
 
-- approved Design Doc or equivalent governing source;
+- Design Doc or equivalent governing source;
 - selected acceptance proof, including existing tests or an explicit no-new-test result;
 - repository commands and task dependencies established by evidence.
 
 ## Completion Conditions
 
-- Every task traces to an approved outcome, requirement, design section, or required correction.
+- Every task is repository work as `documentation-criteria` Work Plan defines it and traces to a requirement, design section, or required correction.
 - Task boundaries follow coherent results and real dependencies rather than file count.
 - Each task has an executable verification method.
 - Existing selected test skeletons are consumed at the earliest task that can make their boundary executable.
@@ -27,7 +27,7 @@ Create the fewest executable implementation tasks that preserve the approved sco
 
 ## Process
 
-1. Extract the approved implementation outcomes and dependency constraints.
+1. Extract the design's implementation outcomes and dependency constraints.
 2. Choose vertical, foundation-first, or hybrid slicing from `implementation-approach`.
 3. Create the fewest independently executable tasks that keep the repository in a valid state.
 4. Attach the narrowest verification that proves each task result.
@@ -41,7 +41,7 @@ File count and architecture layers do not define task boundaries.
 ```markdown
 ### [Task ID]: [Coherent result]
 
-- **Source**: [Design Doc section, acceptance criterion, or approved correction]
+- **Source**: [Design Doc section, acceptance criterion, or required correction]
 - **Result**: [Observable implementation outcome]
 - **Scope**: [Responsibilities and expected paths]
 - **Depends on**: [Real prerequisite or none]
@@ -60,4 +60,4 @@ Store Work Plans at `docs/plans/YYYYMMDD-{type}-{description}.md`. They are tran
 - Every task changes the outcome, protects a boundary, serves a consumer, or supplies necessary proof.
 - No task exists only to satisfy a phase template.
 - Combining or splitting tasks would not improve dependency clarity or verification.
-- The plan stops when all approved outcomes have an executable path to proof.
+- The plan stops when every outcome in the design has an executable path to proof.

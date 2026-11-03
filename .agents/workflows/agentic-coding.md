@@ -2,22 +2,19 @@
 
 ## Purpose
 
-Carry one coordinated outcome or several independently valuable outcomes from confirmed scope through design, planning, implementation, and observable verification.
+Carry one coordinated outcome or several independently valuable outcomes from requirements through design, planning, implementation, and observable verification.
 
-Use this workflow for Medium/Large structural scale after task analysis and user approval. Track progress internally; this file defines phase ownership and transition evidence.
+Use this workflow for Medium/Large structural scale after task analysis and the user's go-ahead for this route. Track progress internally; this file defines phase ownership and transition evidence.
 
 ## Operating Rules
 
-- Preserve the confirmed outcome, current requirements, non-goals, and repository contracts.
 - Load each phase's task definition and required skills when that phase starts.
-- Treat semantically equivalent evidence as satisfying a gate unless a machine consumes an exact schema.
-- Resolve reversible repository-local choices from evidence.
-- Ask the user only for a new product requirement, a scope change, a major approved design change, unavailable authority, or an unauthorized irreversible action.
 - Create only artifacts and verification lanes required by the current outcome or a downstream consumer.
+- A phase stop asks the user about the outcome or for authority, not for approval of technical means; revising a recorded technical choice afterward needs no new stop.
 
 ## Phase 0: Product Requirements [Large only]
 
-Load `.agents/tasks/prd-creation.md` when multiple independently valuable outcomes need one approved product boundary.
+Load `.agents/tasks/prd-creation.md` when multiple independently valuable outcomes need one product boundary.
 
 ### Result
 
@@ -26,7 +23,7 @@ Load `.agents/tasks/prd-creation.md` when multiple independently valuable outcom
 
 ### Transition Gate
 
-Proceed after the user approves the product scope. If an existing approved PRD already carries the current scope, reuse it.
+Proceed after the user confirms the PRD's outcomes, requirements, and exclusions. If an existing PRD already carries the current scope, reuse it.
 
 ## Phase 1: Requirements Confirmation
 
@@ -46,82 +43,49 @@ Load `.agents/tasks/technical-design.md` and the skills it selects.
 
 ### Result
 
-- Reuse an existing approved design when it fully governs the current change.
+- Reuse an existing design when it fully governs the current change.
 - Create ADRs only for current-scope choices that require judgment and remain durable.
 - Create a Design Doc containing the repository-grounded implementation approach, affected contracts, real dependencies, and verification strategy.
 
 ### Transition Gate
 
-Proceed after the user approves the implementation scope and any major durable design decisions. Local reversible choices remain implementation decisions.
+Present the minimum user-visible value the design delivers and its major changes, including internal mechanism changes and ADR choices, and ask whether they match the user's intent. Continue when the user confirms; apply a correction through the owning phase.
 
 ## Phase 3: Acceptance Proof Selection
 
-Load `.agents/tasks/acceptance-test-generation.md` when the approved design selects an integration or E2E boundary as the narrowest sufficient proof for an acceptance criterion.
+Load `.agents/tasks/acceptance-test-generation.md` when an acceptance criterion's behavior is observable at an integration or E2E boundary.
 
-### Selection Rule
-
-1. Reuse existing proof when it already observes the required behavior.
-2. Prefer the cheapest test level that observes the boundary.
-3. Generate a skeleton only when the repository's established pattern or the next planning consumer needs one.
-4. Record why selected proof is necessary and why a cheaper boundary is insufficient.
-
-Some changes require no new integration or E2E test. That is a valid result when focused unit checks or existing coverage provide sufficient proof.
+No new integration or E2E test is a valid result when existing tests, or unit tests of the logic involved, already own each claim.
 
 ## Phase 4: Work Planning
 
 Load `.agents/tasks/work-planning.md`.
 
-Create the fewest tasks that preserve real dependencies and observable verification. Each task records:
-
-- governing source;
-- intended result;
-- affected responsibility or paths;
-- dependencies that make ordering necessary;
-- executable verification.
-
-Use an existing selected test skeleton in the earliest task that can make its boundary executable. Shared infrastructure comes first only when that proof cannot run without it.
-
 ### Transition Gate
 
-Proceed when the Work Plan represents the approved implementation scope, all real dependencies are ordered, and the user approves the plan when it fixes decisions or scope not already approved.
+Proceed when the Work Plan covers the design's repository work and orders its real dependencies. Obtain the user's authorization to implement within this outcome unless the user already gave it. That authorization covers the whole implementation phase; later reviews and technical revisions do not reopen it.
 
 ## Phase 5: Implementation
 
 Load `.agents/tasks/implementation.md` and execute each planned task.
 
-For each task:
-
-1. Confirm its source, result, dependencies, and verification.
-2. Implement the smallest change that produces the result.
-3. Use TDD when the behavior change can be represented by a failing test.
-4. Run focused verification and applicable repository checks.
-5. Update progress after the task satisfies its exit evidence.
-
-When new evidence invalidates the planned result or a major design decision, return to the owning phase. Repository-local corrections that preserve scope remain in implementation.
-
 ## Phase 6: Quality Assurance
 
 Load `.agents/tasks/quality-assurance.md`.
 
-Run the applicable established checks against the complete change. Fix in-scope failures. Report unavailable checks and residual limitations without creating new infrastructure unless the approved outcome requires it.
+Run the applicable established checks against the complete change. Fix in-scope failures. Report unavailable checks and residual limitations without creating new infrastructure unless the outcome requires it.
 
 ### Completion Evidence
 
 - requested behavior is observable;
 - applicable repository checks pass;
-- approved contracts and non-goals remain preserved;
+- contracts and non-goals remain preserved;
 - documentation used by an affected consumer is current;
 - remaining limitations are reported.
 
 ## Phase 7: Review and Handoff
 
-Review the completed change against the approved scope and observable proof.
-
-Resolve each finding as:
-
-- **apply** when it is required by correctness, confirmed requirements, accepted design, or repository rules;
-- **decline** when it adds optional scope, reverses a non-goal, duplicates proof, or lacks an observable effect worth its cost;
-- **user decision** when it changes the product outcome or a major approved decision.
+Review the completed change against the outcome, requirements, non-goals, and observable proof. Resolve each finding as AGENTS.md Review defines.
 
 Repeat review only when an applied correction changes relevant evidence. A repeated preference without new evidence does not block completion.
 

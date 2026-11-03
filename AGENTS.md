@@ -6,9 +6,9 @@ Use the repository's task definitions and skills to complete the requested outco
 
 ## Operating Boundaries
 
-- Preserve confirmed requirements, explicit non-goals, repository contracts, and user authority.
+- Preserve the user's requirements and non-goals, explicit constraints, repository contracts, and user authority.
 - Treat reuse and no-change as valid conclusions when repository evidence shows the outcome is already satisfied.
-- Require user approval when the product outcome, scope, a major durable design decision, or an irreversible external state would change.
+- Return to the user when progress would change the outcome, requirements, non-goals, or explicit constraints the user set, or an actual consumer contract the user did not ask to change; when it needs authority only the user holds; or when it would change irreversible external state without the user's authorization.
 - Consider work complete when the requested behavior is observable through the narrowest sufficient verification boundary.
 
 ## Session Setup
@@ -51,17 +51,18 @@ A gate is justified when it protects:
 
 - user authority;
 - an irreversible action;
-- confirmed requirements or a major durable design decision;
+- the user's requirements and non-goals;
 - a machine-consumed contract;
 - observable completion evidence.
 
-Accept semantically equivalent evidence unless software requires an exact schema. Resolve reversible repository-local ambiguity from available evidence. Ask the user when proceeding requires a new product requirement, a scope change, a major approved design change, authority only the user holds, or an irreversible action the user did not authorize.
+A user's go-ahead authorizes the next work; it does not fix the technical choices in a design, ADR, or plan. Read existing approval records by meaning, and ask again only when the authority they grant does not cover the next action. Accept semantically equivalent evidence unless software requires an exact schema.
+
+Resolve reversible repository-local ambiguity and outcome-preserving technical changes, including superseding a recorded design choice, from available evidence: update the affected documents and proof, then continue. Other changes return to the user as Operating Boundaries states.
 
 ## Implementation and Verification
 
 - Follow repository patterns and existing contracts.
-- Use TDD when a behavior change can be represented by a failing test.
-- Select the narrowest established test or check that observes the required boundary.
+- Prove each changed behavioral claim with one owning test at the narrowest boundary where it is observable; use the narrowest established check for changes without a behavioral claim.
 - Run applicable repository checks before completion.
 - Report unavailable verification or residual risk rather than creating unrequested infrastructure.
 
@@ -69,9 +70,9 @@ Accept semantically equivalent evidence unless software requires an exact schema
 
 Treat review findings as candidates:
 
-- **Apply** findings required by confirmed requirements, repository rules, accepted design, or observable correctness.
+- **Apply** findings required by the requirements, repository rules, the current design, or observable correctness.
 - **Decline** findings that add optional scope, reverse a non-goal, duplicate proof, or cost more than their observable effect justifies.
-- **Return for user decision** findings that change the product outcome or a major approved decision.
+- **Return for user decision** findings whose resolution would make a change that Operating Boundaries returns to the user.
 
 A repeated preference without new evidence does not block progress.
 

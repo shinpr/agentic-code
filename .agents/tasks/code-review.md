@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Evaluate a completed implementation against confirmed requirements, accepted design, repository rules, and observable correctness without expanding the approved outcome.
+Evaluate a completed implementation against the requirements, the current design, repository rules, and observable correctness without expanding the requested outcome.
 
 ## Required Skills
 
@@ -13,7 +13,7 @@ Evaluate a completed implementation against confirmed requirements, accepted des
 ## Required Inputs
 
 - implementation paths or change diff;
-- confirmed requirements and non-goals;
+- requirements and non-goals;
 - Design Doc or ADRs when they govern the change;
 - verification evidence and known limitations.
 
@@ -21,7 +21,7 @@ Evaluate a completed implementation against confirmed requirements, accepted des
 
 1. Confirm the review boundary and governing sources.
 2. Inspect changed behavior, affected callers, contracts, error paths, and tests.
-3. Verify that the supplied proof observes the behavior it claims to prove.
+3. Map each changed test to the claim it proves and its boundary. Verify that it observes that claim; a claim owned by two tests, or a test with no required claim, is scope excess.
 4. Record only findings with an observable correctness, contract, security, maintainability, or scope effect.
 5. Distinguish repository observations from inferences and unknowns.
 
@@ -50,11 +50,7 @@ Use severity for impact, not implementation effort:
 - `needs_revision`: At least one evidence-backed high or medium finding requires resolution.
 - `blocked`: Governing scope or required evidence is unavailable, so correctness cannot be judged.
 
-The receiving agent resolves each finding:
-
-- **apply** when required by correctness, confirmed requirements, accepted design, or repository rules;
-- **decline** when it adds optional scope, reverses a non-goal, duplicates proof, or lacks an effect worth its cost;
-- **user decision** when it changes the product outcome or a major approved decision.
+The receiving agent resolves each finding as AGENTS.md Review defines.
 
 Repeat review only when an applied correction changes relevant evidence.
 

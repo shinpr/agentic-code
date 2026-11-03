@@ -11,7 +11,7 @@ description: "Determines which PRD, ADR, Design Doc, and Work Plan a change requ
 |------------------|--------------------|----------------|
 | Small | None | Direct task execution |
 | Medium | Design Doc → Work Plan | Start with Design Doc |
-| Large | PRD → Design Doc → Work Plan | Continue after PRD approval |
+| Large | PRD → Design Doc → Work Plan | Continue after the user confirms the PRD |
 
 Insert an ADR immediately before the Design Doc only when a current-scope decision passes both ADR filters below. A qualifying ADR decision sets the scale floor to Medium.
 
@@ -29,7 +29,7 @@ Multiple files or layers that serve one coherent outcome remain Medium. Large ap
 
 ## ADR Creation Conditions
 
-Check accepted ADRs that govern the changed responsibility, then apply both filters to each technical topic in the confirmed scope:
+Check accepted ADRs that govern the changed responsibility, then apply both filters to each technical topic in the current scope:
 
 1. **Choice requires judgment**: Current requirements, accepted decisions, and representative repository patterns support at least two credible, materially distinct options.
 2. **Decision is durable**: The choice materially changes a responsibility, dependency direction, shared contract, persistence model, technology dependency, reversibility, or lifecycle cost that future work must preserve.
@@ -70,7 +70,7 @@ Include the durable choice, materially distinct options, trade-offs, decision, c
 
 Include only information that constrains implementation or verification:
 
-- confirmed outcome and non-goals;
+- outcome and non-goals, with requirements in their source's words;
 - relevant existing code and accepted decisions;
 - selected implementation approach and contracts;
 - affected responsibility boundaries and integration points;
@@ -79,9 +79,13 @@ Include only information that constrains implementation or verification:
 
 Add a change-impact map, field-propagation map, API matrix, or diagram when the relationship would otherwise be difficult for the next consumer to reconstruct.
 
+Design only the repository capability that release execution, production access, external-account setup, or organizational approval relies on, if any; that work itself stays with its owner.
+
 ### Work Plan
 
 Include the fewest implementation units needed to preserve real dependencies and observable proof. Each task names its source, intended result, scope, dependencies, and verification.
+
+Each task is repository work completed and verified with repository artifacts and the task's own output. Content that is not such a task, such as exclusions, external prerequisites, handoff or ownership statements, and completion caveats, stays in its governing document; restated in the plan, it becomes an unreviewed second version read as plan scope.
 
 ## Creation Process
 
@@ -89,7 +93,7 @@ Include the fewest implementation units needed to preserve real dependencies and
 2. Determine Structural Scale from repository evidence.
 3. Apply the ADR choice and durability filters.
 4. Create only the documents selected by the decision matrix.
-5. Obtain approval for product requirements and major durable design decisions before they authorize implementation.
+5. Obtain the user's confirmation of product requirements before design and the user's authorization before implementation. Technical choices in ADRs and Design Docs remain revisable while the outcome holds.
 
 ## Storage Locations
 

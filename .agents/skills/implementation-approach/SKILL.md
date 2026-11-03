@@ -10,7 +10,7 @@ description: "Selects the smallest sufficient implementation strategy and verifi
 Use this sequence when a design or task needs an implementation approach:
 
 1. **Current evidence**: Inspect the relevant responsibility, data or control path, representative repository pattern, and constraints that can change the choice.
-2. **Direct implementation**: Describe the simplest end-to-end change that delivers the confirmed outcome through the existing architecture and dependencies.
+2. **Direct implementation**: Describe the simplest end-to-end change that delivers the outcome through the existing architecture and dependencies.
 3. **Failure check**: Test the direct implementation against current requirements, verified constraints, observed problems, and evidence-backed material risks within scope.
 4. **Targeted expansion**: Add only what resolves a failed item. Compare the smaller design with and without the addition.
 5. **Value and subtraction check**: Retain an addition only when evidence shows that its outcome benefit justifies its implementation, testing, documentation, runtime, and maintenance cost.
@@ -37,11 +37,11 @@ Select the narrowest level that exercises the boundary named by the requirement:
 - **L2: Integration**: Interaction across components, persistence, processes, or another named integration boundary.
 - **L3: End-to-end**: The complete user, browser, process, or service journey required by the acceptance criterion.
 
-A broader check does not replace required focused proof, and a focused check does not prove a wider boundary. Prefer observable operation, then a focused test, then build or static evidence when each is applicable.
+Prefer observable operation, then a test, then build or static evidence when each is applicable.
 
 ## Completion Check
 
-- The approach delivers the confirmed outcome through existing patterns where sufficient.
+- The approach delivers the outcome through existing patterns where sufficient.
 - Every added mechanism resolves a current failed item.
 - Task order follows verified dependencies rather than hypothetical rollout needs.
 - Verification exercises the required observable boundary without adding an unnecessary wider lane.

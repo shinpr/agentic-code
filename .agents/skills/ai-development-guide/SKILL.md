@@ -1,6 +1,6 @@
 ---
 name: ai-development-guide
-description: "Applies root-cause analysis, impact inspection, and completeness checks without expanding approved scope. Use when fixing bugs, refactoring, reviewing quality, or resolving unexpected implementation evidence."
+description: "Applies root-cause analysis, impact inspection, and completeness checks without expanding the requested scope. Use when fixing bugs, refactoring, reviewing quality, or resolving unexpected implementation evidence."
 ---
 
 # AI Development Guide
@@ -39,7 +39,7 @@ When similar functionality exists:
 - reuse it when its responsibility, lifecycle, and contract fit the current outcome;
 - extend it when the extension preserves its responsibility and remains cheaper than a parallel mechanism;
 - replace or remove it when evidence shows it is broken or unused;
-- create a new mechanism only when the current ones cannot satisfy the approved requirement.
+- create a new mechanism only when the current ones cannot satisfy the requirement.
 
 Technical debt discovered outside the current outcome remains a finding, not an automatic ADR or implementation task.
 
@@ -67,7 +67,7 @@ The impact record can remain in the active execution context. Create a separate 
 
 ## Completion Check
 
-- The change addresses the demonstrated cause or approved refactoring outcome.
+- The change addresses the demonstrated cause or requested refactoring outcome.
 - No fallback or abstraction masks an unfixed source.
-- No side finding became unapproved work.
+- No side finding became work outside the requested outcome.
 - Verification observes the affected boundary.

@@ -23,7 +23,7 @@ Verify the completed change at the narrowest sufficient boundaries and run the r
 
 Identify checks the repository already establishes for the changed surface, such as focused tests, broader tests, build, type checking, linting, formatting, generated artifacts, or documented manual verification.
 
-Do not infer universal coverage, complexity, runtime, performance, security, or deployment thresholds when the repository and approved requirements do not define them.
+Do not infer universal coverage, complexity, runtime, performance, security, or deployment thresholds when the repository and the requirements do not define them.
 
 ### 2. Run Focused Verification
 
@@ -37,14 +37,14 @@ Run the established checks affected by the complete change. Fix failures caused 
 
 Confirm:
 
-- delivered behavior matches the approved outcome;
+- delivered behavior matches the requested outcome;
 - non-goals and preserved contracts remain intact;
 - no optional mechanism or unrelated cleanup entered the change;
 - documentation consumed by an affected user or maintainer is current.
 
 ### 5. Report Gaps
 
-When a relevant check or environment is unavailable, report what could not be verified and the resulting risk. Add new tooling or operational work only when the approved outcome or a demonstrated recurring failure requires it.
+When a relevant check or environment is unavailable, report what could not be verified and the resulting risk. Add new tooling or operational work only when the outcome or a demonstrated recurring failure requires it.
 
 ## Completion Conditions
 
@@ -64,7 +64,7 @@ Applicable repository checks:
 - [command]: pass | fail | not applicable
 
 Scope and contracts:
-- [boundary]: preserved | changed as approved | issue
+- [boundary]: preserved | changed as required | issue
 
 Remaining limitations:
 - [evidence-backed gap or none]

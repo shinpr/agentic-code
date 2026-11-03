@@ -12,7 +12,7 @@ Create the smallest durable design record needed for repository-grounded impleme
 
 ## Required Inputs
 
-- confirmed outcome, current requirements, and non-goals;
+- outcome, current requirements, and non-goals as the user or PRD states them;
 - related PRD when one governs the scope;
 - relevant repository paths and accepted decisions;
 - unknowns that can change the design.
@@ -23,14 +23,14 @@ Create the smallest durable design record needed for repository-grounded impleme
 - Every retained decision constrains implementation or verification.
 - Existing patterns, contracts, callers, and integrations relevant to the change are represented.
 - ADRs exist only for current-scope choices that pass both choice and durability filters.
-- Acceptance criteria are observable and have a narrowest sufficient verification boundary.
-- User approval is recorded for the implementation scope and major durable design decisions.
+- Acceptance criteria are observable and each has an owning test or check at the boundary where it is observable.
+- The user has confirmed that the design's minimum user-visible value and major changes match their intent.
 
 ## Process
 
 ### 1. Confirm Governing Scope
 
-Record the outcome, requirements, non-goals, constraints, and unresolved product questions. Use an existing approved PRD when it already carries the current scope.
+Record the outcome, requirements, non-goals, constraints, and unresolved product questions. Use an existing PRD when it already carries the current scope.
 
 ### 2. Inspect Existing Evidence
 
@@ -42,7 +42,9 @@ Inspect only evidence that can change reuse, design validity, preserved contract
 - data or control flow across changed boundaries;
 - current tests and available verification harnesses.
 
-Mark evidence as observed, inferred, or unknown. An implicit local pattern may guide a reversible choice; user confirmation is required only when adopting it would change scope or a major durable decision.
+Mark evidence as observed, inferred, or unknown. An implicit local pattern may guide a reversible choice.
+
+When this inspection shows existing behavior that would serve a requirement's need if the requirement dropped behavior it adds on top, present each such requirement with the existing behavior, the added behavior, and the cost effect before writing the design, and let the user keep or change it. Report such evidence even when the requirement as written rules it out: the user selected the requirements before the code was read, and every later phase builds against them, so this is the one point where repository evidence can reduce them. Do this once per change.
 
 ### 3. Select Documents
 
@@ -62,8 +64,8 @@ Use `.agents/skills/implementation-approach/SKILL.md` to choose the direct imple
 For each acceptance criterion:
 
 - name the behavior or contract to observe;
-- select the narrowest sufficient local, integration, or E2E boundary;
-- reuse existing proof where sufficient;
+- select the owning test at the boundary where the behavior is observable, as `.agents/skills/testing/SKILL.md` defines;
+- update an existing owning test rather than adding another;
 - identify any evidence unavailable until implementation.
 
 ## Design Doc Shape
@@ -73,7 +75,7 @@ For each acceptance criterion:
 
 ## Overview
 - Outcome:
-- Requirements:
+- Requirements: [as the PRD or user states them; this design's reading of them belongs under Design]
 - Non-goals:
 - Constraints:
 
@@ -91,7 +93,7 @@ For each acceptance criterion:
 - Real dependency order
 
 ## Acceptance Criteria and Verification
-- [AC]: [observable result] → [narrowest sufficient proof]
+- [AC]: [observable result] → [owning test and its boundary]
 
 ## Risks and Open Questions
 - Only material current-scope risks and decisions that can change implementation
