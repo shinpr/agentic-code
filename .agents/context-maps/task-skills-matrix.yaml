@@ -50,7 +50,7 @@ skills:
     when_to_load:
       - "Generating acceptance tests from design documents"
       - "Test prioritization and selection"
-      - "Selecting the narrowest sufficient proof boundary"
+      - "Selecting the owning test and its boundary"
       - "Preventing test over-generation"
     typical_tasks: [test_generation]
     size: small
@@ -103,17 +103,17 @@ skills:
     path: ".agents/skills/testing/SKILL.md"
     references:
       typescript: ".agents/skills/testing/references/typescript.md"
-    tags: [testing, tdd, quality-assurance, coverage, unit-tests, integration-tests, verify-phase]
+    tags: [testing, test-selection, owning-test, quality-assurance, unit-tests, integration-tests]
     when_to_load:
       - "Writing tests"
-      - "Bug fixing (test-first)"
+      - "Bug fixing (regression test)"
       - "Quality checks"
       - "Refactoring (ensuring safety)"
-      - "VERIFY phase execution (mandatory)"
+      - "Running applicable quality checks"
     typical_tasks: [implementation, debugging, quality-check, test_generation]
     size: medium
     priority: always
-    description: "Testing standards and TDD practices (includes language-specific references)"
+    description: "Test selection with one owning test per behavioral claim, and quality checks (includes language-specific references)"
 
 
 # Task Type to Skill Mapping
@@ -202,9 +202,9 @@ task_mappings:
 selection_rules:
   - "Always load metacognition at session start"
   - "Load coding-rules when any code modification is involved"
-  - "Load testing for implementation verification; apply TDD when the behavior change can be represented by a failing test"
+  - "Load testing for implementation verification; prove each changed behavioral claim with one owning test"
   - "Load implementation-approach for Medium/Large structural scale"
-  - "Execute applicable established repository checks in VERIFY phase"
+  - "Execute applicable established repository checks before completion"
   - "Progressive loading: start with minimum, add as needed"
   - "Unload task-specific skills after task completion"
   - "For TypeScript projects, also read references/typescript.md in coding-rules and testing skills"

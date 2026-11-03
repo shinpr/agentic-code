@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Select and create only the integration or E2E proof that an acceptance criterion cannot obtain more cheaply.
+Select and create the integration or E2E tests that own acceptance-criterion behavior at the boundary where it is observable.
 
 ## Required Skills
 
@@ -13,16 +13,16 @@ Select and create only the integration or E2E proof that an acceptance criterion
 
 ## Required Inputs
 
-- approved acceptance criteria;
+- acceptance criteria;
 - relevant repository test patterns and existing coverage;
 - named integration or user-journey boundaries;
 - available deterministic test environments.
 
 ## Completion Conditions
 
-- Every candidate acceptance criterion has a selected proof result: existing, local, integration, E2E, or none.
+- Every candidate acceptance criterion has a selected proof result: existing, unit, integration, E2E, or none.
 - Every new integration or E2E test traces to an observable requirement or preserved contract.
-- Existing and cheaper proof was considered first.
+- Each claim has one owning test, and an existing owner is updated rather than duplicated.
 - Generated skeletons follow repository conventions and contain the metadata required by their planning consumer.
 - Skipped candidates require no durable record unless a downstream consumer needs the reason.
 
@@ -40,33 +40,20 @@ For each acceptance criterion, identify:
 
 Return ambiguous product behavior to the owning requirements or design phase. Resolve repository-local test details from existing patterns.
 
-### 2. Check Existing and Cheaper Proof
+### 2. Select the Owning Test
 
-Use this order:
+Apply the `testing-strategy` Selection Process to each criterion. Select `none` when the criterion does not require executable test proof or when another accepted verification method is sufficient.
 
-1. Existing test or executable check already proves the behavior.
-2. A focused local or unit test can prove it.
-3. An integration test is required for a named interaction, persistence, or process boundary.
-4. An E2E test is required because the complete journey is the acceptance criterion.
+### 3. Generate Necessary Skeletons
 
-Select `none` when the criterion does not require executable test proof or when another accepted verification method is sufficient.
-
-### 3. Evaluate Test Cost
-
-Compare setup, runtime, brittleness, maintenance, determinism, and diagnostic value using repository evidence. Select proof whose observable value justifies its cost at the narrowest sufficient level.
-
-Prioritize security, authorization, persisted state, public contracts, irreversible effects, and core journeys, while still using the narrowest sufficient test level.
-
-### 4. Generate Necessary Skeletons
-
-Generate a skeleton only when the repository pattern or Work Plan needs a concrete executable boundary before implementation.
+Generate a skeleton only when the repository pattern or Work Plan needs a concrete executable boundary before implementation. Write it into the existing test file that owns the boundary when one exists.
 
 Each skeleton includes:
 
 ```text
 Acceptance criterion: [identifier or behavior]
 Boundary: [observable interaction or journey]
-Why this level: [why cheaper proof is insufficient]
+Why this boundary: [where the behavior becomes observable]
 Setup: [required state]
 Action: [operation]
 Expected: [observable result]
@@ -75,13 +62,13 @@ Implementation status: pending
 
 Use repository-native pending or placeholder markers. Avoid implementing the behavior during skeleton generation.
 
-### 5. Report Selection
+### 4. Report Selection
 
 Return only information needed by planning:
 
 ```text
 Selected proof:
-- [AC]: existing | local | integration | E2E | none
+- [AC]: existing | unit | integration | E2E | none
   Evidence: [path or boundary]
   Reason: [selection criterion]
 
@@ -93,5 +80,5 @@ Generated files:
 
 - Candidate enumeration did not become a test backlog.
 - Every generated test has a named observable effect.
-- No integration and E2E duplicate proves the same behavior without a distinct boundary.
+- No two tests own the same claim; a wider test adds only what its boundary adds.
 - The result can legitimately contain no new test files.

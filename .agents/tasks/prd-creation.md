@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create or update a PRD when multiple independently valuable outcomes need one approved product boundary before separate design decisions.
+Create or update a PRD when multiple independently valuable outcomes need one product boundary the user confirms before separate design decisions.
 
 ## Required Skills
 
@@ -11,7 +11,7 @@ Create or update a PRD when multiple independently valuable outcomes need one ap
 
 ## When to Use
 
-Use for Large structural scale or when an existing product decision requires a durable PRD update. Reuse an existing approved PRD when it already represents the current request.
+Use for Large structural scale or when an existing product decision requires a durable PRD update. Reuse an existing PRD when it already represents the current request.
 
 Bug fixes, internal refactoring, documentation-only work, and one coherent outcome do not require a PRD solely because their implementation surface is broad.
 
@@ -23,7 +23,7 @@ Bug fixes, internal refactoring, documentation-only work, and one coherent outco
 - Non-goals are user-decided.
 - Acceptance criteria and success evidence are observable.
 - Unknown product decisions are visible.
-- The user approves the product scope before it authorizes design.
+- The user confirms the product scope before design starts.
 
 ## Process
 

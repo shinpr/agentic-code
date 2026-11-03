@@ -22,14 +22,14 @@ Verify that selected integration or E2E tests observe their claimed boundary, fo
 
 1. Confirm the observable behavior and boundary claimed by each test.
 2. Verify that setup, action, and assertions exercise that boundary rather than mocks or implementation details.
-3. Check whether existing or cheaper proof already supplies the same evidence.
+3. Check whether another test already owns the same claim.
 4. Evaluate determinism, state isolation, cleanup, and repository-specific mock boundaries.
 5. Record findings only when they affect correctness, diagnostic value, maintenance cost, scope, or acceptance proof.
 
 ## Result
 
 - `approved`: Tests provide necessary, trustworthy proof at an appropriate boundary.
-- `needs_revision`: A current test can pass without proving its claim, duplicates cheaper proof without a distinct effect, or violates an established repository boundary.
+- `needs_revision`: A current test can pass without proving its claim, duplicates a claim another test owns without adding what its boundary adds, or violates an established repository boundary.
 - `blocked`: The mapped requirement or test environment needed for judgment is unavailable.
 
 ## Output
@@ -50,4 +50,4 @@ Limitations:
 - [unknown or none]
 ```
 
-Repeat review only when an applied correction changes relevant evidence. The absence of new integration or E2E tests is valid when cheaper proof is sufficient.
+Repeat review only when an applied correction changes relevant evidence. The absence of new integration or E2E tests is valid when existing tests already own each claim.

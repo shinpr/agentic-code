@@ -20,7 +20,6 @@ Use these rules after identifying the repository's test framework, file naming, 
 
 - Follow repository-native environment setup, cleanup, and fixture patterns.
 - Mock outside the boundary being tested and use real collaborators inside it.
-- Select an E2E test only when the complete journey is the acceptance criterion.
 - Use project-defined performance or timing thresholds; avoid arbitrary multipliers in generic tests.
 
 ## Applicable Commands
@@ -34,4 +33,4 @@ npm run lint
 npm run type-check
 ```
 
-Run the focused proof and applicable established checks for the changed surface. Report unavailable commands; add tooling only when the approved outcome or a demonstrated recurring failure requires it.
+Run the owning tests and applicable established checks for the changed surface. Report unavailable commands; add tooling only when the outcome or a demonstrated recurring failure requires it.

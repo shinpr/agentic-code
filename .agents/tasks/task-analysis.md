@@ -30,7 +30,9 @@ Record:
 - supplied constraints and authority boundaries;
 - whether no-change or reuse could satisfy the request.
 
-Treat current-state descriptions and speculative ideas as evidence, not buildable scope, unless the user selected them as requirements.
+Treat current-state descriptions and speculative ideas as evidence, not buildable scope, unless the user selected them as requirements. Keep agent-proposed capabilities out of both the requirements and the questions about non-goals; the user need not reject what they did not request.
+
+Requirements cover what the repository change can satisfy. A precondition held outside it, such as legal review, release execution, or organizational approval, enters the requirements only when the user raises it.
 
 ### 2. Classify the Task
 

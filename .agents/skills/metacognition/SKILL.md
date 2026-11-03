@@ -14,7 +14,7 @@ Prevent the agent from following an invalid route, expanding work without eviden
 Run a checkpoint when:
 
 - repository work begins;
-- the task type or approved outcome changes;
+- the task type or the requested outcome changes;
 - unexpected evidence invalidates the current approach;
 - a major phase or coherent implementation task completes;
 - the next action requires user authority or an irreversible operation.
@@ -47,16 +47,16 @@ Routine reversible actions inside an already validated approach do not require a
 - Is the requested result observable?
 - Did the applicable established checks pass?
 - Are verification gaps and residual limitations reported?
-- Did review findings remain within approved scope?
+- Did review findings remain within the requested scope?
 
 ## Decision
 
 After assessment, choose one:
 
 - **continue**: Current evidence supports the route.
-- **adjust**: A reversible local change keeps the approved outcome intact.
-- **return to owning phase**: Evidence invalidates a requirement, major design decision, task boundary, or verification strategy.
-- **ask the user**: Progress requires a new requirement, scope change, unavailable authority, or unauthorized irreversible action.
+- **adjust**: A reversible local change keeps the outcome intact.
+- **return to owning phase**: Evidence invalidates a design choice, task boundary, or verification strategy; update its document and proof, then continue.
+- **ask the user**: Progress requires a change that AGENTS.md Operating Boundaries returns to the user.
 - **complete**: The outcome and required proof are observable.
 
 ## Error Recovery
@@ -73,4 +73,4 @@ When an unexpected result occurs:
 
 - The checkpoint changed or validated a real decision.
 - It did not create a status artifact solely to prove reflection occurred.
-- It preserved the approved outcome and stopped generating work once proof was sufficient.
+- It preserved the outcome and stopped generating work once proof was sufficient.

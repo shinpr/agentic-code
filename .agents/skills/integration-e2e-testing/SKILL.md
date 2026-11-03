@@ -26,7 +26,7 @@ description: "Applies integration and E2E implementation, mock-boundary, and rev
 
 ### E2E Test Execution Conditions
 
-- Execute only after all components are implemented
+- Execute once every component the journey crosses is implemented
 - Do not use mocks (full system integration required)
 
 ## Review Criteria

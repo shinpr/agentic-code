@@ -78,9 +78,9 @@ flowchart LR
     H --> I[Observable completion]
 ```
 
-The workflow is strict about requirements, user authority, irreversible actions, accepted durable decisions, and completion evidence. Inside those boundaries, the agent resolves reversible repository-local choices from the available evidence.
+The workflow is strict about requirements, user authority, irreversible actions, and completion evidence. Inside those boundaries, the agent resolves reversible repository-local choices from the available evidence. Technical choices recorded in a design or plan stay revisable while the outcome holds, so a smaller path to the same outcome does not need approval again.
 
-Reuse, no-change, no-new-document, and no-new-test are valid conclusions when they satisfy the requested outcome and its proof.
+Reuse, no-change, no-new-document, and no-new-test are valid conclusions when they satisfy the requested outcome and its proof. Each changed behavioral claim is proven once, by the test at the boundary where it is observable.
 
 ## Tasks, Workflows, and Skills
 
@@ -91,11 +91,11 @@ Task definitions own one kind of result. Available tasks include:
 | Task | Result |
 |------|--------|
 | `task-analysis` | Outcome, structural scale, selected path, and required skills |
-| `prd-creation` | Approved product outcomes and exclusions for Large work |
+| `prd-creation` | User-confirmed product outcomes and exclusions for Large work |
 | `technical-design` | Repository-grounded implementation design and verification strategy |
-| `acceptance-test-generation` | Necessary integration/E2E proof selection and skeletons when required |
+| `acceptance-test-generation` | Owning integration/E2E test selection and skeletons when required |
 | `work-planning` | Fewest executable tasks with real dependencies and verification |
-| `implementation` | Smallest sufficient implementation with focused proof |
+| `implementation` | Smallest sufficient implementation with owning-test proof |
 | `quality-assurance` | Applicable repository checks and completion evidence |
 | `code-review` | Evidence-backed implementation findings without scope expansion |
 | `technical-document-review` | Consumer-focused PRD, ADR, and Design Doc review |
@@ -103,7 +103,7 @@ Task definitions own one kind of result. Available tasks include:
 
 ### Workflow
 
-`.agents/workflows/agentic-coding.md` coordinates Medium/Large work. It preserves the approved outcome across requirements, design, planning, implementation, QA, and review without requiring fixed file counts, test quotas, or template sections that have no current consumer.
+`.agents/workflows/agentic-coding.md` coordinates Medium/Large work. It preserves the requested outcome across requirements, design, planning, implementation, QA, and review without requiring fixed file counts, test quotas, or template sections that have no current consumer.
 
 ### Skills
 
@@ -149,11 +149,11 @@ If you primarily use Codex and want a Codex-native setup with custom agents and 
 
 ## Reviews
 
-Review tasks evaluate findings against confirmed requirements, accepted design, repository rules, and observable correctness. A receiving agent can:
+Review tasks evaluate findings against the requirements, the current design, repository rules, and observable correctness. A receiving agent can:
 
-- apply a finding required by correctness or an approved boundary;
+- apply a finding required by correctness, the requirements, or the current design;
 - decline optional scope, duplicated proof, or unsupported hardening;
-- return a finding to the user when it changes the product outcome or a major approved decision.
+- return a finding to the user when it changes the outcome, requirements, non-goals, explicit constraints, or user-held authority.
 
 For a fresh perspective, run important reviews in a new session or an isolated agent context. The reviewer still needs the governing requirements, relevant document paths, changed files, and verification evidence.
 

@@ -15,7 +15,7 @@ Repository contracts and accepted design decisions take precedence over generic 
 
 ## Minimal Change
 
-- Implement the confirmed outcome through existing mechanisms where sufficient.
+- Implement the requested outcome through existing mechanisms where sufficient.
 - Keep unrelated cleanup and optional hardening outside the change.
 - Remove unused code encountered inside the changed responsibility when evidence shows no current consumer remains.
 - Introduce an abstraction only when current callers share responsibility and change pressure.
@@ -25,7 +25,7 @@ Repository contracts and accepted design decisions take precedence over generic 
 - Keep one coherent responsibility per function or module.
 - Use the language's idiomatic parameter and data-shape conventions.
 - Make external dependencies and side effects visible at the appropriate boundary.
-- Preserve public and shared contracts unless the approved scope changes them.
+- Preserve public and shared contracts unless the requirements change them.
 - Prefer simple control flow; refactor complexity when it obscures behavior or error handling.
 
 ## Error Handling

@@ -1,28 +1,28 @@
 ---
 name: testing-strategy
-description: "Selects the narrowest sufficient test boundary from requirements, repository evidence, and maintenance cost. Use when deciding integration or E2E coverage."
+description: "Selects the one owning test for each acceptance criterion at the boundary where its behavior is observable, using repository evidence and maintenance cost. Use when deciding integration or E2E coverage."
 ---
 
 # Test Strategy
 
 ## Purpose
 
-Select tests that prove an observable requirement at the lowest sufficient cost. Candidate discovery does not create an obligation to implement every technically valid test.
+Select one owning test per behavioral claim at the boundary where the claim is observable, as `testing` defines. Candidate discovery does not create an obligation to implement every technically valid test.
 
 ## Selection Process
 
 For each acceptance criterion that may require integration or E2E proof:
 
 1. **Name the observable boundary**: Identify the interaction, persisted effect, process, or user journey that must be proven.
-2. **Check existing proof**: Reuse or extend an established test when it already observes the required behavior.
-3. **Select the narrowest level**:
-   - use a unit or local check for isolated behavior;
-   - use integration when the requirement depends on a named component, persistence, or process boundary;
-   - use E2E only when the complete journey is itself the requirement.
+2. **Check the existing owner**: When an established test owns the claim at that boundary with assertions that detect its material failure, update it rather than adding another.
+3. **Select the owning level**:
+   - use integration when the behavior is observable at a component, persistence, or process boundary;
+   - use E2E when the behavior is observable only across the complete journey;
+   - leave the cases of a calculation, parsing, or branching rule inside the behavior to that rule's unit test.
 4. **Compare cost**: Consider setup, execution time, brittleness, maintenance, and diagnostic value using repository evidence rather than fixed universal scores.
-5. **Retain necessary proof**: Select a test only when a cheaper boundary cannot establish the required behavior or protect an accepted contract.
+5. **Retain valuable proof**: Select a new test only when its regression-detection value justifies that cost.
 
-No new integration or E2E test is a valid conclusion when existing or cheaper proof is sufficient.
+No new integration or E2E test is a valid conclusion when existing tests already own each claim.
 
 ## Priority
 
@@ -51,13 +51,12 @@ Record only decisions needed by planning or review:
 
 ```text
 Acceptance criterion: [identifier or behavior]
-Selected proof: existing | local | integration | E2E | none
+Selected proof: existing | unit | integration | E2E | none
 Boundary observed: [observable interaction or result]
-Reason: [why this is the narrowest sufficient proof]
+Reason: [why this test owns the claim at this boundary]
 ```
 
 ## Completion Check
 
 - Every selected test traces to an observable requirement or accepted contract.
-- A cheaper sufficient boundary was considered.
-- Existing proof was reused where sufficient.
+- Each claim has one owning test, and an existing owner was updated rather than duplicated.

@@ -13,7 +13,7 @@ Evaluate whether a PRD, ADR, or Design Doc fixes the decisions its next consumer
 ## Required Inputs
 
 - document path and type;
-- confirmed user requirements and non-goals;
+- the user's requirements and non-goals;
 - related accepted documents and repository evidence when applicable.
 
 ## Review Process
@@ -24,7 +24,7 @@ Identify the decision the document owns and the next consumer that relies on it.
 
 ### 2. Check Scope Fidelity
 
-- Outcomes and current requirements match the confirmed request.
+- Outcomes and current requirements match the user's request.
 - Current state and speculation are not treated as buildable scope.
 - Non-goals remain explicit.
 - No technical preference silently changes the product outcome.

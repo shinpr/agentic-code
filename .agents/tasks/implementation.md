@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Implement the confirmed task result with the smallest sufficient change and observable verification.
+Implement the task result with the smallest sufficient change and observable verification.
 
 ## Required Skills
 
@@ -25,20 +25,20 @@ Inspect the target paths, representative patterns, callers, contracts, and exist
 
 ### 2. Implement
 
-- Use TDD when the behavior change can be represented by a focused failing test.
+- Prove each changed behavioral claim with its owning test as `testing` defines.
 - Follow existing repository patterns and accepted design decisions.
 - Add only mechanisms required by the task result or a demonstrated constraint.
 - Keep recorded non-goals outside implementation.
 
 ### 3. Resolve New Evidence
 
-- Fix repository-local implementation problems that preserve the approved result.
-- Return to design when evidence invalidates a major approved decision.
-- Return to the user when progress requires a new requirement, scope change, unavailable authority, or unauthorized irreversible action.
+- Fix repository-local implementation problems that preserve the task result.
+- When evidence invalidates a design or plan choice, update that document, affected tasks, and proof, then continue.
+- Return other changes to the user as AGENTS.md Operating Boundaries states.
 
 ### 4. Verify
 
-Run the focused proof and applicable established repository checks. Fix in-scope failures. Report unavailable verification and remaining limitations.
+Run the owning tests and applicable established repository checks. Fix in-scope failures. Report unavailable verification and remaining limitations.
 
 ### 5. Complete
 
